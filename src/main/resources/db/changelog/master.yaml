@@ -1,0 +1,13 @@
+databaseChangeLog:
+    - property:
+        name: TYPE_UUID
+        value: varchar(36)
+    - property:
+        name: TYPE_NAME
+        value: varchar(100)
+    - property:
+        name: TYPE_PHONE
+        value: varchar(13)
+
+    - include:
+        file: db/changelog/0.1.yaml
