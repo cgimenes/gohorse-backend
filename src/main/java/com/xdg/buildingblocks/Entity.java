@@ -2,14 +2,17 @@ package com.xdg.buildingblocks;
 
 abstract public class Entity<IdType> {
 
-    private IdType id;
+    protected IdType id;
 
     public IdType getId() {
         return id;
     }
 
-    public Entity(IdType id) {
-        this.id = id;
+    public Entity() {
+    }
+
+    protected void dispatch(Event event) {
+
     }
 
     @Override

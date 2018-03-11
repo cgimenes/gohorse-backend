@@ -1,6 +1,6 @@
 package com.xdg.buildingblocks;
 
-public abstract class SingleValueObject<T> {
+public abstract class SingleValueObject<T> extends ValueObject {
     private T value;
 
     public SingleValueObject(T value) {
