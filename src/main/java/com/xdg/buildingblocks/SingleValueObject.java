@@ -1,7 +1,7 @@
 package com.xdg.buildingblocks;
 
 public abstract class SingleValueObject<T> extends ValueObject {
-    private T value;
+    private final T value;
 
     public SingleValueObject(T value) {
         this.value = value;
@@ -9,6 +9,11 @@ public abstract class SingleValueObject<T> extends ValueObject {
 
     public T getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.xdg.xdg;
 
+import com.xdg.buildingblocks.EventBus;
+import com.xdg.buildingblocks.Repository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

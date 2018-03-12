@@ -2,11 +2,17 @@ package com.xdg.xdg.laboratory;
 
 import com.xdg.xdg.laboratory.commandhandlers.LaboratoryRegistration;
 import com.xdg.xdg.laboratory.commands.RegisterLaboratory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LaboratoryCommandService {
-    public LaboratoryId createLaboratory(RegisterLaboratory registerLaboratory) {
-        LaboratoryRegistration handler = new LaboratoryRegistration();
-        handler.execute(registerLaboratory);
-        return registerLaboratory.getId();
+    @Autowired
+    private LaboratoryRepository repository;
+
+    public LaboratoryId createLaboratory(RegisterLaboratory command) {
+        LaboratoryRegistration handler = new LaboratoryRegistration(repository);
+        handler.execute(command);
+        return command.getId();
     }
 }
