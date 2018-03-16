@@ -13,7 +13,8 @@ public class LaboratoryId extends Id {
 		super(value);
 	}
     
-    public LaboratoryId() {
-    	super();
+    // TODO: passar para super classe
+    public static LaboratoryId generate() {
+        return new LaboratoryId(UUID.randomUUID());
     }
 }

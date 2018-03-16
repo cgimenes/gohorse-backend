@@ -1,8 +1,7 @@
 package com.xgh.buildingblocks;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonValue;
 
-@JsonSerialize(using = ItemSerializer.class)
 public abstract class SingleValueObject<T> extends ValueObject {
 	private final T value;
 
@@ -14,11 +13,12 @@ public abstract class SingleValueObject<T> extends ValueObject {
         return value;
     }
 
+    @JsonValue
     @Override
     public String toString() {
         return value.toString();
     }
-
+    
     @SuppressWarnings("unchecked")
 	@Override
     public boolean equals(Object obj) {

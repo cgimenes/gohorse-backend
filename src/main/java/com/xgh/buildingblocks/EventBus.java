@@ -27,7 +27,7 @@ public class EventBus {
         getInstance().handlers.addAll(eventHandlers);
     }
 
-    public static void dispatch(Event event) {
+    public static void dispatch(Event<?> event) {
         for (EventHandler handler : getInstance().handlers) {
             if (handler.isSubscribedTo(event)) {
                 handler.execute(event);

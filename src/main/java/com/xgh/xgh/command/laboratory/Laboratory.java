@@ -1,46 +1,50 @@
 package com.xgh.xgh.command.laboratory;
 
 import com.xgh.buildingblocks.Entity;
-import com.xgh.buildingblocks.EventBus;
+import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.command.laboratory.events.LaboratoryWasRegistered;
 import com.xgh.xgh.command.laboratory.events.LaboratoryWasUpdated;
 
 public final class Laboratory extends Entity<LaboratoryId> {
-    private Name name;
+    private Name companyName;
 	private Phone phone;
 
-    public static Laboratory register(LaboratoryId id, Name name, Phone phone) {
-        Laboratory instance = new Laboratory();
-        instance.id = id;
-        instance.name = name;
-        instance.phone = phone;
-
-        EventBus.dispatch(new LaboratoryWasRegistered(id));
-        return instance;
+    public void register(LaboratoryId id, Name companyName, Phone phone) {
+    	recordAndApply(new LaboratoryWasRegistered(id, companyName, phone, this.nextVersion()));
     }
     
-    public void update(Name name, Phone phone) {
-    	this.name = name;
-    	this.phone = phone;
-
-        EventBus.dispatch(new LaboratoryWasUpdated(id));
+    public void update(Name companyName, Phone phone) {
+    	recordAndApply(new LaboratoryWasUpdated(this.id, companyName, phone, this.nextVersion()));
+    }
+    
+    protected void when(LaboratoryWasRegistered event) {
+        this.id = event.getEntityId();
+    	this.companyName = event.getCompanyName();
+    	this.phone = event.getPhone();
+    }
+    
+    protected void when(LaboratoryWasUpdated event) {
+    	this.companyName = event.getCompanyName();
+    	this.phone = event.getPhone();
     }
 
     // Construtor para hydration
-    public Laboratory(LaboratoryId id, Name name, Phone phone) {
+    public Laboratory(LaboratoryId id, EntityVersion version, Name companyName, Phone phone) {
         this.id = id;
-        this.name = name;
+        this.version = version;
+        this.companyName = companyName;
         this.phone = phone;
     }
 
     // Construtor para registration
-    private Laboratory() {
+    public Laboratory() {
+    	super();
     }
     
-    public Name getName() {
-		return name;
+    public Name getCompanyName() {
+		return companyName;
 	}
 
 	public Phone getPhone() {

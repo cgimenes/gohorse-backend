@@ -8,6 +8,15 @@ databaseChangeLog:
     - property:
         name: TYPE_PHONE
         value: varchar(13)
+    - property:
+        name: TYPE_INTEGER
+        value: integer
+    - property:
+        name: TYPE_DATETIME
+        value: datetime()
+    - property:
+        name: TYPE_JSON
+        value: json
 
     - include:
         file: db/changelog/0.1.yaml

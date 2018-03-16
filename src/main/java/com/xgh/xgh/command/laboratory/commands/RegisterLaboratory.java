@@ -7,13 +7,13 @@ import com.xgh.xgh.command.laboratory.LaboratoryId;
 
 public final class RegisterLaboratory extends Command {
     private final LaboratoryId id;
-    private final Name name;
+    private final Name companyName;
     private final Phone phone;
 
     public RegisterLaboratory() {
         // Gera um id caso o cliente não tenha passado na API
-        this.id = new LaboratoryId();
-        this.name = null;
+        this.id = LaboratoryId.generate();
+        this.companyName = null;
         this.phone = null;
     }
 
@@ -21,8 +21,8 @@ public final class RegisterLaboratory extends Command {
         return id;
     }
 
-    public Name getName() {
-        return name;
+    public Name getCompanyName() {
+        return companyName;
     }
 
     public Phone getPhone() {

@@ -7,12 +7,12 @@ import com.xgh.xgh.command.laboratory.LaboratoryId;
 
 public final class UpdateLaboratory extends Command {
     private final LaboratoryId id;
-    private final Name name;
+    private final Name companyName;
     private final Phone phone;
 
     public UpdateLaboratory() {
         this.id = null;
-        this.name = null;
+        this.companyName = null;
         this.phone = null;
     }
 
@@ -20,8 +20,8 @@ public final class UpdateLaboratory extends Command {
         return id;
     }
 
-    public Name getName() {
-        return name;
+    public Name getCompanyName() {
+        return companyName;
     }
 
     public Phone getPhone() {

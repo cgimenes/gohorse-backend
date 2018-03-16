@@ -15,8 +15,8 @@ public class LaboratoryUpdate extends CommandHandler<UpdateLaboratory>{
 
     @Override
     public void execute(UpdateLaboratory command) {
-        Laboratory laboratory = repository.findById(command.getId());
-        laboratory.update(command.getName(), command.getPhone());
-        repository.update(laboratory);
+        Laboratory laboratory = repository.pull(command.getId());
+        laboratory.update(command.getCompanyName(), command.getPhone());
+        repository.push(laboratory);
     }
 }

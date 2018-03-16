@@ -15,11 +15,8 @@ public class LaboratoryRegistration extends CommandHandler<RegisterLaboratory>{
 
     @Override
     public void execute(RegisterLaboratory command) {
-        Laboratory laboratory = Laboratory.register(
-                command.getId(),
-                command.getName(),
-                command.getPhone());
-
-        repository.insert(laboratory);
+        Laboratory laboratory = new Laboratory();
+        laboratory.register(command.getId(), command.getCompanyName(), command.getPhone());
+        repository.push(laboratory);
     }
 }
