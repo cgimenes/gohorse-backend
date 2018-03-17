@@ -1,11 +1,10 @@
-package com.xgh.xgh.query.laboratory;
+package com.xgh.xgh.laboratory.query;
 
 import com.xgh.buildingblocks.Entity;
 import com.xgh.valueobjects.Id;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 
-// TODO: alterar pacotes
 public final class Laboratory extends Entity<Id> {
     private Name companyName;
 	private Phone phone;

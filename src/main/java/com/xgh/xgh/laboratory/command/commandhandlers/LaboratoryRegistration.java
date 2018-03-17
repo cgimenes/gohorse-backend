@@ -1,9 +1,9 @@
-package com.xgh.xgh.command.laboratory.commandhandlers;
+package com.xgh.xgh.laboratory.command.commandhandlers;
 
 import com.xgh.buildingblocks.CommandHandler;
-import com.xgh.xgh.command.laboratory.Laboratory;
-import com.xgh.xgh.command.laboratory.LaboratoryCommandRepository;
-import com.xgh.xgh.command.laboratory.commands.RegisterLaboratory;
+import com.xgh.xgh.laboratory.command.Laboratory;
+import com.xgh.xgh.laboratory.command.LaboratoryCommandRepository;
+import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
 
 public class LaboratoryRegistration extends CommandHandler<RegisterLaboratory>{
 

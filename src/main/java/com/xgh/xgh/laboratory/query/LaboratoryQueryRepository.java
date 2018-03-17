@@ -1,4 +1,4 @@
-package com.xgh.xgh.query.laboratory;
+package com.xgh.xgh.laboratory.query;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

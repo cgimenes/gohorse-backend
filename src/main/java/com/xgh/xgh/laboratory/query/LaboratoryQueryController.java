@@ -1,4 +1,4 @@
-package com.xgh.xgh.query.laboratory;
+package com.xgh.xgh.laboratory.query;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xgh.valueobjects.Id;
-import com.xgh.xgh.query.laboratory.Laboratory;
+import com.xgh.xgh.laboratory.query.Laboratory;
 
 @RestController
 @RequestMapping("/laboratories")
