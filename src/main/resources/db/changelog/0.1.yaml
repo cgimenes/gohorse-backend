@@ -10,7 +10,7 @@ databaseChangeLog:
                         name: entity_id
                         type: ${TYPE_UUID}
                         constraints:
-                            nullable: false # TODO: adicionar chave primária composta 
+                            nullable: false # TODO: adicionar chave primária composta
                     - column:
                         name: entity_version
                         type: ${TYPE_INTEGER}

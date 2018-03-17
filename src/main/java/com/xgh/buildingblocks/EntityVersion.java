@@ -1,6 +1,4 @@
-package com.xgh.valueobjects;
-
-import com.xgh.buildingblocks.SingleValueObject;
+package com.xgh.buildingblocks;
 
 public class EntityVersion extends SingleValueObject<Integer> {
 

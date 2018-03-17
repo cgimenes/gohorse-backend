@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import com.xgh.buildingblocks.EntityVersion;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 

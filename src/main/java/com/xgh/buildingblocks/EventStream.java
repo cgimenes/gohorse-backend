@@ -11,7 +11,7 @@ public class EventStream implements Iterator<Event<?>> {
 		this.events = new ArrayList<>();
 	}
 	
-	private EventStream(List<Event<?>> events) {
+	public EventStream(List<Event<?>> events) {
 		this.events = events;
 	}
 	
@@ -25,9 +25,7 @@ public class EventStream implements Iterator<Event<?>> {
 		return events.remove(0);
 	}
 	
-	public EventStream add(Event<?> event) {
-		List<Event<?>> newList = new ArrayList<>(this.events);
-		newList.add(event);
-		return new EventStream(newList);		
+	public void add(Event<?> event) {
+		this.events.add(event);
 	}
 }

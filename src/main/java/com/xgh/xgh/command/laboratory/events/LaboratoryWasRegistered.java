@@ -1,7 +1,7 @@
 package com.xgh.xgh.command.laboratory.events;
 
+import com.xgh.buildingblocks.EntityVersion;
 import com.xgh.buildingblocks.Event;
-import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.command.laboratory.LaboratoryId;

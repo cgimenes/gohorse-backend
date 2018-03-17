@@ -2,6 +2,7 @@ package com.xgh.buildingblocks;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.xgh.valueobjects.Id;
 
@@ -18,7 +19,7 @@ public abstract class EventStore<IdType extends Id, EntityType extends Entity<Id
 		return cnt != null && cnt > 0;
     }
 
-    // TODO: adicionar transaction
+    @Transactional
 	public void push(EntityType entity) {
     	EventStream uncommittedEvents = entity.getUncommittedEvents();
     	while (uncommittedEvents.hasNext()) {

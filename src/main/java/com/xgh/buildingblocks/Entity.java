@@ -3,7 +3,6 @@ package com.xgh.buildingblocks;
 import java.lang.reflect.Method;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Id;
 
 abstract public class Entity<IdType extends Id> {
@@ -54,7 +53,7 @@ abstract public class Entity<IdType extends Id> {
 	}
 
 	private void record(Event<?> event) {
-    	this.uncommittedEvents = this.uncommittedEvents.add(event);
+    	this.uncommittedEvents.add(event);
     }
     
     public EventStream getUncommittedEvents() {

@@ -1,7 +1,7 @@
 package com.xgh.xgh.command.laboratory;
 
 import com.xgh.buildingblocks.Entity;
-import com.xgh.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.command.laboratory.events.LaboratoryWasRegistered;
@@ -38,7 +38,7 @@ public final class Laboratory extends Entity<LaboratoryId> {
         this.phone = phone;
     }
 
-    // Construtor para registration
+    // Construtor blank
     public Laboratory() {
     	super();
     }
