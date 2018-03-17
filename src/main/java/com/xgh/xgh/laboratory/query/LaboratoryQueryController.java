@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.valueobjects.Id;
+import com.xgh.buildingblocks.EntityId;
 import com.xgh.xgh.laboratory.query.Laboratory;
 
 @RestController
@@ -25,7 +25,7 @@ public class LaboratoryQueryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Laboratory> findById(@PathVariable Id id) {
+    public ResponseEntity<Laboratory> findById(@PathVariable EntityId id) {
         Laboratory laboratory = service.findById(id);
         return ResponseEntity.ok().body(laboratory);
     }

@@ -2,9 +2,9 @@ package com.xgh.xgh.laboratory.command;
 
 import java.util.UUID;
 
-import com.xgh.valueobjects.Id;
+import com.xgh.buildingblocks.EntityId;
 
-public class LaboratoryId extends Id {
+public class LaboratoryId extends EntityId {
     public LaboratoryId(String value) {
 		super(value);
 	}

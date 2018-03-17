@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 
-// TODO tratar exceções
 @RestController
 @RequestMapping("/laboratories")
 public class LaboratoryCommandController {

@@ -3,9 +3,8 @@ package com.xgh.buildingblocks;
 import java.lang.reflect.Method;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.valueobjects.Id;
 
-abstract public class Entity<IdType extends Id> {
+abstract public class Entity<IdType extends EntityId> {
 
     protected IdType id;
     

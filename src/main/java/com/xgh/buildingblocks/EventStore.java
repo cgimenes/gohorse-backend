@@ -13,10 +13,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xgh.valueobjects.Id;
+// TODO: Passar essa implementação para a infra
+public abstract class EventStore<IdType extends EntityId, EntityType extends Entity<IdType>> {
 
-// TODO: Rever o local dessa implementação (usar default method?)
-public abstract class EventStore<IdType extends Id, EntityType extends Entity<IdType>> {
+	// Criar classe que encapsula essa conexão
     @Autowired
     protected JdbcTemplate connection;
     
