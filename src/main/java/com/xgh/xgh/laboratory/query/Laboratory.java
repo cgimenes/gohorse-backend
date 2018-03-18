@@ -1,25 +1,27 @@
 package com.xgh.xgh.laboratory.query;
 
-import com.xgh.buildingblocks.Entity;
-import com.xgh.buildingblocks.EntityId;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
+import java.util.UUID;
 
-public final class Laboratory extends Entity<EntityId> {
-    private Name companyName;
-	private Phone phone;
+public final class Laboratory {
+    private String companyName;
+	private String phone;
+	private UUID id;
 
-    public Laboratory(EntityId id, Name companyName, Phone phone) {
+    public Laboratory(UUID id, String companyName, String phone) {
         this.id = id;
         this.companyName = companyName;
         this.phone = phone;
     }
     
-    public Name getCompanyName() {
+    public String getCompanyName() {
 		return companyName;
 	}
 
-	public Phone getPhone() {
+	public String getPhone() {
 		return phone;
 	}
+	
+    public UUID getId() {
+        return id;
+    }    
 }

@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 // TODO: Passar essa implementação para a infra
 public abstract class EventStore<IdType extends EntityId, EntityType extends Entity<IdType>> {
 
-	// Criar classe que encapsula essa conexão
+	// TODO: Criar classe que encapsula essa conexão
     @Autowired
     protected JdbcTemplate connection;
     

@@ -47,6 +47,11 @@ public class LaboratoryCommandRepository extends EventStore<LaboratoryId, Labora
 		);
 	}
 
+	@Override
+	protected String getSnapshotTableName() {
+		return "laboratory";
+	}
+
 	private final class LaboratoryRowMapper implements RowMapper<Laboratory> {
     	@Override
     	public Laboratory mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -58,9 +63,4 @@ public class LaboratoryCommandRepository extends EventStore<LaboratoryId, Labora
     		);
     	}
     }
-
-	@Override
-	protected String getSnapshotTableName() {
-		return "laboratory";
-	}
 }
