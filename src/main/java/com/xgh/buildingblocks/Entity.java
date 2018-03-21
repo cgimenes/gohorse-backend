@@ -3,9 +3,8 @@ package com.xgh.buildingblocks;
 import java.lang.reflect.Method;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.valueobjects.Id;
 
-abstract public class Entity<IdType extends Id> {
+abstract public class Entity<IdType extends EntityId> {
 
     protected IdType id;
     
@@ -25,7 +24,6 @@ abstract public class Entity<IdType extends Id> {
     protected void recordAndApply(Event<?> event) {
     	this.record(event);
     	this.apply(event);
-    	this.version = event.getEntityVersion();
     }
     
     protected EntityVersion nextVersion() {
@@ -33,7 +31,18 @@ abstract public class Entity<IdType extends Id> {
     }
     
     private void apply(Event<?> event) {
-	    Method handlerMethod = getHandlerMethod(event);
+    	this.updateMetadata(event);
+	    this.invokeHandlerMethod(event);
+    }
+
+	@SuppressWarnings("unchecked")
+	private void updateMetadata(Event<?> event) {
+	    this.id = (IdType) event.getEntityId();
+		this.version = event.getEntityVersion();
+	}
+
+	private void invokeHandlerMethod(Event<?> event) {
+		Method handlerMethod = getHandlerMethod(event);
 	    if (handlerMethod != null) {
             handlerMethod.setAccessible(true);
 	        try {
@@ -42,7 +51,7 @@ abstract public class Entity<IdType extends Id> {
 	            throw new RuntimeException("Não foi possível invocar o método de aplicação do evento: " + event.getClass().getName(), e);
 	        }
 	    }
-    }
+	}
 
 	private Method getHandlerMethod(Event<?> event) {
 	    try {
@@ -58,6 +67,12 @@ abstract public class Entity<IdType extends Id> {
     
     public EventStream getUncommittedEvents() {
         return uncommittedEvents;
+    }
+        
+	protected void reconstitute(EventStream events) {
+    	while (events.hasNext()) {
+			this.apply(events.next());
+    	}    	
     }
 
     @SuppressWarnings("unchecked")
@@ -80,6 +95,6 @@ abstract public class Entity<IdType extends Id> {
 	}
 	
 	public String getType() {
-		return this.getClass().getSimpleName();
+		return this.getClass().getName();
 	}
 }

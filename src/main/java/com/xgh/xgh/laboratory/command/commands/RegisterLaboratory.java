@@ -1,9 +1,9 @@
-package com.xgh.xgh.command.laboratory.commands;
+package com.xgh.xgh.laboratory.command.commands;
 
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.command.laboratory.LaboratoryId;
+import com.xgh.xgh.laboratory.command.LaboratoryId;
 
 public final class RegisterLaboratory extends Command {
     private final LaboratoryId id;

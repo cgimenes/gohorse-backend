@@ -1,11 +1,11 @@
-package com.xgh.xgh.command.laboratory;
+package com.xgh.xgh.laboratory.command;
 
 import com.xgh.buildingblocks.Entity;
 import com.xgh.buildingblocks.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.command.laboratory.events.LaboratoryWasRegistered;
-import com.xgh.xgh.command.laboratory.events.LaboratoryWasUpdated;
+import com.xgh.xgh.laboratory.command.events.LaboratoryWasRegistered;
+import com.xgh.xgh.laboratory.command.events.LaboratoryWasUpdated;
 
 public final class Laboratory extends Entity<LaboratoryId> {
     private Name companyName;

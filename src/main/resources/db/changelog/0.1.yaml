@@ -35,7 +35,11 @@ databaseChangeLog:
                         name: event_data
                         type: ${TYPE_JSON}
                         constraints:
-                            nullable: false                    
+                            nullable: false              
+            - addPrimaryKey:
+                columnNames: entity_id, entity_type
+                constraintName: pk_event
+                tableName: event                                  
             - createTable:
                 tableName: laboratory
                 columns:

@@ -1,11 +1,11 @@
-package com.xgh.xgh.query.laboratory;
+package com.xgh.xgh.laboratory.query;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xgh.valueobjects.Id;
+import com.xgh.buildingblocks.EntityId;
 
 @Component
 public class LaboratoryQueryService {
@@ -16,7 +16,7 @@ public class LaboratoryQueryService {
 		return repository.findAll();
 	}
 
-	public Laboratory findById(Id id) {
+	public Laboratory findById(EntityId id) {
 		return repository.findById(id);
 	}
 

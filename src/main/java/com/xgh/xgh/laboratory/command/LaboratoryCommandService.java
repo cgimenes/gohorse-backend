@@ -1,12 +1,12 @@
-package com.xgh.xgh.command.laboratory;
+package com.xgh.xgh.laboratory.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xgh.xgh.command.laboratory.commandhandlers.LaboratoryRegistration;
-import com.xgh.xgh.command.laboratory.commandhandlers.LaboratoryUpdate;
-import com.xgh.xgh.command.laboratory.commands.RegisterLaboratory;
-import com.xgh.xgh.command.laboratory.commands.UpdateLaboratory;
+import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryRegistration;
+import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryUpdate;
+import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
+import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
 @Component
 public class LaboratoryCommandService {

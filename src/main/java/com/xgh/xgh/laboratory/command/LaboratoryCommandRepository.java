@@ -1,4 +1,4 @@
-package com.xgh.xgh.command.laboratory;
+package com.xgh.xgh.laboratory.command;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 
 @Component
-public final class LaboratoryCommandRepository extends EventStore<LaboratoryId, Laboratory> {
+public class LaboratoryCommandRepository extends EventStore<LaboratoryId, Laboratory> {
     @Override
     public Laboratory pull(LaboratoryId id) {
     	try {
@@ -47,6 +47,11 @@ public final class LaboratoryCommandRepository extends EventStore<LaboratoryId, 
 		);
 	}
 
+	@Override
+	protected String getSnapshotTableName() {
+		return "laboratory";
+	}
+
 	private final class LaboratoryRowMapper implements RowMapper<Laboratory> {
     	@Override
     	public Laboratory mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -58,9 +63,4 @@ public final class LaboratoryCommandRepository extends EventStore<LaboratoryId, 
     		);
     	}
     }
-
-	@Override
-	protected String getSnapshotTableName() {
-		return "laboratory";
-	}
 }

@@ -1,9 +1,9 @@
-package com.xgh.xgh.command.laboratory;
+package com.xgh.xgh.laboratory.command;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.xgh.command.laboratory.commands.RegisterLaboratory;
-import com.xgh.xgh.command.laboratory.commands.UpdateLaboratory;
+import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
+import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 
-// TODO tratar exceções
 @RestController
 @RequestMapping("/laboratories")
 public class LaboratoryCommandController {
