@@ -37,3 +37,7 @@ gradle-app.setting
 # JetBrains
 .idea/
 *.iml
+.classpath
+.project
+.settings
+bin
