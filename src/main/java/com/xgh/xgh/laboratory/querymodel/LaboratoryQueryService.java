@@ -1,13 +1,13 @@
-package com.xgh.xgh.laboratory.query;
+package com.xgh.xgh.laboratory.querymodel;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.xgh.buildingblocks.EntityId;
+import com.xgh.valueobjects.EntityId;
 
-@Component
+@Service
 public class LaboratoryQueryService {
     @Autowired
     private LaboratoryQueryRepository repository;

@@ -2,18 +2,33 @@ package com.xgh.buildingblocks;
 
 import java.lang.reflect.Method;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.valueobjects.EntityId;
+import com.xgh.valueobjects.EntityVersion;
 
-abstract public class Entity<IdType extends EntityId> {
-
+@MappedSuperclass
+abstract public class DomainEntity<IdType extends EntityId> {
+	@Id
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "id"))
     protected IdType id;
     
     @JsonIgnore
+    @Transient
     private EventStream uncommittedEvents = new EventStream();
 
+    @Embedded
+    @AttributeOverride(name = "value", column = @Column(name = "entity_version"))
 	protected EntityVersion version;
     
-    public Entity() {
+    public DomainEntity() {
     	this.version = new EntityVersion(0);
     }
 
@@ -86,7 +101,7 @@ abstract public class Entity<IdType extends EntityId> {
             return false;
         if (id == null)
             return false;
-        Entity<IdType> other = (Entity<IdType>) obj;
+        DomainEntity<IdType> other = (DomainEntity<IdType>) obj;
         return id.equals(other.getId());
     }
 

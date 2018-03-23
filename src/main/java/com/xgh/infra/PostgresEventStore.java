@@ -1,0 +1,57 @@
+package com.xgh.infra;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
+import com.xgh.buildingblocks.DomainEntity;
+import com.xgh.buildingblocks.Event;
+import com.xgh.buildingblocks.EventStore;
+import com.xgh.valueobjects.EntityId;
+
+@Component
+public class PostgresEventStore<EntityType extends DomainEntity<?>> extends EventStore<EntityType> {
+    @Autowired
+    protected JdbcTemplate connection;
+    
+	@Override
+    protected List<Event<?>> getEvents(EntityId id) {
+    	return connection.query(
+    		"select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
+    		+ "from event "
+    		+ "where entity_id = ? "
+    		+ "and entity_type = ?", 
+    		new EventRowMapper(),
+    		id.toString(),
+    		this.getEntityType());
+    }
+    
+	@Override
+	protected void saveEvent(Event<?> event, String entityType) {
+    	connection.update(
+		    "insert into event ("
+		    + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"
+		    + ") VALUES (?, ?, ?, ?, ?, cast(? as json))",
+		    event.getEntityId().toString(),
+		    event.getEntityVersion().getValue(),
+		    entityType,
+		    event.getType(),
+		    event.getOcurredOn(),
+	    	event.toString()
+		);
+    }
+	
+	private final class EventRowMapper implements RowMapper<Event<?>> {
+    	@Override
+    	public Event<?> mapRow(ResultSet rs, int rowNum) throws SQLException {
+    		return null;
+    		// TODO para o event sourcing, tem que deserializar o evento
+//    		return (Event<?>) Event.fromString(rs.getString("event_type"), rs.getString("event_data"));
+    	}
+    }
+}

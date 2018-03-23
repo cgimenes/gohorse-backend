@@ -1,5 +1,5 @@
 package com.xgh.buildingblocks;
 
-public abstract class CommandHandler<T extends Command> {
-    public abstract void execute(T command);
+public interface CommandHandler<T extends Command> {
+    void execute(T command);
 }

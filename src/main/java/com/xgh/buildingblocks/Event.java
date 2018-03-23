@@ -3,6 +3,8 @@ package com.xgh.buildingblocks;
 import java.util.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.valueobjects.EntityId;
+import com.xgh.valueobjects.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> extends ValueObject {
 	@JsonIgnore

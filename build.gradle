@@ -26,9 +26,10 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.liquibase:liquibase-core')
     compile('org.yaml:snakeyaml')
-    compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.springframework.boot:spring-boot-devtools')
     runtime('org.postgresql:postgresql')
     runtime('com.h2database:h2')
     testCompile('junit:junit')

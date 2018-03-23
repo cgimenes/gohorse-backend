@@ -1,7 +1,10 @@
 package com.xgh.buildingblocks;
 
+import javax.persistence.Embeddable;
+
 import com.fasterxml.jackson.annotation.JsonValue;
 
+@Embeddable
 public abstract class SingleValueObject<T> extends ValueObject {
 	private final T value;
 

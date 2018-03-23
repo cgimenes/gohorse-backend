@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.query;
+package com.xgh.xgh.laboratory.querymodel;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.buildingblocks.EntityId;
-import com.xgh.xgh.laboratory.query.Laboratory;
+import com.xgh.valueobjects.EntityId;
+import com.xgh.xgh.laboratory.querymodel.Laboratory;
 
 @RestController
 @RequestMapping("/laboratories")

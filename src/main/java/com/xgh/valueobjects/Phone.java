@@ -6,9 +6,8 @@ public class Phone extends SingleValueObject<String>{
 
     public Phone(String phone) {
         super(phone);
-        //TODO: adicionar regex
-//        if (!value.matches("")) {
-//            throw new IllegalArgumentException("O telefone deve estar no formato +5544999999999");
-//        }
+        if (!phone.matches("0[0-9]{11}")) {
+            throw new IllegalArgumentException("O telefone deve estar no formato 044999999999");
+        }
     }
 }

@@ -1,22 +1,18 @@
-package com.xgh.xgh.laboratory.query;
+package com.xgh.xgh.laboratory.querymodel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.xgh.buildingblocks.EntityId;
+import com.xgh.infra.PostgresRepository;
+import com.xgh.valueobjects.EntityId;
 
 @Component
-public final class LaboratoryQueryRepository {
-	@Autowired
-	private JdbcTemplate connection;
-	
+public final class LaboratoryQueryRepository extends PostgresRepository {
     public List<Laboratory> findAll() {
         return connection.query(
         		"select id, company_name, phone from laboratory", 
