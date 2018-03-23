@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
-import javax.persistence.Id;
+import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
@@ -15,11 +15,10 @@ import com.xgh.valueobjects.EntityVersion;
 
 @MappedSuperclass
 abstract public class DomainEntity<IdType extends EntityId> {
-	@Id
-    @Embedded
+    @EmbeddedId
     @AttributeOverride(name = "value", column = @Column(name = "id"))
     protected IdType id;
-    
+
     @JsonIgnore
     @Transient
     private EventStream uncommittedEvents = new EventStream();
@@ -27,7 +26,7 @@ abstract public class DomainEntity<IdType extends EntityId> {
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "entity_version"))
 	protected EntityVersion version;
-    
+
     public DomainEntity() {
     	this.version = new EntityVersion(0);
     }
@@ -35,16 +34,16 @@ abstract public class DomainEntity<IdType extends EntityId> {
     public IdType getId() {
         return id;
     }
-    
+
     protected void recordAndApply(Event<?> event) {
     	this.record(event);
     	this.apply(event);
     }
-    
+
     protected EntityVersion nextVersion() {
     	return this.getVersion().next();
     }
-    
+
     private void apply(Event<?> event) {
     	this.updateMetadata(event);
 	    this.invokeHandlerMethod(event);
@@ -79,15 +78,15 @@ abstract public class DomainEntity<IdType extends EntityId> {
 	private void record(Event<?> event) {
     	this.uncommittedEvents.add(event);
     }
-    
+
     public EventStream getUncommittedEvents() {
         return uncommittedEvents;
     }
-        
+
 	protected void reconstitute(EventStream events) {
     	while (events.hasNext()) {
 			this.apply(events.next());
-    	}    	
+    	}
     }
 
     @SuppressWarnings("unchecked")
@@ -108,7 +107,7 @@ abstract public class DomainEntity<IdType extends EntityId> {
 	public EntityVersion getVersion() {
 		return version;
 	}
-	
+
 	public String getType() {
 		return this.getClass().getName();
 	}
