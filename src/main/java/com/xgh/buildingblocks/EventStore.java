@@ -1,9 +1,7 @@
 package com.xgh.buildingblocks;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -11,19 +9,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xgh.buildingblocks.DomainEntity;
 import com.xgh.buildingblocks.Event;
 import com.xgh.buildingblocks.EventStream;
+import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.valueobjects.EntityId;
 
-public abstract class EventStore<EntityType extends DomainEntity<?>> {
-    protected abstract List<Event<?>> getEvents(EntityId id);
+public abstract class EventStore {
+    protected abstract <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 
 	protected abstract void saveEvent(Event<?> event, String entityType);
 
-    public EntityType pull(EntityId id) {
-    	List<Event<?>> events = this.getEvents(id);
+    public <T extends DomainEntity<?>> T pull(Class<T> entityType, EntityId id) {
+    	List<Event<?>> events = this.getEvents(entityType, id);
+    	
+    	if (events.isEmpty()) {
+            throw new EntityNotFoundException();
+    	}
 
-    	String entityType = this.getEntityType();
-    	try {
-        	EntityType entity = this.instanceEntity(entityType);    
+    	try {    		
+    		T entity = this.instanceEntity(entityType);    
         	invokeEntityReconstituteMethod(entity, events);
         	return entity;
     	} catch (Exception e) {
@@ -41,28 +43,30 @@ public abstract class EventStore<EntityType extends DomainEntity<?>> {
     	}
     }
 
-	protected void invokeEntityReconstituteMethod(EntityType entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
+	protected void invokeEntityReconstituteMethod(DomainEntity<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
 																								 IllegalAccessException, IllegalArgumentException, 
-																								 InvocationTargetException {
-		Method handlerMethod =  entity.getClass().getDeclaredMethod("reconstitute");
-        handlerMethod.setAccessible(true);
-  	  	handlerMethod.invoke(entity, new EventStream(events));
+																								 InvocationTargetException {	
+		Class<?> clazz = entity.getClass();
+		while (true) {
+			try {
+			    Method method = clazz.getDeclaredMethod("reconstitute", EventStream.class);				
+			    method.setAccessible(true);
+			    method.invoke(entity, new EventStream(events));
+			    return;
+			} catch(NoSuchMethodException ex) {
+			    clazz = clazz.getSuperclass();
+			    if (clazz == null) {
+			    	throw new NoSuchMethodException(
+			    			"Método 'reconstitute' não declarado na classe: " + entity.getClass().getName());
+			    }
+			}
+		}
 	}
-    
-    @SuppressWarnings("unchecked")
-    protected String getEntityType()
-    {
-        return ((Class<EntityType>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[1]).getTypeName();
-    }
 
-	@SuppressWarnings("unchecked")
-	protected EntityType instanceEntity(String entityType) throws ClassNotFoundException, NoSuchMethodException, 
-    															SecurityException, InstantiationException, 
-    															IllegalAccessException, IllegalArgumentException, 
-    															InvocationTargetException {
-		Class<DomainEntity<?>> c = (Class<DomainEntity<?>>) Class.forName(entityType);
-    	Constructor<DomainEntity<?>> cons = c.getConstructor();
-    	return (EntityType) cons.newInstance();
+	protected <T extends DomainEntity<?>> T instanceEntity(Class<T> entityType) throws ClassNotFoundException, 
+																NoSuchMethodException, SecurityException, 
+																InstantiationException, IllegalAccessException, 
+																IllegalArgumentException, InvocationTargetException {
+    	return entityType.getConstructor().newInstance();
     }
 }

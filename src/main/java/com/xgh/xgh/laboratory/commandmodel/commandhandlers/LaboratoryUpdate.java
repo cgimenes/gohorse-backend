@@ -7,15 +7,15 @@ import com.xgh.xgh.laboratory.commandmodel.commands.UpdateLaboratory;
 
 public class LaboratoryUpdate implements CommandHandler<UpdateLaboratory>{
 
-    private EventStore<Laboratory> repository;
+    private EventStore repository;
 
-    public LaboratoryUpdate(EventStore<Laboratory> repository) {
+    public LaboratoryUpdate(EventStore repository) {
         this.repository = repository;
     }
 
     @Override
     public void execute(UpdateLaboratory command) {
-        Laboratory laboratory = repository.pull(command.getId());
+        Laboratory laboratory = repository.pull(Laboratory.class, command.getId());
         laboratory.update(command.getCompanyName(), command.getPhone());
         repository.push(laboratory);
     }

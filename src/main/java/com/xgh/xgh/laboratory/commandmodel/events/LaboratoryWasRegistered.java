@@ -10,6 +10,9 @@ public class LaboratoryWasRegistered extends Event<LaboratoryId> {
 	private Name companyName;
 	private Phone phone;
 	
+	public LaboratoryWasRegistered() {
+	}
+	
     public LaboratoryWasRegistered(LaboratoryId id, Name companyName, Phone phone, EntityVersion version) {
         super(id, version);
         this.companyName = companyName;

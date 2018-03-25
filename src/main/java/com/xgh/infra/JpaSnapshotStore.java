@@ -10,7 +10,7 @@ import com.xgh.buildingblocks.SnapshotStore;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.valueobjects.EntityId;
 
-public abstract class JpaSnapshotStore<EntityType extends DomainEntity<?>, IdType extends EntityId> implements SnapshotStore<EntityType, IdType> {
+public class JpaSnapshotStore<EntityType extends DomainEntity<?>, IdType extends EntityId> implements SnapshotStore<EntityType, IdType> {
 	@Autowired
 	private JpaRepository<EntityType, IdType> repository;
 

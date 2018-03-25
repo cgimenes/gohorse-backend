@@ -7,9 +7,9 @@ import com.xgh.xgh.laboratory.commandmodel.commands.RegisterLaboratory;
 
 public class LaboratoryRegistration implements CommandHandler<RegisterLaboratory>{
 
-    private EventStore<Laboratory> repository;
+    private EventStore repository;
 
-    public LaboratoryRegistration(EventStore<Laboratory> repository) {
+    public LaboratoryRegistration(EventStore repository) {
         this.repository = repository;
     }
 

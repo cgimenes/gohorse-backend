@@ -37,7 +37,7 @@ databaseChangeLog:
                         constraints:
                             nullable: false              
             - addPrimaryKey:
-                columnNames: entity_id, entity_type
+                columnNames: entity_id, entity_version, entity_type
                 constraintName: pk_event
                 tableName: event                                  
             - createTable:
