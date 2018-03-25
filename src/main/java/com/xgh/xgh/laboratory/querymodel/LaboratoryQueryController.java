@@ -18,6 +18,7 @@ public class LaboratoryQueryController {
     @Autowired
     private LaboratoryQueryService service;
 
+    // TODO paginação
     @GetMapping
     public ResponseEntity<List<Laboratory>> findAll() {
         List<Laboratory> laboratories = service.findAllLaboratories();

@@ -1,7 +1,7 @@
 databaseChangeLog:
     - property:
         name: TYPE_UUID
-        value: varchar(36)
+        value: uuid
     - property:
         name: TYPE_NAME
         value: varchar(100)

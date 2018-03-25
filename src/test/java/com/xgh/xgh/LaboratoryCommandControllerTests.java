@@ -17,6 +17,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.xgh.infra.JpaSnapshotRepository;
 import com.xgh.infra.PostgresEventStore;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
@@ -32,11 +33,14 @@ public class LaboratoryCommandControllerTests {
 	private TestRestTemplate restTemplate;
 	
 	@Autowired
-	private PostgresEventStore<Laboratory> eventStore;
+	private PostgresEventStore<Laboratory, LaboratoryId> eventStore;
+	
+	@Autowired
+	private JpaSnapshotRepository<Laboratory, LaboratoryId> repository;
 
 	@Before
 	public void before() {
-//		repository.deleteAll();
+		repository.deleteAll();
 	}
 
 	@Test

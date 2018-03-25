@@ -12,7 +12,7 @@ import com.xgh.xgh.laboratory.commandmodel.commands.UpdateLaboratory;
 @Service
 public class LaboratoryCommandService {
     @Autowired
-    private PostgresEventStore<Laboratory> eventStore;
+    private PostgresEventStore<Laboratory, LaboratoryId> eventStore;
 
     public LaboratoryId registerLaboratory(RegisterLaboratory command) {
         LaboratoryRegistration handler = new LaboratoryRegistration(eventStore);

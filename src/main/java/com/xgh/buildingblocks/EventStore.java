@@ -16,6 +16,8 @@ public abstract class EventStore {
     protected abstract <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 
 	protected abstract void saveEvent(Event<?> event, String entityType);
+	
+	protected abstract void saveSnapshot(DomainEntity<?> entity);
 
     public <T extends DomainEntity<?>> T pull(Class<T> entityType, EntityId id) {
     	List<Event<?>> events = this.getEvents(entityType, id);
@@ -41,6 +43,7 @@ public abstract class EventStore {
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
     	}
+    	this.saveSnapshot(entity);
     }
 
 	protected void invokeEntityReconstituteMethod(DomainEntity<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 

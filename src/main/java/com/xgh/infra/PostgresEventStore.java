@@ -9,7 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.xgh.buildingblocks.DomainEntity;
 import com.xgh.buildingblocks.Event;
@@ -17,10 +17,13 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
-@Component
-public class PostgresEventStore<EntityType extends DomainEntity<?>> extends EventStore {
+@Repository
+public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType extends EntityId> extends EventStore {
     @Autowired
     protected JdbcTemplate connection;
+    
+    @Autowired
+    protected JpaSnapshotRepository<EntityType, IdType> snapshotRepository;
     
 	@Override
     protected <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
@@ -41,7 +44,7 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>> extends Even
 		    "insert into event ("
 		    + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"
 		    + ") VALUES (?, ?, ?, ?, ?, cast(? as json))",
-		    event.getEntityId().toString(),
+		    event.getEntityId().getValue(),
 		    event.getEntityVersion().getValue(),
 		    entityType,
 		    event.getType(),
@@ -64,4 +67,10 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>> extends Even
     				rs.getString("event_data"));
     	}
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void saveSnapshot(DomainEntity<?> entity) {
+		snapshotRepository.save((EntityType) entity);
+	}
 }
