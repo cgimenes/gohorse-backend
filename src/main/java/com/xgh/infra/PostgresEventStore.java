@@ -33,7 +33,7 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
         		+ "where entity_id = ? "
         		+ "and entity_type = ?", 
         		new EventRowMapper(),
-        		id.toString(),
+        		id.getValue(),
         		entityType.getName());
     }
     

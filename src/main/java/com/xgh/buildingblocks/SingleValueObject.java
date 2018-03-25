@@ -8,8 +8,14 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @Embeddable
 @MappedSuperclass
 public abstract class SingleValueObject<T> extends ValueObject {
-	private final T value;
+	private static final long serialVersionUID = -1149703165422656566L;
+	
+	private T value;
 
+	// TODO ver se dá pra tirar esse construtor fora
+	protected SingleValueObject() {		
+	}
+	
     public SingleValueObject(T value) {
         this.value = value;
     }

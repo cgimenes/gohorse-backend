@@ -7,6 +7,8 @@ import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
 
 public class LaboratoryWasRegistered extends Event<LaboratoryId> {
+	private static final long serialVersionUID = -1312267808691672113L;
+	
 	private Name companyName;
 	private Phone phone;
 	

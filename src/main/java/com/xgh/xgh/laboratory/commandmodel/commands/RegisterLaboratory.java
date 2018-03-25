@@ -6,7 +6,9 @@ import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
 
 public final class RegisterLaboratory extends Command {
-    private final LaboratoryId id;
+	private static final long serialVersionUID = 864620291981116409L;
+	
+	private final LaboratoryId id;
     private final Name companyName;
     private final Phone phone;
 

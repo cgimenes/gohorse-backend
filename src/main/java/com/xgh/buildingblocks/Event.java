@@ -10,6 +10,8 @@ import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> extends ValueObject {
+	private static final long serialVersionUID = -8290936323951912398L;
+	
 	@JsonIgnore
     private Calendar ocurredOn;
 	@JsonIgnore
@@ -17,7 +19,8 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 	@JsonIgnore
 	private EntityVersion entityVersion;
 
-	public Event() {		
+	// TODO ver se dá pra tirar esse construtor fora	
+	protected Event() {		
 	}
 	
     public Event(IdType entityId, EntityVersion entityVersion) {

@@ -7,6 +7,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class ValueObject implements Serializable {
+	private static final long serialVersionUID = -272564284742728433L;
+
 	public String toString() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {

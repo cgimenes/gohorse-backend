@@ -3,6 +3,12 @@ package com.xgh.valueobjects;
 import com.xgh.buildingblocks.SingleValueObject;
 
 public class Name extends SingleValueObject<String> {
+	private static final long serialVersionUID = 3018741585560237802L;
+
+	public Name() {
+		
+	}
+	
     public Name(String name) {
         super(name);
         if (name.length() > 100) {

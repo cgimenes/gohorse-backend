@@ -3,7 +3,12 @@ package com.xgh.valueobjects;
 import com.xgh.buildingblocks.SingleValueObject;
 
 public class EntityVersion extends SingleValueObject<Integer> {
+	private static final long serialVersionUID = -4761548546820727969L;
 
+	public EntityVersion() {
+		
+	}
+	
 	public EntityVersion(Integer version) {
 		super(version);
 	}

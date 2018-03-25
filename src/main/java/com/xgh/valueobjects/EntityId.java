@@ -8,6 +8,8 @@ import com.xgh.buildingblocks.SingleValueObject;
 
 @MappedSuperclass
 public abstract class EntityId extends SingleValueObject<UUID> {
+	private static final long serialVersionUID = 3079215611563351873L;
+
 	public EntityId(UUID id) {
         super(id);
     }
