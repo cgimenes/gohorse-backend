@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.querymodel;
+package com.xgh.xgh.laboratory.infra;
 
 import java.util.List;
 

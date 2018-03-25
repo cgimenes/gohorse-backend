@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.querymodel;
+package com.xgh.xgh.laboratory.infra;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.xgh.infra.PostgresRepository;
 import com.xgh.valueobjects.EntityId;
+import com.xgh.xgh.laboratory.querymodel.Laboratory;
 
 @Component
 public final class LaboratoryQueryRepository extends PostgresRepository {

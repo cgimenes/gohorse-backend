@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.commandmodel;
+package com.xgh.xgh.laboratory.infra;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

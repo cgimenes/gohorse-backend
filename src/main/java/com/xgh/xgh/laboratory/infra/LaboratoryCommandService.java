@@ -1,9 +1,11 @@
-package com.xgh.xgh.laboratory.commandmodel;
+package com.xgh.xgh.laboratory.infra;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xgh.infra.PostgresEventStore;
+import com.xgh.xgh.laboratory.commandmodel.Laboratory;
+import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
 import com.xgh.xgh.laboratory.commandmodel.commandhandlers.LaboratoryRegistration;
 import com.xgh.xgh.laboratory.commandmodel.commandhandlers.LaboratoryUpdate;
 import com.xgh.xgh.laboratory.commandmodel.commands.RegisterLaboratory;
