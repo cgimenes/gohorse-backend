@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
+// TODO comentar o buildingblocks
 @MappedSuperclass
 abstract public class DomainEntity<IdType extends EntityId> {
     @EmbeddedId
