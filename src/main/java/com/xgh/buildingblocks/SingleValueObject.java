@@ -1,5 +1,7 @@
 package com.xgh.buildingblocks;
 
+import java.util.Objects;
+
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
 
@@ -13,7 +15,7 @@ public abstract class SingleValueObject<T> extends ValueObject {
 	private T value;
 
 	// TODO ver se dá pra tirar esse construtor fora
-	protected SingleValueObject() {		
+	protected SingleValueObject() {
 	}
 	
     public SingleValueObject(T value) {
@@ -28,6 +30,11 @@ public abstract class SingleValueObject<T> extends ValueObject {
     @Override
     public String toString() {
         return value.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hashCode(this.value);
     }
     
     @SuppressWarnings("unchecked")

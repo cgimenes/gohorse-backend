@@ -28,7 +28,6 @@ import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
 // TODO: verificar se os snapshots estão sendo salvos corretamente
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ComponentScan("com.xgh")
 public class LaboratoryCommandControllerTests {
 
 	@Autowired
