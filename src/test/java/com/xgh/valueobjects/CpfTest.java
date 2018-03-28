@@ -8,7 +8,9 @@ public class CpfTest {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
+		Cpf cpf = new Cpf();
+		assertTrue("O CPF informado não é valido!",cpf.isValid("09450600929"));
+		assertFalse("O CPF informado é válido!",cpf.isValid("09450600928"));
 	}
 
 }
