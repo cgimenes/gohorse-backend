@@ -1,7 +1,5 @@
 package com.xgh.infra.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +23,17 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
     @Autowired
     protected JpaSnapshotRepository<EntityType, IdType> snapshotRepository;
     
-    private EventRowMapper eventRowMapper = new EventRowMapper();
+	private final RowMapper<Event<?>> eventRowMapper = (rs, rowNum) -> {
+		Calendar ocurredOn = Calendar.getInstance();
+		ocurredOn.setTime(rs.getDate("ocurred_on"));
+		
+		return Event.fromString(
+				rs.getString("event_type"),
+				UUID.fromString(rs.getString("entity_id")),
+				new EntityVersion(rs.getInt("entity_version")),
+				ocurredOn,
+				rs.getString("event_data"));
+	};
     
 	@Override
     protected <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
@@ -53,21 +61,6 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
 		    event.getOcurredOn(),
 	    	event.toString()
 		);
-    }
-	
-	private final class EventRowMapper implements RowMapper<Event<?>> {
-    	@Override
-    	public Event<?> mapRow(ResultSet rs, int rowNum) throws SQLException {
-    		Calendar ocurredOn = Calendar.getInstance();
-    		ocurredOn.setTime(rs.getDate("ocurred_on"));
-    		
-    		return Event.fromString(
-    				rs.getString("event_type"),
-    				UUID.fromString(rs.getString("entity_id")),
-    				new EntityVersion(rs.getInt("entity_version")),
-    				ocurredOn,
-    				rs.getString("event_data"));
-    	}
     }
 
 	@SuppressWarnings("unchecked")
