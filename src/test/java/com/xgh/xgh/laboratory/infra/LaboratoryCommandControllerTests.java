@@ -18,11 +18,11 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.infra.PostgresEventStore;
+import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.laboratory.commandmodel.Laboratory;
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
+import com.xgh.xgh.laboratory.command.Laboratory;
+import com.xgh.xgh.laboratory.command.LaboratoryId;
 
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos corretamente

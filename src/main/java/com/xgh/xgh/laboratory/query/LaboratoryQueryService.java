@@ -1,20 +1,18 @@
-package com.xgh.xgh.laboratory.infra;
-
-import java.util.List;
+package com.xgh.xgh.laboratory.query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xgh.infra.repository.PagedResult;
 import com.xgh.valueobjects.EntityId;
-import com.xgh.xgh.laboratory.querymodel.Laboratory;
 
 @Service
 public class LaboratoryQueryService {
     @Autowired
     private LaboratoryQueryRepository repository;
 
-	public List<Laboratory> findAllLaboratories() {
-		return repository.findAll();
+	public PagedResult<Laboratory> findAllLaboratories(int page) {
+		return repository.findAll(page);
 	}
 
 	public Laboratory findById(EntityId id) {

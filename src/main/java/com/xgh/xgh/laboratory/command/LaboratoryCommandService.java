@@ -1,15 +1,13 @@
-package com.xgh.xgh.laboratory.infra;
+package com.xgh.xgh.laboratory.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xgh.infra.PostgresEventStore;
-import com.xgh.xgh.laboratory.commandmodel.Laboratory;
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
-import com.xgh.xgh.laboratory.commandmodel.commandhandlers.LaboratoryRegistration;
-import com.xgh.xgh.laboratory.commandmodel.commandhandlers.LaboratoryUpdate;
-import com.xgh.xgh.laboratory.commandmodel.commands.RegisterLaboratory;
-import com.xgh.xgh.laboratory.commandmodel.commands.UpdateLaboratory;
+import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryRegistration;
+import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryUpdate;
+import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
+import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
 @Service
 public class LaboratoryCommandService {

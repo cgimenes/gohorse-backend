@@ -1,4 +1,4 @@
-package com.xgh.infra;
+package com.xgh.infra.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +25,8 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
     @Autowired
     protected JpaSnapshotRepository<EntityType, IdType> snapshotRepository;
     
+    private EventRowMapper eventRowMapper = new EventRowMapper();
+    
 	@Override
     protected <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
     	return connection.query(
@@ -32,7 +34,7 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
         		+ "from event "
         		+ "where entity_id = ? "
         		+ "and entity_type = ?", 
-        		new EventRowMapper(),
+        		eventRowMapper,
         		id.getValue(),
         		entityType.getName());
     }

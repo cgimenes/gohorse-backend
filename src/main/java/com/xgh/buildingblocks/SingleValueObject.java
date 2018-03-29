@@ -12,13 +12,18 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public abstract class SingleValueObject<T> extends ValueObject {
 	private static final long serialVersionUID = -1149703165422656566L;
 	
-	private T value;
+	private final T value;
 
 	// TODO ver se dá pra tirar esse construtor fora
 	protected SingleValueObject() {
+		this.value = null;
 	}
 	
     public SingleValueObject(T value) {
+        if (value == null) {
+        	// TODO informar o nome da classe que deu esse erro
+            throw new IllegalArgumentException("O valor não pode ser nulo");
+        }
         this.value = value;
     }
 

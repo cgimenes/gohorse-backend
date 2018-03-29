@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.querymodel;
+package com.xgh.xgh.laboratory.query;
 
 import java.util.UUID;
 

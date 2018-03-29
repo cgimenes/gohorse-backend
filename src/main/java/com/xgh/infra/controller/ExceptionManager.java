@@ -1,4 +1,4 @@
-package com.xgh.infra;
+package com.xgh.infra.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.http.HttpStatus;
@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.xgh.exceptions.EntityNotFoundException;
+import com.xgh.exceptions.NullMandatoryArgumentException;
 
 @ControllerAdvice
 public class ExceptionManager {
-
+	// TODO usar constantes nos código de erro
+	
 	@ResponseStatus(code=HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ EntityNotFoundException.class })
 	public @ResponseBody ErrorResponse handleException(EntityNotFoundException ex) {
@@ -36,4 +39,20 @@ public class ExceptionManager {
 		
 		return new ErrorResponse(3, ex.getCause().getCause().getMessage());
 	}
+	
+	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ NullMandatoryArgumentException.class })
+	public @ResponseBody ErrorResponse handleException(NullMandatoryArgumentException ex) {
+		LogManager.getRootLogger().info("ExceptionManager", ex);
+		
+		return new ErrorResponse(3, ex.getMessage());
+	}
+	
+	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+	public @ResponseBody ErrorResponse handleException(MethodArgumentTypeMismatchException ex) {
+		LogManager.getRootLogger().info("ExceptionManager", ex);
+		
+		return new ErrorResponse(4, ex.getMessage());
+	}	
 }

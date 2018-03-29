@@ -1,9 +1,9 @@
-package com.xgh.xgh.laboratory.commandmodel.commands;
+package com.xgh.xgh.laboratory.command.commands;
 
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
+import com.xgh.xgh.laboratory.command.LaboratoryId;
 
 public final class UpdateLaboratory extends Command {
 	private static final long serialVersionUID = -4910695718010490673L;

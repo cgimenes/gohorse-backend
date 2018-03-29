@@ -1,10 +1,9 @@
-package com.xgh.xgh.laboratory.infra;
+package com.xgh.xgh.laboratory.command;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
-import com.xgh.xgh.laboratory.commandmodel.commands.RegisterLaboratory;
-import com.xgh.xgh.laboratory.commandmodel.commands.UpdateLaboratory;
+import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
+import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
