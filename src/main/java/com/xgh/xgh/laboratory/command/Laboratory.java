@@ -6,7 +6,7 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.xgh.buildingblocks.DomainEntity;
+import com.xgh.buildingblocks.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
@@ -16,7 +16,7 @@ import com.xgh.xgh.laboratory.command.events.LaboratoryWasUpdated;
 
 @Entity
 @Table(name = "laboratory")
-public final class Laboratory extends DomainEntity<LaboratoryId> {
+public final class Laboratory extends AggregateRoot<LaboratoryId> {
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "company_name"))
     private Name companyName;

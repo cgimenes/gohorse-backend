@@ -9,14 +9,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.xgh.buildingblocks.DomainEntity;
+import com.xgh.buildingblocks.AggregateRoot;
 import com.xgh.buildingblocks.Event;
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
 @Repository
-public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType extends EntityId> extends EventStore {
+public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType extends EntityId> extends EventStore {
     @Autowired
     protected JdbcTemplate connection;
     
@@ -36,7 +36,7 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
 	};
     
 	@Override
-    protected <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
+    protected <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
     	return connection.query(
         		"select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
         		+ "from event "
@@ -65,13 +65,13 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void saveSnapshot(DomainEntity<?> entity) {
+	protected void saveSnapshot(AggregateRoot<?> entity) {
 		snapshotRepository.save((EntityType) entity);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void deleteSnapshot(DomainEntity<?> entity) {
+	protected void deleteSnapshot(AggregateRoot<?> entity) {
 		snapshotRepository.delete((EntityType) entity);
 		
 	}

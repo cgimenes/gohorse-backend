@@ -3,12 +3,14 @@ package com.xgh.infra.controller;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConversionException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 
@@ -19,6 +21,14 @@ public class ExceptionManager {
 	@ResponseStatus(code=HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ EntityNotFoundException.class })
 	public @ResponseBody ErrorResponse handleException(EntityNotFoundException ex) {
+		LogManager.getRootLogger().info("ExceptionManager", ex);
+		
+		return new ErrorResponse(2, "Entidade não encontrada");
+	}
+	
+	@ResponseStatus(code=HttpStatus.NOT_FOUND)
+	@ExceptionHandler({ DeletedEntityException.class })
+	public @ResponseBody ErrorResponse handleException(DeletedEntityException ex) {
 		LogManager.getRootLogger().info("ExceptionManager", ex);
 		
 		return new ErrorResponse(2, "Entidade não encontrada");
@@ -54,5 +64,13 @@ public class ExceptionManager {
 		LogManager.getRootLogger().info("ExceptionManager", ex);
 		
 		return new ErrorResponse(4, ex.getMessage());
+	}	
+	
+	@ResponseStatus(code=HttpStatus.NOT_FOUND)
+	@ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
+	public @ResponseBody ErrorResponse handleException(HttpRequestMethodNotSupportedException ex) {
+		LogManager.getRootLogger().info("ExceptionManager", ex);
+		
+		return new ErrorResponse(5, "Rota não encontrada");
 	}	
 }
