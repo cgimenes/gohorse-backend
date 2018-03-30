@@ -39,7 +39,7 @@ abstract public class DomainEntity<IdType extends EntityId> {
     }
 
     // TODO preecher o version com o nextVersion automagicamente 
-    protected void recordAndApply(Event<?> event) {
+    protected void recordAndApply(Event<IdType> event) {
     	if (this.isDeleted()) {
     		throw new DeletedEntityException();
     	}
@@ -52,14 +52,13 @@ abstract public class DomainEntity<IdType extends EntityId> {
     	return this.getVersion().next();
     }
 
-    private void apply(Event<?> event) {
+    private void apply(Event<IdType> event) {
     	this.updateMetadata(event);
 	    this.invokeHandlerMethod(event);
     }
 
-	@SuppressWarnings("unchecked")
-	private void updateMetadata(Event<?> event) {
-	    this.id = (IdType) event.getEntityId();
+	private void updateMetadata(Event<IdType> event) {
+	    this.id = event.getEntityId();
 		this.version = event.getEntityVersion();
 	}
 
@@ -91,9 +90,10 @@ abstract public class DomainEntity<IdType extends EntityId> {
         return uncommittedEvents;
     }
 
+	@SuppressWarnings("unchecked")
 	protected void reconstitute(EventStream events) {
     	while (events.hasNext()) {
-			this.apply(events.next());
+			this.apply((Event<IdType>) events.next());
     	}
     }
 
