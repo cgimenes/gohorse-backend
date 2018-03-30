@@ -9,7 +9,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
@@ -20,9 +20,11 @@ abstract public class DomainEntity<IdType extends EntityId> {
     @AttributeOverride(name = "value", column = @Column(name = "id"))
     protected IdType id;
 
-    @JsonIgnore
     @Transient
     private EventStream uncommittedEvents = new EventStream();
+    
+    @Transient
+    private Boolean deleted = false;
 
     @Embedded
     @AttributeOverride(name = "value", column = @Column(name = "entity_version"))
@@ -36,7 +38,12 @@ abstract public class DomainEntity<IdType extends EntityId> {
         return id;
     }
 
+    // TODO preecher o version com o nextVersion automagicamente 
     protected void recordAndApply(Event<?> event) {
+    	if (this.isDeleted()) {
+    		throw new DeletedEntityException();
+    	}
+    	
     	this.record(event);
     	this.apply(event);
     }
@@ -111,5 +118,13 @@ abstract public class DomainEntity<IdType extends EntityId> {
 
 	public String getType() {
 		return this.getClass().getName();
+	}
+
+	public Boolean isDeleted() {
+		return deleted;
+	}
+	
+	protected void markDeleted() {
+		this.deleted = true;
 	}
 }

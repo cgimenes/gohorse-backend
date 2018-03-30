@@ -68,4 +68,11 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
 	protected void saveSnapshot(DomainEntity<?> entity) {
 		snapshotRepository.save((EntityType) entity);
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void deleteSnapshot(DomainEntity<?> entity) {
+		snapshotRepository.delete((EntityType) entity);
+		
+	}
 }

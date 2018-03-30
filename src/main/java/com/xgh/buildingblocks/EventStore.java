@@ -14,10 +14,9 @@ import com.xgh.valueobjects.EntityId;
 
 public abstract class EventStore {
     protected abstract <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
-
 	protected abstract void saveEvent(Event<?> event, String entityType);
-	
 	protected abstract void saveSnapshot(DomainEntity<?> entity);
+	protected abstract void deleteSnapshot(DomainEntity<?> entity);
 
     public <T extends DomainEntity<?>> T pull(Class<T> entityType, EntityId id) {
     	List<Event<?>> events = this.getEvents(entityType, id);
@@ -29,7 +28,14 @@ public abstract class EventStore {
     	try {    		
     		T entity = this.instanceEntity(entityType);    
         	invokeEntityReconstituteMethod(entity, events);
+        	
+        	if (entity.isDeleted()) {
+                throw new EntityNotFoundException();
+        	}
+        	
         	return entity;
+    	} catch (EntityNotFoundException e) {
+    		throw e;
     	} catch (Exception e) {
             throw new RuntimeException("Não foi possível instanciar a entidade: " + entityType, e);
         }
@@ -42,6 +48,10 @@ public abstract class EventStore {
     		Event<?> event = uncommittedEvents.next();
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
+    	}
+    	if (entity.isDeleted()) {
+    		this.deleteSnapshot(entity);
+    		return;
     	}
     	this.saveSnapshot(entity);
     }

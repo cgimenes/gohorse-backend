@@ -2,12 +2,13 @@ package com.xgh.xgh.laboratory.query;
 
 import java.util.UUID;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.infra.repository.PagedResult;
 import com.xgh.infra.repository.PostgresRepository;
-import com.xgh.valueobjects.EntityId;
 
 @Repository
 public class LaboratoryQueryRepository extends PostgresRepository {
@@ -26,10 +27,14 @@ public class LaboratoryQueryRepository extends PostgresRepository {
     		laboratoryRowMapper));
     }
 
-	public Laboratory findById(EntityId id) {
-        return connection.queryForObject(
-    		"select id, company_name, phone from laboratory where id = ?", 
-    		new Object[] { id.toString() },
-    		laboratoryRowMapper);
+	public Laboratory findById(UUID id) {
+		try {
+	        return connection.queryForObject(
+        		"select id, company_name, phone from laboratory where id = ?", 
+        		new Object[] { id },
+        		laboratoryRowMapper);
+		} catch (EmptyResultDataAccessException e) {
+			throw new EntityNotFoundException();
+		}
 	}
 }

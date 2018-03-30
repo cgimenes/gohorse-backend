@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryDeletion;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryRegistration;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryUpdate;
+import com.xgh.xgh.laboratory.command.commands.DeleteLaboratory;
 import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
 import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
@@ -22,6 +24,11 @@ public class LaboratoryCommandService {
 
 	public void updateLaboratory(UpdateLaboratory command) {
         LaboratoryUpdate handler = new LaboratoryUpdate(eventStore);
+        handler.execute(command);
+	}
+
+	public void deleteLaboratory(DeleteLaboratory command) {
+        LaboratoryDeletion handler = new LaboratoryDeletion(eventStore);
         handler.execute(command);
 	}
 }
