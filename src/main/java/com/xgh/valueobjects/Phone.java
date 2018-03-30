@@ -5,8 +5,7 @@ import com.xgh.buildingblocks.SingleValueObject;
 public class Phone extends SingleValueObject<String>{
 	private static final long serialVersionUID = -9115543650570612238L;
 
-	public Phone() {
-		
+	protected Phone() {
 	}
 	
     public Phone(String phone) {

@@ -28,7 +28,7 @@ abstract public class DomainEntity<IdType extends EntityId> {
     @AttributeOverride(name = "value", column = @Column(name = "entity_version"))
 	protected EntityVersion version;
 
-    public DomainEntity() {
+    protected DomainEntity() {
     	this.version = new EntityVersion(0);
     }
 

@@ -1,10 +1,11 @@
 package com.xgh.xgh.laboratory.query;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xgh.infra.repository.PagedResult;
-import com.xgh.valueobjects.EntityId;
 
 @Service
 public class LaboratoryQueryService {
@@ -15,7 +16,7 @@ public class LaboratoryQueryService {
 		return repository.findAll(page);
 	}
 
-	public Laboratory findById(EntityId id) {
+	public Laboratory findById(UUID id) {
 		return repository.findById(id);
 	}
 

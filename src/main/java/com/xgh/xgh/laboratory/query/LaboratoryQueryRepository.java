@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.xgh.infra.repository.PagedResult;
 import com.xgh.infra.repository.PostgresRepository;
-import com.xgh.valueobjects.EntityId;
 
 @Repository
 public class LaboratoryQueryRepository extends PostgresRepository {
@@ -26,10 +25,10 @@ public class LaboratoryQueryRepository extends PostgresRepository {
     		laboratoryRowMapper));
     }
 
-	public Laboratory findById(EntityId id) {
+	public Laboratory findById(UUID id) {
         return connection.queryForObject(
     		"select id, company_name, phone from laboratory where id = ?", 
-    		new Object[] { id.toString() },
+    		new Object[] { id },
     		laboratoryRowMapper);
 	}
 }

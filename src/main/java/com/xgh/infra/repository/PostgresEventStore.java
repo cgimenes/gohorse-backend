@@ -53,7 +53,7 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
     	connection.update(
 		    "insert into event ("
 		    + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"
-		    + ") VALUES (?, ?, ?, ?, ?, cast(? as json))",
+		    + ") VALUES (?, ?, ?, ?, ?, ?)",
 		    event.getEntityId().getValue(),
 		    event.getEntityVersion().getValue(),
 		    entityType,
@@ -67,5 +67,5 @@ public class PostgresEventStore<EntityType extends DomainEntity<?>, IdType exten
 	@Override
 	protected void saveSnapshot(DomainEntity<?> entity) {
 		snapshotRepository.save((EntityType) entity);
-	}
+	}		
 }

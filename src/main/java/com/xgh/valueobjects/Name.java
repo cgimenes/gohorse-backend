@@ -5,8 +5,7 @@ import com.xgh.buildingblocks.SingleValueObject;
 public class Name extends SingleValueObject<String> {
 	private static final long serialVersionUID = 3018741585560237802L;
 
-	public Name() {
-		
+	protected Name() {	
 	}
 	
     public Name(String name) {
