@@ -1,9 +1,9 @@
-package com.xgh.xgh.laboratory.commandmodel.commandhandlers;
+package com.xgh.xgh.laboratory.command.commandhandlers;
 
 import com.xgh.buildingblocks.CommandHandler;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.xgh.laboratory.commandmodel.Laboratory;
-import com.xgh.xgh.laboratory.commandmodel.commands.UpdateLaboratory;
+import com.xgh.xgh.laboratory.command.Laboratory;
+import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
 
 public class LaboratoryUpdate implements CommandHandler<UpdateLaboratory>{
 

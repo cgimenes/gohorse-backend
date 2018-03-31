@@ -1,21 +1,21 @@
-package com.xgh.xgh.laboratory.commandmodel.events;
+package com.xgh.xgh.laboratory.command.events;
 
 import com.xgh.buildingblocks.Event;
 import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
+import com.xgh.xgh.laboratory.command.LaboratoryId;
 
-public class LaboratoryWasRegistered extends Event<LaboratoryId> {
-	private static final long serialVersionUID = -1312267808691672113L;
+public class LaboratoryWasUpdated extends Event<LaboratoryId> {
+	private static final long serialVersionUID = 8837633091108416524L;
 	
 	private Name companyName;
 	private Phone phone;
-	
-	public LaboratoryWasRegistered() {
+
+	public LaboratoryWasUpdated() {		
 	}
 	
-    public LaboratoryWasRegistered(LaboratoryId id, Name companyName, Phone phone, EntityVersion version) {
+    public LaboratoryWasUpdated(LaboratoryId id, Name companyName, Phone phone, EntityVersion version) {
         super(id, version);
         this.companyName = companyName;
         this.phone = phone;

@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.commandmodel;
+package com.xgh.xgh.laboratory.command;
 
 import java.util.UUID;
 

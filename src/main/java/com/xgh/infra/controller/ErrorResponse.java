@@ -1,4 +1,4 @@
-package com.xgh.infra;
+package com.xgh.infra.controller;
 
 public class ErrorResponse {
 	private int errorCode;
