@@ -24,7 +24,7 @@ public class LaboratoryCommandController {
     private LaboratoryCommandService service;
 
     @PostMapping
-    public ResponseEntity<LaboratoryId> register(@RequestBody RegisterLaboratory command) {
+    public ResponseEntity<Void> register(@RequestBody RegisterLaboratory command) {
         LaboratoryId id = service.registerLaboratory(command);
         return ResponseEntity.created(URI.create("/laboratories/" + id.toString())).build();
     }
