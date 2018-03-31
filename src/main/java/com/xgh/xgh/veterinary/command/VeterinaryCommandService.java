@@ -1,15 +1,13 @@
-package com.xgh.xgh.veterinary.infra;
+package com.xgh.xgh.veterinary.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xgh.infra.PostgresEventStore;
-import com.xgh.xgh.veterinary.commandmodel.Veterinary;
-import com.xgh.xgh.veterinary.commandmodel.VeterinaryId;
-import com.xgh.xgh.veterinary.commandmodel.commandhandlers.VeterinaryRegistration;
-import com.xgh.xgh.veterinary.commandmodel.commandhandlers.VeterinaryUpdate;
-import com.xgh.xgh.veterinary.commandmodel.commands.RegisterVeterinary;
-import com.xgh.xgh.veterinary.commandmodel.commands.UpdateVeterinary;
+import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryRegistration;
+import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryUpdate;
+import com.xgh.xgh.veterinary.command.commands.RegisterVeterinary;
+import com.xgh.xgh.veterinary.command.commands.UpdateVeterinary;
 
 @Service
 public class VeterinaryCommandService {

@@ -1,4 +1,4 @@
-package com.xgh.xgh.veterinary.querymodel;
+package com.xgh.xgh.veterinary.query;
 
 import java.sql.Date;
 import java.util.UUID;

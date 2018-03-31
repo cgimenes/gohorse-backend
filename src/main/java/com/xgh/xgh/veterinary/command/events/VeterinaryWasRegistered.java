@@ -1,4 +1,4 @@
-package com.xgh.xgh.veterinary.commandmodel.events;
+package com.xgh.xgh.veterinary.command.events;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Mail;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.veterinary.commandmodel.VeterinaryId;
+import com.xgh.xgh.veterinary.command.VeterinaryId;
 
 public class VeterinaryWasRegistered extends Event<VeterinaryId> {
 	private static final long serialVersionUID = -6601994182805982237L;
@@ -20,6 +20,10 @@ public class VeterinaryWasRegistered extends Event<VeterinaryId> {
 	private Date birthDate;
 	private boolean active;
 
+	public VeterinaryWasRegistered() {
+
+	}
+
 	public VeterinaryWasRegistered(VeterinaryId id, Name name, Phone phone, Crmv crmv, Mail mail, Date birthDate,
 			boolean active, EntityVersion version) {
 		super(id, version);
@@ -30,7 +34,7 @@ public class VeterinaryWasRegistered extends Event<VeterinaryId> {
 		this.birthDate = birthDate;
 		this.active = active;
 	}
-	
+
 	public Name getName() {
 		return this.name;
 	}

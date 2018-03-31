@@ -1,4 +1,4 @@
-package com.xgh.xgh.veterinary.commandmodel;
+package com.xgh.xgh.veterinary.command;
 
 import java.util.UUID;
 

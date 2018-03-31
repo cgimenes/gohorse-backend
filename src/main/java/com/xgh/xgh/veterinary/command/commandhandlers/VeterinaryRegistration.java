@@ -1,9 +1,9 @@
-package com.xgh.xgh.veterinary.commandmodel.commandhandlers;
+package com.xgh.xgh.veterinary.command.commandhandlers;
 
 import com.xgh.buildingblocks.CommandHandler;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.xgh.veterinary.commandmodel.Veterinary;
-import com.xgh.xgh.veterinary.commandmodel.commands.RegisterVeterinary;
+import com.xgh.xgh.veterinary.command.Veterinary;
+import com.xgh.xgh.veterinary.command.commands.RegisterVeterinary;
 
 public class VeterinaryRegistration implements CommandHandler<RegisterVeterinary> {
 

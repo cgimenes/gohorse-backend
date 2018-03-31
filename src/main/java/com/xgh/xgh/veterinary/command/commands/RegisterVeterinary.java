@@ -1,13 +1,13 @@
-package com.xgh.xgh.veterinary.commandmodel.commands;
+package com.xgh.xgh.veterinary.command.commands;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Mail;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.veterinary.commandmodel.VeterinaryId;
+import com.xgh.xgh.veterinary.command.VeterinaryId;
 
 public class RegisterVeterinary extends Command {
 	private static final long serialVersionUID = -129463298020793445L;

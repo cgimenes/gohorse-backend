@@ -18,8 +18,8 @@ import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Mail;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.veterinary.commandmodel.Veterinary;
-import com.xgh.xgh.veterinary.commandmodel.VeterinaryId;
+import com.xgh.xgh.veterinary.command.Veterinary;
+import com.xgh.xgh.veterinary.command.VeterinaryId;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

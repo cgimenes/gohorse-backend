@@ -1,4 +1,4 @@
-package com.xgh.xgh.veterinary.infra;
+package com.xgh.xgh.veterinary.command;
 
 import java.net.URI;
 
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.xgh.veterinary.commandmodel.VeterinaryId;
-import com.xgh.xgh.veterinary.commandmodel.commands.RegisterVeterinary;
-import com.xgh.xgh.veterinary.commandmodel.commands.UpdateVeterinary;
+import com.xgh.xgh.veterinary.command.commands.RegisterVeterinary;
+import com.xgh.xgh.veterinary.command.commands.UpdateVeterinary;
 
 // TODO logar commandos
 @RestController

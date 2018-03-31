@@ -1,4 +1,4 @@
-package com.xgh.xgh.veterinary.commandmodel;
+package com.xgh.xgh.veterinary.command;
 
 import java.util.Date;
 
@@ -8,17 +8,19 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.xgh.buildingblocks.AggregateRoot;
 import com.xgh.buildingblocks.DomainEntity;
+import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.veterinary.commandmodel.events.VeterinaryWasRegistered;
-import com.xgh.xgh.veterinary.commandmodel.events.VeterinaryWasUpdated;
+import com.xgh.xgh.veterinary.command.events.VeterinaryWasRegistered;
+import com.xgh.xgh.veterinary.command.events.VeterinaryWasUpdated;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Mail;
 
 @Entity
 @Table(name = "veterinary")
-public class Veterinary extends DomainEntity<VeterinaryId> {
+public class Veterinary extends AggregateRoot<VeterinaryId> {
 	@Embedded
 	@AttributeOverride(name = "value", column = @Column(name = "name"))
 	private Name name;
@@ -42,12 +44,24 @@ public class Veterinary extends DomainEntity<VeterinaryId> {
 	private boolean active;
 
 	public Veterinary() {
-		
+
 	}
 
 	public void register(VeterinaryId id, Name name, Phone phone, Crmv crmv, Mail mail, Date birthDate,
 			boolean active) {
-		// TODO: Validar campos obrigatórios
+
+		if (name == null) {
+			throw new NullMandatoryArgumentException("nome");
+		}
+		
+		if (phone == null) {
+			throw new NullMandatoryArgumentException("telefone");
+		}
+		
+		if (crmv == null) {
+			throw new NullMandatoryArgumentException("crmv");
+		}
+
 		recordAndApply(new VeterinaryWasRegistered(id, name, phone, crmv, mail, birthDate, active, this.nextVersion()));
 	}
 
@@ -55,9 +69,18 @@ public class Veterinary extends DomainEntity<VeterinaryId> {
 		recordAndApply(
 				new VeterinaryWasUpdated(this.id, name, phone, crmv, mail, birthDate, active, this.nextVersion()));
 	}
-	
+
 	protected void when(VeterinaryWasRegistered event) {
 		this.id = event.getEntityId();
+		this.name = event.getName();
+		this.phone = event.getPhone();
+		this.crmv = event.getCrmv();
+		this.mail = event.getMail();
+		this.birthDate = event.getBirthDate();
+		this.active = event.isActive();
+	}
+	
+	protected void when(VeterinaryWasUpdated event) {
 		this.name = event.getName();
 		this.phone = event.getPhone();
 		this.crmv = event.getCrmv();
