@@ -1,6 +1,6 @@
 package com.xgh.xgh.veterinary.commandmodel.events;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.xgh.buildingblocks.Event;
 import com.xgh.valueobjects.Crmv;

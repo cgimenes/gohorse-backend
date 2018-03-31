@@ -1,6 +1,7 @@
 package com.xgh.xgh.veterinary.commandmodel;
 
-import java.sql.Date;
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
