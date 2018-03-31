@@ -19,10 +19,10 @@ public class LaboratoryQueryRepository extends PostgresRepository {
 			rs.getString("phone")
 		);
 	};
-	
+
     public PagedResult<Laboratory> findAll(int page) {
         return new PagedResult<Laboratory>(connection.query(
-    		"select id, company_name, phone from laboratory limit ? offset ?", 
+    		"select id, company_name, phone from laboratory limit ? offset ?",
     		new Object[] { PagedResult.PAGE_SIZE, page * PagedResult.PAGE_SIZE },
     		laboratoryRowMapper));
     }
@@ -30,7 +30,7 @@ public class LaboratoryQueryRepository extends PostgresRepository {
 	public Laboratory findById(UUID id) {
 		try {
 	        return connection.queryForObject(
-        		"select id, company_name, phone from laboratory where id = ?", 
+        		"select id, company_name, phone from laboratory where id = ?",
         		new Object[] { id },
         		laboratoryRowMapper);
 		} catch (EmptyResultDataAccessException e) {

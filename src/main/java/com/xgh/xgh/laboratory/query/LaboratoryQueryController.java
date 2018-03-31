@@ -18,6 +18,7 @@ public class LaboratoryQueryController {
     @Autowired
     private LaboratoryQueryService service;
 
+    // TODO pesquisa
     @GetMapping
     public ResponseEntity<PagedResult<Laboratory>> findAll(@RequestParam(name="page", defaultValue="0") int page) {
         PagedResult<Laboratory> laboratories = service.findAllLaboratories(page);

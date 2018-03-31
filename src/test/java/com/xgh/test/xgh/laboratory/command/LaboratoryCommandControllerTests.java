@@ -1,4 +1,4 @@
-package com.xgh.xgh.laboratory.command;
+package com.xgh.test.xgh.laboratory.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -19,6 +19,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.exceptions.DeletedEntityException;
@@ -32,6 +33,7 @@ import com.xgh.xgh.laboratory.command.LaboratoryId;
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestPropertySource("classpath:application-test.properties")
 public class LaboratoryCommandControllerTests {
 
 	@Autowired
@@ -49,7 +51,7 @@ public class LaboratoryCommandControllerTests {
 		Laboratory laboratory = new Laboratory();
 		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 
-		ResponseEntity<Laboratory> response = restTemplate.postForEntity("/laboratories", laboratory, Laboratory.class);
+		ResponseEntity<Void> response = restTemplate.postForEntity("/laboratories", laboratory, Void.class);
 
 		Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
 		

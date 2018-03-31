@@ -16,7 +16,7 @@ databaseChangeLog:
         value: datetime()
     - property:
         name: TYPE_JSON
-        value: json
+        value: text
 
     - include:
         file: db/changelog/0.1.yaml
