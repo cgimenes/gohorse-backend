@@ -19,10 +19,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.PostgresEventStore;
+import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.laboratory.commandmodel.Laboratory;
-import com.xgh.xgh.laboratory.commandmodel.LaboratoryId;
+import com.xgh.xgh.owner.commandmodel.OwnerId;
+import com.xgh.xgh.owner.commandmodel.Owner;
 
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos corretamente
@@ -35,7 +36,7 @@ public class OwnerCommandControllerTests {
 	private TestRestTemplate restTemplate;
 	
 	@Autowired
-	private PostgresEventStore<Laboratory, LaboratoryId> eventStore; 
+	private PostgresEventStore<Owner, OwnerId> eventStore; 
 
 	@Before
 	public void before() {
@@ -43,38 +44,40 @@ public class OwnerCommandControllerTests {
 
 	@Test
 	public void register() {
-		Laboratory laboratory = new Laboratory();
-		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		Owner owner = new Owner();
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"));
 
-		ResponseEntity<Laboratory> response = restTemplate.postForEntity("/laboratories", laboratory, Laboratory.class);
+		ResponseEntity<Owner> response = restTemplate.postForEntity("/owners", owner, Owner.class);
 
-		Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		Owner ownerFromStore = eventStore.pull(Owner.class, owner.getId());
 		
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals("/laboratories/" + laboratory.getId(), response.getHeaders().getLocation().getPath());
-		assertTrue(laboratory.equals(labFromStore));		
-		assertEquals("Laboratório dos Hackers", labFromStore.getCompanyName().toString());
-		assertEquals("044313371337", labFromStore.getPhone().toString());
-		assertEquals("1", labFromStore.getVersion().toString());
+		assertEquals("/laboratories/" + owner.getId(), response.getHeaders().getLocation().getPath());
+		assertTrue(owner.equals(ownerFromStore));		
+		assertEquals("Dono Master", ownerFromStore.getName().toString());
+		assertEquals("044313371337", ownerFromStore.getPhone().toString());
+		assertEquals("09450600929", ownerFromStore.getCpf().toString());
+		assertEquals("1", ownerFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void update() {
-		Laboratory laboratory = new Laboratory();
-		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
-		eventStore.push(laboratory);
+		Owner owner = new Owner();
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"));
+		eventStore.push(owner);
 		
-		laboratory.update(new Name("Laboratório dos Noob"), new Phone("044000000000"));
+		owner.update(new Name("Dono Master"), new Phone("044000000000"), new Cpf("09450600929"));
 		
-		RequestEntity<Laboratory> request = RequestEntity.put(URI.create("/laboratories")).body(laboratory);
+		RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
 
-		Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		Owner ownerFromStore = eventStore.pull(Owner.class, owner.getId());
 		
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-		assertTrue(laboratory.equals(labFromStore));		
-		assertEquals("Laboratório dos Noob", labFromStore.getCompanyName().toString());
-		assertEquals("044000000000", labFromStore.getPhone().toString());
-		assertEquals("2", labFromStore.getVersion().toString());
+		assertTrue(owner.equals(ownerFromStore));		
+		assertEquals("Dono Master", ownerFromStore.getName().toString());
+		assertEquals("044000000000", ownerFromStore.getPhone().toString());
+		assertEquals("09450600929", ownerFromStore.getCpf().toString());
+		assertEquals("2", ownerFromStore.getVersion().toString());
 	}
 }

@@ -23,13 +23,13 @@ public class LaboratoryCommandController {
     private LaboratoryCommandService service;
 
     @PostMapping
-    public ResponseEntity<LaboratoryId> register(@RequestBody RegisterLaboratory command) {
+    public ResponseEntity<Void> register(@RequestBody RegisterLaboratory command) {
         LaboratoryId id = service.registerLaboratory(command);
         return ResponseEntity.created(URI.create("/laboratories/" + id.toString())).build();
     }
 
     @PutMapping
-    public ResponseEntity<LaboratoryId> update(@RequestBody UpdateLaboratory command) {
+    public ResponseEntity<Void> update(@RequestBody UpdateLaboratory command) {
         service.updateLaboratory(command);
         return ResponseEntity.noContent().build();
     }
