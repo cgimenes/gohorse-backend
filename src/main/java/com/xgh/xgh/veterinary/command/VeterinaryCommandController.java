@@ -21,13 +21,13 @@ public class VeterinaryCommandController {
 	private VeterinaryCommandService service;
 
 	@PostMapping
-	public ResponseEntity<VeterinaryId> register(@RequestBody RegisterVeterinary command) {
+	public ResponseEntity<Void> register(@RequestBody RegisterVeterinary command) {
 		VeterinaryId id = service.registerVeterinary(command);
 		return ResponseEntity.created(URI.create("/veterinarians/" + id.toString())).build();
 	}
 
 	@PutMapping
-	public ResponseEntity<VeterinaryId> update(@RequestBody UpdateVeterinary command) {
+	public ResponseEntity<Void> update(@RequestBody UpdateVeterinary command) {
 		service.updateVeterinary(command);
 		return ResponseEntity.noContent().build();
 	}
