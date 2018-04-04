@@ -9,6 +9,9 @@ databaseChangeLog:
         name: TYPE_PHONE
         value: varchar(13)
     - property:
+        name: TYPE_CPF
+        value: varchar(11)
+    - property:
         name: TYPE_INTEGER
         value: integer
     - property:

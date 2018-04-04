@@ -52,7 +52,7 @@ public class OwnerCommandControllerTests {
 		Owner ownerFromStore = eventStore.pull(Owner.class, owner.getId());
 		
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals("/laboratories/" + owner.getId(), response.getHeaders().getLocation().getPath());
+		assertEquals("/owners/" + owner.getId(), response.getHeaders().getLocation().getPath());
 		assertTrue(owner.equals(ownerFromStore));		
 		assertEquals("Dono Master", ownerFromStore.getName().toString());
 		assertEquals("044313371337", ownerFromStore.getPhone().toString());
