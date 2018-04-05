@@ -9,10 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.xgh.buildingblocks.AggregateRoot;
-import com.xgh.buildingblocks.DomainEntity;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
+import com.xgh.xgh.veterinary.command.events.VeterinaryWasDeleted;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasRegistered;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasUpdated;
 import com.xgh.valueobjects.Crmv;
@@ -53,11 +53,11 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		if (name == null) {
 			throw new NullMandatoryArgumentException("nome");
 		}
-		
+
 		if (phone == null) {
 			throw new NullMandatoryArgumentException("telefone");
 		}
-		
+
 		if (crmv == null) {
 			throw new NullMandatoryArgumentException("crmv");
 		}
@@ -69,6 +69,10 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		recordAndApply(
 				new VeterinaryWasUpdated(this.id, name, phone, crmv, mail, birthDate, active, this.nextVersion()));
 	}
+	
+	public void delete() {
+		recordAndApply(new VeterinaryWasDeleted(this.id, this.nextVersion()));
+	}
 
 	protected void when(VeterinaryWasRegistered event) {
 		this.id = event.getEntityId();
@@ -79,7 +83,7 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		this.birthDate = event.getBirthDate();
 		this.active = event.isActive();
 	}
-	
+
 	protected void when(VeterinaryWasUpdated event) {
 		this.name = event.getName();
 		this.phone = event.getPhone();
@@ -87,6 +91,10 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		this.mail = event.getMail();
 		this.birthDate = event.getBirthDate();
 		this.active = event.isActive();
+	}
+	
+	protected void when(VeterinaryWasDeleted event) {
+		this.markDeleted();
 	}
 
 	public Name getName() {

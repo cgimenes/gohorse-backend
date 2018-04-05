@@ -20,8 +20,6 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpStatusCodeException;
-
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Mail;

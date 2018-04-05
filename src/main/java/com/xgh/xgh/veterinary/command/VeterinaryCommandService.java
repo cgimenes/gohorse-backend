@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryDeletion;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryRegistration;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryUpdate;
+import com.xgh.xgh.veterinary.command.commands.DeleteVeterinary;
 import com.xgh.xgh.veterinary.command.commands.RegisterVeterinary;
 import com.xgh.xgh.veterinary.command.commands.UpdateVeterinary;
 
@@ -23,5 +25,10 @@ public class VeterinaryCommandService {
 	public void updateVeterinary(UpdateVeterinary command) {
 		VeterinaryUpdate handler = new VeterinaryUpdate(eventStore);
 		handler.execute(command);
+	}
+
+	public void deleteVeterinary(DeleteVeterinary command) {
+		VeterinaryDeletion handler = new VeterinaryDeletion(eventStore);
+		handler.execute(command);		
 	}
 }

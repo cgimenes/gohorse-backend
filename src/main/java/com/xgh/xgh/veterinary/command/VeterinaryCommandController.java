@@ -4,12 +4,14 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xgh.xgh.veterinary.command.commands.DeleteVeterinary;
 import com.xgh.xgh.veterinary.command.commands.RegisterVeterinary;
 import com.xgh.xgh.veterinary.command.commands.UpdateVeterinary;
 
@@ -32,4 +34,9 @@ public class VeterinaryCommandController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@DeleteMapping
+	public ResponseEntity<Void> delete(@RequestBody DeleteVeterinary command) {
+		service.deleteVeterinary(command);
+		return ResponseEntity.noContent().build();
+	}
 }

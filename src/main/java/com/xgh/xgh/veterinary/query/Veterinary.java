@@ -1,12 +1,6 @@
 package com.xgh.xgh.veterinary.query;
 
-import java.sql.Date;
 import java.util.UUID;
-
-import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Mail;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
 
 public final class Veterinary {
 	private UUID id;
@@ -14,10 +8,10 @@ public final class Veterinary {
 	private String phone;
 	private String crmv;
 	private String mail;
-	private Date birthDate;
-	private boolean active;
+	private String birthDate;
+	private String active;
 
-	public Veterinary(UUID id, String name, String phone, String crmv, String mail, Date birthDate, boolean active) {
+	public Veterinary(UUID id, String name, String phone, String crmv, String mail, String birthDate, String active) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
@@ -47,11 +41,11 @@ public final class Veterinary {
 		return this.mail;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return this.birthDate;
 	}
 
-	public boolean isActive() {
+	public String isActive() {
 		return this.active;
 	}
 
