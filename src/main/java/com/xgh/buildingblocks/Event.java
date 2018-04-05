@@ -18,8 +18,7 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 	private IdType entityId;
 	@JsonIgnore
 	private EntityVersion entityVersion;
-
-	// TODO ver se dá pra tirar esse construtor fora	
+	
 	protected Event() {		
 	}
 	

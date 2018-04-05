@@ -17,6 +17,9 @@ databaseChangeLog:
     - property:
         name: TYPE_JSON
         value: text
+    - property:
+        name: TYPE_BOOL
+        value: bool
 
     - include:
         file: db/changelog/0.1.yaml

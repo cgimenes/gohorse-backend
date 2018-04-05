@@ -18,7 +18,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     @Transient
     private EventStream uncommittedEvents = new EventStream();
     
-    @Transient
+    @Column(name = "deleted")
     private Boolean deleted = false;
 
     @Embedded

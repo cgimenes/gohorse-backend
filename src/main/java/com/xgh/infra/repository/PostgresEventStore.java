@@ -68,11 +68,4 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
 	protected void saveSnapshot(AggregateRoot<?> entity) {
 		snapshotRepository.save((EntityType) entity);
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void deleteSnapshot(AggregateRoot<?> entity) {
-		snapshotRepository.delete((EntityType) entity);
-
-	}
 }

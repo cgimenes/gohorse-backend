@@ -17,7 +17,6 @@ public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 	protected abstract void saveEvent(Event<?> event, String entityType);
 	protected abstract void saveSnapshot(AggregateRoot<?> entity);
-	protected abstract void deleteSnapshot(AggregateRoot<?> entity);
 
     public <T extends AggregateRoot<?>> T pull(Class<T> entityType, EntityId id) {
     	List<Event<?>> events = this.getEvents(entityType, id);
@@ -48,10 +47,6 @@ public abstract class EventStore {
     		Event<?> event = uncommittedEvents.next();
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
-    	}
-    	if (entity.isDeleted()) {
-    		this.deleteSnapshot(entity);
-    		return;
     	}
     	this.saveSnapshot(entity);
     }
