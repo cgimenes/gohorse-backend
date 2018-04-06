@@ -9,9 +9,9 @@ public final class Veterinary {
 	private String crmv;
 	private String mail;
 	private String birthDate;
-	private String active;
+	private boolean active;
 
-	public Veterinary(UUID id, String name, String phone, String crmv, String mail, String birthDate, String active) {
+	public Veterinary(UUID id, String name, String phone, String crmv, String mail, String birthDate, boolean active) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
@@ -45,7 +45,7 @@ public final class Veterinary {
 		return this.birthDate;
 	}
 
-	public String isActive() {
+	public boolean isActive() {
 		return this.active;
 	}
 

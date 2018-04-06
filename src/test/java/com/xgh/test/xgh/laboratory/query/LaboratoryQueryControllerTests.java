@@ -81,7 +81,7 @@ public class LaboratoryQueryControllerTests {
 
 	@Test
 	public void findAllWithManyPages() {
-
+		
 	}
 	
 	private Laboratory createSampleLaboratory() {

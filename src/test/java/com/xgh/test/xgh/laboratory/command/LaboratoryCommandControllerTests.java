@@ -88,19 +88,19 @@ public class LaboratoryCommandControllerTests {
 		Laboratory laboratory = new Laboratory();
 		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 		eventStore.push(laboratory);
-		
-        HttpEntity<Laboratory> requestEntity = new HttpEntity<Laboratory>(laboratory);
-	        
-        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/laboratories"), HttpMethod.DELETE, requestEntity, Void.class);
 
-        Laboratory labFromStore = null;
-        try {
-    		labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
-    		fail();
-        } catch (DeletedEntityException e) {
-        }
-		
+		HttpEntity<Laboratory> requestEntity = new HttpEntity<Laboratory>(laboratory);
+
+		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/laboratories"), HttpMethod.DELETE,
+				requestEntity, Void.class);
+
+		try {
+			Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+			fail();
+		} catch (DeletedEntityException e) {
+
+		}
+
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
-		assertNull(labFromStore);
 	}
 }

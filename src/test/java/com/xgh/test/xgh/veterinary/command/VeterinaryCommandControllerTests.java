@@ -2,6 +2,7 @@ package com.xgh.test.xgh.veterinary.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.net.URI;
 import java.text.ParseException;
@@ -15,11 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Mail;
@@ -79,12 +84,12 @@ public class VeterinaryCommandControllerTests {
 		veterinary.update(veterinary.getName(), new Phone("044998731154"), veterinary.getCrmv(),
 				new Mail("ricardo.requena@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
-		
+
 		RequestEntity<Veterinary> request = RequestEntity.put(URI.create("/veterinarians")).body(veterinary);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
-		
+
 		Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
-		
+
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 		assertTrue(veterinary.equals(veterinaryFromStore));
 		assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
@@ -95,32 +100,28 @@ public class VeterinaryCommandControllerTests {
 
 	}
 
-	// @Test
-	// private void registerBadRequest() throws ParseException {
-	// Veterinary veterinary = new Veterinary();
-	// veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new
-	// Phone("044998015821"),
-	// new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
-	// new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()),
-	// true);
-	//
-	// ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians",
-	// veterinary, Void.class);
-	//
-	// Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class,
-	// veterinary.getId());
-	//
-	// assertEquals(HttpStatus.CREATED, response.getStatusCode());
-	// assertTrue(veterinary.equals(veterinaryFromStore));
-	// assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
-	// assertEquals("044998015821", veterinaryFromStore.getPhone().toString());
-	// assertEquals("9375", veterinaryFromStore.getCrmv().toString());
-	// assertEquals("espacoanimal.vet@hotmail.com",
-	// veterinaryFromStore.getMail().toString());
-	// assertTrue(veterinaryFromStore.isActive());
-	// assertEquals("1", veterinaryFromStore.getVersion().toString());
-	// assertEquals("/veterinarians/" + veterinary.getId(),
-	// response.getHeaders().getLocation().getPath());
-	// }
+	@Test
+	public void deleteVeterinaryWithSuccess() throws ParseException {
+		Veterinary veterinary = new Veterinary();
+		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
+				new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
 
+		eventStore.push(veterinary);
+
+		HttpEntity<Veterinary> requestEntity = new HttpEntity<Veterinary>(veterinary);
+
+		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/veterinarians"), HttpMethod.DELETE,
+				requestEntity, Void.class);
+
+		try {
+			Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
+			fail();
+		} catch (DeletedEntityException e) {
+
+		}
+
+		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+	}
 }
