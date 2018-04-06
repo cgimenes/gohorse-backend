@@ -21,7 +21,7 @@ public class LaboratoryQueryController {
     // TODO pesquisa
     @GetMapping
     public ResponseEntity<PagedResult<Laboratory>> findAll(@RequestParam(name="page", defaultValue="0") int page) {
-        PagedResult<Laboratory> laboratories = service.findAllLaboratories(page);
+        PagedResult<Laboratory> laboratories = service.findAll(page);
         return ResponseEntity.ok().body(laboratories);
     }
 

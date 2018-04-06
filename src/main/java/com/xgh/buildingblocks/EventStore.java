@@ -17,8 +17,10 @@ public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 	protected abstract void saveEvent(Event<?> event, String entityType);
 	protected abstract void saveSnapshot(AggregateRoot<?> entity);
-	protected abstract void deleteSnapshot(AggregateRoot<?> entity);
 
+	/*
+	 * Retorna uma entidade, realizando a reconstituição da mesma à partir de seus eventos
+	 */
     public <T extends AggregateRoot<?>> T pull(Class<T> entityType, EntityId id) {
     	List<Event<?>> events = this.getEvents(entityType, id);
     	
@@ -41,6 +43,11 @@ public abstract class EventStore {
     	return entity;
     }
 
+    /*
+     * Persiste os eventos que ainda não foram persistidos,
+     * dispara os event handlers para cada evento e 
+     * salva o snapshot da entidade
+     */
     @Transactional
 	public void push(AggregateRoot<?> entity) {
     	EventStream uncommittedEvents = entity.getUncommittedEvents();
@@ -49,13 +56,12 @@ public abstract class EventStore {
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
     	}
-    	if (entity.isDeleted()) {
-    		this.deleteSnapshot(entity);
-    		return;
-    	}
     	this.saveSnapshot(entity);
     }
 
+    /*
+     * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
+     */
 	protected void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
 																								 IllegalAccessException, IllegalArgumentException, 
 																								 InvocationTargetException {	
@@ -76,6 +82,9 @@ public abstract class EventStore {
 		}
 	}
 
+	/*
+	 * Instancia a entidade usando reflection
+	 */
 	protected <T extends AggregateRoot<?>> T instanceEntity(Class<T> entityType) throws ClassNotFoundException, 
 																NoSuchMethodException, SecurityException, 
 																InstantiationException, IllegalAccessException, 

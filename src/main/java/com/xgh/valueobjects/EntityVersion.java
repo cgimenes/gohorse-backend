@@ -5,8 +5,7 @@ import com.xgh.buildingblocks.SingleValueObject;
 public class EntityVersion extends SingleValueObject<Integer> {
 	private static final long serialVersionUID = -4761548546820727969L;
 
-	protected EntityVersion() {		
-	}
+	protected EntityVersion() {}
 	
 	public EntityVersion(Integer version) {
 		super(version);
@@ -14,5 +13,9 @@ public class EntityVersion extends SingleValueObject<Integer> {
 	
 	public EntityVersion next() {
 		return new EntityVersion(this.getValue() + 1);
+	}
+	
+	public boolean isBlank() {
+		return this.equals(new EntityVersion(0));
 	}
 }

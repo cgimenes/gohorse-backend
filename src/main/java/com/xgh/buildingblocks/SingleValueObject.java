@@ -14,7 +14,6 @@ public abstract class SingleValueObject<T> extends ValueObject {
 	
 	private final T value;
 
-	// TODO ver se dá pra tirar esse construtor fora
 	protected SingleValueObject() {
 		this.value = null;
 	}

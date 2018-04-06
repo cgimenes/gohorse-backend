@@ -7,8 +7,7 @@ public class PagedResult<T> {
 	
 	private List<T> items;
 	
-	protected PagedResult() {		
-	}
+	protected PagedResult() {}
 	
 	public PagedResult(List<T> items) {
 		this.items = items;

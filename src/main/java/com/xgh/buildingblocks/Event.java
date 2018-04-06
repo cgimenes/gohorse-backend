@@ -18,10 +18,8 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 	private IdType entityId;
 	@JsonIgnore
 	private EntityVersion entityVersion;
-
-	// TODO ver se dá pra tirar esse construtor fora	
-	protected Event() {		
-	}
+	
+	protected Event() {}
 	
     public Event(IdType entityId, EntityVersion entityVersion) {
     	this.entityId = entityId;
@@ -46,6 +44,9 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 		return this.getClass().getName();
 	}
 	
+	/*
+	 * Deserializa um evento à partir de um JSON
+	 */
 	public static Event<?> fromString(
 			String eventType, 
 			UUID entityId,
@@ -61,7 +62,7 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 			event.entityVersion = entityVersion;
 			event.ocurredOn = ocurredOn;
 
-			Field field = getField(event);
+			Field field = getEntityIdField(event);
 			field.set(event, entityIdType.getConstructor(UUID.class).newInstance(entityId));
 			
 			return event;
@@ -76,7 +77,10 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 		}
 	}
 
-	private static Field getField(Event<?> event) throws NoSuchFieldException {
+	/*
+	 * Obtem o campo "entityId" através de reflection
+	 */
+	private static Field getEntityIdField(Event<?> event) throws NoSuchFieldException {
 		Field field;
 		Class<?> clazz = event.getClass();
 		while (true) {

@@ -60,7 +60,6 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
     	this.markDeleted();
     }
 
-    // Construtor blank
     public Laboratory() {
     	super();
     }

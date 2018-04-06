@@ -17,6 +17,7 @@ import com.xgh.valueobjects.EntityVersion;
 
 @Repository
 public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType extends EntityId> extends EventStore {
+	// TODO migrar para Mongo
     @Autowired
     protected JdbcTemplate connection;
 
@@ -41,7 +42,8 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
         		"select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
         		+ "from event "
         		+ "where entity_id = ? "
-        		+ "and entity_type = ?",
+        		+ "and entity_type = ? "
+        		+ "order by entity_version asc",
         		eventRowMapper,
         		id.getValue(),
         		entityType.getName());
@@ -67,12 +69,5 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
 	@Override
 	protected void saveSnapshot(AggregateRoot<?> entity) {
 		snapshotRepository.save((EntityType) entity);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void deleteSnapshot(AggregateRoot<?> entity) {
-		snapshotRepository.delete((EntityType) entity);
-
 	}
 }

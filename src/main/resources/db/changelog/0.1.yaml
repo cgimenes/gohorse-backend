@@ -64,4 +64,11 @@ databaseChangeLog:
                         name: phone
                         type: ${TYPE_PHONE}
                         constraints:
-                            nullable: false                         
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false             
+
+                            
