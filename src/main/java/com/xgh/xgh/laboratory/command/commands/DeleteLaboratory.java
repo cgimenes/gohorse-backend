@@ -8,7 +8,7 @@ public class DeleteLaboratory extends Command {
 	
 	private final LaboratoryId id;
 	
-    public DeleteLaboratory() {
+	protected DeleteLaboratory() {
         this.id = null;
     }
 

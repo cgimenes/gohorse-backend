@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xgh.infra.repository.PagedResult;
 
 @RestController
-@RequestMapping("/veteriniarians")
+@RequestMapping("/veterinarians")
 public class VeterinaryQueryController {
 	@Autowired
 	private VeterinaryQueryService service;

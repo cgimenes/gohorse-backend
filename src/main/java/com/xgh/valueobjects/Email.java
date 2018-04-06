@@ -2,14 +2,13 @@ package com.xgh.valueobjects;
 
 import com.xgh.buildingblocks.SingleValueObject;
 
-public class Mail extends SingleValueObject<String>{
+public class Email extends SingleValueObject<String>{
 	private static final long serialVersionUID = 1455291974507259592L;
 	
-	public Mail() {
-		
-	}
+	protected Email() {}
 	
-	public Mail(String mail) {
+	public Email(String email) {
+		super(email);
 		// TODO: Fazer um regex para validar o email
 	}
 }

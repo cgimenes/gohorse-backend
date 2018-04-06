@@ -12,7 +12,7 @@ public final class UpdateLaboratory extends Command {
     private final Name companyName;
     private final Phone phone;
 
-    public UpdateLaboratory() {
+    protected UpdateLaboratory() {
         this.id = null;
         this.companyName = null;
         this.phone = null;

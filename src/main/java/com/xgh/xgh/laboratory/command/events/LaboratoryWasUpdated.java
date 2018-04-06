@@ -12,8 +12,7 @@ public class LaboratoryWasUpdated extends Event<LaboratoryId> {
 	private Name companyName;
 	private Phone phone;
 
-	public LaboratoryWasUpdated() {		
-	}
+	protected LaboratoryWasUpdated() {}
 	
     public LaboratoryWasUpdated(LaboratoryId id, Name companyName, Phone phone, EntityVersion version) {
         super(id, version);

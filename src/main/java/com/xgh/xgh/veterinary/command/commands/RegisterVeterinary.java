@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Mail;
+import com.xgh.valueobjects.Email;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.command.VeterinaryId;
@@ -16,18 +16,16 @@ public class RegisterVeterinary extends Command {
 	private final Name name;
 	private final Phone phone;
 	private final Crmv crmv;
-	private final Mail mail;
+	private final Email email;
 	private final Date birthDate;
-	private final boolean active;
 
-	public RegisterVeterinary() {
+	protected RegisterVeterinary() {
 		this.id = new VeterinaryId();
 		this.name = null;
 		this.phone = null;
 		this.crmv = null;
-		this.mail = null;
+		this.email = null;
 		this.birthDate = null;
-		this.active = true;		
 	}
 
 	public VeterinaryId getId() {
@@ -46,16 +44,12 @@ public class RegisterVeterinary extends Command {
 		return this.crmv;
 	}
 
-	public Mail getMail() {
-		return this.mail;
+	public Email getEmail() {
+		return this.email;
 	}
 
 	public Date getBirthDate() {
 		return this.birthDate;
-	}
-
-	public boolean isActive() {
-		return this.active;
 	}
 	
 }

@@ -8,7 +8,7 @@ public class DeleteVeterinary extends Command {
 
 	private final VeterinaryId id;
 	
-	public DeleteVeterinary() {
+	protected DeleteVeterinary() {
 		this.id = null;
 	}
 	

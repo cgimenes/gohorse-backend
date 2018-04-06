@@ -46,7 +46,6 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
     }
 
     protected void when(LaboratoryWasRegistered event) {
-        this.id = event.getEntityId();
     	this.companyName = event.getCompanyName();
     	this.phone = event.getPhone();
     }

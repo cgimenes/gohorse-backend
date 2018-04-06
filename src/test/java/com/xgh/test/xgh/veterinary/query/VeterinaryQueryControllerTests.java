@@ -1,9 +1,7 @@
 package com.xgh.test.xgh.veterinary.query;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Mail;
+import com.xgh.valueobjects.Email;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.query.Veterinary;
@@ -43,7 +41,7 @@ public class VeterinaryQueryControllerTests {
 	protected JdbcTemplate connection;
 
 	@Before
-	private void before() {
+	public void before() {
 		connection.update("truncate table veterinary");
 	}
 
@@ -59,7 +57,7 @@ public class VeterinaryQueryControllerTests {
 		assertEquals(veterinary.getName().toString(), response.getBody().getName().toString());
 		assertEquals(veterinary.getPhone().toString(), response.getBody().getPhone().toString());
 		assertEquals(veterinary.getCrmv().toString(), response.getBody().getCrmv().toString());
-		assertEquals(veterinary.getMail().toString(), response.getBody().getMail().toString());
+		assertEquals(veterinary.getEmail().toString(), response.getBody().getEmail().toString());
 		assertEquals(veterinary.getBirthDate().toString(), response.getBody().getBirthDate().toString());
 	}
 	
@@ -71,11 +69,11 @@ public class VeterinaryQueryControllerTests {
 	private Veterinary createSampleVeterinary() throws ParseException {
 		com.xgh.xgh.veterinary.command.Veterinary veterinary = new com.xgh.xgh.veterinary.command.Veterinary();
 		veterinary.register(new com.xgh.xgh.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
-				new Phone("044998015821"), new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
+				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 		eventStore.push(veterinary);
 		return new Veterinary(veterinary.getId().getValue(), veterinary.getName().getValue(),
-				veterinary.getPhone().getValue(), veterinary.getCrmv().getValue(), veterinary.getMail().getValue(),
-				veterinary.getBirthDate().toString(), veterinary.isActive());
+				veterinary.getPhone().getValue(), veterinary.getCrmv().getValue(), veterinary.getEmail().getValue(),
+				veterinary.getBirthDate().toString());
 	}
 }

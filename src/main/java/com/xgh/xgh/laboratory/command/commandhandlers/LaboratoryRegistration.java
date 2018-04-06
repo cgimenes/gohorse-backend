@@ -17,6 +17,6 @@ public class LaboratoryRegistration implements CommandHandler<RegisterLaboratory
     public void execute(RegisterLaboratory command) {
         Laboratory laboratory = new Laboratory();
         laboratory.register(command.getId(), command.getCompanyName(), command.getPhone());
-		repository.push(laboratory);
+        repository.push(laboratory);
 	}
 }

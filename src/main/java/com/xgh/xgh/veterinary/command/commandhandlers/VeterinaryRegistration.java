@@ -17,7 +17,7 @@ public class VeterinaryRegistration implements CommandHandler<RegisterVeterinary
 	public void execute(RegisterVeterinary command) {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(command.getId(), command.getName(), command.getPhone(), command.getCrmv(),
-				command.getMail(), command.getBirthDate(), command.isActive());
+				command.getEmail(), command.getBirthDate());
 		repository.push(veterinary);
 	}
 }

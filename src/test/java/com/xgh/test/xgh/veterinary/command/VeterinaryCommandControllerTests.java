@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Mail;
+import com.xgh.valueobjects.Email;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.command.Veterinary;
@@ -47,16 +47,16 @@ public class VeterinaryCommandControllerTests {
 	private PostgresEventStore<Veterinary, VeterinaryId> eventStore;
 
 	@Before
-	private void before() {
+	public void before() {
 
 	}
 
 	@Test
-	private void registerWithSuccess() throws ParseException {
+	public void registerWithSuccess() throws ParseException {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
+				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
 		ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians", veterinary, Void.class);
 
@@ -64,26 +64,25 @@ public class VeterinaryCommandControllerTests {
 
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
 		assertTrue(veterinary.equals(veterinaryFromStore));
-		assertTrue(veterinaryFromStore.isActive());
 		assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
 		assertEquals("044998015821", veterinaryFromStore.getPhone().toString());
 		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
-		assertEquals("espacoanimal.vet@hotmail.com", veterinaryFromStore.getMail().toString());
+		assertEquals("espacoanimal.vet@hotmail.com", veterinaryFromStore.getEmail().toString());
 		assertEquals("1", veterinaryFromStore.getVersion().toString());
 		assertEquals("/veterinarians/" + veterinary.getId(), response.getHeaders().getLocation().getPath());
 	}
 
 	@Test
-	private void updateWithSuccess() throws ParseException {
+	public void updateWithSuccess() throws ParseException {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
+				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 		eventStore.push(veterinary);
 
 		veterinary.update(veterinary.getName(), new Phone("044998731154"), veterinary.getCrmv(),
-				new Mail("ricardo.requena@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
+				new Email("ricardo.requena@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
 		RequestEntity<Veterinary> request = RequestEntity.put(URI.create("/veterinarians")).body(veterinary);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -95,17 +94,16 @@ public class VeterinaryCommandControllerTests {
 		assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
 		assertEquals("044998731154", veterinaryFromStore.getPhone().toString());
 		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
-		assertEquals("ricardo.requena@hotmail.com", veterinaryFromStore.getMail().toString());
+		assertEquals("ricardo.requena@hotmail.com", veterinaryFromStore.getEmail().toString());
 		assertEquals("2", veterinaryFromStore.getVersion().toString());
-
 	}
 
 	@Test
 	public void deleteVeterinaryWithSuccess() throws ParseException {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Mail("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()), true);
+				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
 		eventStore.push(veterinary);
 
@@ -115,7 +113,7 @@ public class VeterinaryCommandControllerTests {
 				requestEntity, Void.class);
 
 		try {
-			Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
+			eventStore.pull(Veterinary.class, veterinary.getId());
 			fail();
 		} catch (DeletedEntityException e) {
 

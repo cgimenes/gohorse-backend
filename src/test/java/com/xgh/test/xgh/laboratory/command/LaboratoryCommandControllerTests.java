@@ -1,7 +1,6 @@
 package com.xgh.test.xgh.laboratory.command;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -95,7 +94,7 @@ public class LaboratoryCommandControllerTests {
 				requestEntity, Void.class);
 
 		try {
-			Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+			eventStore.pull(Laboratory.class, laboratory.getId());
 			fail();
 		} catch (DeletedEntityException e) {
 

@@ -14,19 +14,19 @@ import com.xgh.infra.repository.PostgresRepository;
 public class VeterinaryQueryRepository extends PostgresRepository {
 	private final RowMapper<Veterinary> veterinaryRowMapper = (rs, rowNum) -> {
 		return new Veterinary(UUID.fromString(rs.getString("id")), rs.getString("name"), rs.getString("phone"),
-				rs.getString("crmv"), rs.getString("mail"), rs.getString("birthDate"), rs.getBoolean("active"));
+				rs.getString("crmv"), rs.getString("email"), rs.getString("birthDate"));
 	};
 
 	public PagedResult<Veterinary> findAll(int page) {
 		return new PagedResult<Veterinary>(connection.query(
-				"select id, name, phone, crmv, mail, birth_date, active from veterinary limit ? offset ?",
+				"select id, name, phone, crmv, email, birth_date from veterinary limit ? offset ?",
 				new Object[] { PagedResult.PAGE_SIZE, page * PagedResult.PAGE_SIZE }, veterinaryRowMapper));
 	}
 
 	public Veterinary findById(UUID id) {
 		try {
 			return connection.queryForObject(
-					"select id, name, phone, crmv, mail, birth_date, active from veterinary where id = ?",
+					"select id, name, phone, crmv, email, birth_date from veterinary where id = ?",
 					new Object[] { id }, veterinaryRowMapper);
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntityNotFoundException();

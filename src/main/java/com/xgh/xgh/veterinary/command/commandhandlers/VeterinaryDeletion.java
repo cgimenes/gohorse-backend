@@ -19,5 +19,4 @@ public class VeterinaryDeletion implements CommandHandler<DeleteVeterinary>{
 		veterinary.delete();
 		repository.push(veterinary);
 	}
-
 }

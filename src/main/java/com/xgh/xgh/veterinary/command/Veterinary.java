@@ -16,7 +16,7 @@ import com.xgh.xgh.veterinary.command.events.VeterinaryWasDeleted;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasRegistered;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasUpdated;
 import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Mail;
+import com.xgh.valueobjects.Email;
 
 @Entity
 @Table(name = "veterinary")
@@ -34,22 +34,17 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 	private Crmv crmv;
 
 	@Embedded
-	@AttributeOverride(name = "value", column = @Column(name = "mail"))
-	private Mail mail;
+	@AttributeOverride(name = "value", column = @Column(name = "email"))
+	private Email email;
 
 	@Column(name = "birth_date")
 	private Date birthDate;
 
-	@Column(name = "active")
-	private boolean active;
-
 	public Veterinary() {
-
+		super();
 	}
 
-	public void register(VeterinaryId id, Name name, Phone phone, Crmv crmv, Mail mail, Date birthDate,
-			boolean active) {
-
+	public void register(VeterinaryId id, Name name, Phone phone, Crmv crmv, Email email, Date birthDate) {
 		if (name == null) {
 			throw new NullMandatoryArgumentException("nome");
 		}
@@ -62,12 +57,11 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 			throw new NullMandatoryArgumentException("crmv");
 		}
 
-		recordAndApply(new VeterinaryWasRegistered(id, name, phone, crmv, mail, birthDate, active, this.nextVersion()));
+		recordAndApply(new VeterinaryWasRegistered(id, name, phone, crmv, email, birthDate, this.nextVersion()));
 	}
 
-	public void update(Name name, Phone phone, Crmv crmv, Mail mail, Date birthDate, boolean active) {
-		recordAndApply(
-				new VeterinaryWasUpdated(this.id, name, phone, crmv, mail, birthDate, active, this.nextVersion()));
+	public void update(Name name, Phone phone, Crmv crmv, Email email, Date birthDate) {
+		recordAndApply(new VeterinaryWasUpdated(this.id, name, phone, crmv, email, birthDate, this.nextVersion()));
 	}
 	
 	public void delete() {
@@ -75,22 +69,19 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 	}
 
 	protected void when(VeterinaryWasRegistered event) {
-		this.id = event.getEntityId();
 		this.name = event.getName();
 		this.phone = event.getPhone();
 		this.crmv = event.getCrmv();
-		this.mail = event.getMail();
+		this.email = event.getEmail();
 		this.birthDate = event.getBirthDate();
-		this.active = event.isActive();
 	}
 
 	protected void when(VeterinaryWasUpdated event) {
 		this.name = event.getName();
 		this.phone = event.getPhone();
 		this.crmv = event.getCrmv();
-		this.mail = event.getMail();
+		this.email = event.getEmail();
 		this.birthDate = event.getBirthDate();
-		this.active = event.isActive();
 	}
 	
 	protected void when(VeterinaryWasDeleted event) {
@@ -109,16 +100,12 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		return crmv;
 	}
 
-	public Mail getMail() {
-		return mail;
+	public Email getEmail() {
+		return email;
 	}
 
 	public Date getBirthDate() {
 		return birthDate;
-	}
-
-	public boolean isActive() {
-		return active;
 	}
 
 }

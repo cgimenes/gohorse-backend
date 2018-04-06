@@ -7,18 +7,16 @@ public final class Veterinary {
 	private String name;
 	private String phone;
 	private String crmv;
-	private String mail;
+	private String email;
 	private String birthDate;
-	private boolean active;
 
-	public Veterinary(UUID id, String name, String phone, String crmv, String mail, String birthDate, boolean active) {
+	public Veterinary(UUID id, String name, String phone, String crmv, String email, String birthDate) {
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.crmv = crmv;
-		this.mail = mail;
+		this.email = email;
 		this.birthDate = birthDate;
-		this.active = active;
 	}
 
 	public UUID getId() {
@@ -37,16 +35,12 @@ public final class Veterinary {
 		return this.crmv;
 	}
 
-	public String getMail() {
-		return this.mail;
+	public String getEmail() {
+		return this.email;
 	}
 
 	public String getBirthDate() {
 		return this.birthDate;
-	}
-
-	public boolean isActive() {
-		return this.active;
 	}
 
 }
