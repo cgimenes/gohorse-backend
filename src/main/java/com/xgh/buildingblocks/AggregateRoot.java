@@ -12,9 +12,11 @@ import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
-// TODO comentar o buildingblocks
 @MappedSuperclass
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
+	/*
+	 * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
+	 */
     @Transient
     private EventStream uncommittedEvents = new EventStream();
     
@@ -29,7 +31,12 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     	this.version = new EntityVersion(0);
     }
 
-    // TODO preecher o version com o nextVersion automagicamente 
+    /*
+     * Grava o novo evento na lista de eventos à serem persistidos (uncommittedEvents)
+     * e aplica o evento
+     * 
+     * TODO preecher o version com o nextVersion automagicamente 
+     */
     protected void recordAndApply(Event<IdType> event) {
     	if (this.isDeleted()) {
     		throw new DeletedEntityException();
@@ -39,10 +46,16 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     	this.apply(event);
     }
 
+    /*
+     * Retorna a próxima versão do agregado
+     */
     protected EntityVersion nextVersion() {
     	return this.getVersion().next();
     }
 
+    /*
+     * Aplica o evento, atualizando os metadados e invocando o handler do evento 
+     */
     private void apply(Event<IdType> event) {
     	this.updateMetadata(event);
 	    this.invokeHandlerMethod(event);
@@ -53,6 +66,9 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
 		this.version = event.getEntityVersion();
 	}
 
+	/*
+	 * Encontra e executa o handler do evento
+	 */
 	private void invokeHandlerMethod(Event<?> event) {
 		Method handlerMethod = getHandlerMethod(event);
 	    if (handlerMethod != null) {
@@ -65,6 +81,9 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
 	    }
 	}
 
+	/*
+	 * Encontra o handler do evento (método 'when' com o argumento do mesmo tipo do evento)
+	 */
 	private Method getHandlerMethod(Event<?> event) {
 	    try {
 	        return getClass().getDeclaredMethod("when", event.getClass());
@@ -81,8 +100,15 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
         return uncommittedEvents;
     }
 
+    /*
+     * Aplica todos os eventos do event stream na entidade limpa
+     */
 	@SuppressWarnings("unchecked")
 	protected void reconstitute(EventStream events) {
+		if (!this.version.isBlank()) {
+			throw new RuntimeException("Só é possível reconstituir à partir de uma entidade sem alterações");
+		}
+		
     	while (events.hasNext()) {
 			this.apply((Event<IdType>) events.next());
     	}
