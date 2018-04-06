@@ -12,7 +12,7 @@ public class LaboratoryQueryService {
     @Autowired
     private LaboratoryQueryRepository repository;
 
-	public PagedResult<Laboratory> findAllLaboratories(int page) {
+	public PagedResult<Laboratory> findAll(int page) {
 		return repository.findAll(page);
 	}
 

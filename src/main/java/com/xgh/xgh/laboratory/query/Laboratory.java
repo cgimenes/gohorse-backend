@@ -7,8 +7,7 @@ public final class Laboratory {
 	private String phone;
 	private UUID id;
 	
-	protected Laboratory() {		
-	}
+	protected Laboratory() {}
 	
     public Laboratory(UUID id, String companyName, String phone) {
         this.id = id;
