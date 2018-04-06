@@ -22,4 +22,6 @@ databaseChangeLog:
         value: bool
 
     - include:
-        file: db/changelog/0.1.yaml
+        file: db/changelog/0001-table-event.yaml
+    - include:
+        file: db/changelog/0002-table-laboratory.yaml

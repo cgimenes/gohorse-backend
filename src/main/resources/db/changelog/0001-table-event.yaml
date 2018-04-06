@@ -10,7 +10,7 @@ databaseChangeLog:
                         name: entity_id
                         type: ${TYPE_UUID}
                         constraints:
-                            nullable: false # TODO: adicionar chave primária composta
+                            nullable: false
                     - column:
                         name: entity_version
                         type: ${TYPE_INTEGER}
@@ -39,36 +39,4 @@ databaseChangeLog:
             - addPrimaryKey:
                 columnNames: entity_id, entity_version, entity_type
                 constraintName: pk_event
-                tableName: event                                  
-            - createTable:
-                tableName: laboratory
-                columns:
-                    - column:
-                        name: id
-                        type: ${TYPE_UUID}
-                        constraints:
-                            nullable: false
-                            primaryKey: true
-                            primaryKeyName: PK_LABORATORY
-                    - column:
-                        name: entity_version
-                        type: ${TYPE_INTEGER}
-                        constraints:
-                            nullable: false   
-                    - column:
-                        name: company_name
-                        type: ${TYPE_NAME}
-                        constraints:
-                            nullable: false
-                    - column:
-                        name: phone
-                        type: ${TYPE_PHONE}
-                        constraints:
-                            nullable: false
-                    - column:
-                        name: deleted
-                        type: ${TYPE_BOOL}
-                        constraints:
-                            nullable: false             
-
-                            
+                tableName: event
