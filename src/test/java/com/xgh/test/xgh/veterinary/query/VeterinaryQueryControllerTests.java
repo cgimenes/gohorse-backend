@@ -40,6 +40,7 @@ import com.xgh.xgh.veterinary.query.Veterinary;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
 public class VeterinaryQueryControllerTests {
+	
 	@Autowired
 	private TestRestTemplate restTemplate;
 

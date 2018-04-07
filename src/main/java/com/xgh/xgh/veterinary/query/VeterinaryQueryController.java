@@ -19,13 +19,13 @@ public class VeterinaryQueryController {
 
 	// TODO pesquisa
 	@GetMapping
-	public ResponseEntity<Page<Veterinary>> findAll(@RequestParam(value = "page", defaultValue = "0") int page) {
+	public ResponseEntity<Page<Veterinary>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
 		Page<Veterinary> veterinarians = service.findAll(page);
 		return ResponseEntity.ok().body(veterinarians);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<Veterinary> findById(@PathVariable UUID id){
+	public ResponseEntity<Veterinary> findById(@PathVariable UUID id) {
 		Veterinary veterinary = service.findById(id);
 		return ResponseEntity.ok().body(veterinary);
 	}
