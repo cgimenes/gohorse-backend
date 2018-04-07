@@ -14,11 +14,6 @@ databaseChangeLog:
                             primaryKey: true
                             primaryKeyName: PK_LABORATORY
                     - column:
-                        name: entity_version
-                        type: ${TYPE_INTEGER}
-                        constraints:
-                            nullable: false   
-                    - column:
                         name: company_name
                         type: ${TYPE_NAME}
                         constraints:

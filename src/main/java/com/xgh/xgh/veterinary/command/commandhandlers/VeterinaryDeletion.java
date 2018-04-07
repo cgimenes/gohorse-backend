@@ -9,7 +9,7 @@ public class VeterinaryDeletion implements CommandHandler<DeleteVeterinary>{
 
 	private EventStore repository;
 	
-	public VeterinaryDeletion (EventStore repository) {
+	public VeterinaryDeletion(EventStore repository) {
 		this.repository = repository;
 	}
 	

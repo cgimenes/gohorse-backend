@@ -1,11 +1,5 @@
 package com.xgh.xgh.laboratory.command;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import com.xgh.buildingblocks.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.valueobjects.Name;
@@ -14,15 +8,8 @@ import com.xgh.xgh.laboratory.command.events.LaboratoryWasDeleted;
 import com.xgh.xgh.laboratory.command.events.LaboratoryWasRegistered;
 import com.xgh.xgh.laboratory.command.events.LaboratoryWasUpdated;
 
-@Entity
-@Table(name = "laboratory")
 public final class Laboratory extends AggregateRoot<LaboratoryId> {
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "company_name"))
     private Name companyName;
-
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "phone"))
 	private Phone phone;
 
     public void register(LaboratoryId id, Name companyName, Phone phone) {

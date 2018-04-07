@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,7 +25,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.infra.repository.PagedResult;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
@@ -37,12 +38,12 @@ public class LaboratoryQueryControllerTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
-	
-	@Autowired
-	private PostgresEventStore<com.xgh.xgh.laboratory.command.Laboratory, com.xgh.xgh.laboratory.command.LaboratoryId> eventStore; 
 
 	@Autowired
 	protected JdbcTemplate connection;
+
+	@Autowired
+	private PostgresEventStore eventStore;
 
 	@Before
 	public void before() {
@@ -51,43 +52,44 @@ public class LaboratoryQueryControllerTests {
 
 	@Test
 	public void findById() {
-		Laboratory laboratory = createSampleLaboratory();
+		UUID laboratoryId = createSampleEntity();
 
 		ResponseEntity<Laboratory> response = restTemplate.getForEntity("/laboratories/{id}", Laboratory.class,
-				laboratory.getId());
+				laboratoryId);
 		
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals(laboratory.getId(), response.getBody().getId());		
-		assertEquals(laboratory.getCompanyName().toString(), response.getBody().getCompanyName().toString());
-		assertEquals(laboratory.getPhone().toString(), response.getBody().getPhone().toString());
+		assertEquals(laboratoryId, response.getBody().getId());		
+		assertEquals("Laboratório dos Hackers", response.getBody().getCompanyName().toString());
+		assertEquals("044313371337", response.getBody().getPhone().toString());
 	}
 
+	// TODO corrigir
 	@Test
 	public void findAllWithOnePage() throws JsonParseException, JsonMappingException, IOException {
-		List<Laboratory> laboratories = new ArrayList<>(); 
+		List<UUID> laboratories = new ArrayList<>(); 
 		for (int i = 0; i < 5; i++) {
-			laboratories.add(createSampleLaboratory());
+			laboratories.add(createSampleEntity());
 		}
 
 		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/laboratories", String.class);
 
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		
-		PagedResult<Laboratory> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<PagedResult<Laboratory>>() {});		
+		Page<Laboratory> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<Page<Laboratory>>() {});		
 		for (int i = 0; i < 5; i++) {
-			assertEquals(laboratories.get(i).getId(), response.getItems().get(i).getId());
+			assertEquals(laboratories.get(i), response.getContent().get(i).getId());
 		}
 	}
 
 	@Test
 	public void findAllWithManyPages() {
-		
+		// TODO criar
 	}
 	
-	private Laboratory createSampleLaboratory() {
+	private UUID createSampleEntity() {
 		com.xgh.xgh.laboratory.command.Laboratory laboratory = new com.xgh.xgh.laboratory.command.Laboratory();
 		laboratory.register(new com.xgh.xgh.laboratory.command.LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 		eventStore.push(laboratory);
-		return new Laboratory(laboratory.getId().getValue(), laboratory.getCompanyName().getValue(), laboratory.getPhone().getValue());
+		return laboratory.getId().getValue();
 	}
 }

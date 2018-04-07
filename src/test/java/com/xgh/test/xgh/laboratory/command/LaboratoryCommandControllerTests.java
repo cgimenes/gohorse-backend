@@ -2,7 +2,6 @@ package com.xgh.test.xgh.laboratory.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.net.URI;
 
@@ -21,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
@@ -39,14 +37,14 @@ public class LaboratoryCommandControllerTests {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private PostgresEventStore<Laboratory, LaboratoryId> eventStore;
+	private PostgresEventStore eventStore;
 
 	@Before
 	public void before() {
 	}
 
 	@Test
-	public void register() {
+	public void registerWithSuccess() {
 		Laboratory laboratory = new Laboratory();
 		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 
@@ -63,7 +61,7 @@ public class LaboratoryCommandControllerTests {
 	}
 
 	@Test
-	public void update() {
+	public void updateWithSuccess() {
 		Laboratory laboratory = new Laboratory();
 		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 		eventStore.push(laboratory);
@@ -83,7 +81,7 @@ public class LaboratoryCommandControllerTests {
 	}
 
 	@Test
-	public void delete() {
+	public void deleteWithSuccess() {
 		Laboratory laboratory = new Laboratory();
 		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 		eventStore.push(laboratory);
@@ -93,13 +91,10 @@ public class LaboratoryCommandControllerTests {
 		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/laboratories"), HttpMethod.DELETE,
 				requestEntity, Void.class);
 
-		try {
-			eventStore.pull(Laboratory.class, laboratory.getId());
-			fail();
-		} catch (DeletedEntityException e) {
-
-		}
-
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+		Laboratory entityFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		
+		assertTrue(entityFromStore.isDeleted());
 	}
 }

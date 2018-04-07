@@ -2,7 +2,6 @@ package com.xgh.test.xgh.veterinary.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.net.URI;
 import java.text.ParseException;
@@ -24,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
@@ -44,7 +42,7 @@ public class VeterinaryCommandControllerTests {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private PostgresEventStore<Veterinary, VeterinaryId> eventStore;
+	private PostgresEventStore eventStore;
 
 	@Before
 	public void before() {
@@ -99,7 +97,7 @@ public class VeterinaryCommandControllerTests {
 	}
 
 	@Test
-	public void deleteVeterinaryWithSuccess() throws ParseException {
+	public void deleteWithSuccess() throws ParseException {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
 				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
@@ -112,14 +110,11 @@ public class VeterinaryCommandControllerTests {
 		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/veterinarians"), HttpMethod.DELETE,
 				requestEntity, Void.class);
 
-		try {
-			eventStore.pull(Veterinary.class, veterinary.getId());
-			fail();
-		} catch (DeletedEntityException e) {
-
-		}
-
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+		Veterinary entityFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
+			
+		assertTrue(entityFromStore.isDeleted());
 
 	}
 }

@@ -2,9 +2,13 @@ package com.xgh.test.xgh.veterinary.query;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
@@ -35,7 +44,7 @@ public class VeterinaryQueryControllerTests {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private PostgresEventStore<com.xgh.xgh.veterinary.command.Veterinary, com.xgh.xgh.veterinary.command.VeterinaryId> eventStore;
+	private PostgresEventStore eventStore;
 
 	@Autowired
 	protected JdbcTemplate connection;
@@ -47,33 +56,49 @@ public class VeterinaryQueryControllerTests {
 
 	@Test
 	public void findById() throws ParseException {
-		Veterinary veterinary = createSampleVeterinary();
+		UUID veterinaryId = createSampleEntity();
 
 		ResponseEntity<Veterinary> response = restTemplate.getForEntity("/veterinarians/{id}", Veterinary.class,
-				veterinary.getId());
+				veterinaryId);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals(veterinary.getId(), response.getBody().getId());
-		assertEquals(veterinary.getName().toString(), response.getBody().getName().toString());
-		assertEquals(veterinary.getPhone().toString(), response.getBody().getPhone().toString());
-		assertEquals(veterinary.getCrmv().toString(), response.getBody().getCrmv().toString());
-		assertEquals(veterinary.getEmail().toString(), response.getBody().getEmail().toString());
-		assertEquals(veterinary.getBirthDate().toString(), response.getBody().getBirthDate().toString());
+		assertEquals(veterinaryId, response.getBody().getId());
+		assertEquals("Ricardo Requena", response.getBody().getName().toString());
+		assertEquals("044998015821", response.getBody().getPhone().toString());
+		assertEquals("9375", response.getBody().getCrmv().toString());
+		assertEquals("espacoanimal.vet@hotmail.com", response.getBody().getEmail().toString());
+		assertEquals("1986-10-03", response.getBody().getBirthDate().toString());
+	}
+
+	// TODO corrigir
+	@Test
+	public void findAllWithOnePage() throws JsonParseException, JsonMappingException, IOException, ParseException {
+		List<UUID> veterinarians = new ArrayList<>(); 
+		for (int i = 0; i < 5; i++) {
+			veterinarians.add(createSampleEntity());
+		}
+
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/veterinarians", String.class);
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		
+		Page<Veterinary> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<Page<Veterinary>>() {});		
+		for (int i = 0; i < 5; i++) {
+			assertEquals(veterinarians.get(i), response.getContent().get(i).getId());
+		}
 	}
 	
 	@Test
 	public void findAllWithManyPages() throws ParseException {
-		
+		// TODO criar
 	}
 
-	private Veterinary createSampleVeterinary() throws ParseException {
+	private UUID createSampleEntity() throws ParseException {
 		com.xgh.xgh.veterinary.command.Veterinary veterinary = new com.xgh.xgh.veterinary.command.Veterinary();
 		veterinary.register(new com.xgh.xgh.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
 				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 		eventStore.push(veterinary);
-		return new Veterinary(veterinary.getId().getValue(), veterinary.getName().getValue(),
-				veterinary.getPhone().getValue(), veterinary.getCrmv().getValue(), veterinary.getEmail().getValue(),
-				veterinary.getBirthDate().toString());
+		return veterinary.getId().getValue();
 	}
 }

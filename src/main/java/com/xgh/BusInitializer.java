@@ -1,24 +1,23 @@
-package com.xgh.infra;
+package com.xgh;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.xgh.buildingblocks.CommandBus;
+import com.xgh.buildingblocks.EventBus;
+import com.xgh.eventhandlers.LaboratoryProjector;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.xgh.laboratory.command.Laboratory;
-import com.xgh.xgh.laboratory.command.LaboratoryId;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryDeletion;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryRegistration;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryUpdate;
 import com.xgh.xgh.laboratory.command.commands.DeleteLaboratory;
 import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
 import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
-import com.xgh.xgh.veterinary.command.Veterinary;
-import com.xgh.xgh.veterinary.command.VeterinaryId;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryDeletion;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryRegistration;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryUpdate;
@@ -34,26 +33,28 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
 	/*
 	 * Dependências dos handlers
 	 */
+	// TODO injetar automaticamente
     @Autowired
-    private PostgresEventStore<Laboratory, LaboratoryId> laboratoryEventStore;
+    private PostgresEventStore eventStore;
     
     @Autowired
-	private PostgresEventStore<Veterinary, VeterinaryId> veterinaryEventStore;
+    private ApplicationContext context;
 	
 	private void initializeCommandBus() {
 		logger.info("Inicializando command bus");
 		// Laboratory
-		CommandBus.addHandler(RegisterLaboratory.class, new LaboratoryRegistration(laboratoryEventStore));
-		CommandBus.addHandler(UpdateLaboratory.class, new LaboratoryUpdate(laboratoryEventStore));
-		CommandBus.addHandler(DeleteLaboratory.class, new LaboratoryDeletion(laboratoryEventStore));
+		CommandBus.addHandler(RegisterLaboratory.class, new LaboratoryRegistration(eventStore));
+		CommandBus.addHandler(UpdateLaboratory.class, new LaboratoryUpdate(eventStore));
+		CommandBus.addHandler(DeleteLaboratory.class, new LaboratoryDeletion(eventStore));
 		// Veterinary
-		CommandBus.addHandler(RegisterVeterinary.class, new VeterinaryRegistration(veterinaryEventStore));
-		CommandBus.addHandler(UpdateVeterinary.class, new VeterinaryUpdate(veterinaryEventStore));
-		CommandBus.addHandler(DeleteVeterinary.class, new VeterinaryDeletion(veterinaryEventStore));
+		CommandBus.addHandler(RegisterVeterinary.class, new VeterinaryRegistration(eventStore));
+		CommandBus.addHandler(UpdateVeterinary.class, new VeterinaryUpdate(eventStore));
+		CommandBus.addHandler(DeleteVeterinary.class, new VeterinaryDeletion(eventStore));
 	}
 
 	private void initializeEventBus() {
 		logger.info("Inicializando event bus");
+		EventBus.addHandler(context.getBean(LaboratoryProjector.class));
 	}
 
 	@Override 

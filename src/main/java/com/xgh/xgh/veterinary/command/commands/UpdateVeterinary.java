@@ -9,7 +9,7 @@ import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.command.VeterinaryId;
 
-public class UpdateVeterinary extends Command{
+public class UpdateVeterinary extends Command {
 	private static final long serialVersionUID = -8599483144628000021L;
 	
 	private final VeterinaryId id;
