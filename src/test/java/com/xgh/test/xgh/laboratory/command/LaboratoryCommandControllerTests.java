@@ -45,55 +45,55 @@ public class LaboratoryCommandControllerTests {
 
 	@Test
 	public void registerWithSuccess() {
-		Laboratory laboratory = new Laboratory();
-		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		Laboratory entity = new Laboratory();
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 
-		ResponseEntity<Void> response = restTemplate.postForEntity("/laboratories", laboratory, Void.class);
+		ResponseEntity<Void> response = restTemplate.postForEntity("/laboratories", entity, Void.class);
 
-		Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		Laboratory entityFromStore = eventStore.pull(Laboratory.class, entity.getId());
 
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals("/laboratories/" + laboratory.getId(), response.getHeaders().getLocation().getPath());
-		assertTrue(laboratory.equals(labFromStore));
-		assertEquals("Laboratório dos Hackers", labFromStore.getCompanyName().toString());
-		assertEquals("044313371337", labFromStore.getPhone().toString());
-		assertEquals("1", labFromStore.getVersion().toString());
+		assertEquals("/laboratories/" + entity.getId(), response.getHeaders().getLocation().getPath());
+		assertTrue(entity.equals(entityFromStore));
+		assertEquals("Laboratório dos Hackers", entityFromStore.getCompanyName().toString());
+		assertEquals("044313371337", entityFromStore.getPhone().toString());
+		assertEquals("1", entityFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void updateWithSuccess() {
-		Laboratory laboratory = new Laboratory();
-		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
-		eventStore.push(laboratory);
+		Laboratory entity = new Laboratory();
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		eventStore.push(entity);
 
-		laboratory.update(new Name("Laboratório dos Noob"), new Phone("044000000000"));
+		entity.update(new Name("Laboratório dos Noob"), new Phone("044000000000"));
 
-		RequestEntity<Laboratory> request = RequestEntity.put(URI.create("/laboratories")).body(laboratory);
+		RequestEntity<Laboratory> request = RequestEntity.put(URI.create("/laboratories")).body(entity);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
 
-		Laboratory labFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		Laboratory entityFromStore = eventStore.pull(Laboratory.class, entity.getId());
 
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-		assertTrue(laboratory.equals(labFromStore));
-		assertEquals("Laboratório dos Noob", labFromStore.getCompanyName().toString());
-		assertEquals("044000000000", labFromStore.getPhone().toString());
-		assertEquals("2", labFromStore.getVersion().toString());
+		assertTrue(entity.equals(entityFromStore));
+		assertEquals("Laboratório dos Noob", entityFromStore.getCompanyName().toString());
+		assertEquals("044000000000", entityFromStore.getPhone().toString());
+		assertEquals("2", entityFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void deleteWithSuccess() {
-		Laboratory laboratory = new Laboratory();
-		laboratory.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
-		eventStore.push(laboratory);
+		Laboratory entity = new Laboratory();
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		eventStore.push(entity);
 
-		HttpEntity<Laboratory> requestEntity = new HttpEntity<Laboratory>(laboratory);
+		HttpEntity<Laboratory> requestEntity = new HttpEntity<Laboratory>(entity);
 
 		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/laboratories"), HttpMethod.DELETE,
 				requestEntity, Void.class);
 
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
-		Laboratory entityFromStore = eventStore.pull(Laboratory.class, laboratory.getId());
+		Laboratory entityFromStore = eventStore.pull(Laboratory.class, entity.getId());
 		
 		assertTrue(entityFromStore.isDeleted());
 	}
