@@ -14,7 +14,7 @@ import com.xgh.infra.repository.PostgresRepository;
 public class VeterinaryQueryRepository extends PostgresRepository {
 	private final RowMapper<Veterinary> veterinaryRowMapper = (rs, rowNum) -> {
 		return new Veterinary(UUID.fromString(rs.getString("id")), rs.getString("name"), rs.getString("phone"),
-				rs.getString("crmv"), rs.getString("email"), rs.getString("birthDate"));
+				rs.getString("crmv"), rs.getString("email"), rs.getString("birth_date"));
 	};
 
 	public PagedResult<Veterinary> findAll(int page) {

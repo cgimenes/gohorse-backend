@@ -60,10 +60,10 @@ public class VeterinaryQueryControllerTests {
 		assertEquals(veterinary.getEmail().toString(), response.getBody().getEmail().toString());
 		assertEquals(veterinary.getBirthDate().toString(), response.getBody().getBirthDate().toString());
 	}
-	
+
 	@Test
 	public void findAllWithManyPages() throws ParseException {
-		
+
 	}
 
 	private Veterinary createSampleVeterinary() throws ParseException {

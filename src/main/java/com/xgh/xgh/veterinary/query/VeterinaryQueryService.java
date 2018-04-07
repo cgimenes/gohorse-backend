@@ -12,7 +12,7 @@ public class VeterinaryQueryService {
 	@Autowired
 	private VeterinaryQueryRepository repository;
 
-	public PagedResult<Veterinary> finAllVeterinarians(int page) {
+	public PagedResult<Veterinary> findAllVeterinarians(int page) {
 		return repository.findAll(page);
 	}
 	
