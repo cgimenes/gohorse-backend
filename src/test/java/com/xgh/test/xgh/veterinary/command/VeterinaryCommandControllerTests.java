@@ -68,7 +68,6 @@ public class VeterinaryCommandControllerTests {
 		assertEquals("044998015821", veterinaryFromStore.getPhone().toString());
 		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
 		assertEquals("espacoanimal.vet@hotmail.com", veterinaryFromStore.getEmail().toString());
-		assertEquals("1", veterinaryFromStore.getVersion().toString());
 		assertEquals("/veterinarians/" + veterinary.getId(), response.getHeaders().getLocation().getPath());
 	}
 
@@ -95,11 +94,10 @@ public class VeterinaryCommandControllerTests {
 		assertEquals("044998731154", veterinaryFromStore.getPhone().toString());
 		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
 		assertEquals("ricardo.requena@hotmail.com", veterinaryFromStore.getEmail().toString());
-		assertEquals("2", veterinaryFromStore.getVersion().toString());
 	}
 
 	@Test
-	public void deleteVeterinaryWithSuccess() throws ParseException {
+	public void deleteWithSuccess() throws ParseException {
 		Veterinary veterinary = new Veterinary();
 		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
 				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
