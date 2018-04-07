@@ -2,13 +2,8 @@ package com.xgh.buildingblocks;
 
 import java.util.Objects;
 
-import javax.persistence.Embeddable;
-import javax.persistence.MappedSuperclass;
-
 import com.fasterxml.jackson.annotation.JsonValue;
 
-@Embeddable
-@MappedSuperclass
 public abstract class SingleValueObject<T> extends ValueObject {
 	private static final long serialVersionUID = -1149703165422656566L;
 	

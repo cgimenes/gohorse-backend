@@ -2,29 +2,18 @@ package com.xgh.buildingblocks;
 
 import java.lang.reflect.Method;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
-
 import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
-@MappedSuperclass
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
 	/*
 	 * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
 	 */
-    @Transient
     private EventStream uncommittedEvents = new EventStream();
-    
-    @Column(name = "deleted")
+
     private Boolean deleted = false;
 
-    @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "entity_version"))
 	protected EntityVersion version;
 
     public AggregateRoot() {

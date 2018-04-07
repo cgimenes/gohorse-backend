@@ -16,13 +16,10 @@ import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
 @Repository
-public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType extends EntityId> extends EventStore {
+public class PostgresEventStore extends EventStore {
 	// TODO migrar para Mongo
     @Autowired
     protected JdbcTemplate connection;
-
-    @Autowired
-    protected JpaSnapshotRepository<EntityType, IdType> snapshotRepository;
 
 	private final RowMapper<Event<?>> eventRowMapper = (rs, rowNum) -> {
 		Calendar ocurredOn = Calendar.getInstance();
@@ -64,10 +61,4 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
 	    	event.toString()
 		);
     }
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void saveSnapshot(AggregateRoot<?> entity) {
-		snapshotRepository.save((EntityType) entity);
-	}
 }

@@ -2,7 +2,6 @@ package com.xgh.test.xgh.veterinary.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.net.URI;
 import java.text.ParseException;
@@ -24,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
@@ -44,7 +42,7 @@ public class VeterinaryCommandControllerTests {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private PostgresEventStore<Veterinary, VeterinaryId> eventStore;
+	private PostgresEventStore eventStore;
 
 	@Before
 	public void before() {
@@ -53,71 +51,70 @@ public class VeterinaryCommandControllerTests {
 
 	@Test
 	public void registerWithSuccess() throws ParseException {
-		Veterinary veterinary = new Veterinary();
-		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
+		Veterinary entity = new Veterinary();
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
 				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
-		ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians", veterinary, Void.class);
+		ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians", entity, Void.class);
 
-		Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
+		Veterinary entityFromStore = eventStore.pull(Veterinary.class, entity.getId());
 
 		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertTrue(veterinary.equals(veterinaryFromStore));
-		assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
-		assertEquals("044998015821", veterinaryFromStore.getPhone().toString());
-		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
-		assertEquals("espacoanimal.vet@hotmail.com", veterinaryFromStore.getEmail().toString());
-		assertEquals("/veterinarians/" + veterinary.getId(), response.getHeaders().getLocation().getPath());
+		assertTrue(entity.equals(entityFromStore));
+		assertEquals("Ricardo Requena", entityFromStore.getName().toString());
+		assertEquals("044998015821", entityFromStore.getPhone().toString());
+		assertEquals("9375", entityFromStore.getCrmv().toString());
+		assertEquals("espacoanimal.vet@hotmail.com", entityFromStore.getEmail().toString());
+		assertEquals("/veterinarians/" + entity.getId(), response.getHeaders().getLocation().getPath());
+		assertEquals("1", entityFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void updateWithSuccess() throws ParseException {
-		Veterinary veterinary = new Veterinary();
-		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
+		Veterinary entity = new Veterinary();
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
 				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
-		eventStore.push(veterinary);
+		eventStore.push(entity);
 
-		veterinary.update(veterinary.getName(), new Phone("044998731154"), veterinary.getCrmv(),
+		entity.update(entity.getName(), new Phone("044998731154"), entity.getCrmv(),
 				new Email("ricardo.requena@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
-		RequestEntity<Veterinary> request = RequestEntity.put(URI.create("/veterinarians")).body(veterinary);
+		RequestEntity<Veterinary> request = RequestEntity.put(URI.create("/veterinarians")).body(entity);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
 
-		Veterinary veterinaryFromStore = eventStore.pull(Veterinary.class, veterinary.getId());
+		Veterinary entityFromStore = eventStore.pull(Veterinary.class, entity.getId());
 
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-		assertTrue(veterinary.equals(veterinaryFromStore));
-		assertEquals("Ricardo Requena", veterinaryFromStore.getName().toString());
-		assertEquals("044998731154", veterinaryFromStore.getPhone().toString());
-		assertEquals("9375", veterinaryFromStore.getCrmv().toString());
-		assertEquals("ricardo.requena@hotmail.com", veterinaryFromStore.getEmail().toString());
+		assertTrue(entity.equals(entityFromStore));
+		assertEquals("Ricardo Requena", entityFromStore.getName().toString());
+		assertEquals("044998731154", entityFromStore.getPhone().toString());
+		assertEquals("9375", entityFromStore.getCrmv().toString());
+		assertEquals("ricardo.requena@hotmail.com", entityFromStore.getEmail().toString());
+		assertEquals("2", entityFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void deleteWithSuccess() throws ParseException {
-		Veterinary veterinary = new Veterinary();
-		veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
+		Veterinary entity = new Veterinary();
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
 				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
-		eventStore.push(veterinary);
+		eventStore.push(entity);
 
-		HttpEntity<Veterinary> requestEntity = new HttpEntity<Veterinary>(veterinary);
+		HttpEntity<Veterinary> requestEntity = new HttpEntity<Veterinary>(entity);
 
 		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/veterinarians"), HttpMethod.DELETE,
 				requestEntity, Void.class);
 
-		try {
-			eventStore.pull(Veterinary.class, veterinary.getId());
-			fail();
-		} catch (DeletedEntityException e) {
-
-		}
-
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+		Veterinary entityFromStore = eventStore.pull(Veterinary.class, entity.getId());
+			
+		assertTrue(entityFromStore.isDeleted());
 
 	}
 }

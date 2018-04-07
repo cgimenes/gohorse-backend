@@ -1,16 +1,8 @@
 package com.xgh.buildingblocks;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.MappedSuperclass;
-
 import com.xgh.valueobjects.EntityId;
 
-@MappedSuperclass
 public abstract class DomainEntity<IdType extends EntityId> {
-    @EmbeddedId
-    @AttributeOverride(name = "value", column = @Column(name = "id"))
     protected IdType id;
 
     public IdType getId() {

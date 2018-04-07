@@ -43,6 +43,14 @@ public class ExceptionManager {
 	}
 	
 	@ResponseStatus(code=HttpStatus.NOT_FOUND)
+	@ExceptionHandler({ javax.persistence.EntityNotFoundException.class })
+	public @ResponseBody ErrorResponse handleException(javax.persistence.EntityNotFoundException ex) {
+		logger.info(ex);
+		
+		return new ErrorResponse(ENTITY_NOT_FOUND, "Entidade não encontrada");
+	}
+	
+	@ResponseStatus(code=HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ DeletedEntityException.class })
 	public @ResponseBody ErrorResponse handleException(DeletedEntityException ex) {
 		logger.info(ex);

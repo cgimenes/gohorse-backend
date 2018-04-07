@@ -13,7 +13,6 @@ public final class RegisterLaboratory extends Command {
     private final Phone phone;
 
     protected RegisterLaboratory() {
-        // Gera um id caso o cliente não tenha passado na API
         this.id = new LaboratoryId();
         this.companyName = null;
         this.phone = null;
