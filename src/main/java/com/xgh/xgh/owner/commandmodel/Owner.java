@@ -1,5 +1,7 @@
 package com.xgh.xgh.owner.commandmodel;
 
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -28,12 +30,15 @@ public final class Owner extends DomainEntity<OwnerId>{
 	@AttributeOverride(name = "value", column = @Column(name = "cpf"))
 	private Cpf cpf;
 	
-	public void register(OwnerId id, Name name, Phone phone, Cpf cpf) {
-		recordAndApply(new OwnerWasRegistered(id, name, phone, cpf, this.nextVersion()));
+	@Column(name = "birth_date")
+	private Date birthDate;
+	
+	public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate) {
+		recordAndApply(new OwnerWasRegistered(id, name, phone, cpf, birthDate, this.nextVersion()));
 	}
 	
-	public void update(Name name, Phone phone, Cpf cpf) {
-		recordAndApply(new OwnerWasUpdated(this.id, name, phone, cpf, this.nextVersion()));
+	public void update(Name name, Phone phone, Cpf cpf, Date birthDate) {
+		recordAndApply(new OwnerWasUpdated(this.id, name, phone, cpf, birthDate, this.nextVersion()));
 	}
 	
 	protected void when(OwnerWasRegistered event) {
@@ -41,12 +46,14 @@ public final class Owner extends DomainEntity<OwnerId>{
 		this.name = event.getName();
 		this.cpf = event.getCpf();
 		this.phone = event.getPhone();
+		this.birthDate = event.getBirthDate();
 	}
 	
 	protected void when(OwnerWasUpdated event) {
 		this.name = event.getName();
 		this.cpf = event.getCpf();
 		this.phone = event.getPhone();
+		this.birthDate = event.getBirthDate();
 	}
 	
 	public Owner() {
@@ -64,4 +71,9 @@ public final class Owner extends DomainEntity<OwnerId>{
 	public Phone getPhone() {
 		return this.phone;
 	}
+	
+	public Date getBirthDate() {
+		return this.birthDate;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.xgh.xgh.owner.commandmodel.commands;
 
+import java.util.Date;
+
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.Name;
@@ -13,6 +15,7 @@ public final class RegisterOwner extends Command {
 	private final Name name;
 	private final Cpf cpf;
 	private final Phone phone;
+	private final Date birthDate;
 	
 	public RegisterOwner() {
 	 // Gera um id para o Proprietário, caso o mesmo não tenha passado pela API ainda
@@ -20,6 +23,7 @@ public final class RegisterOwner extends Command {
 		this.name = null;
 		this.cpf = null;
 		this.phone = null;
+		this.birthDate = null;
 	}
 	
 	public OwnerId getId() {
@@ -37,4 +41,9 @@ public final class RegisterOwner extends Command {
 	public Phone getPhone() {
 		return this.phone;
 	}
+	
+	public Date getBirthDate() {
+		return this.birthDate;
+	}
+	
 }

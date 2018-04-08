@@ -1,5 +1,7 @@
 package com.xgh.xgh.owner.commandmodel.commands;
 
+import java.util.Date;
+
 import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.Name;
@@ -14,12 +16,14 @@ public final class UpdateOwner extends Command {
 	private final Name name;
 	private final Cpf cpf;
 	private final Phone phone;
+	private final Date birthDate;
 	
 	public UpdateOwner() {
 		this.id = null;
 		this.name = null;
 		this.cpf = null;
 		this.phone = null;
+		this.birthDate = null;
 	}
 
 	public OwnerId getId() {
@@ -36,6 +40,10 @@ public final class UpdateOwner extends Command {
 
 	public Phone getPhone() {
 		return phone;
+	}
+	
+	public Date getBirthDate() {
+		return birthDate;
 	}
 	
 }

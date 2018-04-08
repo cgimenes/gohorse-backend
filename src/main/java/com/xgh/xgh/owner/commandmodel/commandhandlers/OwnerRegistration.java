@@ -16,7 +16,7 @@ public class OwnerRegistration implements CommandHandler<RegisterOwner> {
 	@Override
 	public void execute(RegisterOwner command) {
 		Owner owner = new Owner();
-		owner.register(command.getId(), command.getName(), command.getPhone(), command.getCpf());
+		owner.register(command.getId(), command.getName(), command.getPhone(), command.getCpf(), command.getBirthDate());
 		repository.push(owner);
 	}
 

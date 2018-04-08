@@ -17,13 +17,13 @@ public final class OwnerQueryRepository extends PostgresRepository {
 
 	public List<Owner> findAll() {
 		return connection.query(
-				"select id, name, cpf, phone from owner",
+				"select id, name, cpf, phone, birth_date, active from owner",
 			    new OwnerRowMapper());
 	}
 
 	public Owner findById(EntityId id) {
 		return connection.queryForObject(
-				"select id, name, cpf, phone from owner where id = ?",
+				"select id, name, cpf, phone, birth_date, active from owner where id = ?",
 				new Object[] {id.toString()},
 				new OwnerRowMapper());
 	}
@@ -35,7 +35,9 @@ public final class OwnerQueryRepository extends PostgresRepository {
 				UUID.fromString(rs.getString("id")),
 				rs.getString("name"),
 				rs.getString("cpf"),
-				rs.getString("phone")
+				rs.getString("phone"),
+				rs.getDate("birth_date"),
+				rs.getBoolean("active")
 			);
 		}
 		

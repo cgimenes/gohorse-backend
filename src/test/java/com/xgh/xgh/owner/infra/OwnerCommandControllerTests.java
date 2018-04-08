@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,8 @@ public class OwnerCommandControllerTests {
 	@Test
 	public void register() {
 		Owner owner = new Owner();
-		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"));
+		Date data = new Date();
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
 
 		ResponseEntity<Owner> response = restTemplate.postForEntity("/owners", owner, Owner.class);
 
@@ -57,16 +59,18 @@ public class OwnerCommandControllerTests {
 		assertEquals("Dono Master", ownerFromStore.getName().toString());
 		assertEquals("044313371337", ownerFromStore.getPhone().toString());
 		assertEquals("09450600929", ownerFromStore.getCpf().toString());
+		assertEquals(data, ownerFromStore.getBirthDate());
 		assertEquals("1", ownerFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void update() {
 		Owner owner = new Owner();
-		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"));
+		Date data = new Date();
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
 		eventStore.push(owner);
 		
-		owner.update(new Name("Dono Master"), new Phone("044000000000"), new Cpf("09450600929"));
+		owner.update(new Name("Dono Master"), new Phone("044000000000"), new Cpf("09450600929"), data);
 		
 		RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -78,6 +82,7 @@ public class OwnerCommandControllerTests {
 		assertEquals("Dono Master", ownerFromStore.getName().toString());
 		assertEquals("044000000000", ownerFromStore.getPhone().toString());
 		assertEquals("09450600929", ownerFromStore.getCpf().toString());
+		assertEquals(data, ownerFromStore.getBirthDate());
 		assertEquals("2", ownerFromStore.getVersion().toString());
 	}
 }

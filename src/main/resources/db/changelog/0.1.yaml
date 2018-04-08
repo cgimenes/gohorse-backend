@@ -99,3 +99,8 @@ databaseChangeLog:
                         type: ${TYPE_CPF}
                         constraints:
                             nullable: false
+                    - column:
+                        name: birth_date
+                        type: ${TYPE_DATETIME}
+                        constraints:
+                            nullable: true                         
