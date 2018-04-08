@@ -1,22 +1,23 @@
 package com.xgh.buildingblocks;
 
-import javax.persistence.Embeddable;
-import javax.persistence.MappedSuperclass;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-@Embeddable
-@MappedSuperclass
 public abstract class SingleValueObject<T> extends ValueObject {
 	private static final long serialVersionUID = -1149703165422656566L;
 	
-	private T value;
+	private final T value;
 
-	// TODO ver se dá pra tirar esse construtor fora
-	protected SingleValueObject() {		
+	protected SingleValueObject() {
+		this.value = null;
 	}
 	
     public SingleValueObject(T value) {
+        if (value == null) {
+        	// TODO informar o nome da classe que deu esse erro
+            throw new IllegalArgumentException("O valor não pode ser nulo");
+        }
         this.value = value;
     }
 
@@ -28,6 +29,11 @@ public abstract class SingleValueObject<T> extends ValueObject {
     @Override
     public String toString() {
         return value.toString();
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hashCode(this.value);
     }
     
     @SuppressWarnings("unchecked")

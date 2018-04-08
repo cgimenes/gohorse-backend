@@ -4,49 +4,55 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
-import com.xgh.buildingblocks.DomainEntity;
+import com.xgh.buildingblocks.AggregateRoot;
 import com.xgh.buildingblocks.Event;
 import com.xgh.buildingblocks.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.valueobjects.EntityId;
 
 public abstract class EventStore {
-    protected abstract <T extends DomainEntity<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
-
+    protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 	protected abstract void saveEvent(Event<?> event, String entityType);
-	
-	protected abstract void saveSnapshot(DomainEntity<?> entity);
 
-    public <T extends DomainEntity<?>> T pull(Class<T> entityType, EntityId id) {
+	/*
+	 * Retorna uma entidade, realizando a reconstituição da mesma à partir de seus eventos
+	 */
+    public <T extends AggregateRoot<?>> T pull(Class<T> entityType, EntityId id) {
     	List<Event<?>> events = this.getEvents(entityType, id);
     	
     	if (events.isEmpty()) {
             throw new EntityNotFoundException();
     	}
-
+    	
+    	T entity = null;
     	try {    		
-    		T entity = this.instanceEntity(entityType);    
+    		entity = this.instanceEntity(entityType);    
         	invokeEntityReconstituteMethod(entity, events);
-        	return entity;
     	} catch (Exception e) {
             throw new RuntimeException("Não foi possível instanciar a entidade: " + entityType, e);
         }
+    	
+    	return entity;
     }
 
-    @Transactional
-	public void push(DomainEntity<?> entity) {
+    /*
+     * Persiste os eventos que ainda não foram persistidos e
+     * dispara os event handlers para cada evento
+     */
+    // TODO transação
+	public void push(AggregateRoot<?> entity) {
     	EventStream uncommittedEvents = entity.getUncommittedEvents();
     	while (uncommittedEvents.hasNext()) {
     		Event<?> event = uncommittedEvents.next();
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
     	}
-    	this.saveSnapshot(entity);
     }
 
-	protected void invokeEntityReconstituteMethod(DomainEntity<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
+    /*
+     * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
+     */
+	protected void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
 																								 IllegalAccessException, IllegalArgumentException, 
 																								 InvocationTargetException {	
 		Class<?> clazz = entity.getClass();
@@ -66,7 +72,10 @@ public abstract class EventStore {
 		}
 	}
 
-	protected <T extends DomainEntity<?>> T instanceEntity(Class<T> entityType) throws ClassNotFoundException, 
+	/*
+	 * Instancia a entidade usando reflection
+	 */
+	protected <T extends AggregateRoot<?>> T instanceEntity(Class<T> entityType) throws ClassNotFoundException, 
 																NoSuchMethodException, SecurityException, 
 																InstantiationException, IllegalAccessException, 
 																IllegalArgumentException, InvocationTargetException {
