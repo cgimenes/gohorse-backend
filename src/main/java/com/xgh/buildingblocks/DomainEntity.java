@@ -2,8 +2,10 @@ package com.xgh.buildingblocks;
 
 import com.xgh.valueobjects.EntityId;
 
-public abstract class DomainEntity<IdType extends EntityId> {
-    protected IdType id;
+public abstract class DomainEntity<IdType extends EntityId> implements JsonSerializable {
+	private static final long serialVersionUID = 2636121875876552398L;
+	
+	protected IdType id;
 
     public IdType getId() {
         return id;

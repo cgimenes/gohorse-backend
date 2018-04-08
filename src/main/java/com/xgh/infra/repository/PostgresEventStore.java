@@ -25,7 +25,7 @@ public class PostgresEventStore extends EventStore {
 		Calendar ocurredOn = Calendar.getInstance();
 		ocurredOn.setTime(rs.getDate("ocurred_on"));
 
-		return Event.fromString(
+		return Event.fromJson(
 				rs.getString("event_type"),
 				UUID.fromString(rs.getString("entity_id")),
 				new EntityVersion(rs.getInt("entity_version")),
@@ -58,7 +58,7 @@ public class PostgresEventStore extends EventStore {
 		    entityType,
 		    event.getType(),
 		    event.getOcurredOn(),
-	    	event.toString()
+	    	event.toJson()
 		);
     }
 }

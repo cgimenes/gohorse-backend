@@ -9,10 +9,16 @@ import com.xgh.xgh.laboratory.command.events.LaboratoryWasRegistered;
 import com.xgh.xgh.laboratory.command.events.LaboratoryWasUpdated;
 
 public final class Laboratory extends AggregateRoot<LaboratoryId> {
-    private Name companyName;
+	private static final long serialVersionUID = 7031562150242723400L;
+	
+	private Name companyName;
 	private Phone phone;
 
     public void register(LaboratoryId id, Name companyName, Phone phone) {
+    	if (id == null) {
+    		throw new NullMandatoryArgumentException("id");
+    	}
+    	
     	if (companyName == null) {
     		throw new NullMandatoryArgumentException("nome");
     	}

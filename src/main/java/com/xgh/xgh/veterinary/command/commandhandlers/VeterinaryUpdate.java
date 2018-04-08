@@ -16,7 +16,7 @@ public class VeterinaryUpdate implements CommandHandler<UpdateVeterinary> {
 	@Override
 	public void execute(UpdateVeterinary command) {
 		Veterinary veterinary = repository.pull(Veterinary.class, command.getId());
-		veterinary.update(command.getName(), command.getPhone(), command.getCrmv(), command.getEmail(),
+		veterinary.update(command.getName(), command.getAddress(), command.getPhone(), command.getCrmv(), command.getEmail(),
 				command.getBirthDate());
 		repository.push(veterinary);
 	}

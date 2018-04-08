@@ -21,6 +21,9 @@ databaseChangeLog:
         name: TYPE_DATETIME
         value: datetime()
     - property:
+        name: TYPE_DATE
+        value: date()
+    - property:
         name: TYPE_JSON
         value: text
     - property:

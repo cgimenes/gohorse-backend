@@ -9,25 +9,36 @@ import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasDeleted;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasRegistered;
 import com.xgh.xgh.veterinary.command.events.VeterinaryWasUpdated;
+import com.xgh.valueobjects.Address;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
 
 public class Veterinary extends AggregateRoot<VeterinaryId> {
+	private static final long serialVersionUID = 3238712574990382956L;
+	
 	private Name name;
+	private Address address;
 	private Phone phone;
 	private Crmv crmv;
 	private Email email;
+	// TODO corrigir problema de serialização de data (está diminuindo um dia)
 	private Date birthDate;
-	
-	// TODO adicionar endereço
 
 	public Veterinary() {
 		super();
 	}
 
-	public void register(VeterinaryId id, Name name, Phone phone, Crmv crmv, Email email, Date birthDate) {
+	public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+    	if (id == null) {
+    		throw new NullMandatoryArgumentException("id");
+    	}
+		
 		if (name == null) {
 			throw new NullMandatoryArgumentException("nome");
+		}
+
+		if (address == null) {
+			throw new NullMandatoryArgumentException("endereço");
 		}
 
 		if (phone == null) {
@@ -35,14 +46,22 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 		}
 
 		if (crmv == null) {
-			throw new NullMandatoryArgumentException("crmv");
+			throw new NullMandatoryArgumentException("CRMV");
+		}
+		
+		if (email == null) {
+			throw new NullMandatoryArgumentException("e-mail");
+		}
+		
+		if (birthDate == null) {
+			throw new NullMandatoryArgumentException("data de nascimento");
 		}
 
-		recordAndApply(new VeterinaryWasRegistered(id, name, phone, crmv, email, birthDate, this.nextVersion()));
+		recordAndApply(new VeterinaryWasRegistered(id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
 	}
 
-	public void update(Name name, Phone phone, Crmv crmv, Email email, Date birthDate) {
-		recordAndApply(new VeterinaryWasUpdated(this.id, name, phone, crmv, email, birthDate, this.nextVersion()));
+	public void update(Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+		recordAndApply(new VeterinaryWasUpdated(this.id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
 	}
 	
 	public void delete() {
@@ -71,6 +90,10 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 
 	public Name getName() {
 		return name;
+	}
+
+	public Address getAddress() {
+		return address;
 	}
 
 	public Phone getPhone() {

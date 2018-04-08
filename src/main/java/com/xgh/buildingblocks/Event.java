@@ -1,15 +1,17 @@
 package com.xgh.buildingblocks;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.valueobjects.EntityId;
 import com.xgh.valueobjects.EntityVersion;
 
-public abstract class Event<IdType extends EntityId> extends ValueObject {
+public abstract class Event<IdType extends EntityId> implements ValueObject {
 	private static final long serialVersionUID = -8290936323951912398L;
 	
 	@JsonIgnore
@@ -47,14 +49,14 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 	/*
 	 * Deserializa um evento à partir de um JSON
 	 */
-	public static Event<?> fromString(
+	public static Event<?> fromJson(
 			String eventType, 
 			UUID entityId,
 			EntityVersion entityVersion, 
 			Calendar ocurredOn, 
 			String data) {
 		try {
-			Event<?> event = (Event<?>) ValueObject.fromString(eventType, data);
+			Event<?> event = (Event<?>) unserialize(eventType, data);
 			
 			Class<?> entityIdType = ((Class<?>) ((ParameterizedType) event.getClass().getGenericSuperclass())
 					.getActualTypeArguments()[0]);
@@ -74,6 +76,19 @@ public abstract class Event<IdType extends EntityId> extends ValueObject {
 				entityVersion,
 				ocurredOn.getTime(),
 				data), e);
+		}
+	}
+	
+	/*
+	 * Deserializa um objeto à partir de um JSON
+	 */
+	private static ValueObject unserialize(String type, String json) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return (ValueObject) objectMapper.readValue(json, Class.forName(type));
+		} catch (ClassNotFoundException | IOException e) {
+			throw new RuntimeException(String.format(
+					"Falha ao deserializar objeto do tipo: %s, com os dados: ", type, json), e);
 		}
 	}
 

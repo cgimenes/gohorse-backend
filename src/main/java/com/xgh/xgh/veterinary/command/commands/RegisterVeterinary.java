@@ -3,17 +3,19 @@ package com.xgh.xgh.veterinary.command.commands;
 import java.util.Date;
 
 import com.xgh.buildingblocks.Command;
+import com.xgh.valueobjects.Address;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.veterinary.command.VeterinaryId;
 
-public class RegisterVeterinary extends Command {
+public class RegisterVeterinary implements Command {
 	private static final long serialVersionUID = -129463298020793445L;
 
 	private final VeterinaryId id;
 	private final Name name;
+	private final Address address;
 	private final Phone phone;
 	private final Crmv crmv;
 	private final Email email;
@@ -22,6 +24,7 @@ public class RegisterVeterinary extends Command {
 	protected RegisterVeterinary() {
 		this.id = new VeterinaryId();
 		this.name = null;
+		this.address = null;
 		this.phone = null;
 		this.crmv = null;
 		this.email = null;
@@ -34,6 +37,10 @@ public class RegisterVeterinary extends Command {
 
 	public Name getName() {
 		return this.name;
+	}
+
+	public Address getAddress() {
+		return this.address;
 	}
 
 	public Phone getPhone() {

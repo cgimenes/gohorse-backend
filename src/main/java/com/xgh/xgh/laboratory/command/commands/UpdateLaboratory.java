@@ -5,7 +5,7 @@ import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
 import com.xgh.xgh.laboratory.command.LaboratoryId;
 
-public final class UpdateLaboratory extends Command {
+public final class UpdateLaboratory implements Command {
 	private static final long serialVersionUID = -4910695718010490673L;
 	
 	private final LaboratoryId id;

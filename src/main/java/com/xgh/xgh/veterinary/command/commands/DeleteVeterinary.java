@@ -3,7 +3,7 @@ package com.xgh.xgh.veterinary.command.commands;
 import com.xgh.buildingblocks.Command;
 import com.xgh.xgh.veterinary.command.VeterinaryId;
 
-public class DeleteVeterinary extends Command {
+public class DeleteVeterinary implements Command {
 	private static final long serialVersionUID = -3191539102394257532L;
 
 	private final VeterinaryId id;

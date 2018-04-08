@@ -1,0 +1,8 @@
+databaseChangeLog:
+    - changeSet:
+        id: 3
+        author: marcelo.gimenes
+        changes:   
+            - createTable:
+                tableName: postal_code
+                columns:

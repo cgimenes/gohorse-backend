@@ -39,7 +39,7 @@ public class VeterinaryProjector implements EventHandler {
 				entity.getName().getValue(),
 				entity.getPhone().getValue(),
 				entity.getCrmv().getValue(),
-				entity.getEmail().getValue(),
+				entity.getEmail() == null ? null : entity.getEmail().getValue(),
 				entity.getBirthDate(),
 				entity.isDeleted());
 		

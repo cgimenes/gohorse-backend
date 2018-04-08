@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class EventBus {
+	private static Logger logger = LogManager.getLogger(EventBus.class);
+	
     private List<EventHandler> handlers = new ArrayList<>();
 
     /*
@@ -32,9 +37,15 @@ public class EventBus {
      * irá ou não ser executado para o tipo do evento que foi disparado 
      */
     public static void dispatch(Event<?> event) {
+    	logger.info("Disparando evento: %s com os dados: %s", event.getClass().getName(), event.toJson());
         for (EventHandler handler : getInstance().handlers) {
             if (handler.isSubscribedTo(event)) {
-                handler.execute(event);
+            	logger.info("Executando event handler: %s", handler.getClass().getName());
+            	try {
+                    handler.execute(event);
+            	} catch (Exception ex) {
+            		logger.fatal("Erro ao executar event handler", ex);
+            	}
             }
         }
     }
