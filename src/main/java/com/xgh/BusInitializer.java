@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.xgh.buildingblocks.CommandBus;
 import com.xgh.buildingblocks.EventBus;
 import com.xgh.eventhandlers.LaboratoryProjector;
+import com.xgh.eventhandlers.VeterinaryProjector;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryDeletion;
 import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryRegistration;
@@ -55,6 +56,7 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
 	private void initializeEventBus() {
 		logger.info("Inicializando event bus");
 		EventBus.addHandler(context.getBean(LaboratoryProjector.class));
+		EventBus.addHandler(context.getBean(VeterinaryProjector.class));
 	}
 
 	@Override 

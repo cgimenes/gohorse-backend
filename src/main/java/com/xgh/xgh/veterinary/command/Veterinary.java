@@ -18,6 +18,8 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 	private Crmv crmv;
 	private Email email;
 	private Date birthDate;
+	
+	// TODO adicionar endereço
 
 	public Veterinary() {
 		super();
