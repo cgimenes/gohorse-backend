@@ -40,6 +40,7 @@ import com.xgh.xgh.veterinary.query.Veterinary;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
 public class VeterinaryQueryControllerTests {
+	
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -87,7 +88,7 @@ public class VeterinaryQueryControllerTests {
 			assertEquals(veterinarians.get(i), response.getContent().get(i).getId());
 		}
 	}
-	
+
 	@Test
 	public void findAllWithManyPages() throws ParseException {
 		// TODO criar
