@@ -19,6 +19,9 @@ import com.xgh.xgh.laboratory.command.commandhandlers.LaboratoryUpdate;
 import com.xgh.xgh.laboratory.command.commands.DeleteLaboratory;
 import com.xgh.xgh.laboratory.command.commands.RegisterLaboratory;
 import com.xgh.xgh.laboratory.command.commands.UpdateLaboratory;
+import com.xgh.xgh.owner.command.commandhandlers.OwnerDeletion;
+import com.xgh.xgh.owner.command.commandhandlers.OwnerRegistration;
+import com.xgh.xgh.owner.command.commandhandlers.OwnerUpdate;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryDeletion;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryRegistration;
 import com.xgh.xgh.veterinary.command.commandhandlers.VeterinaryUpdate;
@@ -51,6 +54,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
 		CommandBus.addHandler(RegisterVeterinary.class, new VeterinaryRegistration(eventStore));
 		CommandBus.addHandler(UpdateVeterinary.class, new VeterinaryUpdate(eventStore));
 		CommandBus.addHandler(DeleteVeterinary.class, new VeterinaryDeletion(eventStore));
+		// Owner
+		CommandBus.addHandler(RegisterVeterinary.class, new OwnerRegistration(eventStore));
+		CommandBus.addHandler(UpdateVeterinary.class, new OwnerUpdate(eventStore));
+		CommandBus.addHandler(DeleteVeterinary.class, new OwnerDeletion(eventStore));
 	}
 
 	private void initializeEventBus() {

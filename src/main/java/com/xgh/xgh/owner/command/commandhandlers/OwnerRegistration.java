@@ -1,9 +1,9 @@
-package com.xgh.xgh.owner.commandmodel.commandhandlers;
+package com.xgh.xgh.owner.command.commandhandlers;
 
 import com.xgh.buildingblocks.CommandHandler;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.xgh.owner.commandmodel.Owner;
-import com.xgh.xgh.owner.commandmodel.commands.RegisterOwner;
+import com.xgh.xgh.owner.command.Owner;
+import com.xgh.xgh.owner.command.commands.RegisterOwner;
 
 public class OwnerRegistration implements CommandHandler<RegisterOwner> {
 	

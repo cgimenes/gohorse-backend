@@ -1,4 +1,4 @@
-package com.xgh.xgh.owner.commandmodel;
+package com.xgh.xgh.owner.command;
 
 import java.util.UUID;
 

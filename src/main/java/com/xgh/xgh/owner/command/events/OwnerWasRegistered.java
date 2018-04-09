@@ -1,4 +1,4 @@
-package com.xgh.xgh.owner.commandmodel.events;
+package com.xgh.xgh.owner.command.events;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.EntityVersion;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.owner.commandmodel.OwnerId;
+import com.xgh.xgh.owner.command.OwnerId;
 
 public class OwnerWasRegistered extends Event<OwnerId> {
 	private static final long serialVersionUID = -3062625947435023015L;

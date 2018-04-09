@@ -1,4 +1,4 @@
-package com.xgh.xgh.owner.commandmodel.commands;
+package com.xgh.xgh.owner.command.commands;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import com.xgh.buildingblocks.Command;
 import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.owner.commandmodel.OwnerId;
+import com.xgh.xgh.owner.command.OwnerId;
 
 public final class UpdateOwner extends Command {
 	private static final long serialVersionUID = -5468719672345592356L;

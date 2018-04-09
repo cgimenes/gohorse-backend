@@ -1,7 +1,6 @@
-package com.xgh.xgh.owner.infra;
+package com.xgh.test.xgh.owner.command;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.net.URI;
 import java.util.Date;
@@ -13,31 +12,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.infra.PostgresEventStore;
+import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.valueobjects.Cpf;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.owner.commandmodel.OwnerId;
-import com.xgh.xgh.owner.commandmodel.Owner;
+import com.xgh.xgh.owner.command.Owner;
+import com.xgh.xgh.owner.command.OwnerId;
 
-// TODO: criar teste de falha de bad request e entity not found
-// TODO: verificar se os snapshots estão sendo salvos corretamente
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ComponentScan("com.xgh")
+@TestPropertySource("classpath:application-test.properties")
 public class OwnerCommandControllerTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
 	
 	@Autowired
-	private PostgresEventStore<Owner, OwnerId> eventStore; 
+	private PostgresEventStore eventStore; 
 
 	@Before
 	public void before() {
@@ -49,7 +48,7 @@ public class OwnerCommandControllerTests {
 		Date data = new Date();
 		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
 
-		ResponseEntity<Owner> response = restTemplate.postForEntity("/owners", owner, Owner.class);
+		ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
 
 		Owner ownerFromStore = eventStore.pull(Owner.class, owner.getId());
 		
@@ -85,4 +84,24 @@ public class OwnerCommandControllerTests {
 		assertEquals(data, ownerFromStore.getBirthDate());
 		assertEquals("2", ownerFromStore.getVersion().toString());
 	}
+	
+	@Test
+	public void deleteWithSuccess() {
+		Owner owner = new Owner();
+		Date data = new Date();
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
+		eventStore.push(owner);
+
+		HttpEntity<Owner> requestEntity = new HttpEntity<Owner>(owner);
+
+		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/owners"), HttpMethod.DELETE,
+				requestEntity, Void.class);
+
+		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+
+		Owner entityFromStore = eventStore.pull(Owner.class, owner.getId());
+		
+		assertTrue(entityFromStore.isDeleted());
+	}
+
 }
