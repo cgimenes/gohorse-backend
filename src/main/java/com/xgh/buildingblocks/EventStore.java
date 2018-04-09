@@ -4,19 +4,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
-import com.xgh.buildingblocks.AggregateRoot;
-import com.xgh.buildingblocks.Event;
-import com.xgh.buildingblocks.EventStream;
-import com.xgh.exceptions.DeletedEntityException;
+import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EventBus;
+import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.valueobjects.EntityId;
+import com.xgh.model.valueobjects.command.EntityId;
 
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
 	protected abstract void saveEvent(Event<?> event, String entityType);
-	protected abstract void saveSnapshot(AggregateRoot<?> entity);
 
 	/*
 	 * Retorna uma entidade, realizando a reconstituição da mesma à partir de seus eventos
@@ -35,20 +32,15 @@ public abstract class EventStore {
     	} catch (Exception e) {
             throw new RuntimeException("Não foi possível instanciar a entidade: " + entityType, e);
         }
-
-    	if (entity.isDeleted()) {
-            throw new DeletedEntityException();
-    	}
     	
     	return entity;
     }
 
     /*
-     * Persiste os eventos que ainda não foram persistidos,
-     * dispara os event handlers para cada evento e 
-     * salva o snapshot da entidade
+     * Persiste os eventos que ainda não foram persistidos e
+     * dispara os event handlers para cada evento
      */
-    @Transactional
+    // TODO transação
 	public void push(AggregateRoot<?> entity) {
     	EventStream uncommittedEvents = entity.getUncommittedEvents();
     	while (uncommittedEvents.hasNext()) {
@@ -56,7 +48,6 @@ public abstract class EventStore {
     		this.saveEvent(event, entity.getType());
     		EventBus.dispatch(event);
     	}
-    	this.saveSnapshot(entity);
     }
 
     /*

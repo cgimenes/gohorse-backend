@@ -9,25 +9,23 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.xgh.buildingblocks.AggregateRoot;
-import com.xgh.buildingblocks.Event;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.valueobjects.EntityId;
-import com.xgh.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.event.Event;
+import com.xgh.model.valueobjects.command.EntityId;
+import com.xgh.model.valueobjects.command.EntityVersion;
 
 @Repository
-public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType extends EntityId> extends EventStore {
+public class PostgresEventStore extends EventStore {
+	// TODO migrar para Mongo
     @Autowired
     protected JdbcTemplate connection;
-
-    @Autowired
-    protected JpaSnapshotRepository<EntityType, IdType> snapshotRepository;
 
 	private final RowMapper<Event<?>> eventRowMapper = (rs, rowNum) -> {
 		Calendar ocurredOn = Calendar.getInstance();
 		ocurredOn.setTime(rs.getDate("ocurred_on"));
 
-		return Event.fromString(
+		return Event.fromJson(
 				rs.getString("event_type"),
 				UUID.fromString(rs.getString("entity_id")),
 				new EntityVersion(rs.getInt("entity_version")),
@@ -41,7 +39,8 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
         		"select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
         		+ "from event "
         		+ "where entity_id = ? "
-        		+ "and entity_type = ?",
+        		+ "and entity_type = ? "
+        		+ "order by entity_version asc",
         		eventRowMapper,
         		id.getValue(),
         		entityType.getName());
@@ -59,13 +58,7 @@ public class PostgresEventStore<EntityType extends AggregateRoot<?>, IdType exte
 		    entityType,
 		    event.getType(),
 		    event.getOcurredOn(),
-	    	event.toString()
+	    	event.toJson()
 		);
     }
-
-	@SuppressWarnings("unchecked")
-	@Override
-	protected void saveSnapshot(AggregateRoot<?> entity) {
-		snapshotRepository.save((EntityType) entity);
-	}
 }
