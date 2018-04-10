@@ -1,10 +1,10 @@
 databaseChangeLog:
     - changeSet:
-        id: 5
-        author: alexandre.requena
+        id: 4
+        author: marcelo.gimenes
         changes:   
             - createTable:
-                tableName: veterinary
+                tableName: laboratory
                 columns:
                     - column:
                         name: id
@@ -12,15 +12,10 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: pk_veterinary            
+                            primaryKeyName: pk_laboratory
                     - column:
-                        name: name
+                        name: company_name
                         type: ${TYPE_NAME}
-                        constraints:
-                            nullable: false   
-                    - column:
-                        name: crmv
-                        type: ${TYPE_CRMV}
                         constraints:
                             nullable: false
                     - column:
@@ -29,27 +24,16 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                     - column:
-                        name: email
-                        type: ${TYPE_EMAIL}
-                        constraints:
-                            nullable: false             
-                    - column:
-                        name: birth_date
-                        type: ${TYPE_DATE}
-                        constraints:
-                            nullable: false
-                    - column:
                         name: address_id     
                         type: ${TYPE_UUID}          
                         constraints:
-                            foreignKeyName: fk_veterinary_address
+                            foreignKeyName: fk_laboratory_address
                             references: address(id)
-                            nullable: false
                     - column:
                         name: deleted
                         type: ${TYPE_BOOL}
                         constraints:
-                            nullable: false
+                            nullable: false             
             - rollback:
                - dropTable: 
-                  tableName: veterinary
+                  tableName: laboratory
