@@ -36,7 +36,7 @@ public class CommandBus {
      */
     @SuppressWarnings("unchecked")
 	public static <T extends Command> void dispatch(T command) {
-    	getInstance().logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toString()));
+    	getInstance().logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
     	
         CommandHandler<T> handler = (CommandHandler<T>) getInstance().handlers.get(command.getClass());
         
