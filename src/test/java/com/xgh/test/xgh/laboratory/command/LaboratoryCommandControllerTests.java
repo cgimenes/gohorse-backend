@@ -23,8 +23,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.laboratory.command.Laboratory;
 import com.xgh.model.laboratory.command.LaboratoryId;
+import com.xgh.model.valueobjects.Address;
 import com.xgh.model.valueobjects.Name;
 import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.PostalCode;
 
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente
@@ -46,7 +48,9 @@ public class LaboratoryCommandControllerTests {
 	@Test
 	public void registerWithSuccess() {
 		Laboratory entity = new Laboratory();
-		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"), new Address(
+				new PostalCode("87020025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+				null));
 
 		ResponseEntity<Void> response = restTemplate.postForEntity("/laboratories", entity, Void.class);
 
@@ -63,10 +67,14 @@ public class LaboratoryCommandControllerTests {
 	@Test
 	public void updateWithSuccess() {
 		Laboratory entity = new Laboratory();
-		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"), new Address(
+				new PostalCode("87020025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+				null));
 		eventStore.push(entity);
 
-		entity.update(new Name("Laboratório dos Noob"), new Phone("044000000000"));
+		entity.update(new Name("Laboratório dos Noob"), new Phone("044000000000"), new Address(
+				new PostalCode("87020025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+				null));
 
 		RequestEntity<Laboratory> request = RequestEntity.put(URI.create("/laboratories")).body(entity);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -83,7 +91,9 @@ public class LaboratoryCommandControllerTests {
 	@Test
 	public void deleteWithSuccess() {
 		Laboratory entity = new Laboratory();
-		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"), new Address(
+				new PostalCode("87020025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+				null));
 		eventStore.push(entity);
 
 		HttpEntity<Laboratory> requestEntity = new HttpEntity<Laboratory>(entity);
@@ -94,7 +104,7 @@ public class LaboratoryCommandControllerTests {
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
 		Laboratory entityFromStore = eventStore.pull(Laboratory.class, entity.getId());
-		
+
 		assertTrue(entityFromStore.isDeleted());
 	}
 }
