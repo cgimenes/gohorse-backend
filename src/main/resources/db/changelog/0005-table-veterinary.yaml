@@ -12,7 +12,7 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: PK_VETERINARY            
+                            primaryKeyName: pk_veterinary            
                     - column:
                         name: name
                         type: ${TYPE_NAME}
@@ -44,6 +44,7 @@ databaseChangeLog:
                         constraints:
                             foreignKeyName: fk_veterinary_address
                             references: address(id)
+                            nullable: false
                     - column:
                         name: deleted
                         type: ${TYPE_BOOL}
