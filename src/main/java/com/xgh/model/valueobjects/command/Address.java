@@ -1,4 +1,4 @@
-package com.xgh.model.valueobjects;
+package com.xgh.model.valueobjects.command;
 
 import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.exceptions.NullMandatoryArgumentException;

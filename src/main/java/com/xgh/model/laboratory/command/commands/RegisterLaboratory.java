@@ -2,9 +2,9 @@ package com.xgh.model.laboratory.command.commands;
 
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.laboratory.command.LaboratoryId;
-import com.xgh.model.valueobjects.Address;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 
 public final class RegisterLaboratory implements Command {
 	private static final long serialVersionUID = 864620291981116409L;

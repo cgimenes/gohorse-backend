@@ -1,7 +1,7 @@
 package com.xgh.model.veterinary.command.events;
 
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.valueobjects.EntityVersion;
+import com.xgh.model.valueobjects.command.EntityVersion;
 import com.xgh.model.veterinary.command.VeterinaryId;
 
 public class VeterinaryWasDeleted extends Event<VeterinaryId> {

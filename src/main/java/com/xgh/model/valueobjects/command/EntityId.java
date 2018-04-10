@@ -1,4 +1,4 @@
-package com.xgh.model.valueobjects;
+package com.xgh.model.valueobjects.command;
 
 import java.util.UUID;
 

@@ -1,10 +1,10 @@
 package com.xgh;
 
 // TODO rever essa solução
-public enum Constant {
+public enum Constants {
 	PAGE_SIZE(10);
 
-	Constant(Object value) {
+	Constants(Object value) {
 		this.value = value;
 	}
 

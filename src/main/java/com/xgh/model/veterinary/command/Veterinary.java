@@ -4,11 +4,11 @@ import java.util.Date;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
-import com.xgh.model.valueobjects.Address;
-import com.xgh.model.valueobjects.Crmv;
-import com.xgh.model.valueobjects.Email;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Email;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 import com.xgh.model.veterinary.command.events.VeterinaryWasDeleted;
 import com.xgh.model.veterinary.command.events.VeterinaryWasRegistered;
 import com.xgh.model.veterinary.command.events.VeterinaryWasUpdated;
@@ -70,6 +70,7 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 
 	protected void when(VeterinaryWasRegistered event) {
 		this.name = event.getName();
+		this.address = event.getAddress();
 		this.phone = event.getPhone();
 		this.crmv = event.getCrmv();
 		this.email = event.getEmail();
@@ -78,6 +79,7 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 
 	protected void when(VeterinaryWasUpdated event) {
 		this.name = event.getName();
+		this.address = event.getAddress();
 		this.phone = event.getPhone();
 		this.crmv = event.getCrmv();
 		this.email = event.getEmail();

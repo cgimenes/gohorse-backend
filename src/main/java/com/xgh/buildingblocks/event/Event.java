@@ -9,8 +9,8 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.buildingblocks.valueobject.ValueObject;
-import com.xgh.model.valueobjects.EntityId;
-import com.xgh.model.valueobjects.EntityVersion;
+import com.xgh.model.valueobjects.command.EntityId;
+import com.xgh.model.valueobjects.command.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> implements ValueObject {
 	private static final long serialVersionUID = -8290936323951912398L;

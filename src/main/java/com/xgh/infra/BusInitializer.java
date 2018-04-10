@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.event.EventBus;
-import com.xgh.eventhandlers.LaboratoryProjector;
-import com.xgh.eventhandlers.VeterinaryProjector;
+import com.xgh.infra.eventhandlers.LaboratoryProjector;
+import com.xgh.infra.eventhandlers.VeterinaryProjector;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.laboratory.command.commandhandlers.LaboratoryDeletion;
 import com.xgh.model.laboratory.command.commandhandlers.LaboratoryRegistration;

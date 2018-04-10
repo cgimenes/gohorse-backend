@@ -9,7 +9,7 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.model.valueobjects.EntityId;
+import com.xgh.model.valueobjects.command.EntityId;
 
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);

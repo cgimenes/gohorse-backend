@@ -24,12 +24,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.valueobjects.Address;
-import com.xgh.model.valueobjects.Crmv;
-import com.xgh.model.valueobjects.Email;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
-import com.xgh.model.valueobjects.PostalCode;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Email;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
+import com.xgh.model.valueobjects.command.PostalCode;
 import com.xgh.model.veterinary.command.Veterinary;
 import com.xgh.model.veterinary.command.VeterinaryId;
 

@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
-import com.xgh.model.valueobjects.EntityId;
-import com.xgh.model.valueobjects.EntityVersion;
+import com.xgh.model.valueobjects.command.EntityId;
+import com.xgh.model.valueobjects.command.EntityVersion;
 
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
 	private static final long serialVersionUID = 325564934279313058L;

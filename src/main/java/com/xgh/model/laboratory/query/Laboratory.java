@@ -5,6 +5,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,7 +27,7 @@ public final class Laboratory {
 	private String phone;
 	
     @ManyToOne
-    @Column(name = "address_id")
+    @JoinColumn(name="address_id")
     private Address address;
 	
 	@JsonIgnore

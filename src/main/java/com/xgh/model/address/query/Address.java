@@ -2,9 +2,10 @@ package com.xgh.model.address.query;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,10 +15,11 @@ import com.xgh.model.postalcode.query.PostalCode;
 @Table(name = "address")
 public class Address {
 	@Id
+	@GeneratedValue
 	private UUID id;
 
     @ManyToOne
-    @Column(name = "postalcode_id")
+    @JoinColumn(name="postalcode_id")
 	private PostalCode postalCode;
 	
 	private Integer number;
@@ -27,6 +29,7 @@ public class Address {
 	protected Address() {}
 	
 	public Address(PostalCode postalCode, Integer number, String complement) {
+//		this.id = UUID.randomUUID();
 		this.postalCode = postalCode;
 		this.number = number;
 		this.complement = complement;

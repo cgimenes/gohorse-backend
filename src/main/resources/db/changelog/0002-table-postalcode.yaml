@@ -3,7 +3,6 @@ databaseChangeLog:
         id: 2
         author: marcelo.gimenes
         changes:   
-            - sql: create type ${TYPE_STREET_TYPE} as enum ('Avenida', 'Rua');
             - createTable:
                 tableName: postalcode
                 columns:
@@ -16,7 +15,7 @@ databaseChangeLog:
                             primaryKeyName: PK_POSTALCODE
                     - column:
                         name: street_type
-                        type: ${TYPE_STREET_TYPE}
+                        type: ${TYPE_DESCRIPTION}
                     - column:
                         name: street_name
                         type: ${TYPE_DESCRIPTION}
@@ -33,6 +32,5 @@ databaseChangeLog:
                         name: country
                         type: ${TYPE_DESCRIPTION}
             - rollback:
-               - sql: drop type if exists ${TYPE_STREET_TYPE};
                - dropTable: 
                   tableName: postalcode

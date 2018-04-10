@@ -1,4 +1,4 @@
-package com.xgh.buildingblocks;
+package com.xgh;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

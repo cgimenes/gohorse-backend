@@ -35,9 +35,6 @@ databaseChangeLog:
     - property:
         name: TYPE_POSTALCODE
         value: varchar(9)
-    - property:
-        name: TYPE_STREET_TYPE
-        value: street_type
 
     - include:
         file: db/changelog/0001-table-event.yaml

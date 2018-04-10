@@ -42,6 +42,7 @@ public class EventBus {
             if (handler.isSubscribedTo(event)) {
             	logger.info(String.format("Executando event handler: %s", handler.getClass().getName()));
             	try {
+            		// TODO adicionar async
                     handler.execute(event);
             	} catch (Exception ex) {
             		logger.fatal("Erro ao executar event handler", ex);

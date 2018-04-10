@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.xgh.Constant;
+import com.xgh.Constants;
 
 @Service
 public class VeterinaryQueryService {
@@ -15,7 +15,7 @@ public class VeterinaryQueryService {
 	private VeterinaryRepository repository;
 
 	public Page<Veterinary> findAll(int page) {
-        PageRequest request = PageRequest.of(page, Constant.PAGE_SIZE.asInteger());
+        PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
         return repository.findAll(request);
 	}
 	

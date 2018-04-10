@@ -5,9 +5,9 @@ import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.laboratory.command.events.LaboratoryWasDeleted;
 import com.xgh.model.laboratory.command.events.LaboratoryWasRegistered;
 import com.xgh.model.laboratory.command.events.LaboratoryWasUpdated;
-import com.xgh.model.valueobjects.Address;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 
 public final class Laboratory extends AggregateRoot<LaboratoryId> {
 	private static final long serialVersionUID = 7031562150242723400L;

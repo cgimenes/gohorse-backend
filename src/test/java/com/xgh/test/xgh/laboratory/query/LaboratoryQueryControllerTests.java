@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.laboratory.query.Laboratory;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 
 // TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)

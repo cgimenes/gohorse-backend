@@ -1,4 +1,4 @@
-package com.xgh.model.valueobjects;
+package com.xgh.model.valueobjects.command;
 
 import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.exceptions.NullMandatoryArgumentException;
@@ -50,6 +50,7 @@ public class PostalCode implements ValueObject {
             throw new IllegalArgumentException("O código do CEP deve estar no formato 99999-999");
         }
         
+        // TODO converter para enum
         if (!streetType.equals("Avenida") || !streetType.equals("Rua")) {
             throw new IllegalArgumentException("O tipo da rua deve ser: 'Rua' ou 'Avenida'");
         }

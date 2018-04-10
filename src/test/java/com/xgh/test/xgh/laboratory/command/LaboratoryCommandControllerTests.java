@@ -23,8 +23,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.laboratory.command.Laboratory;
 import com.xgh.model.laboratory.command.LaboratoryId;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente

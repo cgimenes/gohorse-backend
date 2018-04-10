@@ -2,10 +2,10 @@ package com.xgh.model.laboratory.command.events;
 
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.laboratory.command.LaboratoryId;
-import com.xgh.model.valueobjects.Address;
-import com.xgh.model.valueobjects.EntityVersion;
-import com.xgh.model.valueobjects.Name;
-import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.EntityVersion;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
 
 public class LaboratoryWasRegistered extends Event<LaboratoryId> {
 	private static final long serialVersionUID = -1312267808691672113L;
