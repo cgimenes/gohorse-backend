@@ -1,0 +1,38 @@
+databaseChangeLog:
+    - changeSet:
+        id: 2
+        author: marcelo.gimenes
+        changes:   
+            - sql: create type ${TYPE_STREET_TYPE} as enum ('Avenida', 'Rua');
+            - createTable:
+                tableName: postalcode
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_POSTALCODE}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: PK_POSTALCODE
+                    - column:
+                        name: street_type
+                        type: ${TYPE_STREET_TYPE}
+                    - column:
+                        name: street_name
+                        type: ${TYPE_DESCRIPTION}
+                    - column:
+                        name: neighbourhood
+                        type: ${TYPE_DESCRIPTION}
+                    - column:
+                        name: city
+                        type: ${TYPE_DESCRIPTION}
+                    - column:
+                        name: state
+                        type: ${TYPE_DESCRIPTION}
+                    - column:
+                        name: country
+                        type: ${TYPE_DESCRIPTION}
+            - rollback:
+               - sql: drop type if exists ${TYPE_STREET_TYPE};
+               - dropTable: 
+                  tableName: postalcode

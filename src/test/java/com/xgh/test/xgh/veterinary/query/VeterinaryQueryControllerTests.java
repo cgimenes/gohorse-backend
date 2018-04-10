@@ -29,13 +29,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Address;
-import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Email;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.valueobjects.PostalCode;
-import com.xgh.xgh.veterinary.query.Veterinary;
+import com.xgh.model.valueobjects.Address;
+import com.xgh.model.valueobjects.Crmv;
+import com.xgh.model.valueobjects.Email;
+import com.xgh.model.valueobjects.Name;
+import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.PostalCode;
+import com.xgh.model.veterinary.query.Veterinary;
 
 // TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
@@ -99,8 +99,8 @@ public class VeterinaryQueryControllerTests {
 	}
 
 	private UUID createSampleEntity() throws ParseException {
-		com.xgh.xgh.veterinary.command.Veterinary veterinary = new com.xgh.xgh.veterinary.command.Veterinary();
-		veterinary.register(new com.xgh.xgh.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
+		com.xgh.model.veterinary.command.Veterinary veterinary = new com.xgh.model.veterinary.command.Veterinary();
+		veterinary.register(new com.xgh.model.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
 				new Address(new PostalCode("87043050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
 						null),
 				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),

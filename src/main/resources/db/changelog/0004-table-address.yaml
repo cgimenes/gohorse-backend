@@ -1,9 +1,0 @@
-databaseChangeLog:
-    - changeSet:
-        id: 4
-        author: marcelo.gimenes
-        changes:   
-            - createTable:
-                tableName: address
-                columns:
-                   

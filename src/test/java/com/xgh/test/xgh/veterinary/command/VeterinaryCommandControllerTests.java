@@ -24,14 +24,14 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Address;
-import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Email;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.valueobjects.PostalCode;
-import com.xgh.xgh.veterinary.command.Veterinary;
-import com.xgh.xgh.veterinary.command.VeterinaryId;
+import com.xgh.model.valueobjects.Address;
+import com.xgh.model.valueobjects.Crmv;
+import com.xgh.model.valueobjects.Email;
+import com.xgh.model.valueobjects.Name;
+import com.xgh.model.valueobjects.Phone;
+import com.xgh.model.valueobjects.PostalCode;
+import com.xgh.model.veterinary.command.Veterinary;
+import com.xgh.model.veterinary.command.VeterinaryId;
 
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente

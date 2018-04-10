@@ -29,14 +29,23 @@ databaseChangeLog:
     - property:
         name: TYPE_BOOL
         value: bool
+    - property:
+        name: TYPE_DESCRIPTION
+        value: varchar(30)
+    - property:
+        name: TYPE_POSTALCODE
+        value: varchar(9)
+    - property:
+        name: TYPE_STREET_TYPE
+        value: street_type
 
     - include:
         file: db/changelog/0001-table-event.yaml
     - include:
-        file: db/changelog/0002-table-laboratory.yaml
+        file: db/changelog/0002-table-postalcode.yaml
     - include:
-        file: db/changelog/0003-table-postalcode.yaml
+        file: db/changelog/0003-table-address.yaml
     - include:
-        file: db/changelog/0004-table-address.yaml
+        file: db/changelog/0004-table-laboratory.yaml
     - include:
         file: db/changelog/0005-table-veterinary.yaml

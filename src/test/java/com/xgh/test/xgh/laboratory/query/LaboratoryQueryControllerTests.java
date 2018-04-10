@@ -26,9 +26,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.laboratory.query.Laboratory;
+import com.xgh.model.laboratory.query.Laboratory;
+import com.xgh.model.valueobjects.Name;
+import com.xgh.model.valueobjects.Phone;
 
 // TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
@@ -87,8 +87,8 @@ public class LaboratoryQueryControllerTests {
 	}
 	
 	private UUID createSampleEntity() {
-		com.xgh.xgh.laboratory.command.Laboratory laboratory = new com.xgh.xgh.laboratory.command.Laboratory();
-		laboratory.register(new com.xgh.xgh.laboratory.command.LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
+		com.xgh.model.laboratory.command.Laboratory laboratory = new com.xgh.model.laboratory.command.Laboratory();
+		laboratory.register(new com.xgh.model.laboratory.command.LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("044313371337"));
 		eventStore.push(laboratory);
 		return laboratory.getId().getValue();
 	}
