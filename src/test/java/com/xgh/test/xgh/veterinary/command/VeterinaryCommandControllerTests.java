@@ -24,10 +24,12 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.valueobjects.Address;
 import com.xgh.valueobjects.Crmv;
 import com.xgh.valueobjects.Email;
 import com.xgh.valueobjects.Name;
 import com.xgh.valueobjects.Phone;
+import com.xgh.valueobjects.PostalCode;
 import com.xgh.xgh.veterinary.command.Veterinary;
 import com.xgh.xgh.veterinary.command.VeterinaryId;
 
@@ -52,8 +54,10 @@ public class VeterinaryCommandControllerTests {
 	@Test
 	public void registerWithSuccess() throws ParseException {
 		Veterinary entity = new Veterinary();
-		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"),
+				new Address(new PostalCode("87043050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+						null),
+				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
 		ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians", entity, Void.class);
@@ -73,12 +77,14 @@ public class VeterinaryCommandControllerTests {
 	@Test
 	public void updateWithSuccess() throws ParseException {
 		Veterinary entity = new Veterinary();
-		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"),
+				new Address(new PostalCode("87043050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+						null),
+				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 		eventStore.push(entity);
 
-		entity.update(entity.getName(), new Phone("044998731154"), entity.getCrmv(),
+		entity.update(entity.getName(), entity.getAddress(), new Phone("044998731154"), entity.getCrmv(),
 				new Email("ricardo.requena@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
@@ -99,8 +105,10 @@ public class VeterinaryCommandControllerTests {
 	@Test
 	public void deleteWithSuccess() throws ParseException {
 		Veterinary entity = new Veterinary();
-		entity.register(new VeterinaryId(), new Name("Ricardo Requena"), new Phone("044998015821"),
-				new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
+		entity.register(new VeterinaryId(), new Name("Ricardo Requena"),
+				new Address(new PostalCode("87043050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+						null),
+				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
 				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
 
 		eventStore.push(entity);
@@ -113,7 +121,7 @@ public class VeterinaryCommandControllerTests {
 		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
 		Veterinary entityFromStore = eventStore.pull(Veterinary.class, entity.getId());
-			
+
 		assertTrue(entityFromStore.isDeleted());
 
 	}

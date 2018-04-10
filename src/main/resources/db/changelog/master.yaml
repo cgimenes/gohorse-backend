@@ -35,4 +35,8 @@ databaseChangeLog:
     - include:
         file: db/changelog/0002-table-laboratory.yaml
     - include:
-        file: db/changelog/0003-table-veterinary.yaml
+        file: db/changelog/0003-table-postalcode.yaml
+    - include:
+        file: db/changelog/0004-table-address.yaml
+    - include:
+        file: db/changelog/0005-table-veterinary.yaml
