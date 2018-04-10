@@ -1,4 +1,4 @@
-package com.xgh.infra.eventhandlers;
+package com.xgh.eventhandlers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
