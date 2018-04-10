@@ -32,18 +32,18 @@ public class VeterinaryProjector implements EventHandler {
 	@Async
 	@Override
 	public void execute(Event<?> event) {
-		Veterinary entity = eventStore.pull(Veterinary.class, event.getEntityId());
-		
-		com.xgh.model.veterinary.query.Veterinary projection = new com.xgh.model.veterinary.query.Veterinary(
-				entity.getId().getValue(),
-				entity.getName().getValue(),
-				entity.getPhone().getValue(),
-				entity.getCrmv().getValue(),
-				entity.getEmail() == null ? null : entity.getEmail().getValue(),
-				entity.getBirthDate(),
-				entity.isDeleted());
-		
-		repository.save(projection);
+//		Veterinary entity = eventStore.pull(Veterinary.class, event.getEntityId());
+//		
+//		com.xgh.model.veterinary.query.Veterinary projection = new com.xgh.model.veterinary.query.Veterinary(
+//				entity.getId().getValue(),
+//				entity.getName().getValue(),
+//				entity.getPhone().getValue(),
+//				entity.getCrmv().getValue(),
+//				entity.getEmail() == null ? null : entity.getEmail().getValue(),
+//				entity.getBirthDate(),
+//				entity.isDeleted());
+//		
+//		repository.save(projection);
 	}
 
 }
