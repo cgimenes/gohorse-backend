@@ -6,3 +6,40 @@ databaseChangeLog:
             - createTable:
                 tableName: postal_code
                 columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: PK_POSTALCODE
+                    - column:
+                        name: street_type
+                        type: ${TYPE_STREET_TYPE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: street_name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: neighbourhood
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: city
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: state
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: country
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false

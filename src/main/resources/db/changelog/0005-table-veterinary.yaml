@@ -43,3 +43,9 @@ databaseChangeLog:
                         type: ${TYPE_BOOL}
                         constraints:
                             nullable: false
+            - addForeignKeyConstraint:
+                baseColumnNames: address_id
+                baseTableName: veterinary
+                constraintName: FK_VETERINARY_ADDRESS
+                referencedColumnNames: id
+                referencedTableName: address

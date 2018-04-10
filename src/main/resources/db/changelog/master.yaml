@@ -6,6 +6,9 @@ databaseChangeLog:
         name: TYPE_NAME
         value: varchar(100)
     - property:
+        name: TYPE_COMPLEMENT
+        value: varchar(150)
+    - property:
         name: TYPE_PHONE
         value: varchar(13)
     - property:
@@ -29,6 +32,9 @@ databaseChangeLog:
     - property:
         name: TYPE_BOOL
         value: bool
+    - property:
+        name: TYPE_STREET_TYPE
+        value: enum('Rua', 'Avenida', 'Travessa')
 
     - include:
         file: db/changelog/0001-table-event.yaml

@@ -6,4 +6,30 @@ databaseChangeLog:
             - createTable:
                 tableName: address
                 columns:
-                   
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: PK_ADDRESS
+                    - column:
+                        name: number
+                        type: ${TYPE_INTEGER}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: complement
+                        type: ${TYPE_COMPLEMENT}
+                        constraints:
+                            nullable: true
+            - addForeignKeyConstraint:
+                baseColumnNames: postalcode_id
+                baseTableName: address
+                constraintName: FK_ADDRESS_POSTALCODE
+                referencedColumnNames: id
+                referencedTableName: postalcode
+                # deferrable: true
+                # initiallyDeferred: true
+                # onDelete: CASCADE
+                # onUpdate: RESTRICT
