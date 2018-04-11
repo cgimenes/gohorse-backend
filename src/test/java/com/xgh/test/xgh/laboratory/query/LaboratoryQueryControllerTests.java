@@ -93,7 +93,7 @@ public class LaboratoryQueryControllerTests {
 	private UUID createSampleEntity() {
 		com.xgh.model.laboratory.command.Laboratory laboratory = new com.xgh.model.laboratory.command.Laboratory();
 		laboratory.register(new com.xgh.model.laboratory.command.LaboratoryId(), new Name("Laboratório dos Hackers"),
-				new Phone("044313371337"), new Address(new PostalCode("87020025", "Avenida", "Avenida Tiradentes",
+				new Phone("044313371337"), new Address(new PostalCode("87020-025", "Avenida", "Avenida Tiradentes",
 						"Centro", "Maringá", "PR", "Brasil"), 587, null));
 		eventStore.push(laboratory);
 		return laboratory.getId().getValue();

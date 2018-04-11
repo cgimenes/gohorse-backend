@@ -1,10 +1,9 @@
 package com.xgh.model.veterinary.command.commands;
 
-import java.util.Date;
-
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.valueobjects.command.Address;
 import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Date;
 import com.xgh.model.valueobjects.command.Email;
 import com.xgh.model.valueobjects.command.Name;
 import com.xgh.model.valueobjects.command.Phone;

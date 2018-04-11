@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.valueobjects.command.Address;
 import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Date;
 import com.xgh.model.valueobjects.command.Email;
 import com.xgh.model.valueobjects.command.Name;
 import com.xgh.model.valueobjects.command.Phone;
@@ -101,10 +101,10 @@ public class VeterinaryQueryControllerTests {
 	private UUID createSampleEntity() throws ParseException {
 		com.xgh.model.veterinary.command.Veterinary veterinary = new com.xgh.model.veterinary.command.Veterinary();
 		veterinary.register(new com.xgh.model.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
-				new Address(new PostalCode("87043050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+				new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
 						null),
 				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
+				new Date(LocalDate.of(1986, 10, 03)));
 		eventStore.push(veterinary);
 		return veterinary.getId().getValue();
 	}

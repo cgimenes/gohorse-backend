@@ -1,6 +1,6 @@
 package com.xgh.model.veterinary.query;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -32,14 +32,14 @@ public final class Veterinary {
 	private String email;
 	
 	@Column(name = "birth_date")
-	private Date birthDate;
+	private LocalDate birthDate;
 	
 	@JsonIgnore
     private Boolean deleted = false;
 
 	protected Veterinary() {}
 
-	public Veterinary(UUID id, String name, Address address, String phone, String crmv, String email, Date birthDate, Boolean deleted) {
+	public Veterinary(UUID id, String name, Address address, String phone, String crmv, String email, LocalDate birthDate, Boolean deleted) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -74,7 +74,7 @@ public final class Veterinary {
 		return this.email;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return this.birthDate;
 	}
     

@@ -1,10 +1,9 @@
 package com.xgh.model.veterinary.command.events;
 
-import java.util.Date;
-
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.valueobjects.command.Address;
 import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Date;
 import com.xgh.model.valueobjects.command.Email;
 import com.xgh.model.valueobjects.command.EntityVersion;
 import com.xgh.model.valueobjects.command.Name;

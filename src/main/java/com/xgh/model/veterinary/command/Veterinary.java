@@ -1,11 +1,10 @@
 package com.xgh.model.veterinary.command;
 
-import java.util.Date;
-
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.valueobjects.command.Address;
 import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Date;
 import com.xgh.model.valueobjects.command.Email;
 import com.xgh.model.valueobjects.command.Name;
 import com.xgh.model.valueobjects.command.Phone;
@@ -21,7 +20,6 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
 	private Phone phone;
 	private Crmv crmv;
 	private Email email;
-	// TODO corrigir problema de serialização de data (está diminuindo um dia)
 	private Date birthDate;
 
 	public Veterinary() {

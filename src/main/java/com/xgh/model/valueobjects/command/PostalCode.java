@@ -51,7 +51,7 @@ public class PostalCode implements ValueObject {
         }
         
         // TODO converter para enum
-        if (!streetType.equals("Avenida") || !streetType.equals("Rua")) {
+        if (!streetType.equals("Avenida") && !streetType.equals("Rua")) {
             throw new IllegalArgumentException("O tipo da rua deve ser: 'Rua' ou 'Avenida'");
         }
 		
