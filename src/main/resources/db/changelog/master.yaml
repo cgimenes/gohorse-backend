@@ -46,3 +46,7 @@ databaseChangeLog:
         file: db/changelog/0004-table-laboratory.yaml
     - include:
         file: db/changelog/0005-table-veterinary.yaml
+    - include:
+        file: db/changelog/0006-table-owner.yaml
+    - include:
+        file: db/changelog/0007-table-internment.yaml

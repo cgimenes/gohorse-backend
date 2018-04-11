@@ -1,0 +1,47 @@
+databaseChangeLog:
+    - changeSet:
+        id: 7
+        author: alexandre.requena
+        changes:   
+            - createTable:
+                tableName: internment
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_internment            
+                    - column:
+                        name: animal_id     
+                        type: ${TYPE_UUID}          
+                        constraints:
+                            foreignKeyName: fk_internment_animal
+                            references: animal(id)
+                            nullable: false
+                    - column:
+                        name: bed_id     
+                        type: ${TYPE_UUID}          
+                        constraints:
+                            foreignKeyName: fk_internment_bed
+                            references: bed(id)
+                            nullable: false
+                    - column:
+                        name: busy_at
+                        type: ${TYPE_DATE}
+                        constraints:
+                            nullable: false   
+                    - column:
+                        name: busy_until
+                        type: ${TYPE_DATE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false
+            - rollback:
+               - dropTable: 
+                  tableName: internment
