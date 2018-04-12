@@ -1,5 +1,8 @@
 package com.xgh.infra;
 
+import com.xgh.model.owner.command.commands.DeleteOwner;
+import com.xgh.model.owner.command.commands.RegisterOwner;
+import com.xgh.model.owner.command.commands.UpdateOwner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,45 +37,45 @@ import com.xgh.model.veterinary.command.commands.UpdateVeterinary;
 // TODO ver se é possível criar um meio de inicializar dinamicamente os handlers
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
-	private Logger logger = LogManager.getLogger(this.getClass());
-	
-	/*
-	 * Dependências dos handlers
-	 */
-	// TODO injetar automaticamente
+    private Logger logger = LogManager.getLogger(this.getClass());
+
+    /*
+     * Dependências dos handlers
+     */
+    // TODO injetar automaticamente
     @Autowired
     private PostgresEventStore eventStore;
     
     @Autowired
     private ApplicationContext context;
-	
-	private void initializeCommandBus() {
-		logger.info("Inicializando command bus");
-		// Laboratory
-		CommandBus.addHandler(RegisterLaboratory.class, new LaboratoryRegistration(eventStore));
-		CommandBus.addHandler(UpdateLaboratory.class, new LaboratoryUpdate(eventStore));
-		CommandBus.addHandler(DeleteLaboratory.class, new LaboratoryDeletion(eventStore));
-		// Veterinary
-		CommandBus.addHandler(RegisterVeterinary.class, new VeterinaryRegistration(eventStore));
-		CommandBus.addHandler(UpdateVeterinary.class, new VeterinaryUpdate(eventStore));
-		CommandBus.addHandler(DeleteVeterinary.class, new VeterinaryDeletion(eventStore));
-		// Owner
-		CommandBus.addHandler(RegisterVeterinary.class, new OwnerRegistration(eventStore));
-		CommandBus.addHandler(UpdateVeterinary.class, new OwnerUpdate(eventStore));
-		CommandBus.addHandler(DeleteVeterinary.class, new OwnerDeletion(eventStore));
-	}
 
-	private void initializeEventBus() {
-		logger.info("Inicializando event bus");
-		EventBus.addHandler(context.getBean(LaboratoryProjector.class));
-		EventBus.addHandler(context.getBean(VeterinaryProjector.class));
-		EventBus.addHandler(context.getBean(OwnerProjector.class));
-	}
+    private void initializeCommandBus() {
+        logger.info("Inicializando command bus");
+        // Laboratory
+        CommandBus.addHandler(RegisterLaboratory.class, new LaboratoryRegistration(eventStore));
+        CommandBus.addHandler(UpdateLaboratory.class, new LaboratoryUpdate(eventStore));
+        CommandBus.addHandler(DeleteLaboratory.class, new LaboratoryDeletion(eventStore));
+        // Veterinary
+        CommandBus.addHandler(RegisterVeterinary.class, new VeterinaryRegistration(eventStore));
+        CommandBus.addHandler(UpdateVeterinary.class, new VeterinaryUpdate(eventStore));
+        CommandBus.addHandler(DeleteVeterinary.class, new VeterinaryDeletion(eventStore));
+        // Owner
+        CommandBus.addHandler(RegisterOwner.class, new OwnerRegistration(eventStore));
+        CommandBus.addHandler(UpdateOwner.class, new OwnerUpdate(eventStore));
+        CommandBus.addHandler(DeleteOwner.class, new OwnerDeletion(eventStore));
+    }
 
-	@Override 
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		initializeCommandBus();
-		initializeEventBus();
-		logger.info("Bus inicializados");
+    private void initializeEventBus() {
+        logger.info("Inicializando event bus");
+        EventBus.addHandler(context.getBean(LaboratoryProjector.class));
+        EventBus.addHandler(context.getBean(VeterinaryProjector.class));
+        EventBus.addHandler(context.getBean(OwnerProjector.class));
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        initializeCommandBus();
+        initializeEventBus();
+        logger.info("Bus inicializados");
     }
 }

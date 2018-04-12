@@ -43,4 +43,3 @@ databaseChangeLog:
             - rollback:
                - dropTable: 
                   tableName: event
-

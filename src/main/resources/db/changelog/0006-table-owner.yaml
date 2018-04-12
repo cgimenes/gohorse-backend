@@ -12,12 +12,7 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: PK_OWNER
-                    - column:
-                        name: entity_version
-                        type: ${TYPE_INTEGER}
-                        constraints:
-                            nullable: false   
+                            primaryKeyName: pk_owner
                     - column:
                         name: name
                         type: ${TYPE_NAME}
@@ -35,7 +30,7 @@ databaseChangeLog:
                             nullable: false
                     - column:
                         name: birth_date
-                        type: ${TYPE_DATETIME}
+                        type: ${TYPE_DATE}
                         constraints:
                             nullable: false
                     - column:

@@ -16,51 +16,51 @@ import com.xgh.model.address.query.Address;
 @Entity
 @Table(name = "laboratory")
 public final class Laboratory {
-	@Id
+    @Id
     @Column(name = "id")
-	private UUID id;
+    private UUID id;
 
-	@Column(name = "company_name")
+    @Column(name = "company_name")
     private String companyName;
-	
-	@Column(name = "phone")
-	private String phone;
-	
+
+    @Column(name = "phone")
+    private String phone;
+
     @ManyToOne
     @JoinColumn(name="address_id")
     private Address address;
-	
-	@JsonIgnore
+
+    @JsonIgnore
     @Column(name = "deleted")
     private Boolean deleted = false;
-	
-	protected Laboratory() {}
-	
+
+    protected Laboratory() {}
+
     public Laboratory(UUID id, String companyName, String phone, Address address, Boolean deleted) {
-		this.id = id;
-		this.companyName = companyName;
-		this.phone = phone;
-		this.address = address;
-		this.deleted = deleted;
-	}
+        this.id = id;
+        this.companyName = companyName;
+        this.phone = phone;
+        this.address = address;
+        this.deleted = deleted;
+    }
 
-	public String getCompanyName() {
-		return companyName;
-	}
+    public String getCompanyName() {
+        return companyName;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
-	
-	public Address getAddress() {
-		return address;
-	}
-	
+    public String getPhone() {
+        return phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
     public UUID getId() {
         return id;
     }
     
     public Boolean isDeleted() {
-    	return deleted;
+        return deleted;
     }
 }
