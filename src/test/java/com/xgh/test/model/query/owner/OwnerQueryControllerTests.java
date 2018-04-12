@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.xgh.model.query.address.Address;
+import com.xgh.model.query.owner.Owner;
+import com.xgh.model.query.owner.OwnerRepository;
+import com.xgh.test.model.query.address.AddressSampleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,16 +23,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.owner.Owner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -40,14 +37,14 @@ public class OwnerQueryControllerTests {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    protected JdbcTemplate connection;
+    private OwnerRepository repository;
 
     @Autowired
-    private PostgresEventStore eventStore;
+    private AddressSampleData addressSampleData;
 
     @Before
     public void before() {
-        connection.update("truncate table owner");
+        repository.deleteAll();
     }
 
     @Test
@@ -58,15 +55,15 @@ public class OwnerQueryControllerTests {
                 ownerId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(ownerId, response.getBody().getId().getValue());
-        assertEquals("Dono Master", response.getBody().getName().toString());
-        assertEquals("44313371337", response.getBody().getPhone().toString());
-        assertEquals("09450600929", response.getBody().getCpf().toString());
+        assertEquals(ownerId, response.getBody().getId());
+        assertEquals("Dono Master", response.getBody().getName());
+        assertEquals("44313371337", response.getBody().getPhone());
+        assertEquals("09450600929", response.getBody().getCpf());
         assertEquals("1911-01-01", response.getBody().getBirthDate().toString());
     }
 
     @Test
-    public void findAllWithOnePage() throws JsonParseException, JsonMappingException, IOException {
+    public void findAllWithOnePage() throws IOException {
         List<UUID> owners = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             owners.add(createSampleEntity());
@@ -82,14 +79,16 @@ public class OwnerQueryControllerTests {
         }
     }
 
-    private UUID createSampleEntity() {
-        Owner owner = new Owner();
-        Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
-                389,null);
+    @Test
+    public void findAllWithManyPages() {
+        // TODO criar
+    }
 
-        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09450600929"), new Date(LocalDate.of(1911, 1, 1)), address);
-        eventStore.push(owner);
-        return owner.getId().getValue();
+    private UUID createSampleEntity() {
+        Address address = addressSampleData.getSampleAddress();
+        Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false);
+        repository.save(owner);
+        return owner.getId();
     }
 
 }

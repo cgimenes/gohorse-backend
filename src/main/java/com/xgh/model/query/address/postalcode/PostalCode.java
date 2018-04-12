@@ -1,4 +1,4 @@
-package com.xgh.model.query.postalcode;
+package com.xgh.model.query.address.postalcode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
