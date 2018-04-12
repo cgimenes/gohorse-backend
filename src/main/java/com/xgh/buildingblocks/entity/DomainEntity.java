@@ -1,7 +1,6 @@
 package com.xgh.buildingblocks.entity;
 
 import com.xgh.JsonSerializable;
-import com.xgh.model.valueobjects.command.EntityId;
 
 public abstract class DomainEntity<IdType extends EntityId> implements JsonSerializable {
 	private static final long serialVersionUID = 2636121875876552398L;

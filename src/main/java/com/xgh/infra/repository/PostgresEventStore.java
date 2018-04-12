@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.valueobjects.command.EntityId;
-import com.xgh.model.valueobjects.command.EntityVersion;
+import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.buildingblocks.entity.EntityVersion;
 
 @Repository
 public class PostgresEventStore extends EventStore {

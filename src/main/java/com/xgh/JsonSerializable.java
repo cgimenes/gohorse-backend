@@ -11,7 +11,7 @@ public interface JsonSerializable extends Serializable {
 	/*
 	 * Serializa o value object em JSON
 	 */
-	default public String toJson() {
+	default String toJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));

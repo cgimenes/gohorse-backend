@@ -7,9 +7,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CommandBus {
-	private Logger logger = LogManager.getLogger(this.getClass());
-	
-    private Map<Class<? extends Command>, CommandHandler<?>> handlers = new HashMap<>();
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
+    private final Map<Class<? extends Command>, CommandHandler<?>> handlers = new HashMap<>();
 
     /*
      * Singleton
@@ -27,21 +27,17 @@ public class CommandBus {
         getInstance().handlers.put(command, handler);
     }
 
-    public static void addAllHandlers(Map<Class<? extends Command>, CommandHandler<?>> handlers) {
-        getInstance().handlers.putAll(handlers);
-    }
-
     /*
      * Executa um comando utilizando o seu respectivo command handler
      */
     @SuppressWarnings("unchecked")
-	public static <T extends Command> void dispatch(T command) {
-    	getInstance().logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
-    	
+    public static <T extends Command> void dispatch(T command) {
+        getInstance().logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
+
         CommandHandler<T> handler = (CommandHandler<T>) getInstance().handlers.get(command.getClass());
         
         if (handler == null) {
-        	throw new RuntimeException(String.format("Nenhum handler encontrado para o comando: %s", command.getClass().getName()));
+            throw new RuntimeException(String.format("Nenhum handler encontrado para o comando: %s", command.getClass().getName()));
         }
         
         handler.execute(command);
