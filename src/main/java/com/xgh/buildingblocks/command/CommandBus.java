@@ -27,10 +27,6 @@ public class CommandBus {
         getInstance().handlers.put(command, handler);
     }
 
-    public static void addAllHandlers(Map<Class<? extends Command>, CommandHandler<?>> handlers) {
-        getInstance().handlers.putAll(handlers);
-    }
-
     /*
      * Executa um comando utilizando o seu respectivo command handler
      */
