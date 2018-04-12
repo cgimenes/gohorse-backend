@@ -1,4 +1,4 @@
-package com.xgh.valueobjects;
+package com.xgh.test.model.command.valueobjects;
 
 import com.xgh.model.command.valueobjects.Cpf;
 import org.junit.Test;
