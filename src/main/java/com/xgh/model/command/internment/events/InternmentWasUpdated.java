@@ -1,9 +1,9 @@
-package com.xgh.model.internment.command.events;
+package com.xgh.model.command.internment.events;
 
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.animal.command.AnimalId;
-import com.xgh.model.bed.command.BedId;
-import com.xgh.model.internment.command.InternmentId;
+import com.xgh.model.command.animal.AnimalId;
+import com.xgh.model.command.bed.BedId;
+import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.valueobjects.command.Date;
 import com.xgh.model.valueobjects.command.EntityVersion;
 

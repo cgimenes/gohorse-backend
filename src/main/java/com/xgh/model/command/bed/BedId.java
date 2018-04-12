@@ -1,4 +1,4 @@
-package com.xgh.model.bed.command;
+package com.xgh.model.command.bed;
 
 import com.xgh.model.valueobjects.command.EntityId;
 

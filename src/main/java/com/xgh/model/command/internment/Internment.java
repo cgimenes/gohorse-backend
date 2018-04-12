@@ -1,12 +1,12 @@
-package com.xgh.model.internment.command;
+package com.xgh.model.command.internment;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
-import com.xgh.model.animal.command.AnimalId;
-import com.xgh.model.bed.command.BedId;
-import com.xgh.model.internment.command.events.InternmentWasDeleted;
-import com.xgh.model.internment.command.events.InternmentWasRegistered;
-import com.xgh.model.internment.command.events.InternmentWasUpdated;
+import com.xgh.model.command.animal.AnimalId;
+import com.xgh.model.command.bed.BedId;
+import com.xgh.model.command.internment.events.InternmentWasDeleted;
+import com.xgh.model.command.internment.events.InternmentWasRegistered;
+import com.xgh.model.command.internment.events.InternmentWasUpdated;
 import com.xgh.model.laboratory.command.events.LaboratoryWasDeleted;
 import com.xgh.model.laboratory.command.events.LaboratoryWasRegistered;
 import com.xgh.model.laboratory.command.events.LaboratoryWasUpdated;

@@ -1,4 +1,4 @@
-package com.xgh.model.internment.command;
+package com.xgh.model.command.internment;
 
 import java.util.UUID;
 

@@ -1,7 +1,7 @@
-package com.xgh.model.internment.command.events;
+package com.xgh.model.command.internment.events;
 
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.internment.command.InternmentId;
+import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.valueobjects.command.EntityVersion;
 
 public class InternmentWasDeleted extends Event<InternmentId> {

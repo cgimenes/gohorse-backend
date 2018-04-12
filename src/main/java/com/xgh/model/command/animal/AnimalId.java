@@ -1,4 +1,4 @@
-package com.xgh.model.animal.command;
+package com.xgh.model.command.animal;
 
 import com.xgh.model.valueobjects.command.EntityId;
 
