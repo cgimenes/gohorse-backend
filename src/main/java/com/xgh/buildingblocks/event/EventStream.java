@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EventStream implements Iterator<Event<?>> {
-	private List<Event<?>> events;
+	private final List<Event<?>> events;
 
 	public EventStream() {
 		this.events = new ArrayList<>();

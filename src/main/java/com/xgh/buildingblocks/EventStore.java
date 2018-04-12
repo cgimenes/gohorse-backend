@@ -9,7 +9,7 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.model.valueobjects.command.EntityId;
+import com.xgh.buildingblocks.entity.EntityId;
 
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
@@ -25,7 +25,7 @@ public abstract class EventStore {
             throw new EntityNotFoundException();
     	}
     	
-    	T entity = null;
+    	T entity;
     	try {    		
     		entity = this.instanceEntity(entityType);    
         	invokeEntityReconstituteMethod(entity, events);
@@ -53,7 +53,7 @@ public abstract class EventStore {
     /*
      * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
      */
-	protected void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException, 
+    private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException,
 																								 IllegalAccessException, IllegalArgumentException, 
 																								 InvocationTargetException {	
 		Class<?> clazz = entity.getClass();
@@ -76,8 +76,8 @@ public abstract class EventStore {
 	/*
 	 * Instancia a entidade usando reflection
 	 */
-	protected <T extends AggregateRoot<?>> T instanceEntity(Class<T> entityType) throws ClassNotFoundException, 
-																NoSuchMethodException, SecurityException, 
+	private <T extends AggregateRoot<?>> T instanceEntity(Class<T> entityType) throws
+			NoSuchMethodException, SecurityException,
 																InstantiationException, IllegalAccessException, 
 																IllegalArgumentException, InvocationTargetException {
     	return entityType.getConstructor().newInstance();

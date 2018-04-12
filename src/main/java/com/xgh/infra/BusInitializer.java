@@ -1,43 +1,43 @@
 package com.xgh.infra;
 
-import com.xgh.model.owner.command.commands.DeleteOwner;
-import com.xgh.model.owner.command.commands.RegisterOwner;
-import com.xgh.model.owner.command.commands.UpdateOwner;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
-
 import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.eventhandlers.LaboratoryProjector;
 import com.xgh.eventhandlers.OwnerProjector;
 import com.xgh.eventhandlers.VeterinaryProjector;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.laboratory.command.commandhandlers.LaboratoryDeletion;
-import com.xgh.model.laboratory.command.commandhandlers.LaboratoryRegistration;
-import com.xgh.model.laboratory.command.commandhandlers.LaboratoryUpdate;
-import com.xgh.model.laboratory.command.commands.DeleteLaboratory;
-import com.xgh.model.laboratory.command.commands.RegisterLaboratory;
-import com.xgh.model.laboratory.command.commands.UpdateLaboratory;
+import com.xgh.model.command.laboratory.commandhandlers.LaboratoryDeletion;
+import com.xgh.model.command.laboratory.commandhandlers.LaboratoryRegistration;
+import com.xgh.model.command.laboratory.commandhandlers.LaboratoryUpdate;
+import com.xgh.model.command.laboratory.commands.DeleteLaboratory;
+import com.xgh.model.command.laboratory.commands.RegisterLaboratory;
+import com.xgh.model.command.laboratory.commands.UpdateLaboratory;
+import com.xgh.model.command.veterinary.commandhandlers.VeterinaryDeletion;
+import com.xgh.model.command.veterinary.commandhandlers.VeterinaryRegistration;
+import com.xgh.model.command.veterinary.commandhandlers.VeterinaryUpdate;
+import com.xgh.model.command.veterinary.commands.DeleteVeterinary;
+import com.xgh.model.command.veterinary.commands.RegisterVeterinary;
+import com.xgh.model.command.veterinary.commands.UpdateVeterinary;
 import com.xgh.model.owner.command.commandhandlers.OwnerDeletion;
 import com.xgh.model.owner.command.commandhandlers.OwnerRegistration;
 import com.xgh.model.owner.command.commandhandlers.OwnerUpdate;
-import com.xgh.model.veterinary.command.commandhandlers.VeterinaryDeletion;
-import com.xgh.model.veterinary.command.commandhandlers.VeterinaryRegistration;
-import com.xgh.model.veterinary.command.commandhandlers.VeterinaryUpdate;
-import com.xgh.model.veterinary.command.commands.DeleteVeterinary;
-import com.xgh.model.veterinary.command.commands.RegisterVeterinary;
-import com.xgh.model.veterinary.command.commands.UpdateVeterinary;
+import com.xgh.model.owner.command.commands.DeleteOwner;
+import com.xgh.model.owner.command.commands.RegisterOwner;
+import com.xgh.model.owner.command.commands.UpdateOwner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 // TODO ver se é possível criar um meio de inicializar dinamicamente os handlers
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
-    private Logger logger = LogManager.getLogger(this.getClass());
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     /*
      * Dependências dos handlers
@@ -45,7 +45,7 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
     // TODO injetar automaticamente
     @Autowired
     private PostgresEventStore eventStore;
-    
+
     @Autowired
     private ApplicationContext context;
 

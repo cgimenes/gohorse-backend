@@ -13,7 +13,7 @@ public abstract class SingleValueObject<T> implements ValueObject {
 		this.value = null;
 	}
 	
-    public SingleValueObject(T value) {
+    protected SingleValueObject(T value) {
         if (value == null) {
         	// TODO informar o nome da classe que deu esse erro
             throw new IllegalArgumentException("O valor não pode ser nulo");

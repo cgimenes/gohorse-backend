@@ -9,8 +9,8 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.buildingblocks.valueobject.ValueObject;
-import com.xgh.model.valueobjects.command.EntityId;
-import com.xgh.model.valueobjects.command.EntityVersion;
+import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.model.command.valueobjects.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> implements ValueObject {
 	private static final long serialVersionUID = -8290936323951912398L;
@@ -24,7 +24,7 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
 	
 	protected Event() {}
 	
-    public Event(IdType entityId, EntityVersion entityVersion) {
+    protected Event(IdType entityId, EntityVersion entityVersion) {
     	this.entityId = entityId;
 		this.entityVersion = entityVersion;
         this.ocurredOn = Calendar.getInstance();

@@ -8,9 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class EventBus {
-	private static Logger logger = LogManager.getLogger(EventBus.class);
+	private static final Logger logger = LogManager.getLogger(EventBus.class);
 	
-    private List<EventHandler> handlers = new ArrayList<>();
+    private final List<EventHandler> handlers = new ArrayList<>();
 
     /*
      * Singleton

@@ -1,8 +1,8 @@
 package com.xgh.infra.controller;
 
 public class ErrorResponse {
-	private int errorCode;
-	private String message;
+	private final int errorCode;
+	private final String message;
 	
 	public ErrorResponse(int errorCode, String message) {
 		this.errorCode = errorCode;

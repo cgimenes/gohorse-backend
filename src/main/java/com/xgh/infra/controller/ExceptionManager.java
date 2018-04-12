@@ -18,7 +18,7 @@ import com.xgh.exceptions.NullMandatoryArgumentException;
 
 @ControllerAdvice
 public class ExceptionManager {
-	private Logger logger = LogManager.getLogger(this.getClass());
+	private final Logger logger = LogManager.getLogger(this.getClass());
 	
 	/*
 	 * Códigos de erro

@@ -28,8 +28,6 @@ databaseChangeLog:
                     - column:
                         name: complement
                         type: ${TYPE_DESCRIPTION}
-                        constraints:
-                            nullable: true
             - rollback:
                - dropTable: 
                   tableName: address       
