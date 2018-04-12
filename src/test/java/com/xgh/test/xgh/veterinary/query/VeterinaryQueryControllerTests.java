@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,18 +28,21 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Crmv;
-import com.xgh.valueobjects.Email;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.veterinary.query.Veterinary;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Crmv;
+import com.xgh.model.valueobjects.command.Date;
+import com.xgh.model.valueobjects.command.Email;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
+import com.xgh.model.valueobjects.command.PostalCode;
+import com.xgh.model.veterinary.query.Veterinary;
 
 // TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
 public class VeterinaryQueryControllerTests {
-	
+
 	@Autowired
 	private TestRestTemplate restTemplate;
 
@@ -74,7 +76,7 @@ public class VeterinaryQueryControllerTests {
 	// TODO corrigir
 	@Test
 	public void findAllWithOnePage() throws JsonParseException, JsonMappingException, IOException, ParseException {
-		List<UUID> veterinarians = new ArrayList<>(); 
+		List<UUID> veterinarians = new ArrayList<>();
 		for (int i = 0; i < 5; i++) {
 			veterinarians.add(createSampleEntity());
 		}
@@ -82,8 +84,10 @@ public class VeterinaryQueryControllerTests {
 		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/veterinarians", String.class);
 
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		
-		Page<Veterinary> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<Page<Veterinary>>() {});		
+
+		Page<Veterinary> response = new ObjectMapper().readValue(responseEntity.getBody(),
+				new TypeReference<Page<Veterinary>>() {
+				});
 		for (int i = 0; i < 5; i++) {
 			assertEquals(veterinarians.get(i), response.getContent().get(i).getId());
 		}
@@ -95,10 +99,12 @@ public class VeterinaryQueryControllerTests {
 	}
 
 	private UUID createSampleEntity() throws ParseException {
-		com.xgh.xgh.veterinary.command.Veterinary veterinary = new com.xgh.xgh.veterinary.command.Veterinary();
-		veterinary.register(new com.xgh.xgh.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
+		com.xgh.model.veterinary.command.Veterinary veterinary = new com.xgh.model.veterinary.command.Veterinary();
+		veterinary.register(new com.xgh.model.veterinary.command.VeterinaryId(), new Name("Ricardo Requena"),
+				new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+						null),
 				new Phone("044998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-				new Date(new SimpleDateFormat("yyyy-MM-dd").parse("1986-10-03").getTime()));
+				new Date(LocalDate.of(1986, 10, 03)));
 		eventStore.push(veterinary);
 		return veterinary.getId().getValue();
 	}

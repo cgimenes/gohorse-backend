@@ -3,7 +3,7 @@ package com.xgh.test.xgh.owner.command;
 import static org.junit.Assert.*;
 
 import java.net.URI;
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +21,14 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Cpf;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.owner.command.Owner;
-import com.xgh.xgh.owner.command.OwnerId;
+import com.xgh.model.owner.command.Owner;
+import com.xgh.model.owner.command.OwnerId;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Cpf;
+import com.xgh.model.valueobjects.command.Date;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
+import com.xgh.model.valueobjects.command.PostalCode;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -45,8 +48,11 @@ public class OwnerCommandControllerTests {
 	@Test
 	public void register() {
 		Owner owner = new Owner();
-		Date data = new Date();
-		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
+		Address address = new Address(new PostalCode("87024-360", "Rua", "Garimpo", "Jardim Diamante", "Maringá", "PR", "Brasil"), 
+				389,null);
+		
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), 
+				new Date(LocalDate.of(01, 01, 1901)), address);
 
 		ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
 
@@ -58,18 +64,22 @@ public class OwnerCommandControllerTests {
 		assertEquals("Dono Master", ownerFromStore.getName().toString());
 		assertEquals("044313371337", ownerFromStore.getPhone().toString());
 		assertEquals("09450600929", ownerFromStore.getCpf().toString());
-		assertEquals(data, ownerFromStore.getBirthDate());
+		assertEquals(new Date(LocalDate.of(01, 01, 1901)), ownerFromStore.getBirthDate());
+		assertEquals(address,ownerFromStore.getAddress().toString());
 		assertEquals("1", ownerFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void update() {
 		Owner owner = new Owner();
-		Date data = new Date();
-		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
+		Address address = new Address(new PostalCode("87024-360", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"), 
+										389,null);
+		
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), 
+				new Date(LocalDate.of(1001, 01, 01)), address);
 		eventStore.push(owner);
 		
-		owner.update(new Name("Dono Master"), new Phone("044000000000"), new Cpf("09450600929"), data);
+		owner.update(new Name("Dono Master"), new Phone("044000000000"), new Cpf("09450600929"), new Date(LocalDate.of(1002, 02, 02)),address);
 		
 		RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -81,15 +91,19 @@ public class OwnerCommandControllerTests {
 		assertEquals("Dono Master", ownerFromStore.getName().toString());
 		assertEquals("044000000000", ownerFromStore.getPhone().toString());
 		assertEquals("09450600929", ownerFromStore.getCpf().toString());
-		assertEquals(data, ownerFromStore.getBirthDate());
+		assertEquals(new Date(LocalDate.of(1002, 02, 02)), ownerFromStore.getBirthDate());
+		assertEquals(address, ownerFromStore.getAddress().toString());
 		assertEquals("2", ownerFromStore.getVersion().toString());
 	}
 	
 	@Test
 	public void deleteWithSuccess() {
 		Owner owner = new Owner();
-		Date data = new Date();
-		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data);
+		Date data = new Date(LocalDate.of(1802, 02, 02));
+		Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"), 
+										389,null);
+		
+		owner.register(new OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), data, address);
 		eventStore.push(owner);
 
 		HttpEntity<Owner> requestEntity = new HttpEntity<Owner>(owner);

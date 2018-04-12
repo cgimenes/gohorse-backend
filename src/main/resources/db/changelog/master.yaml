@@ -24,15 +24,30 @@ databaseChangeLog:
         name: TYPE_DATETIME
         value: datetime()
     - property:
+        name: TYPE_DATE
+        value: date()
+    - property:
         name: TYPE_JSON
         value: text
     - property:
         name: TYPE_BOOL
         value: bool
+    - property:
+        name: TYPE_DESCRIPTION
+        value: varchar(30)
+    - property:
+        name: TYPE_POSTALCODE
+        value: varchar(9)
 
     - include:
         file: db/changelog/0001-table-event.yaml
     - include:
-        file: db/changelog/0002-table-laboratory.yaml
+        file: db/changelog/0002-table-postalcode.yaml
     - include:
-        file: db/changelog/0003-table-veterinary.yaml
+        file: db/changelog/0003-table-address.yaml
+    - include:
+        file: db/changelog/0004-table-laboratory.yaml
+    - include:
+        file: db/changelog/0005-table-veterinary.yaml
+    - include:
+        file: db/changelog/0006-table-owner.yaml    

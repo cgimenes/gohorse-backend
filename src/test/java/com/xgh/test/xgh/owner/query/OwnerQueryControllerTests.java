@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +26,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.valueobjects.Cpf;
-import com.xgh.valueobjects.Name;
-import com.xgh.valueobjects.Phone;
-import com.xgh.xgh.owner.command.Owner;
+import com.xgh.model.owner.command.Owner;
+import com.xgh.model.valueobjects.command.Address;
+import com.xgh.model.valueobjects.command.Cpf;
+import com.xgh.model.valueobjects.command.Date;
+import com.xgh.model.valueobjects.command.Name;
+import com.xgh.model.valueobjects.command.Phone;
+import com.xgh.model.valueobjects.command.PostalCode;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -51,7 +53,6 @@ public class OwnerQueryControllerTests {
 		connection.update("truncate table owner");
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void findById() {
 		UUID ownerId = createSampleEntity();
@@ -64,7 +65,7 @@ public class OwnerQueryControllerTests {
 		assertEquals("Dono Master", response.getBody().getName().toString());
 		assertEquals("044313371337", response.getBody().getPhone().toString());
 		assertEquals("09450600929", response.getBody().getCpf().toString());
-		assertEquals(new Date("01/01/2050"), response.getBody().getBirthDate());
+		assertEquals("1001-10-01", response.getBody().getBirthDate().toString());
 	}
 	
 	@Test
@@ -84,10 +85,12 @@ public class OwnerQueryControllerTests {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	private UUID createSampleEntity() {
-		com.xgh.xgh.owner.command.Owner owner = new com.xgh.xgh.owner.command.Owner();
-		owner.register(new com.xgh.xgh.owner.command.OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), new Date("01/01/2050"));
+		com.xgh.model.owner.command.Owner owner = new com.xgh.model.owner.command.Owner();
+		Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"), 
+				389,null);
+		
+		owner.register(new com.xgh.model.owner.command.OwnerId(), new Name("Dono Master"), new Phone("044313371337"), new Cpf("09450600929"), new Date("1002, 02, 02"), address);
 		eventStore.push(owner);
 		return owner.getId().getValue();
 	}

@@ -1,0 +1,39 @@
+databaseChangeLog:
+    - changeSet:
+        id: 4
+        author: marcelo.gimenes
+        changes:   
+            - createTable:
+                tableName: laboratory
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_laboratory
+                    - column:
+                        name: company_name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: phone
+                        type: ${TYPE_PHONE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: address_id     
+                        type: ${TYPE_UUID}          
+                        constraints:
+                            foreignKeyName: fk_laboratory_address
+                            references: address(id)
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false             
+            - rollback:
+               - dropTable: 
+                  tableName: laboratory

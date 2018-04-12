@@ -1,0 +1,56 @@
+databaseChangeLog:
+    - changeSet:
+        id: 5
+        author: alexandre.requena
+        changes:   
+            - createTable:
+                tableName: veterinary
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_veterinary            
+                    - column:
+                        name: name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false   
+                    - column:
+                        name: crmv
+                        type: ${TYPE_CRMV}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: phone
+                        type: ${TYPE_PHONE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: email
+                        type: ${TYPE_EMAIL}
+                        constraints:
+                            nullable: false             
+                    - column:
+                        name: birth_date
+                        type: ${TYPE_DATE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: address_id     
+                        type: ${TYPE_UUID}          
+                        constraints:
+                            foreignKeyName: fk_veterinary_address
+                            references: address(id)
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false
+            - rollback:
+               - dropTable: 
+                  tableName: veterinary
+                  

@@ -4,11 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import com.xgh.buildingblocks.AggregateRoot;
-import com.xgh.buildingblocks.Event;
-import com.xgh.buildingblocks.EventStream;
+import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EventBus;
+import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.valueobjects.EntityId;
+import com.xgh.model.valueobjects.command.EntityId;
 
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);

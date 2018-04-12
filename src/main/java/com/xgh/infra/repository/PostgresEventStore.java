@@ -9,11 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.xgh.buildingblocks.AggregateRoot;
-import com.xgh.buildingblocks.Event;
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.valueobjects.EntityId;
-import com.xgh.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.event.Event;
+import com.xgh.model.valueobjects.command.EntityId;
+import com.xgh.model.valueobjects.command.EntityVersion;
 
 @Repository
 public class PostgresEventStore extends EventStore {
@@ -25,7 +25,7 @@ public class PostgresEventStore extends EventStore {
 		Calendar ocurredOn = Calendar.getInstance();
 		ocurredOn.setTime(rs.getDate("ocurred_on"));
 
-		return Event.fromString(
+		return Event.fromJson(
 				rs.getString("event_type"),
 				UUID.fromString(rs.getString("entity_id")),
 				new EntityVersion(rs.getInt("entity_version")),
@@ -58,7 +58,7 @@ public class PostgresEventStore extends EventStore {
 		    entityType,
 		    event.getType(),
 		    event.getOcurredOn(),
-	    	event.toString()
+	    	event.toJson()
 		);
     }
 }

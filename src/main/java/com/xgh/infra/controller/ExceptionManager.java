@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 
 @ControllerAdvice
 public class ExceptionManager {
+	private Logger logger = LogManager.getLogger(this.getClass());
+	
 	/*
 	 * Códigos de erro
 	 */
@@ -27,13 +30,16 @@ public class ExceptionManager {
 	private static final int ROUTE_NOT_FOUND = 5;
 	
 	/*
-	 * Logger padrão
-	 */
-	private Logger logger = LogManager.getLogger(this.getClass());
-	
-	/*
 	 * Exception Handlers
-	 */
+	 */	
+	@ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler({ Exception.class })
+	public @ResponseBody ErrorResponse handleException(Exception ex) {
+		logger.fatal(ex);
+		
+		return new ErrorResponse(INTERNAL_ERROR, "Erro interno não tratado");
+	}
+	
 	@ResponseStatus(code=HttpStatus.NOT_FOUND)
 	@ExceptionHandler({ EntityNotFoundException.class })
 	public @ResponseBody ErrorResponse handleException(EntityNotFoundException ex) {
@@ -60,12 +66,23 @@ public class ExceptionManager {
 	
 	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ HttpMessageConversionException.class })
-	public @ResponseBody ErrorResponse handleException(HttpMessageConversionException ex) {
-		logger.info(ex);
+	public @ResponseBody ErrorResponse handleException(HttpMessageConversionException ex) {		
+		if (ex.getCause() == null) {
+			return handleException((Exception) ex);
+		}
 		
+		if (ex.getCause() instanceof JsonParseException) {
+			return new ErrorResponse(BAD_REQUEST, "Falha ao parsear o JSON da mensagem");
+		}
+			
+		if (ex.getCause().getCause() == null) {	
+			return handleException((Exception) ex);
+		}	
+		
+		logger.info(ex);		
 		return new ErrorResponse(BAD_REQUEST, ex.getCause().getCause().getMessage());
 	}
-	
+		
 	@ResponseStatus(code=HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({ NullMandatoryArgumentException.class })
 	public @ResponseBody ErrorResponse handleException(NullMandatoryArgumentException ex) {
@@ -91,13 +108,5 @@ public class ExceptionManager {
 		logger.info(ex);
 		
 		return new ErrorResponse(ROUTE_NOT_FOUND, "Rota não encontrada");
-	}	
-
-	@ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
-	@ExceptionHandler({ Exception.class })
-	public @ResponseBody ErrorResponse handleException(Exception ex) {
-		logger.fatal(ex);
-		
-		return new ErrorResponse(INTERNAL_ERROR, "Erro interno não tratado");
 	}
 }
