@@ -18,12 +18,12 @@ import com.xgh.model.command.veterinary.commandhandlers.VeterinaryUpdate;
 import com.xgh.model.command.veterinary.commands.DeleteVeterinary;
 import com.xgh.model.command.veterinary.commands.RegisterVeterinary;
 import com.xgh.model.command.veterinary.commands.UpdateVeterinary;
-import com.xgh.model.owner.command.commandhandlers.OwnerDeletion;
-import com.xgh.model.owner.command.commandhandlers.OwnerRegistration;
-import com.xgh.model.owner.command.commandhandlers.OwnerUpdate;
-import com.xgh.model.owner.command.commands.DeleteOwner;
-import com.xgh.model.owner.command.commands.RegisterOwner;
-import com.xgh.model.owner.command.commands.UpdateOwner;
+import com.xgh.model.command.owner.commandhandlers.OwnerDeletion;
+import com.xgh.model.command.owner.commandhandlers.OwnerRegistration;
+import com.xgh.model.command.owner.commandhandlers.OwnerUpdate;
+import com.xgh.model.command.owner.commands.DeleteOwner;
+import com.xgh.model.command.owner.commands.RegisterOwner;
+import com.xgh.model.command.owner.commands.UpdateOwner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

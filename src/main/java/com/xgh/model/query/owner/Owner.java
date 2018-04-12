@@ -1,4 +1,4 @@
-package com.xgh.model.owner.query;
+package com.xgh.model.query.owner;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.address.query.Address;
+import com.xgh.model.query.address.Address;
 
 @Entity
 @Table(name = "owner")

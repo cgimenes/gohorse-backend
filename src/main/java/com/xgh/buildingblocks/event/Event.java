@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.model.command.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.entity.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> implements ValueObject {
 	private static final long serialVersionUID = -8290936323951912398L;

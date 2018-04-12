@@ -13,7 +13,7 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.model.command.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.entity.EntityVersion;
 
 @Repository
 public class PostgresEventStore extends EventStore {

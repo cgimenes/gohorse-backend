@@ -1,4 +1,4 @@
-package com.xgh.model.valueobjects.command;
+package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
@@ -10,7 +10,9 @@ public class Cpf extends SingleValueObject<String> {
 
     public Cpf(String cpf) {
         super(cpf);
-        if (!new CPFValidator().isValid(cpf, null)) {
+        CPFValidator validator = new CPFValidator();
+        validator.initialize(null);
+        if (!validator.isValid(cpf, null)) {
             throw new IllegalArgumentException("CPF inválido!");
         }
     }

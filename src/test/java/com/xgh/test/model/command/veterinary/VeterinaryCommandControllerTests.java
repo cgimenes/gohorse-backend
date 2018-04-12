@@ -32,6 +32,7 @@ import com.xgh.model.command.valueobjects.PostalCode;
 import com.xgh.model.command.veterinary.Veterinary;
 import com.xgh.model.command.veterinary.VeterinaryId;
 
+// TODO: comparar endereço
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente
 @RunWith(SpringRunner.class)

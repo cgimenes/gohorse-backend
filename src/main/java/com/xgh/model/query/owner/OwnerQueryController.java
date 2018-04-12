@@ -1,4 +1,4 @@
-package com.xgh.model.owner.query;
+package com.xgh.model.query.owner;
 
 import java.util.UUID;
 

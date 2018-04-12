@@ -1,4 +1,4 @@
-package com.xgh.model.command.valueobjects;
+package com.xgh.buildingblocks.entity;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 

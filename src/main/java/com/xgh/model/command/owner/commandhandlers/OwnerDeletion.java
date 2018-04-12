@@ -1,12 +1,11 @@
-package com.xgh.model.owner.command.commandhandlers;
+package com.xgh.model.command.owner.commandhandlers;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
-import com.xgh.model.owner.command.Owner;
-import com.xgh.model.owner.command.commands.DeleteOwner;
+import com.xgh.model.command.owner.Owner;
+import com.xgh.model.command.owner.commands.DeleteOwner;
 
 public class OwnerDeletion implements CommandHandler<DeleteOwner>{
-	
 	private EventStore repository;
 	
 	public OwnerDeletion(EventStore repository) {
@@ -19,5 +18,4 @@ public class OwnerDeletion implements CommandHandler<DeleteOwner>{
 		owner.delete();
 		repository.push(owner);
 	}
-
 }

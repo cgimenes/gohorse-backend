@@ -3,7 +3,7 @@ package com.xgh.model.command.laboratory.events;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.laboratory.LaboratoryId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.EntityVersion;
+import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 

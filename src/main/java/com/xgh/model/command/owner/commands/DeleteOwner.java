@@ -1,7 +1,7 @@
-package com.xgh.model.owner.command.commands;
+package com.xgh.model.command.owner.commands;
 
 import com.xgh.buildingblocks.command.Command;
-import com.xgh.model.owner.command.OwnerId;
+import com.xgh.model.command.owner.OwnerId;
 
 public class DeleteOwner implements Command {
 	private static final long serialVersionUID = -8751170354092451583L;
@@ -14,5 +14,4 @@ public class DeleteOwner implements Command {
     public OwnerId getId() {
         return id;
     }
-
 }
