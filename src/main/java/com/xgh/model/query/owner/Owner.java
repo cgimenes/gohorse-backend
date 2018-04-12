@@ -17,16 +17,12 @@ import com.xgh.model.query.address.Address;
 @Table(name = "owner")
 public final class Owner {
     @Id
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "phone")
     private String phone;
 
-    @Column(name = "cpf")
     private String cpf;
 
     @Column(name = "birth_date")
@@ -37,7 +33,6 @@ public final class Owner {
     private Address address;
 
     @JsonIgnore
-    @Column(name = "deleted")
     private Boolean deleted = false;
 
     protected Owner() {}

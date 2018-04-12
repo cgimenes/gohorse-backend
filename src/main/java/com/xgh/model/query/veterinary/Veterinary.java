@@ -16,69 +16,69 @@ import com.xgh.model.query.address.Address;
 @Entity
 @Table(name = "veterinary")
 public final class Veterinary {
-	@Id
-	private UUID id;
-	
-	private String name;
-	
+    @Id
+    private UUID id;
+
+    private String name;
+
     @ManyToOne
     @JoinColumn(name="address_id")
     private Address address;
-	
-	private String phone;
-	
-	private String crmv;
-	
-	private String email;
-	
-	@Column(name = "birth_date")
-	private LocalDate birthDate;
-	
-	@JsonIgnore
+
+    private String phone;
+
+    private String crmv;
+
+    private String email;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @JsonIgnore
     private Boolean deleted = false;
 
-	protected Veterinary() {}
+    protected Veterinary() {}
 
-	public Veterinary(UUID id, String name, Address address, String phone, String crmv, String email, LocalDate birthDate, Boolean deleted) {
-		this.id = id;
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
-		this.crmv = crmv;
-		this.email = email;
-		this.birthDate = birthDate;
-		this.deleted = deleted;
-	}
+    public Veterinary(UUID id, String name, Address address, String phone, String crmv, String email, LocalDate birthDate, Boolean deleted) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.crmv = crmv;
+        this.email = email;
+        this.birthDate = birthDate;
+        this.deleted = deleted;
+    }
 
-	public UUID getId() {
-		return this.id;
-	}
+    public UUID getId() {
+        return this.id;
+    }
 
-	public String getName() {
-		return this.name;
-	}
-	
-	public Address getAddress() {
-		return address;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public String getPhone() {
-		return this.phone;
-	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public String getCrmv() {
-		return this.crmv;
-	}
+    public String getPhone() {
+        return this.phone;
+    }
 
-	public String getEmail() {
-		return this.email;
-	}
+    public String getCrmv() {
+        return this.crmv;
+    }
 
-	public LocalDate getBirthDate() {
-		return this.birthDate;
-	}
+    public String getEmail() {
+        return this.email;
+    }
+
+    public LocalDate getBirthDate() {
+        return this.birthDate;
+    }
     
     public Boolean isDeleted() {
-    	return deleted;
+        return deleted;
     }
 }

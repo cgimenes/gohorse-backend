@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/owners")
 public class OwnerQueryController {
-	@Autowired
-	private OwnerQueryService service;
-	
-	@GetMapping
-	public ResponseEntity<Page<Owner>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
-		Page<Owner> owners = service.findAll(page);
-		return ResponseEntity.ok().body(owners);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Owner> findById(@PathVariable UUID id) {
-		Owner owner = service.findById(id);
-		return ResponseEntity.ok().body(owner);
-	}
+    @Autowired
+    private OwnerQueryService service;
+
+    @GetMapping
+    public ResponseEntity<Page<Owner>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<Owner> owners = service.findAll(page);
+        return ResponseEntity.ok().body(owners);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Owner> findById(@PathVariable UUID id) {
+        Owner owner = service.findById(id);
+        return ResponseEntity.ok().body(owner);
+    }
 }
