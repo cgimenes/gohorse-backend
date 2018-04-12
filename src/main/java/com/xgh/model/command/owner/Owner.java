@@ -21,6 +21,10 @@ public class Owner extends AggregateRoot<OwnerId>{
     }
 
     public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
+        if (id == null) {
+            throw new NullMandatoryArgumentException("id");
+        }
+        
         if (name == null) {
             throw new NullMandatoryArgumentException("nome");
         }
@@ -30,7 +34,7 @@ public class Owner extends AggregateRoot<OwnerId>{
         }
 
         if (cpf == null) {
-            throw new NullMandatoryArgumentException("cpf");
+            throw new NullMandatoryArgumentException("CPF");
         }
 
         if (birthDate == null) {
