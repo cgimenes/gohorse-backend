@@ -7,10 +7,7 @@ import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.events.InternmentWasDeleted;
 import com.xgh.model.command.internment.events.InternmentWasRegistered;
 import com.xgh.model.command.internment.events.InternmentWasUpdated;
-import com.xgh.model.laboratory.command.events.LaboratoryWasDeleted;
-import com.xgh.model.laboratory.command.events.LaboratoryWasRegistered;
-import com.xgh.model.laboratory.command.events.LaboratoryWasUpdated;
-import com.xgh.model.valueobjects.command.Date;
+import com.xgh.model.command.valueobjects.Date;
 
 public class Internment extends AggregateRoot<InternmentId> {
 	private static final long serialVersionUID = 513769173122252062L;
