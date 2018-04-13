@@ -16,11 +16,11 @@ public class OwnerQueryService {
 	
 	public Page<Owner> findAll(int page) {
 		PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
-        return repository.findAll(request);
+        return repository.findAllNotDeleted(request);
 	}
 	
 	public Owner findById(UUID id) {
-		return repository.getOne(id);
+		return repository.getOneNotDeleted(id);
 	}
 
 }

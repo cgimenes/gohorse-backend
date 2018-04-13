@@ -16,10 +16,10 @@ public class LaboratoryQueryService {
 
     public Page<Laboratory> findAll(int page) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
-        return repository.findAll(request);
+        return repository.findAllNotDeleted(request);
     }
     
 	public Laboratory findById(UUID id) {
-		return repository.getOne(id);
+		return repository.getOneNotDeleted(id);
 	}
 }
