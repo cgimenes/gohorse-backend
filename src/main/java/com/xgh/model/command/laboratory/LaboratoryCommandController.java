@@ -21,19 +21,19 @@ import java.net.URI;
 public class LaboratoryCommandController {
     @PostMapping
     public ResponseEntity<Void> register(@RequestBody RegisterLaboratory command) {
-    	CommandBus.dispatch(command);
+        CommandBus.dispatch(command);
         return ResponseEntity.created(URI.create("/laboratories/" + command.getId().toString())).build();
     }
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody UpdateLaboratory command) {
-    	CommandBus.dispatch(command);
+        CommandBus.dispatch(command);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestBody DeleteLaboratory command) {
-    	CommandBus.dispatch(command);
+        CommandBus.dispatch(command);
         return ResponseEntity.noContent().build();
     }
 }

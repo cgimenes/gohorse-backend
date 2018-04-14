@@ -61,7 +61,6 @@ public class LaboratoryQueryControllerTests {
         assertEquals("44313371337", response.getBody().getPhone());
     }
 
-    // TODO corrigir
     @Test
     public void findAllWithOnePage() throws IOException {
         List<UUID> laboratories = new ArrayList<>();

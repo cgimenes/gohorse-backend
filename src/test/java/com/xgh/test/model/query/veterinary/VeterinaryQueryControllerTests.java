@@ -63,7 +63,6 @@ public class VeterinaryQueryControllerTests {
         assertEquals("1986-10-03", response.getBody().getBirthDate().toString());
     }
 
-    // TODO corrigir
     @Test
     public void findAllWithOnePage() throws IOException {
         List<UUID> veterinarians = new ArrayList<>();

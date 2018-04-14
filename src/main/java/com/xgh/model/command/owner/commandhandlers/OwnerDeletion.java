@@ -6,7 +6,7 @@ import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.commands.DeleteOwner;
 
 public class OwnerDeletion implements CommandHandler<DeleteOwner>{
-	private EventStore repository;
+	private final EventStore repository;
 	
 	public OwnerDeletion(EventStore repository) {
 		this.repository = repository;

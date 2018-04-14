@@ -100,7 +100,7 @@ public class OwnerCommandControllerTests {
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09450600929"), data, address);
         eventStore.push(owner);
 
-        HttpEntity<Owner> requestEntity = new HttpEntity<Owner>(owner);
+        HttpEntity<Owner> requestEntity = new HttpEntity<>(owner);
 
         ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/owners"), HttpMethod.DELETE,
                 requestEntity, Void.class);

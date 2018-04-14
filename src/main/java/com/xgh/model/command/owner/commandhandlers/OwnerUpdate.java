@@ -6,7 +6,7 @@ import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.commands.UpdateOwner;
 
 public class OwnerUpdate implements CommandHandler<UpdateOwner>{
-	private EventStore repository;
+	private final EventStore repository;
 	
 	public OwnerUpdate(EventStore repository) {
 		this.repository = repository;

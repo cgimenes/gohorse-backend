@@ -6,7 +6,7 @@ import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.commands.RegisterOwner;
 
 public class OwnerRegistration implements CommandHandler<RegisterOwner> {
-	private EventStore repository;
+	private final EventStore repository;
 	
 	public OwnerRegistration(EventStore repository) {
 		this.repository = repository;
