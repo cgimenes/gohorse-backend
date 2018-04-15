@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-        id: 7
+        id: 9
         author: alexandre.requena
         changes:   
             - createTable:

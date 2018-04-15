@@ -1,0 +1,18 @@
+databaseChangeLog:
+    - changeSet:
+        id: 7
+        author: alexandre.requena
+        changes:   
+            - createTable:
+                tableName: animal
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_animal  
+            - rollback:
+               - dropTable: 
+                  tableName: animal

@@ -1,0 +1,18 @@
+databaseChangeLog:
+    - changeSet:
+        id: 8
+        author: alexandre.requena
+        changes:   
+            - createTable:
+                tableName: bed
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_bed  
+            - rollback:
+               - dropTable: 
+                  tableName: bed

@@ -52,4 +52,8 @@ databaseChangeLog:
     - include:
         file: db/changelog/0006-table-owner.yaml
     - include:
-        file: db/changelog/0007-table-internment.yaml
+        file: db/changelog/0007-table-animal.yaml
+    - include:
+        file: db/changelog/0008-table-bed.yaml
+    - include:
+        file: db/changelog/0009-table-internment.yaml
