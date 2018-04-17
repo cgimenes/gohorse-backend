@@ -8,12 +8,14 @@ import com.xgh.model.query.address.postalcode.PostalCodeRepository;
 
 @Component
 public class AddressProjector {
+    private final PostalCodeRepository postalcodeRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    private PostalCodeRepository postalcodeRepository;
-
-    @Autowired
-    private AddressRepository addressRepository;
+    protected AddressProjector(PostalCodeRepository postalcodeRepository, AddressRepository addressRepository) {
+        this.postalcodeRepository = postalcodeRepository;
+        this.addressRepository = addressRepository;
+    }
 
     public Address execute(com.xgh.model.command.valueobjects.Address address) {
         PostalCode postalcodeProjection = projectPostalCode(address.getPostalCode());

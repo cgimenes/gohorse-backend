@@ -9,11 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AddressSampleData {
-    @Autowired
-    private PostalCodeRepository postalCodeRepository;
+    private final PostalCodeRepository postalCodeRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
+    protected AddressSampleData(PostalCodeRepository postalcodeRepository, AddressRepository addressRepository) {
+        this.postalCodeRepository = postalcodeRepository;
+        this.addressRepository = addressRepository;
+    }
 
     public Address getSampleAddress() {
         PostalCode postalCode = new PostalCode("87040-000", "Avenida", "Do Toninho", "Bairro Pacífico", "Londrina", "Paraná", "Brasil");

@@ -18,21 +18,21 @@ import com.xgh.model.command.veterinary.commands.UpdateVeterinary;
 @RestController
 @RequestMapping("/veterinarians")
 public class VeterinaryCommandController {
-	@PostMapping
-	public ResponseEntity<Void> register(@RequestBody RegisterVeterinary command) {
-		CommandBus.dispatch(command);
-		return ResponseEntity.created(URI.create("/veterinarians/" + command.getId().toString())).build();
-	}
+    @PostMapping
+    public ResponseEntity<Void> register(@RequestBody RegisterVeterinary command) {
+        CommandBus.dispatch(command);
+        return ResponseEntity.created(URI.create("/veterinarians/" + command.getId().toString())).build();
+    }
 
-	@PutMapping
-	public ResponseEntity<Void> update(@RequestBody UpdateVeterinary command) {
-		CommandBus.dispatch(command);
-		return ResponseEntity.noContent().build();
-	}
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody UpdateVeterinary command) {
+        CommandBus.dispatch(command);
+        return ResponseEntity.noContent().build();
+    }
 
-	@DeleteMapping
-	public ResponseEntity<Void> delete(@RequestBody DeleteVeterinary command) {
-		CommandBus.dispatch(command);
-		return ResponseEntity.noContent().build();
-	}
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestBody DeleteVeterinary command) {
+        CommandBus.dispatch(command);
+        return ResponseEntity.noContent().build();
+    }
 }

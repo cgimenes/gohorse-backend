@@ -14,19 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/laboratories")
 public class LaboratoryQueryController {
-	@Autowired
-	private LaboratoryQueryService service;
+    private final LaboratoryQueryService service;
 
-	// TODO pesquisa
-	@GetMapping
-	public ResponseEntity<Page<Laboratory>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
-		Page<Laboratory> laboratories = service.findAll(page);
-		return ResponseEntity.ok().body(laboratories);
-	}
+    @Autowired
+    public LaboratoryQueryController(LaboratoryQueryService service) {
+        this.service = service;
+    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Laboratory> findById(@PathVariable UUID id) {
-		Laboratory laboratory = service.findById(id);
-		return ResponseEntity.ok().body(laboratory);
-	}
+    // TODO pesquisa
+    @GetMapping
+    public ResponseEntity<Page<Laboratory>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<Laboratory> laboratories = service.findAll(page);
+        return ResponseEntity.ok().body(laboratories);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Laboratory> findById(@PathVariable UUID id) {
+        Laboratory laboratory = service.findById(id);
+        return ResponseEntity.ok().body(laboratory);
+    }
 }

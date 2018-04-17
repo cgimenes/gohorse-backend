@@ -23,8 +23,9 @@ public class EventBus {
         return instance;
     }
 
-    public static void addHandler(EventHandler eventHandler) {
-        getInstance().handlers.add(eventHandler);
+    public static void addHandler(EventHandler handler) {
+        logger.info(String.format("Adicionando handler '%s' ao EventBus", handler.getClass().getName()));
+        getInstance().handlers.add(handler);
     }
 
     /*

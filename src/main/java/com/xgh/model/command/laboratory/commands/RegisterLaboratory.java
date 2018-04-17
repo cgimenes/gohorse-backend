@@ -7,12 +7,12 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class RegisterLaboratory implements Command {
-	private static final long serialVersionUID = 864620291981116409L;
-	
-	private final LaboratoryId id;
+    private static final long serialVersionUID = 864620291981116409L;
+
+    private final LaboratoryId id;
     private final Name companyName;
     private final Phone phone;
-	private final Address address;
+    private final Address address;
 
     protected RegisterLaboratory() {
         this.id = new LaboratoryId();
@@ -33,7 +33,7 @@ public final class RegisterLaboratory implements Command {
         return phone;
     }
 
-	public Address getAddress() {
-		return address;
-	}
+    public Address getAddress() {
+        return address;
+    }
 }

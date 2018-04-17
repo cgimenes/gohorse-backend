@@ -18,8 +18,7 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 @Repository
 public class PostgresEventStore extends EventStore {
     // TODO migrar para Mongo
-    @Autowired
-    protected JdbcTemplate connection;
+    private final JdbcTemplate connection;
 
     private final RowMapper<Event<?>> eventRowMapper = (rs, rowNum) -> {
         Calendar ocurredOn = Calendar.getInstance();
@@ -32,6 +31,11 @@ public class PostgresEventStore extends EventStore {
                 ocurredOn,
                 rs.getString("event_data"));
     };
+
+    @Autowired
+    public PostgresEventStore(JdbcTemplate connection) {
+        this.connection = connection;
+    }
 
     @Override
     protected <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {

@@ -10,52 +10,52 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public class UpdateVeterinary implements Command {
-	private static final long serialVersionUID = -8599483144628000021L;
-	
-	private final VeterinaryId id;
-	private final Name name;
-	private final Address address;
-	private final Phone phone;
-	private final Crmv crmv;
-	private final Email email;
-	private final Date birthDate;
+    private static final long serialVersionUID = -8599483144628000021L;
 
-	protected UpdateVeterinary() {
-		this.id = null;
-		this.name = null;
-		this.address = null;
-		this.phone = null;
-		this.crmv = null;
-		this.email = null;
-		this.birthDate = null;
-	}
+    private final VeterinaryId id;
+    private final Name name;
+    private final Address address;
+    private final Phone phone;
+    private final Crmv crmv;
+    private final Email email;
+    private final Date birthDate;
 
-	public VeterinaryId getId() {
-		return this.id;
-	}
+    protected UpdateVeterinary() {
+        this.id = null;
+        this.name = null;
+        this.address = null;
+        this.phone = null;
+        this.crmv = null;
+        this.email = null;
+        this.birthDate = null;
+    }
 
-	public Name getName() {
-		return this.name;
-	}
+    public VeterinaryId getId() {
+        return this.id;
+    }
 
-	public Address getAddress() {
-		return this.address;
-	}
+    public Name getName() {
+        return this.name;
+    }
 
-	public Phone getPhone() {
-		return this.phone;
-	}
+    public Address getAddress() {
+        return this.address;
+    }
 
-	public Crmv getCrmv() {
-		return this.crmv;
-	}
+    public Phone getPhone() {
+        return this.phone;
+    }
 
-	public Email getEmail() {
-		return this.email;
-	}
+    public Crmv getCrmv() {
+        return this.crmv;
+    }
 
-	public Date getBirthDate() {
-		return this.birthDate;
-	}
+    public Email getEmail() {
+        return this.email;
+    }
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
 
 }

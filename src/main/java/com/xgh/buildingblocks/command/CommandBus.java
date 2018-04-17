@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class CommandBus {
-    private final Logger logger = LogManager.getLogger(this.getClass());
+    private static final Logger logger = LogManager.getLogger(CommandBus.class);
 
     private final Map<Class<? extends Command>, CommandHandler<?>> handlers = new HashMap<>();
 
@@ -24,6 +24,7 @@ public class CommandBus {
     }
     
     public static void addHandler(Class<? extends Command> command, CommandHandler<?> handler) {
+        logger.info(String.format("Adicionando handler '%s' do comando '%s' ao CommandBus", handler.getClass().getName(), command.getName()));
         getInstance().handlers.put(command, handler);
     }
 
@@ -32,7 +33,7 @@ public class CommandBus {
      */
     @SuppressWarnings("unchecked")
     public static <T extends Command> void dispatch(T command) {
-        getInstance().logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
+        logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
 
         CommandHandler<T> handler = (CommandHandler<T>) getInstance().handlers.get(command.getClass());
         

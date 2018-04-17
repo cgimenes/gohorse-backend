@@ -4,11 +4,15 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.model.command.product.Product;
 import com.xgh.model.command.product.commands.RegisterProduct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductRegistration implements CommandHandler<RegisterProduct>{
 
     private final EventStore repository;
 
+    @Autowired
     public ProductRegistration(EventStore repository) {
         this.repository = repository;
     }

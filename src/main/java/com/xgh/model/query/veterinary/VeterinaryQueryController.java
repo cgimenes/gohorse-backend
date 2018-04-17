@@ -14,19 +14,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/veterinarians")
 public class VeterinaryQueryController {
-	@Autowired
-	private VeterinaryQueryService service;
+    private final VeterinaryQueryService service;
 
-	// TODO pesquisa
-	@GetMapping
-	public ResponseEntity<Page<Veterinary>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
-		Page<Veterinary> veterinarians = service.findAll(page);
-		return ResponseEntity.ok().body(veterinarians);
-	}
+    @Autowired
+    public VeterinaryQueryController(VeterinaryQueryService service) {
+        this.service = service;
+    }
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Veterinary> findById(@PathVariable UUID id) {
-		Veterinary veterinary = service.findById(id);
-		return ResponseEntity.ok().body(veterinary);
-	}
+    // TODO pesquisa
+    @GetMapping
+    public ResponseEntity<Page<Veterinary>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
+        Page<Veterinary> veterinarians = service.findAll(page);
+        return ResponseEntity.ok().body(veterinarians);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Veterinary> findById(@PathVariable UUID id) {
+        Veterinary veterinary = service.findById(id);
+        return ResponseEntity.ok().body(veterinary);
+    }
 }

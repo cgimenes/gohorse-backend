@@ -1,39 +1,18 @@
 package com.xgh.model.command.laboratory;
 
+import com.xgh.infra.controller.CrudCommandController;
 import com.xgh.model.command.laboratory.commands.DeleteLaboratory;
 import com.xgh.model.command.laboratory.commands.RegisterLaboratory;
 import com.xgh.model.command.laboratory.commands.UpdateLaboratory;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.xgh.buildingblocks.command.CommandBus;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-
-@RestController
 @RequestMapping("/laboratories")
-public class LaboratoryCommandController {
-    @PostMapping
-    public ResponseEntity<Void> register(@RequestBody RegisterLaboratory command) {
-        CommandBus.dispatch(command);
-        return ResponseEntity.created(URI.create("/laboratories/" + command.getId().toString())).build();
-    }
-
-    @PutMapping
-    public ResponseEntity<Void> update(@RequestBody UpdateLaboratory command) {
-        CommandBus.dispatch(command);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody DeleteLaboratory command) {
-        CommandBus.dispatch(command);
-        return ResponseEntity.noContent().build();
+@RestController
+public class LaboratoryCommandController extends CrudCommandController<RegisterLaboratory, UpdateLaboratory, DeleteLaboratory> {
+    @Override
+    protected String getBasePath() {
+        return "/laboratories";
     }
 }

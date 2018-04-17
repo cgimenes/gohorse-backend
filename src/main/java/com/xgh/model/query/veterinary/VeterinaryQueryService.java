@@ -11,15 +11,19 @@ import com.xgh.Constants;
 
 @Service
 public class VeterinaryQueryService {
-	@Autowired
-	private VeterinaryRepository repository;
+    private final VeterinaryRepository repository;
 
-	public Page<Veterinary> findAll(int page) {
+    @Autowired
+    public VeterinaryQueryService(VeterinaryRepository repository) {
+        this.repository = repository;
+    }
+
+    public Page<Veterinary> findAll(int page) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
         return repository.findAll(request);
-	}
-	
-	public Veterinary findById(UUID id) {
-		return repository.getOne(id);
-	}
+    }
+
+    public Veterinary findById(UUID id) {
+        return repository.getOne(id);
+    }
 }

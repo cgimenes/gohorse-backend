@@ -11,16 +11,20 @@ import com.xgh.Constants;
 
 @Service
 public class OwnerQueryService {
-	@Autowired
-	private OwnerRepository repository;
-	
-	public Page<Owner> findAll(int page) {
-		PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
+    private final OwnerRepository repository;
+
+    @Autowired
+    public OwnerQueryService(OwnerRepository repository) {
+        this.repository = repository;
+    }
+
+    public Page<Owner> findAll(int page) {
+        PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
         return repository.findAll(request);
-	}
-	
-	public Owner findById(UUID id) {
-		return repository.getOne(id);
-	}
+    }
+
+    public Owner findById(UUID id) {
+        return repository.getOne(id);
+    }
 
 }

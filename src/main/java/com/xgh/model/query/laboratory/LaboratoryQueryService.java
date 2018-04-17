@@ -11,15 +11,19 @@ import com.xgh.Constants;
 
 @Service
 public class LaboratoryQueryService {
+    private final LaboratoryRepository repository;
+
     @Autowired
-    private LaboratoryRepository repository;
+    public LaboratoryQueryService(LaboratoryRepository repository) {
+        this.repository = repository;
+    }
 
     public Page<Laboratory> findAll(int page) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
         return repository.findAll(request);
     }
     
-	public Laboratory findById(UUID id) {
-		return repository.getOne(id);
-	}
+    public Laboratory findById(UUID id) {
+        return repository.getOne(id);
+    }
 }
