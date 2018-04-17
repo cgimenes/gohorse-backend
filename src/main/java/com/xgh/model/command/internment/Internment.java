@@ -75,7 +75,7 @@ public class Internment extends AggregateRoot<InternmentId> {
 		return animalId;
 	}
 
-	public Date getBusy_at() {
+	public Date getBusyAt() {
 		return busyAt;
 	}
 
