@@ -22,9 +22,9 @@ import java.util.Set;
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    private DefaultListableBeanFactory context;
+    private final DefaultListableBeanFactory context;
 
-    private Reflections reflections = new Reflections("com.xgh");
+    private final Reflections reflections = new Reflections("com.xgh");
 
     @Autowired
     public BusInitializer(DefaultListableBeanFactory context) {

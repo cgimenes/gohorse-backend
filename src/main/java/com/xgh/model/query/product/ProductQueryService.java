@@ -1,13 +1,13 @@
-package com.xgh.model.query.veterinary;
+package com.xgh.model.query.product;
 
 import com.xgh.infra.service.BasicQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VeterinaryQueryService extends BasicQueryService<Veterinary, VeterinaryRepository> {
+public class ProductQueryService extends BasicQueryService<Product, ProductRepository> {
     @Autowired
-    public VeterinaryQueryService(VeterinaryRepository repository) {
+    public ProductQueryService(ProductRepository repository) {
         super(repository);
     }
 }

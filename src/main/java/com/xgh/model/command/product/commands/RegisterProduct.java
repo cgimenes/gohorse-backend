@@ -24,6 +24,7 @@ public class RegisterProduct implements Command {
         supplierId = null;
     }
 
+    @Override
     public ProductId getId() {
         return id;
     }

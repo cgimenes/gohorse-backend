@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/owners")
 public class OwnerQueryController {
+    private final OwnerQueryService service;
+
     @Autowired
-    private OwnerQueryService service;
+    public OwnerQueryController(OwnerQueryService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<Page<Owner>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
-public abstract class CrudCommandController<Register extends Command, Update extends Command, Delete extends Command> {
+public abstract class BasicCommandController<Register extends Command, Update extends Command, Delete extends Command> {
     protected abstract String getBasePath();
 
     @PostMapping
     public ResponseEntity<Void> register(@RequestBody Register command) {
         CommandBus.dispatch(command);
-        return ResponseEntity.created(URI.create(getBasePath() + command.getId().toString())).build();
+        return ResponseEntity.created(URI.create(getBasePath() + "/" + command.getId().toString())).build();
     }
 
     @PutMapping

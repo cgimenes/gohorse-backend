@@ -30,6 +30,7 @@ public class RegisterVeterinary implements Command {
         this.birthDate = null;
     }
 
+    @Override
     public VeterinaryId getId() {
         return this.id;
     }

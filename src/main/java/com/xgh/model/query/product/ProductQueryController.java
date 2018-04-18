@@ -1,4 +1,4 @@
-package com.xgh.model.query.veterinary;
+package com.xgh.model.query.product;
 
 import com.xgh.infra.controller.BasicQueryController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/veterinarians")
-public class VeterinaryQueryController extends BasicQueryController<Veterinary, VeterinaryQueryService> {
+@RequestMapping("/products")
+public class ProductQueryController extends BasicQueryController<Product, ProductQueryService> {
     @Autowired
-    public VeterinaryQueryController(VeterinaryQueryService repository) {
-        super(repository);
+    public ProductQueryController(ProductQueryService service) {
+        super(service);
     }
 }

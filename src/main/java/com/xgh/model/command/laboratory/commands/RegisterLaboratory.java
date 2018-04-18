@@ -21,6 +21,7 @@ public final class RegisterLaboratory implements Command {
         this.address = null;
     }
 
+    @Override
     public LaboratoryId getId() {
         return id;
     }

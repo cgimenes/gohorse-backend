@@ -12,6 +12,7 @@ public class DeleteProduct implements Command {
         this.id = null;
     }
 
+    @Override
     public ProductId getId() {
         return id;
     }

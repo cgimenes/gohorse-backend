@@ -22,6 +22,7 @@ public class UpdateProduct implements Command {
         supplierId = null;
     }
 
+    @Override
     public ProductId getId() {
         return id;
     }

@@ -12,6 +12,7 @@ public class DeleteLaboratory implements Command {
         this.id = null;
     }
 
+    @Override
     public LaboratoryId getId() {
         return id;
     }

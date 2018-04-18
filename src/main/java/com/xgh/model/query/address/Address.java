@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.address.postalcode.PostalCode;
 
 @Entity
@@ -16,6 +17,7 @@ import com.xgh.model.query.address.postalcode.PostalCode;
 public class Address {
     @Id
     @GeneratedValue
+    @JsonIgnore
     private UUID id;
 
     @ManyToOne
