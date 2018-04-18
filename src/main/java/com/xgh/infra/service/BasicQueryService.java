@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
+// TODO logar
 public abstract class BasicQueryService<Entity, Repository extends JpaRepository<Entity, UUID>> {
     private final Repository repository;
 

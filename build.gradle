@@ -32,6 +32,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-devtools')
     compile('biz.paluch.logging:logstash-gelf:1.11.2')
     compile('org.reflections:reflections:0.9.11')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     runtime('org.postgresql:postgresql')
     runtime('com.h2database:h2')
     testCompile('junit:junit')

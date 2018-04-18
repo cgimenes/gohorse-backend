@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.xgh.model.query.veterinary.VeterinaryRepository;
+import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.address.AddressSampleData;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
@@ -74,9 +74,8 @@ public class VeterinaryQueryControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        Page<Veterinary> response = new ObjectMapper().readValue(responseEntity.getBody(),
-                new TypeReference<Page<Veterinary>>() {
-                });
+        Page<Veterinary> response = new ObjectMapper().findAndRegisterModules().readValue(
+                responseEntity.getBody(), new TypeReference<Page<Veterinary>>() {});
         for (int i = 0; i < 5; i++) {
             assertEquals(veterinarians.get(i), response.getContent().get(i).getId());
         }

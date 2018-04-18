@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/products")
 public class ProductCommandController extends BasicCommandController<RegisterProduct, UpdateProduct, DeleteProduct> {
-
     @Override
     protected String getBasePath() {
         return "/products";
