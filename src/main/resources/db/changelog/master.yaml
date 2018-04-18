@@ -38,6 +38,9 @@ databaseChangeLog:
     - property:
         name: TYPE_POSTALCODE
         value: varchar(9)
+    - property:
+        name: TYPE_CPF_CNPJ
+        value: varchar(14)    
 
     - include:
         file: db/changelog/0001-table-event.yaml
