@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-        id: 7
+        id: 8
         author: andre.conceicao
         changes:                                
             - createTable:
@@ -17,7 +17,7 @@ databaseChangeLog:
                         name: name
                         type: ${TYPE_NAME}
                         constraints:
-                            nullable: false
+                            nullable: false   
                     - column:
                         name: cpf_cnpj
                         type: ${TYPE_CPF_CNPJ}
@@ -34,14 +34,14 @@ databaseChangeLog:
                         name: distribution_type
                         type: ${TYPE_UUID}  
                         constraints:
-                        	foreignKeyName: fk_supplier_distribution
-                            references: distribution(id)
-                            nullable: true                                     
+                            foreignKeyName: fk_supplier_distribution_type
+                            references: distribution_type(id)
+                            nullable: false                                                            
                     - column:
                         name: phone
                         type: ${TYPE_PHONE}
                         constraints:
-                            nullable: false                            
+                            nullable: false                             
                     - column:
                         name: deleted
                         type: ${TYPE_BOOL}

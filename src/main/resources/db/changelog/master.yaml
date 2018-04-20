@@ -45,7 +45,7 @@ databaseChangeLog:
     - include:
         file: db/changelog/0001-table-event.yaml
     - include:
-        file: db/changelog/0002-table-postalcode.yaml
+        file: db/changelog/0002-table-postal_code.yaml
     - include:
         file: db/changelog/0003-table-address.yaml
     - include:
@@ -54,3 +54,7 @@ databaseChangeLog:
         file: db/changelog/0005-table-veterinary.yaml
     - include:
         file: db/changelog/0006-table-owner.yaml    
+    - include:
+        file: db/changelog/0007-table-supplier.yaml     
+    - include:
+        file: db/changelog/0008-table-distributiontype.yaml         

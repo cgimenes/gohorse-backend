@@ -1,0 +1,24 @@
+databaseChangeLog:
+    - changeSet:
+        id: 7
+        author: andre.conceicao
+        changes:                                
+            - createTable:
+                tableName: distributiontype
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_supplier
+                    - column:
+                        name: name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false                                              
+            - rollback:
+               - dropTable: 
+                  tableName: distributiontype
+                                              
