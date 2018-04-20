@@ -7,7 +7,7 @@ import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.valueobjects.*;
 
-public class Owner extends AggregateRoot<OwnerId>{
+public final class Owner extends AggregateRoot<OwnerId>{
     private static final long serialVersionUID = -6278682205377779382L;
 
     private Name name;
