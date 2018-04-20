@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class LaboratoryDeletion implements CommandHandler<DeleteLaboratory>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    protected LaboratoryDeletion(EventStore repository) {
-        this.repository = repository;
+    protected LaboratoryDeletion(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(DeleteLaboratory command) {
-        Laboratory laboratory = repository.pull(Laboratory.class, command.getId());
+        Laboratory laboratory = eventStore.pull(Laboratory.class, command.getId());
         laboratory.delete();
-        repository.push(laboratory);
+        eventStore.push(laboratory);
     }
 }

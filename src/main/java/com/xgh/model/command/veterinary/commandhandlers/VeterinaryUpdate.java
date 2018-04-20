@@ -10,19 +10,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class VeterinaryUpdate implements CommandHandler<UpdateVeterinary> {
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public VeterinaryUpdate(EventStore repository) {
-        this.repository = repository;
+    public VeterinaryUpdate(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(UpdateVeterinary command) {
-        Veterinary veterinary = repository.pull(Veterinary.class, command.getId());
+        Veterinary veterinary = eventStore.pull(Veterinary.class, command.getId());
         veterinary.update(command.getName(), command.getAddress(), command.getPhone(), command.getCrmv(), command.getEmail(),
                 command.getBirthDate());
-        repository.push(veterinary);
+        eventStore.push(veterinary);
     }
 
 }

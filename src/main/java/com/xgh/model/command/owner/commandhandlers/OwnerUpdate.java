@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerUpdate implements CommandHandler<UpdateOwner>{
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public OwnerUpdate(EventStore repository) {
-        this.repository = repository;
+    public OwnerUpdate(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(UpdateOwner command) {
-        Owner owner = repository.pull(Owner.class, command.getId());
+        Owner owner = eventStore.pull(Owner.class, command.getId());
         owner.update(command.getName(), command.getPhone(),command.getCpf(),command.getBirthDate(),command.getAddress());
-        repository.push(owner);
+        eventStore.push(owner);
     }
 }

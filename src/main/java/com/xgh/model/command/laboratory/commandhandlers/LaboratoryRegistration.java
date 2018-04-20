@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class LaboratoryRegistration implements CommandHandler<RegisterLaboratory>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public LaboratoryRegistration(EventStore repository) {
-        this.repository = repository;
+    public LaboratoryRegistration(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(RegisterLaboratory command) {
         Laboratory laboratory = new Laboratory();
         laboratory.register(command.getId(), command.getCompanyName(), command.getPhone(), command.getAddress());
-        repository.push(laboratory);
+        eventStore.push(laboratory);
     }
 }

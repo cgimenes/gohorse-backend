@@ -12,20 +12,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductUpdate implements CommandHandler<UpdateProduct>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public ProductUpdate(EventStore repository) {
-        this.repository = repository;
+    public ProductUpdate(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(UpdateProduct command) {
-        Product product = repository.pull(Product.class, command.getId());
-        if (!repository.entityExists(Supplier.class, command.getSupplierId())) {
+        Product product = eventStore.pull(Product.class, command.getId());
+        if (!eventStore.entityExists(Supplier.class, command.getSupplierId())) {
             throw new EntityNotFoundException(Supplier.class.getSimpleName());
         }
         product.update(command.getName(), command.getPrice(), command.getBrand(), command.getSupplierId());
-        repository.push(product);
+        eventStore.push(product);
     }
 }

@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerRegistration implements CommandHandler<RegisterOwner> {
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public OwnerRegistration(EventStore repository) {
-        this.repository = repository;
+    public OwnerRegistration(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(RegisterOwner command) {
         Owner owner = new Owner();
         owner.register(command.getId(), command.getName(), command.getPhone(), command.getCpf(), command.getBirthDate(), command.getAddress());
-        repository.push(owner);
+        eventStore.push(owner);
     }
 }

@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class VeterinaryRegistration implements CommandHandler<RegisterVeterinary> {
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public VeterinaryRegistration(EventStore repository) {
-        this.repository = repository;
+    public VeterinaryRegistration(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
@@ -22,6 +22,6 @@ public class VeterinaryRegistration implements CommandHandler<RegisterVeterinary
         Veterinary veterinary = new Veterinary();
         veterinary.register(command.getId(), command.getName(), command.getAddress(), command.getPhone(),
                 command.getCrmv(), command.getEmail(), command.getBirthDate());
-        repository.push(veterinary);
+        eventStore.push(veterinary);
     }
 }

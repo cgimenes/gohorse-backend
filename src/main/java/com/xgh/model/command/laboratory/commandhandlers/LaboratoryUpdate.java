@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class LaboratoryUpdate implements CommandHandler<UpdateLaboratory>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public LaboratoryUpdate(EventStore repository) {
-        this.repository = repository;
+    public LaboratoryUpdate(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(UpdateLaboratory command) {
-        Laboratory laboratory = repository.pull(Laboratory.class, command.getId());
+        Laboratory laboratory = eventStore.pull(Laboratory.class, command.getId());
         laboratory.update(command.getCompanyName(), command.getPhone(), command.getAddress());
-        repository.push(laboratory);
+        eventStore.push(laboratory);
     }
 }

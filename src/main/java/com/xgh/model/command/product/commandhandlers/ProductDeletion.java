@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductDeletion implements CommandHandler<DeleteProduct>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public ProductDeletion(EventStore repository) {
-        this.repository = repository;
+    public ProductDeletion(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(DeleteProduct command) {
-        Product product = repository.pull(Product.class, command.getId());
+        Product product = eventStore.pull(Product.class, command.getId());
         product.delete();
-        repository.push(product);
+        eventStore.push(product);
     }
 }

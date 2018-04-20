@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class VeterinaryDeletion implements CommandHandler<DeleteVeterinary>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public VeterinaryDeletion(EventStore repository) {
-        this.repository = repository;
+    public VeterinaryDeletion(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(DeleteVeterinary command) {
-        Veterinary veterinary = repository.pull(Veterinary.class, command.getId());
+        Veterinary veterinary = eventStore.pull(Veterinary.class, command.getId());
         veterinary.delete();
-        repository.push(veterinary);
+        eventStore.push(veterinary);
     }
 }

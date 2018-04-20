@@ -12,21 +12,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductRegistration implements CommandHandler<RegisterProduct>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public ProductRegistration(EventStore repository) {
-        this.repository = repository;
+    public ProductRegistration(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(RegisterProduct command) {
         Product product = new Product();
-        if (!repository.entityExists(Supplier.class, command.getSupplierId())) {
+        if (!eventStore.entityExists(Supplier.class, command.getSupplierId())) {
             throw new EntityNotFoundException(Supplier.class.getSimpleName());
         }
         product.register(command.getId(), command.getName(), command.getPrice(), command.getBrand(),
                 command.getAmount(), command.getSupplierId());
-        repository.push(product);
+        eventStore.push(product);
     }
 }

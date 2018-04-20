@@ -2,9 +2,9 @@ package com.xgh.model.query.veterinary;
 
 import java.util.UUID;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.xgh.infra.repository.BasicJpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface VeterinaryRepository extends JpaRepository<Veterinary, UUID> {
+public interface VeterinaryRepository extends BasicJpaRepository<Veterinary, UUID> {
 }

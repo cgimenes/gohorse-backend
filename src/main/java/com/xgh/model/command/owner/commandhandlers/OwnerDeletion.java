@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerDeletion implements CommandHandler<DeleteOwner>{
-    private final EventStore repository;
+    private final EventStore eventStore;
 
     @Autowired
-    public OwnerDeletion(EventStore repository) {
-        this.repository = repository;
+    public OwnerDeletion(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(DeleteOwner command) {
-        Owner owner = repository.pull(Owner.class, command.getId());
+        Owner owner = eventStore.pull(Owner.class, command.getId());
         owner.delete();
-        repository.push(owner);
+        eventStore.push(owner);
     }
 }
