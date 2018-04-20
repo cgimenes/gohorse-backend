@@ -54,6 +54,10 @@ public class Internment {
 	public UUID getBedId() {
 		return bedId;
 	}
+	
+	public UUID getAnimalId() {
+		return animalId;
+	}
 
 	public Date getBusyAt() {
 		return busyAt;
