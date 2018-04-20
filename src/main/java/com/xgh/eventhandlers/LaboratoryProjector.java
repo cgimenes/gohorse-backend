@@ -17,36 +17,36 @@ import com.xgh.model.query.laboratory.LaboratoryRepository;
 @Component
 public class LaboratoryProjector implements EventHandler {
 
-	@Autowired
-	private PostgresEventStore eventStore;
-	
-	@Autowired
-	private LaboratoryRepository laboratoryRepository;
-	
-	@Autowired
-	private AddressProjector addressProjector;
-	
-	@Override
-	public boolean isSubscribedTo(Event<?> event) {
-		return event instanceof LaboratoryWasDeleted
-			|| event instanceof LaboratoryWasRegistered
-			|| event instanceof LaboratoryWasUpdated;
-	}
+    @Autowired
+    private PostgresEventStore eventStore;
 
-	@Override
-	public void execute(Event<?> event) {
-		Laboratory entity = eventStore.pull(Laboratory.class, event.getEntityId());
+    @Autowired
+    private LaboratoryRepository laboratoryRepository;
 
-		Address addressProjection = addressProjector.execute(entity.getAddress());
-		
-		com.xgh.model.query.laboratory.Laboratory laboratoryProjection = new com.xgh.model.query.laboratory.Laboratory(
-				entity.getId().getValue(),
-				entity.getCompanyName().getValue(),
-				entity.getPhone().getValue(),
-				addressProjection,
-				entity.isDeleted());
-		
-		laboratoryRepository.save(laboratoryProjection);
-	}
+    @Autowired
+    private AddressProjector addressProjector;
+
+    @Override
+    public boolean isSubscribedTo(Event<?> event) {
+        return event instanceof LaboratoryWasDeleted
+            || event instanceof LaboratoryWasRegistered
+            || event instanceof LaboratoryWasUpdated;
+    }
+
+    @Override
+    public void execute(Event<?> event) {
+        Laboratory entity = eventStore.pull(Laboratory.class, event.getEntityId());
+
+        Address addressProjection = addressProjector.execute(entity.getAddress());
+
+        com.xgh.model.query.laboratory.Laboratory laboratoryProjection = new com.xgh.model.query.laboratory.Laboratory(
+                entity.getId().getValue(),
+                entity.getCompanyName().getValue(),
+                entity.getPhone().getValue(),
+                addressProjection,
+                entity.isDeleted());
+
+        laboratoryRepository.save(laboratoryProjection);
+    }
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.xgh.model.query.postalcode.PostalCode;
+import com.xgh.model.query.address.postalcode.PostalCode;
 
 @Entity
 @Table(name = "address")

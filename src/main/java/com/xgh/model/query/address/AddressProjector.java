@@ -1,11 +1,10 @@
 package com.xgh.model.query.address;
 
+import com.xgh.model.query.address.postalcode.PostalCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xgh.model.query.postalcode.PostalCodeRepository;
-import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.PostalCode;
+import com.xgh.model.query.address.postalcode.PostalCodeRepository;
 
 @Component
 public class AddressProjector {
@@ -16,11 +15,11 @@ public class AddressProjector {
     @Autowired
     private AddressRepository addressRepository;
 
-    public com.xgh.model.query.address.Address execute(Address address) {
-        com.xgh.model.query.postalcode.PostalCode postalcodeProjection = projectPostalCode(address.getPostalCode());
+    public Address execute(com.xgh.model.command.valueobjects.Address address) {
+        PostalCode postalcodeProjection = projectPostalCode(address.getPostalCode());
 
 
-        com.xgh.model.query.address.Address addressProjection = new com.xgh.model.query.address.Address(
+        Address addressProjection = new Address(
                 postalcodeProjection,
                 address.getNumber(),
                 address.getComplement());
@@ -32,8 +31,8 @@ public class AddressProjector {
         return addressProjection;
     }
 
-    private com.xgh.model.query.postalcode.PostalCode projectPostalCode(PostalCode postalcode) {
-        com.xgh.model.query.postalcode.PostalCode postalcodeProjection = new com.xgh.model.query.postalcode.PostalCode(
+    private PostalCode projectPostalCode(com.xgh.model.command.valueobjects.PostalCode postalcode) {
+        PostalCode postalcodeProjection = new PostalCode(
                 postalcode.getCode(),
                 postalcode.getStreetType(),
                 postalcode.getStreetName(),

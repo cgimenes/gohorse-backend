@@ -1,7 +1,7 @@
 databaseChangeLog:
     - changeSet:
         id: 8
-        author: alexandre.requena
+        author: andre.martins
         changes:   
             - createTable:
                 tableName: bed

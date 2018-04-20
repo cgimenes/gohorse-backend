@@ -16,7 +16,7 @@ databaseChangeLog:
         value: varchar(13)
     - property:
         name: TYPE_EMAIL
-        value: varchar(40)
+        value: varchar(100)
     - property:
         name: TYPE_INTEGER
         value: integer
@@ -34,7 +34,7 @@ databaseChangeLog:
         value: bool
     - property:
         name: TYPE_DESCRIPTION
-        value: varchar(30)
+        value: varchar(100)
     - property:
         name: TYPE_POSTALCODE
         value: varchar(9)
