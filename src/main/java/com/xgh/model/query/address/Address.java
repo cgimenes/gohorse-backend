@@ -3,7 +3,6 @@ package com.xgh.model.query.address;
 import java.util.UUID;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,9 +15,8 @@ import com.xgh.model.query.address.postalcode.PostalCode;
 @Table(name = "address")
 public class Address {
     @Id
-    @GeneratedValue
     @JsonIgnore
-    private UUID id;
+    private final UUID id = UUID.randomUUID();
 
     @ManyToOne
     @JoinColumn(name="postalcode_id")

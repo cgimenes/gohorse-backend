@@ -80,13 +80,8 @@ public class OwnerQueryControllerTests {
         }
     }
 
-    @Test
-    public void findAllWithManyPages() {
-        // TODO criar
-    }
-
     private UUID createSampleEntity() {
-        Address address = addressSampleData.getSampleAddress();
+        Address address = addressSampleData.getSample();
         Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false);
         repository.save(owner);
         return owner.getId();

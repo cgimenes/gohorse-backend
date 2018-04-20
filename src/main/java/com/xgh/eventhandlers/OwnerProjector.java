@@ -50,6 +50,4 @@ public class OwnerProjector implements EventHandler{
 
         repository.save(projection);
     }
-
-
 }

@@ -8,18 +8,24 @@ import com.xgh.model.command.product.events.ProductWasDeleted;
 import com.xgh.model.command.product.events.ProductWasRegistered;
 import com.xgh.model.command.product.events.ProductWasUpdated;
 import com.xgh.model.query.product.ProductRepository;
+import com.xgh.model.query.supplier.Supplier;
+import com.xgh.model.query.supplier.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class ProductProjector implements EventHandler {
     private final PostgresEventStore eventStore;
     private final ProductRepository repository;
+    private final SupplierRepository supplierRepository;
 
     @Autowired
-    public ProductProjector(PostgresEventStore eventStore, ProductRepository repository) {
+    public ProductProjector(PostgresEventStore eventStore, ProductRepository repository, SupplierRepository supplierRepository) {
         this.eventStore = eventStore;
         this.repository = repository;
+        this.supplierRepository = supplierRepository;
     }
 
     @Override
@@ -33,13 +39,19 @@ public class ProductProjector implements EventHandler {
     public void execute(Event<?> event) {
         Product entity = eventStore.pull(Product.class, event.getEntityId());
 
+        Optional<Supplier> supplier = supplierRepository.findById(entity.getSupplierId().getValue());
+
+        if (!supplier.isPresent()) {
+            throw new RuntimeException("Falha na projeção da entidade 'Supplier'");
+        }
+
         com.xgh.model.query.product.Product projection = new com.xgh.model.query.product.Product(
                 entity.getId().getValue(),
                 entity.getName().getValue(),
                 entity.getPrice(),
                 entity.getBrand() != null ? entity.getBrand().getValue() : null,
                 entity.getAmount(),
-                entity.getSupplierId().getValue(),
+                supplier.get(),
                 entity.isDeleted());
 
         repository.save(projection);

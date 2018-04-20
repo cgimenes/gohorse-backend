@@ -23,7 +23,7 @@ public abstract class EventStore {
         List<Event<?>> events = this.getEvents(entityType, id);
 
         if (events.isEmpty()) {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException(entityType.getSimpleName());
         }
 
         T entity;

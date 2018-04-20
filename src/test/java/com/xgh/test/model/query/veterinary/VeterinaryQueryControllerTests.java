@@ -27,7 +27,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.model.query.veterinary.Veterinary;
 
-// TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
@@ -81,13 +80,8 @@ public class VeterinaryQueryControllerTests {
         }
     }
 
-    @Test
-    public void findAllWithManyPages() {
-        // TODO criar
-    }
-
     private UUID createSampleEntity() {
-        com.xgh.model.query.address.Address address = addressSampleData.getSampleAddress();
+        com.xgh.model.query.address.Address address = addressSampleData.getSample();
         Veterinary veterinary = new Veterinary(UUID.randomUUID(), "Ricardo Requena", address, "44998015821",
                 "9375", "espacoanimal.vet@hotmail.com", LocalDate.parse("1986-10-03"), false);
         repository.save(veterinary);

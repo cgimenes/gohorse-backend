@@ -85,7 +85,7 @@ public class LaboratoryQueryControllerTests {
     }
 
     private UUID createSampleEntity() {
-        Address address = addressSampleData.getSampleAddress();
+        Address address = addressSampleData.getSample();
         Laboratory laboratory = new Laboratory(UUID.randomUUID(), "Laboratório dos Hackers", "44313371337", address, false);
         repository.save(laboratory);
         return laboratory.getId();

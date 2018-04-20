@@ -25,7 +25,6 @@ import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.OwnerId;
 
-// TODO: comparar endereço
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")

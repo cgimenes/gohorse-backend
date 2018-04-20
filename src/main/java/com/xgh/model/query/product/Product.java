@@ -1,11 +1,9 @@
 package com.xgh.model.query.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.model.query.supplier.Supplier;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -22,19 +20,20 @@ public final class Product {
 
     private Float amount;
 
-    @Column(name="supplier_id")
-    private UUID supplierId;
+    @JoinColumn(name="supplier_id")
+    @ManyToOne
+    private Supplier supplier;
 
     @JsonIgnore
     private Boolean deleted = false;
 
-    public Product(UUID id, String name, Float price, String brand, Float amount, UUID supplierId, Boolean deleted) {
+    public Product(UUID id, String name, Float price, String brand, Float amount, Supplier supplier, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.brand = brand;
         this.amount = amount;
-        this.supplierId = supplierId;
+        this.supplier = supplier;
         this.deleted = deleted;
     }
 
@@ -60,8 +59,8 @@ public final class Product {
         return amount;
     }
 
-    public UUID getSupplierId() {
-        return supplierId;
+    public Supplier getSupplier() {
+        return supplier;
     }
 
     public Boolean getDeleted() {

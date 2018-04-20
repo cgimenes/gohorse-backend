@@ -12,7 +12,7 @@ import java.util.UUID;
 public abstract class BasicQueryController<Entity, Service extends BasicQueryService<Entity, ?>> {
     private final Service service;
 
-    public BasicQueryController(Service service) {
+    protected BasicQueryController(Service service) {
         this.service = service;
     }
 

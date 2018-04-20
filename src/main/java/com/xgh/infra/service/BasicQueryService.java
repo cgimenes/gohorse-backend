@@ -11,7 +11,7 @@ import java.util.UUID;
 public abstract class BasicQueryService<Entity, Repository extends JpaRepository<Entity, UUID>> {
     private final Repository repository;
 
-    public BasicQueryService(Repository repository) {
+    protected BasicQueryService(Repository repository) {
         this.repository = repository;
     }
 

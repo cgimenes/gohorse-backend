@@ -46,7 +46,7 @@ public class ExceptionManager {
     public @ResponseBody ErrorResponse handleException(EntityNotFoundException ex) {
         logger.info(ex);
 
-        return new ErrorResponse(ENTITY_NOT_FOUND, "Entidade não encontrada");
+        return new ErrorResponse(ENTITY_NOT_FOUND, ex.getMessage());
     }
 
     @ResponseStatus(code=HttpStatus.NOT_FOUND)
