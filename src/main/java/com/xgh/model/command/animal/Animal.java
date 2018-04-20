@@ -9,4 +9,14 @@ public final class Animal extends AggregateRoot<AnimalId> {
 	private Name name;
 	private Float weight;
 	private boolean castrated;
+	
+	public Name getName() {
+		return name;
+	}
+	public Float getWeight() {
+		return weight;
+	}
+	public boolean isCastrated() {
+		return castrated;
+	}
 }

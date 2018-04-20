@@ -15,7 +15,7 @@ public class InternmentUpdate implements CommandHandler<UpdateInternment> {
 	@Override
 	public void execute(UpdateInternment command) {
 		Internment internment = new Internment();
-		internment.update(command.getBedId(), command.getAnimalId(), command.getBusyAt(), command.getBusyUntil());
+		internment.update(command.getBed(), command.getAnimal(), command.getBusyAt(), command.getBusyUntil());
 		repository.push(internment);
 	}
 

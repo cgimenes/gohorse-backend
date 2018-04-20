@@ -5,10 +5,13 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.query.bed.Bed;
 
 @Entity
 @Table(name = "internment")
@@ -18,8 +21,9 @@ public class Internment {
 	@Column(name = "id")
 	private UUID id;
 
-	@Column(name = "bed_id")
-	private UUID bedId;
+	@ManyToOne
+	@JoinColumn(name = "bed_id")
+	private Bed bed;
 
 	@Column(name = "animal_id")
 	private UUID animalId;
@@ -38,9 +42,9 @@ public class Internment {
 
 	}
 
-	public Internment(UUID id, UUID bedId, UUID animalId, Date busyAt, Date busyUntil, Boolean deleted) {
+	public Internment(UUID id, Bed bed, UUID animalId, Date busyAt, Date busyUntil, Boolean deleted) {
 		this.id = id;
-		this.bedId = bedId;
+		this.bed = bed;
 		this.animalId = animalId;
 		this.busyAt = busyAt;
 		this.busyUntil = busyUntil;
@@ -51,8 +55,8 @@ public class Internment {
 		return id;
 	}
 
-	public UUID getBedId() {
-		return bedId;
+	public Bed getBed() {
+		return bed;
 	}
 	
 	public UUID getAnimalId() {

@@ -16,7 +16,7 @@ public class InternmentRegistration implements CommandHandler<RegisterInternment
 	@Override
 	public void execute(RegisterInternment command) {
 		Internment internment = new Internment();
-		internment.register(command.getId(), command.getBedId(), command.getAnimalId(), command.getBusyAt(),
+		internment.register(command.getId(), command.getBed(), command.getAnimal(), command.getBusyAt(),
 				command.getBusyUntil());
 		repository.push(internment);
 	}
