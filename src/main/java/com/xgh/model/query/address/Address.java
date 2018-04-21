@@ -19,7 +19,7 @@ public class Address {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name="postalcode_id")
+    @JoinColumn(name="postal_code_id")
     private PostalCode postalCode;
 
     private Integer number;
