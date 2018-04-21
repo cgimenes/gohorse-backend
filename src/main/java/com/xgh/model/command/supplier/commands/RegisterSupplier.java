@@ -5,9 +5,11 @@ import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.*;
 
 public final class RegisterSupplier implements Command {
-    private static final long serialVersionUID = 7829193234187879671L;
 
-    private final SupplierId id;
+	private static final long serialVersionUID = 7965777984144335313L;
+	
+	
+	private final SupplierId id;
     private final Name name;
     private final CpfCnpj cpfCnpj;
     private final Phone phone;    

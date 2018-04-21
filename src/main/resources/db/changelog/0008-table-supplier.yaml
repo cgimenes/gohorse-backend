@@ -31,7 +31,7 @@ databaseChangeLog:
                             references: address(id)
                             nullable: false       
                     - column:
-                        name: distribution_type
+                        name: distribution_type_id
                         type: ${TYPE_UUID}  
                         constraints:
                             foreignKeyName: fk_supplier_distribution_type

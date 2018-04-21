@@ -2,10 +2,10 @@ package com.xgh.model.command.supplier.commandhandlers;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
-import com.xgh.model.command.owner.Owner;
-import com.xgh.model.command.owner.commands.DeleteOwner;
+import com.xgh.model.command.supplier.Supplier;
+import com.xgh.model.command.supplier.commands.DeleteSupplier;
 
-public class SupplierDeletion implements CommandHandler<DeleteOwner>{
+public class SupplierDeletion implements CommandHandler<DeleteSupplier>{
 	private EventStore repository;
 	
 	public SupplierDeletion(EventStore repository) {
@@ -13,9 +13,9 @@ public class SupplierDeletion implements CommandHandler<DeleteOwner>{
 	}
 	
 	@Override
-	public void execute(DeleteOwner command) {
-		Owner owner = repository.pull(Owner.class, command.getId());
-		owner.delete();
-		repository.push(owner);
+	public void execute(DeleteSupplier command) {
+		Supplier supplier = repository.pull(Supplier.class, command.getId());
+		supplier.delete();
+		repository.push(supplier);
 	}
 }

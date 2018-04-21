@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/owners")
+@RequestMapping("/suppliers")
 public class SupplierQueryController {
     @Autowired
     private SupplierQueryService service;
