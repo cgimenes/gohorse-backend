@@ -5,6 +5,7 @@ import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.eventhandlers.LaboratoryProjector;
 import com.xgh.eventhandlers.OwnerProjector;
 import com.xgh.eventhandlers.VeterinaryProjector;
+import com.xgh.eventhandlers.SupplierProjector;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.laboratory.commandhandlers.LaboratoryDeletion;
 import com.xgh.model.command.laboratory.commandhandlers.LaboratoryRegistration;
@@ -24,6 +25,13 @@ import com.xgh.model.command.owner.commandhandlers.OwnerUpdate;
 import com.xgh.model.command.owner.commands.DeleteOwner;
 import com.xgh.model.command.owner.commands.RegisterOwner;
 import com.xgh.model.command.owner.commands.UpdateOwner;
+import com.xgh.model.command.supplier.commandhandlers.SupplierDeletion;
+import com.xgh.model.command.supplier.commandhandlers.SupplierRegistration;
+import com.xgh.model.command.supplier.commandhandlers.SupplierUpdate;
+import com.xgh.model.command.supplier.commands.DeleteSupplier;
+import com.xgh.model.command.supplier.commands.RegisterSupplier;
+import com.xgh.model.command.supplier.commands.UpdateSupplier;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,6 +71,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         CommandBus.addHandler(RegisterOwner.class, new OwnerRegistration(eventStore));
         CommandBus.addHandler(UpdateOwner.class, new OwnerUpdate(eventStore));
         CommandBus.addHandler(DeleteOwner.class, new OwnerDeletion(eventStore));
+        //Supplier
+        CommandBus.addHandler(RegisterSupplier.class, new SupplierRegistration(eventStore));
+        CommandBus.addHandler(UpdateSupplier.class, new SupplierUpdate(eventStore));
+        CommandBus.addHandler(DeleteSupplier.class, new SupplierDeletion(eventStore));
     }
 
     private void initializeEventBus() {
@@ -70,6 +82,7 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         EventBus.addHandler(context.getBean(LaboratoryProjector.class));
         EventBus.addHandler(context.getBean(VeterinaryProjector.class));
         EventBus.addHandler(context.getBean(OwnerProjector.class));
+        EventBus.addHandler(context.getBean(SupplierProjector.class));
     }
 
     @Override
