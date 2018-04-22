@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.bed.Bed;
 
 @Entity
@@ -25,8 +26,9 @@ public class Internment {
 	@JoinColumn(name = "bed_id")
 	private Bed bed;
 
-	@Column(name = "animal_id")
-	private UUID animalId;
+	@ManyToOne
+	@JoinColumn(name = "animal_id")
+	private Animal animal;
 
 	@Column(name = "busy_at")
 	private Date busyAt;
@@ -42,10 +44,10 @@ public class Internment {
 
 	}
 
-	public Internment(UUID id, Bed bed, UUID animalId, Date busyAt, Date busyUntil, Boolean deleted) {
+	public Internment(UUID id, Bed bed, Animal animal, Date busyAt, Date busyUntil, Boolean deleted) {
 		this.id = id;
 		this.bed = bed;
-		this.animalId = animalId;
+		this.animal = animal;
 		this.busyAt = busyAt;
 		this.busyUntil = busyUntil;
 		this.deleted = deleted;
@@ -59,8 +61,8 @@ public class Internment {
 		return bed;
 	}
 	
-	public UUID getAnimalId() {
-		return animalId;
+	public Animal getAnimal() {
+		return animal;
 	}
 
 	public Date getBusyAt() {

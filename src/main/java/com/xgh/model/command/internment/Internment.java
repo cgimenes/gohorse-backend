@@ -67,11 +67,11 @@ public class Internment extends AggregateRoot<InternmentId> {
     	this.markDeleted();
     }
 
-	public Bed getBedId() {
+	public Bed getBed() {
 		return bed;
 	}
 
-	public Animal getAnimalId() {
+	public Animal getAnimal() {
 		return animal;
 	}
 
