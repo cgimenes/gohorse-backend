@@ -1,10 +1,10 @@
-package com.xgh.model.query.internment;
+package com.xgh.model.query.bed;
 
 import java.util.UUID;
 import org.springframework.stereotype.Repository;
 import com.xgh.infra.repository.BasicJpaRepository;
 
 @Repository
-public interface InternmentRepository extends BasicJpaRepository<Internment, UUID> {
+public interface BedRepository extends BasicJpaRepository<Bed, UUID>{
 
 }
