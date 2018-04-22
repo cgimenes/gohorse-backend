@@ -37,7 +37,7 @@ public final class Supplier {
 
     protected Supplier() {}
 
-    public Supplier(UUID id, String name, String cpfCnpj, String phone, Address address, DistributionType distributionType, Boolean deleted) {
+    public Supplier(UUID id, String name, String phone, String cpfCnpj, Address address, DistributionType distributionType, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.cpfCnpj = cpfCnpj;
