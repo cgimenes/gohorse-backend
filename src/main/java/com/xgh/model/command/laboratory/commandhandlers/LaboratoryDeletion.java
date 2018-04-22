@@ -4,19 +4,23 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.model.command.laboratory.Laboratory;
 import com.xgh.model.command.laboratory.commands.DeleteLaboratory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LaboratoryDeletion implements CommandHandler<DeleteLaboratory>{
 
-    private final EventStore repository;
+    private final EventStore eventStore;
 
-    public LaboratoryDeletion(EventStore repository) {
-        this.repository = repository;
+    @Autowired
+    protected LaboratoryDeletion(EventStore eventStore) {
+        this.eventStore = eventStore;
     }
 
     @Override
     public void execute(DeleteLaboratory command) {
-        Laboratory laboratory = repository.pull(Laboratory.class, command.getId());
+        Laboratory laboratory = eventStore.pull(Laboratory.class, command.getId());
         laboratory.delete();
-        repository.push(laboratory);
+        eventStore.push(laboratory);
     }
 }
