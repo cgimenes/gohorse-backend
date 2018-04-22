@@ -1,6 +1,10 @@
 package com.xgh.test.model.query.internment;
 
 import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,12 +18,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.query.internment.Internment;
+import com.xgh.test.model.query.Page;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -47,13 +54,38 @@ public class InternmentQueryControllerTests {
 
 		com.xgh.model.command.internment.Internment internmentFromStore = eventStore
 				.pull(com.xgh.model.command.internment.Internment.class, new InternmentId(internmentId));
-		
+
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-//		TODO: Validar ID de leito e animal sem utilizar o eventStore
-//		assertEquals(internmentFromStore.getAnimalId(), response.getBody().getAnimalId());
-//		assertEquals(internmentFromStore.getBedId(), response.getBody().getBedId());
+		// TODO: Validar ID de leito e animal sem utilizar o eventStore
+		// assertEquals(internmentFromStore.getAnimalId(),
+		// response.getBody().getAnimalId());
+		// assertEquals(internmentFromStore.getBedId(), response.getBody().getBedId());
 		assertEquals(new Date("2018-04-20"), response.getBody().getBusyAt());
 		assertEquals(new Date("2018-04-25"), response.getBody().getBusyUntil());
+	}
+
+	@Test
+	public void findAllWithOnePage() throws IOException {
+		List<UUID> internments = new ArrayList<>();
+		for (int i = 0; i < 5; i++) {
+			internments.add(createSampleEntity());
+		}
+
+		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/internments", String.class);
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
+		Page<Internment> response = new ObjectMapper().readValue(responseEntity.getBody(),
+				new TypeReference<Page<Internment>>() {
+				});
+		for (int i = 0; i < 5; i++) {
+			assertEquals(internments.get(i), response.getContent().get(i).getId());
+		}
+	}
+
+	@Test
+	public void findAllWithManyPages() {
+		// TODO criar
 	}
 
 	private UUID createSampleEntity() {

@@ -72,8 +72,6 @@ databaseChangeLog:
     - include:
         file: db/changelog/0010-table-specie.yaml
     - include:
-        file: db/changelog/0011-table-animal.yaml
+        file: db/changelog/0011-table-supplier.yaml
     - include:
-        file: db/changelog/0012-table-supplier.yaml
-    - include:
-        file: db/changelog/0013-table-product.yaml
+        file: db/changelog/0012-table-product.yaml

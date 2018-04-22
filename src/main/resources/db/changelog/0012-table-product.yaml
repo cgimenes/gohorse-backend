@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-        id: 13
+        id: 12
         author: marcelo.gimenes
         changes:
             - createTable:
