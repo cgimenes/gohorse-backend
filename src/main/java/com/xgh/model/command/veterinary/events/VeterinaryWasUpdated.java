@@ -11,49 +11,49 @@ import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.VeterinaryId;
 
 public class VeterinaryWasUpdated extends Event<VeterinaryId> {
-	private static final long serialVersionUID = -4536989718000692293L;
+    private static final long serialVersionUID = -4536989718000692293L;
 
-	private Name name;
-	private Address address;
-	private Phone phone;
-	private Crmv crmv;
-	private Email email;
-	private Date birthDate;
+    private Name name;
+    private Address address;
+    private Phone phone;
+    private Crmv crmv;
+    private Email email;
+    private Date birthDate;
 
-	protected VeterinaryWasUpdated() {}
-	
-	public VeterinaryWasUpdated(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate,
-			EntityVersion version) {
-		super(id, version);
-		this.name = name;
-		this.address = address;
-		this.phone = phone;
-		this.crmv = crmv;
-		this.email = email;
-		this.birthDate = birthDate;
-	}
+    protected VeterinaryWasUpdated() {}
 
-	public Name getName() {
-		return this.name;
-	}
+    public VeterinaryWasUpdated(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate,
+            EntityVersion version) {
+        super(id, version);
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.crmv = crmv;
+        this.email = email;
+        this.birthDate = birthDate;
+    }
 
-	public Address getAddress() {
-		return this.address;
-	}
+    public Name getName() {
+        return this.name;
+    }
 
-	public Phone getPhone() {
-		return this.phone;
-	}
+    public Address getAddress() {
+        return this.address;
+    }
 
-	public Crmv getCrmv() {
-		return this.crmv;
-	}
+    public Phone getPhone() {
+        return this.phone;
+    }
 
-	public Email getEmail() {
-		return this.email;
-	}
+    public Crmv getCrmv() {
+        return this.crmv;
+    }
 
-	public Date getBirthDate() {
-		return this.birthDate;
-	}
+    public Email getEmail() {
+        return this.email;
+    }
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
 }

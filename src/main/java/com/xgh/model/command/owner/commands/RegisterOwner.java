@@ -23,6 +23,7 @@ public final class RegisterOwner implements Command {
         this.address = null;
     }
 
+    @Override
     public OwnerId getId() {
         return this.id;
     }

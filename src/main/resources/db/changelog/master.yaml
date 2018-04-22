@@ -41,6 +41,15 @@ databaseChangeLog:
     - property:
         name: TYPE_SEX
         value: varchar(1)
+    - property:
+        name: TYPE_CPF_CNPJ
+        value: varchar(14)
+    - property:
+        name: TYPE_CURRENCY
+        value: decimal(20,2)
+    - property:
+        name: TYPE_FLOAT
+        value: decimal
 
     - include:
         file: db/changelog/0001-table-event.yaml
@@ -60,3 +69,11 @@ databaseChangeLog:
         file: db/changelog/0008-table-bed.yaml
     - include:
         file: db/changelog/0009-table-internment.yaml
+    - include:
+        file: db/changelog/0010-table-specie.yaml
+    - include:
+        file: db/changelog/0011-table-animal.yaml
+    - include:
+        file: db/changelog/0012-table-supplier.yaml
+    - include:
+        file: db/changelog/0013-table-product.yaml

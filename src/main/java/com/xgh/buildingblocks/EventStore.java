@@ -16,6 +16,8 @@ public abstract class EventStore {
 
 	protected abstract void saveEvent(Event<?> event, String entityType);
 
+	public abstract <T extends AggregateRoot<?>> boolean entityExists(Class<T> entityType, EntityId id);
+
 	/*
 	 * Retorna uma entidade, realizando a reconstituição da mesma à partir de seus
 	 * eventos
@@ -24,7 +26,7 @@ public abstract class EventStore {
 		List<Event<?>> events = this.getEvents(entityType, id);
 
 		if (events.isEmpty()) {
-			throw new EntityNotFoundException();
+			throw new EntityNotFoundException(entityType.getSimpleName());
 		}
 
 		T entity;

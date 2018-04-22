@@ -23,6 +23,7 @@ public final class UpdateOwner implements Command {
         this.address = null;
     }
 
+    @Override
     public OwnerId getId() {
         return id;
     }
