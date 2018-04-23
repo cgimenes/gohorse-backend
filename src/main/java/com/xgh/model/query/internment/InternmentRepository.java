@@ -6,5 +6,4 @@ import com.xgh.infra.repository.BasicJpaRepository;
 
 @Repository
 public interface InternmentRepository extends BasicJpaRepository<Internment, UUID> {
-
 }

@@ -10,5 +10,4 @@ public class InternmentQueryService extends BasicQueryService<Internment, Intern
 	protected InternmentQueryService(InternmentRepository repository) {
 		super(repository);
 	}
-
 }

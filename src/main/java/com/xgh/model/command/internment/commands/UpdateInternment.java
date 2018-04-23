@@ -7,40 +7,41 @@ import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 
 public class UpdateInternment implements Command {
-	private static final long serialVersionUID = -558533399289381447L;
-	
-	private final InternmentId id;
-	private final BedId bedId;
-	private final AnimalId animalId;
-	private final Date busyAt;
-	private final Date busyUntil;
+    private static final long serialVersionUID = -558533399289381447L;
 
-	public UpdateInternment() {
-		this.id = null;
-		this.bedId = null;
-		this.animalId = null;
-		this.busyAt = null;
-		this.busyUntil = null;
-	}
+    private final InternmentId id;
+    private final BedId bedId;
+    private final AnimalId animalId;
+    private final Date busyAt;
+    private final Date busyUntil;
 
-	public InternmentId getId() {
-		return id;
-	}
+    public UpdateInternment() {
+        this.id = null;
+        this.bedId = null;
+        this.animalId = null;
+        this.busyAt = null;
+        this.busyUntil = null;
+    }
 
-	public BedId getBedId() {
-		return bedId;
-	}
+    @Override
+    public InternmentId getId() {
+        return id;
+    }
 
-	public AnimalId getAnimalId() {
-		return animalId;
-	}
+    public BedId getBedId() {
+        return bedId;
+    }
 
-	public Date getBusyAt() {
-		return busyAt;
-	}
+    public AnimalId getAnimalId() {
+        return animalId;
+    }
 
-	public Date getBusyUntil() {
-		return busyUntil;
-	}
-	
+    public Date getBusyAt() {
+        return busyAt;
+    }
+
+    public Date getBusyUntil() {
+        return busyUntil;
+    }
+
 }

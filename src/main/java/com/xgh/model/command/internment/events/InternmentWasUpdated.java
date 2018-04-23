@@ -8,36 +8,40 @@ import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 
 public class InternmentWasUpdated extends Event<InternmentId> {
-	private static final long serialVersionUID = -3596563508703713510L;
+    private static final long serialVersionUID = -3596563508703713510L;
 
-	private BedId bedId;
-	private AnimalId animalId;
-	private Date busyAt;
-	private Date busyUntil;
+    private BedId bedId;
+    private AnimalId animalId;
+    private Date busyAt;
+    private Date busyUntil;
 
-	protected InternmentWasUpdated() {
+    protected InternmentWasUpdated() {
 
-	}
+    }
 
-	public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
-			EntityVersion version) {
-		super(id, version);
-	}
+    public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
+            EntityVersion version) {
+        super(id, version);
+        this.bedId = bedId;
+        this.animalId = animalId;
+        this.busyAt = busyAt;
+        this.busyUntil = busyUntil;
+    }
 
-	public BedId getBedId() {
-		return bedId;
-	}
+    public BedId getBedId() {
+        return bedId;
+    }
 
-	public AnimalId getAnimalId() {
-		return animalId;
-	}
+    public AnimalId getAnimalId() {
+        return animalId;
+    }
 
-	public Date getBusyAt() {
-		return busyAt;
-	}
+    public Date getBusyAt() {
+        return busyAt;
+    }
 
-	public Date getBusyUntil() {
-		return busyUntil;
-	}
+    public Date getBusyUntil() {
+        return busyUntil;
+    }
 
 }

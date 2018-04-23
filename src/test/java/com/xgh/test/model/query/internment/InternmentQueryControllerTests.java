@@ -32,67 +32,62 @@ import com.xgh.test.model.query.Page;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
 public class InternmentQueryControllerTests {
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@Autowired
-	protected JdbcTemplate connection;
+    @Autowired
+    protected JdbcTemplate connection;
 
-	@Autowired
-	private PostgresEventStore eventStore;
+    @Autowired
+    private PostgresEventStore eventStore;
 
-	@Before
-	public void before() {
-		connection.update("truncate table internment");
-	}
+    @Before
+    public void before() {
+        connection.update("truncate table internment");
+    }
 
-	@Test
-	private void findById() {
-		UUID internmentId = createSampleEntity();
-		ResponseEntity<Internment> response = restTemplate.getForEntity("/internments/{id}", Internment.class,
-				internmentId);
+    @Test
+    private void findById() {
+        UUID internmentId = createSampleEntity();
+        ResponseEntity<Internment> response = restTemplate.getForEntity("/internments/{id}", Internment.class,
+                internmentId);
 
-		com.xgh.model.command.internment.Internment internmentFromStore = eventStore
-				.pull(com.xgh.model.command.internment.Internment.class, new InternmentId(internmentId));
+        com.xgh.model.command.internment.Internment internmentFromStore = eventStore
+                .pull(com.xgh.model.command.internment.Internment.class, new InternmentId(internmentId));
 
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		// TODO: Validar ID de leito e animal sem utilizar o eventStore
-		// assertEquals(internmentFromStore.getAnimalId(),
-		// response.getBody().getAnimalId());
-		// assertEquals(internmentFromStore.getBedId(), response.getBody().getBedId());
-		assertEquals(new Date("2018-04-20"), response.getBody().getBusyAt());
-		assertEquals(new Date("2018-04-25"), response.getBody().getBusyUntil());
-	}
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        // TODO: Validar ID de leito e animal sem utilizar o eventStore
+        // assertEquals(internmentFromStore.getAnimalId(),
+        // response.getBody().getAnimalId());
+        // assertEquals(internmentFromStore.getBedId(), response.getBody().getBedId());
+        assertEquals(new Date("2018-04-20"), response.getBody().getBusyAt());
+        assertEquals(new Date("2018-04-25"), response.getBody().getBusyUntil());
+    }
 
-	@Test
-	public void findAllWithOnePage() throws IOException {
-		List<UUID> internments = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
-			internments.add(createSampleEntity());
-		}
+    @Test
+    public void findAllWithOnePage() throws IOException {
+        List<UUID> internments = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            internments.add(createSampleEntity());
+        }
 
-		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/internments", String.class);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("/internments", String.class);
 
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-		Page<Internment> response = new ObjectMapper().readValue(responseEntity.getBody(),
-				new TypeReference<Page<Internment>>() {
-				});
-		for (int i = 0; i < 5; i++) {
-			assertEquals(internments.get(i), response.getContent().get(i).getId());
-		}
-	}
+        Page<Internment> response = new ObjectMapper().readValue(responseEntity.getBody(),
+                new TypeReference<Page<Internment>>() {
+                });
+        for (int i = 0; i < 5; i++) {
+            assertEquals(internments.get(i), response.getContent().get(i).getId());
+        }
+    }
 
-	@Test
-	public void findAllWithManyPages() {
-		// TODO criar
-	}
-
-	private UUID createSampleEntity() {
-		com.xgh.model.command.internment.Internment internment = new com.xgh.model.command.internment.Internment();
-		internment.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
-				new Date("2018-04-25"));
-		eventStore.push(internment);
-		return internment.getId().getValue();
-	}
+    private UUID createSampleEntity() {
+        com.xgh.model.command.internment.Internment internment = new com.xgh.model.command.internment.Internment();
+        internment.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
+                new Date("2018-04-25"));
+        eventStore.push(internment);
+        return internment.getId().getValue();
+    }
 }

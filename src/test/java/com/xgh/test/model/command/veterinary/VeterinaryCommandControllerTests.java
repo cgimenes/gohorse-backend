@@ -43,11 +43,6 @@ public class VeterinaryCommandControllerTests {
     @Autowired
     private PostgresEventStore eventStore;
 
-    @Before
-    public void before() {
-
-    }
-
     @Test
     public void registerWithSuccess() {
         Veterinary entity = new Veterinary();

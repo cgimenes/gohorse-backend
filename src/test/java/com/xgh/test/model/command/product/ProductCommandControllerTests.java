@@ -42,10 +42,6 @@ public class ProductCommandControllerTests {
     @Autowired
     private SupplierSampleData supplierSampleData;
 
-    @Before
-    public void before() {
-    }
-
     @Test
     public void registerWithSuccess() {
         Product entity = new Product();

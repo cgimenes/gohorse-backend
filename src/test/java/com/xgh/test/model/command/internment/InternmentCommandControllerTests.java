@@ -29,76 +29,76 @@ import com.xgh.model.command.valueobjects.Date;
 @TestPropertySource("classpath:application-test.properties")
 public class InternmentCommandControllerTests {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@Autowired
-	private PostgresEventStore eventStore;
+    @Autowired
+    private PostgresEventStore eventStore;
 
-	@Before
-	public void before() {
+    @Before
+    public void before() {
 
-	}
+    }
 
-	@Test
-	public void registerWithSuccess() {
-		Internment entity = new Internment();
-		entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
-				new Date("2018-04-25"));
+    @Test
+    public void registerWithSuccess() {
+        Internment entity = new Internment();
+        entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
+                new Date("2018-04-25"));
 
-		ResponseEntity<Void> response = restTemplate.postForEntity(URI.create("/internments"), entity, Void.class);
+        ResponseEntity<Void> response = restTemplate.postForEntity(URI.create("/internments"), entity, Void.class);
 
-		Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
+        Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
 
-		assertTrue(entity.equals(entityFromStore));
-		assertEquals(HttpStatus.CREATED, response.getStatusCode());
-		assertEquals(entity.getId(), entityFromStore.getId());
-		assertEquals(entity.getBedId(), entityFromStore.getBedId());
-		assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
-		assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
-		assertEquals(new Date("2018-04-25"), entityFromStore.getBusyUntil());
-		assertEquals("/internment/" + entity.getId(), response.getHeaders().getLocation().getPath());
-	}
+        assertTrue(entity.equals(entityFromStore));
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(entity.getId(), entityFromStore.getId());
+        assertEquals(entity.getBedId(), entityFromStore.getBedId());
+        assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
+        assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
+        assertEquals(new Date("2018-04-25"), entityFromStore.getBusyUntil());
+        assertEquals("/internment/" + entity.getId(), response.getHeaders().getLocation().getPath());
+    }
 
-	@Test
-	public void updateWithSuccess() {
-		Internment entity = new Internment();
-		entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
-				new Date("2018-04-25"));
-		eventStore.push(entity);
+    @Test
+    public void updateWithSuccess() {
+        Internment entity = new Internment();
+        entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
+                new Date("2018-04-25"));
+        eventStore.push(entity);
 
-		BedId newBed = new BedId();
+        BedId newBed = new BedId();
 
-		entity.update(newBed, entity.getAnimalId(), entity.getBusyAt(), new Date("2018-04-28"));
+        entity.update(newBed, entity.getAnimalId(), entity.getBusyAt(), new Date("2018-04-28"));
 
-		RequestEntity<Internment> request = RequestEntity.put(URI.create("/internments")).body(entity);
-		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
+        RequestEntity<Internment> request = RequestEntity.put(URI.create("/internments")).body(entity);
+        ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
 
-		Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
+        Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
 
-		assertTrue(entity.equals(entityFromStore));
-		assertEquals(newBed, entityFromStore.getBedId());
-		assertEquals(new Date("2018-04-28"), entityFromStore.getBusyUntil());
-		assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
-		assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
-		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-	}
+        assertTrue(entity.equals(entityFromStore));
+        assertEquals(newBed, entityFromStore.getBedId());
+        assertEquals(new Date("2018-04-28"), entityFromStore.getBusyUntil());
+        assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
+        assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 
-	@Test
-	public void deleteWithSuccess() {
-		Internment entity = new Internment();
-		entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
-				new Date("2018-04-25"));
-		eventStore.push(entity);
+    @Test
+    public void deleteWithSuccess() {
+        Internment entity = new Internment();
+        entity.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
+                new Date("2018-04-25"));
+        eventStore.push(entity);
 
-		HttpEntity<Internment> requestEntity = new HttpEntity<>(entity);
-		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/internments"), HttpMethod.DELETE,
-				requestEntity, Void.class);
+        HttpEntity<Internment> requestEntity = new HttpEntity<>(entity);
+        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/internments"), HttpMethod.DELETE,
+                requestEntity, Void.class);
 
-		assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
-		Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
+        Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
 
-		assertTrue(entityFromStore.isDeleted());
-	}
+        assertTrue(entityFromStore.isDeleted());
+    }
 }

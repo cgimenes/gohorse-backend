@@ -13,27 +13,27 @@ import com.xgh.model.command.internment.commands.UpdateInternment;
 @Component
 public class InternmentUpdate implements CommandHandler<UpdateInternment> {
 
-	private final EventStore eventStore;
+    private final EventStore eventStore;
 
-	@Autowired
-	public InternmentUpdate(EventStore eventStore) {
-		this.eventStore = eventStore;
-	}
+    @Autowired
+    public InternmentUpdate(EventStore eventStore) {
+        this.eventStore = eventStore;
+    }
 
-	@Override
-	public void execute(UpdateInternment command) {
-		Internment internment = eventStore.pull(Internment.class, command.getId());
-		
-		if (!eventStore.entityExists(Bed.class, command.getBedId())) {
-			throw new EntityNotFoundException(Bed.class.getSimpleName());
-		}
-		
-		if (!eventStore.entityExists(Animal.class, command.getAnimalId())) {
-			throw new EntityNotFoundException(Animal.class.getSimpleName());
-		}
-		
-		internment.update(command.getBedId(), command.getAnimalId(), command.getBusyAt(), command.getBusyUntil());
-		eventStore.push(internment);
-	}
+    @Override
+    public void execute(UpdateInternment command) {
+        Internment internment = eventStore.pull(Internment.class, command.getId());
+
+        if (!eventStore.entityExists(Bed.class, command.getBedId())) {
+            throw new EntityNotFoundException(Bed.class.getSimpleName());
+        }
+
+        if (!eventStore.entityExists(Animal.class, command.getAnimalId())) {
+            throw new EntityNotFoundException(Animal.class.getSimpleName());
+        }
+
+        internment.update(command.getBedId(), command.getAnimalId(), command.getBusyAt(), command.getBusyUntil());
+        eventStore.push(internment);
+    }
 
 }
