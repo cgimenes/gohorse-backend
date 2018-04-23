@@ -1,18 +1,18 @@
 package com.xgh.buildingblocks.entity;
 
-import com.xgh.JsonSerializable;
+import com.xgh.buildingblocks.JsonSerializable;
 
 public abstract class DomainEntity<IdType extends EntityId> implements JsonSerializable {
-	private static final long serialVersionUID = 2636121875876552398L;
-	
-	protected IdType id;
+    private static final long serialVersionUID = 2636121875876552398L;
+
+    protected IdType id;
 
     public IdType getId() {
         return id;
     }
 
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -26,7 +26,7 @@ public abstract class DomainEntity<IdType extends EntityId> implements JsonSeria
         return id.equals(other.getId());
     }
 
-	public String getType() {
-		return this.getClass().getName();
-	}
+    public String getType() {
+        return this.getClass().getName();
+    }
 }

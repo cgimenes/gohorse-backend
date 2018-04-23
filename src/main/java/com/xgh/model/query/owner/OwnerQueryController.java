@@ -1,31 +1,15 @@
 package com.xgh.model.query.owner;
 
-import java.util.UUID;
-
+import com.xgh.infra.controller.BasicQueryController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/owners")
-public class OwnerQueryController {
+public class OwnerQueryController extends BasicQueryController<Owner, OwnerQueryService> {
     @Autowired
-    private OwnerQueryService service;
-
-    @GetMapping
-    public ResponseEntity<Page<Owner>> findAll(@RequestParam(name = "page", defaultValue = "0") int page) {
-        Page<Owner> owners = service.findAll(page);
-        return ResponseEntity.ok().body(owners);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Owner> findById(@PathVariable UUID id) {
-        Owner owner = service.findById(id);
-        return ResponseEntity.ok().body(owner);
+    public OwnerQueryController(OwnerQueryService service) {
+        super(service);
     }
 }

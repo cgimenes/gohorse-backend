@@ -1,7 +1,10 @@
 package com.xgh.infra;
 
+import com.xgh.buildingblocks.command.Command;
 import com.xgh.buildingblocks.command.CommandBus;
+import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.buildingblocks.event.EventBus;
+<<<<<<< HEAD
 import com.xgh.eventhandlers.LaboratoryProjector;
 import com.xgh.eventhandlers.OwnerProjector;
 import com.xgh.eventhandlers.VeterinaryProjector;
@@ -33,32 +36,38 @@ import com.xgh.model.command.supplier.commands.RegisterSupplier;
 import com.xgh.model.command.supplier.commands.UpdateSupplier;
 
 
+=======
+import com.xgh.buildingblocks.event.EventHandler;
+>>>>>>> origin/master
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
+import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-// TODO ver se é possível criar um meio de inicializar dinamicamente os handlers
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Set;
+
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    /*
-     * Dependências dos handlers
-     */
-    // TODO injetar automaticamente
-    @Autowired
-    private PostgresEventStore eventStore;
+    private final DefaultListableBeanFactory context;
+
+    private final Reflections reflections = new Reflections("com.xgh");
 
     @Autowired
-    private ApplicationContext context;
+    public BusInitializer(DefaultListableBeanFactory context) {
+        this.context = context;
+    }
 
     private void initializeCommandBus() {
         logger.info("Inicializando command bus");
+<<<<<<< HEAD
         // Laboratory
         CommandBus.addHandler(RegisterLaboratory.class, new LaboratoryRegistration(eventStore));
         CommandBus.addHandler(UpdateLaboratory.class, new LaboratoryUpdate(eventStore));
@@ -75,14 +84,39 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         CommandBus.addHandler(RegisterSupplier.class, new SupplierRegistration(eventStore));
         CommandBus.addHandler(UpdateSupplier.class, new SupplierUpdate(eventStore));
         CommandBus.addHandler(DeleteSupplier.class, new SupplierDeletion(eventStore));
+=======
+
+        Set<Class<? extends CommandHandler>> handlers = reflections.getSubTypesOf(CommandHandler.class);
+        for (Class<? extends CommandHandler> handler : handlers) {
+            CommandBus.addHandler(getCommandClass(handler), context.getBean(handler));
+        }
+>>>>>>> origin/master
     }
 
     private void initializeEventBus() {
         logger.info("Inicializando event bus");
+<<<<<<< HEAD
         EventBus.addHandler(context.getBean(LaboratoryProjector.class));
         EventBus.addHandler(context.getBean(VeterinaryProjector.class));
         EventBus.addHandler(context.getBean(OwnerProjector.class));
         EventBus.addHandler(context.getBean(SupplierProjector.class));
+=======
+
+        Set<Class<? extends EventHandler>> handlers = reflections.getSubTypesOf(EventHandler.class);
+        for (Class<? extends EventHandler> handler : handlers) {
+            EventBus.addHandler(context.getBean(handler));
+        }
+    }
+
+    /*
+     * Obtém a classe do comando que um dado command handler executa, usando reflection
+     */
+    @SuppressWarnings("unchecked")
+    private Class<? extends Command> getCommandClass(Class<? extends CommandHandler> handlerClass) {
+        ParameterizedType parameterizedType = (ParameterizedType) handlerClass.getGenericInterfaces()[0];
+        Type[] typeArguments = parameterizedType.getActualTypeArguments();
+        return (Class<? extends Command>) typeArguments[0];
+>>>>>>> origin/master
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.xgh.buildingblocks.event;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,8 +23,9 @@ public class EventBus {
         return instance;
     }
 
-    public static void addHandler(EventHandler eventHandler) {
-        getInstance().handlers.add(eventHandler);
+    public static void addHandler(EventHandler handler) {
+        logger.info(String.format("Adicionando handler '%s' ao EventBus", handler.getClass().getName()));
+        getInstance().handlers.add(handler);
     }
 
     /*

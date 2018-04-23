@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.xgh.model.query.address.Address;
 import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.owner.OwnerRepository;
+import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.address.AddressSampleData;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
@@ -73,19 +73,15 @@ public class OwnerQueryControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        Page<Owner> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<Page<Owner>>() {});
+        Page<Owner> response = new ObjectMapper().findAndRegisterModules().readValue(
+                responseEntity.getBody(), new TypeReference<Page<Owner>>() {});
         for (int i = 0; i < 5; i++) {
             assertEquals(owners.get(i), response.getContent().get(i).getId());
         }
     }
 
-    @Test
-    public void findAllWithManyPages() {
-        // TODO criar
-    }
-
     private UUID createSampleEntity() {
-        Address address = addressSampleData.getSampleAddress();
+        Address address = addressSampleData.getSample();
         Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false);
         repository.save(owner);
         return owner.getId();

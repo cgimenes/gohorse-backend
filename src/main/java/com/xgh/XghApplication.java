@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // TODO ativar https no nginx
 @SpringBootApplication
 public class XghApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(XghApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(XghApplication.class, args);
+    }
 }

@@ -2,6 +2,7 @@ package com.xgh.model.command.supplier;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
+<<<<<<< HEAD
 import com.xgh.model.command.supplier.events.SupplierWasUpdated;
 import com.xgh.model.command.supplier.events.SupplierWasDeleted;
 import com.xgh.model.command.supplier.events.SupplierWasRegistered;
@@ -16,11 +17,18 @@ public class Supplier extends AggregateRoot<SupplierId>{
     private CpfCnpj cpfCnpj;
     private Address address;
     private DistributionType distributionType;
+=======
+import com.xgh.model.command.supplier.events.SupplierWasCreated;
+
+public class Supplier extends AggregateRoot<SupplierId> {
+    private static final long serialVersionUID = -2711143065960475932L;
+>>>>>>> origin/master
 
     public Supplier() {
         super();
     }
 
+<<<<<<< HEAD
     public void register(SupplierId id, Name name, Phone phone, CpfCnpj cpfCnpj, Address address, DistributionType distributionType) {
         if (id == null) {
             throw new NullMandatoryArgumentException("ID");
@@ -96,5 +104,16 @@ public class Supplier extends AggregateRoot<SupplierId>{
 
     public Address getAddress() {
         return this.address;
+=======
+    public void register(SupplierId id) {
+        if (id == null) {
+            throw new NullMandatoryArgumentException("id");
+        }
+        recordAndApply(new SupplierWasCreated(id, this.nextVersion()));
+    }
+
+    protected void when(SupplierWasCreated event) {
+
+>>>>>>> origin/master
     }
 }
