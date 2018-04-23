@@ -6,9 +6,8 @@ import com.xgh.infra.service.BasicQueryService;
 
 @Service
 public class InternmentQueryService extends BasicQueryService<Internment, InternmentRepository>{
-	@Autowired
-	protected InternmentQueryService(InternmentRepository repository) {
-		super(repository);	
-	}
-	
+    @Autowired
+    protected InternmentQueryService(InternmentRepository repository) {
+        super(repository);
+    }
 }

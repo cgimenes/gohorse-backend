@@ -17,64 +17,60 @@ import com.xgh.model.query.bed.Bed;
 @Entity
 @Table(name = "internment")
 public class Internment {
+    @Id
+    private UUID id;
 
-	@Id
-	@Column(name = "id")
-	private UUID id;
+    @ManyToOne
+    @JoinColumn(name = "bed_id")
+    private Bed bed;
 
-	@ManyToOne
-	@JoinColumn(name = "bed_id")
-	private Bed bed;
+    @ManyToOne
+    @JoinColumn(name = "animal_id")
+    private Animal animal;
 
-	@ManyToOne
-	@JoinColumn(name = "animal_id")
-	private Animal animal;
+    @Column(name = "busy_at")
+    private Date busyAt;
 
-	@Column(name = "busy_at")
-	private Date busyAt;
+    @Column(name = "busy_until")
+    private Date busyUntil;
 
-	@Column(name = "busy_until")
-	private Date busyUntil;
+    @JsonIgnore
+    private Boolean deleted = false;
 
-	@JsonIgnore
-	@Column(name = "deleted")
-	private Boolean deleted = false;
+    protected Internment() {
+    }
 
-	public Internment() {
+    public Internment(UUID id, Bed bed, Animal animal, Date busyAt, Date busyUntil, Boolean deleted) {
+        this.id = id;
+        this.bed = bed;
+        this.animal = animal;
+        this.busyAt = busyAt;
+        this.busyUntil = busyUntil;
+        this.deleted = deleted;
+    }
 
-	}
+    public UUID getId() {
+        return id;
+    }
 
-	public Internment(UUID id, Bed bed, Animal animal, Date busyAt, Date busyUntil, Boolean deleted) {
-		this.id = id;
-		this.bed = bed;
-		this.animal = animal;
-		this.busyAt = busyAt;
-		this.busyUntil = busyUntil;
-		this.deleted = deleted;
-	}
+    public Bed getBed() {
+        return bed;
+    }
 
-	public UUID getId() {
-		return id;
-	}
+    public Animal getAnimal() {
+        return animal;
+    }
 
-	public Bed getBed() {
-		return bed;
-	}
-	
-	public Animal getAnimal() {
-		return animal;
-	}
+    public Date getBusyAt() {
+        return busyAt;
+    }
 
-	public Date getBusyAt() {
-		return busyAt;
-	}
+    public Date getBusyUntil() {
+        return busyUntil;
+    }
 
-	public Date getBusyUntil() {
-		return busyUntil;
-	}
-
-	public Boolean isDeleted() {
-		return deleted;
-	}
+    public Boolean isDeleted() {
+        return deleted;
+    }
 
 }

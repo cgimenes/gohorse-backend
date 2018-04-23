@@ -10,9 +10,9 @@ import com.xgh.model.command.internment.commands.UpdateInternment;
 @RestController
 @RequestMapping("/internments")
 public class InternmentCommandController
-		extends BasicCommandController<RegisterInternment, UpdateInternment, DeleteInternment> {
-	@Override
-	protected String getBasePath() {
-		return "/internments";
-	}
+        extends BasicCommandController<RegisterInternment, UpdateInternment, DeleteInternment> {
+    @Override
+    protected String getBasePath() {
+        return "/internments";
+    }
 }

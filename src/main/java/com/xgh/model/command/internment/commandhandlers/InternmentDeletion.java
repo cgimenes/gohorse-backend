@@ -11,18 +11,18 @@ import com.xgh.model.command.internment.commands.DeleteInternment;
 @Component
 public class InternmentDeletion implements CommandHandler<DeleteInternment> {
 
-	private final EventStore repository;
-	
-	@Autowired
-	public InternmentDeletion(EventStore repository) {
-		this.repository = repository;
-	}
-	
-	@Override
-	public void execute(DeleteInternment command) {
-		Internment internment = repository.pull(Internment.class, command.getId());
-		internment.delete();
-		repository.push(internment);
-	}
+    private final EventStore repository;
+
+    @Autowired
+    public InternmentDeletion(EventStore repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void execute(DeleteInternment command) {
+        Internment internment = repository.pull(Internment.class, command.getId());
+        internment.delete();
+        repository.push(internment);
+    }
 
 }

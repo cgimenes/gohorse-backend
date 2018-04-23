@@ -20,10 +20,9 @@ import java.util.Set;
 
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
-	private final Logger logger = LogManager.getLogger(this.getClass());
+    private final Logger logger = LogManager.getLogger(this.getClass());
 
     private final DefaultListableBeanFactory context;
-
     private final Reflections reflections = new Reflections("com.xgh");
 
     @Autowired
@@ -31,6 +30,12 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         this.context = context;
     }
 
+    /*
+     * Pesquisa todas as classes do tipo CommandHandler que estão dentro do pacote com.xgh,
+     * obtém a classe de command que o command handler executa,
+     * obtém uma instância do command handler usando o container de injeção do Spring
+     * e adiciona no CommandBus
+     */
     private void initializeCommandBus() {
         logger.info("Inicializando command bus");
 
@@ -40,6 +45,11 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         }
     }
 
+    /*
+     * Pesquisa todas as classes do tipo EventHandler que estão dentro do pacote com.xgh,
+     * obtém uma instância do event handler usando o container de injeção do Spring
+     * e adiciona no EventBus
+     */
     private void initializeEventBus() {
         logger.info("Inicializando event bus");
 
@@ -59,10 +69,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         return (Class<? extends Command>) typeArguments[0];
     }
 
-	@Override
-	public void onApplicationEvent(ContextRefreshedEvent event) {
-		initializeCommandBus();
-		initializeEventBus();
-		logger.info("Bus inicializados");
-	}
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        initializeCommandBus();
+        initializeEventBus();
+        logger.info("Bus inicializados");
+    }
 }
