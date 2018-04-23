@@ -67,7 +67,8 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
             try {
               handlerMethod.invoke(this, event);
             } catch (Exception e) {
-                throw new RuntimeException("Não foi possível invocar o método de aplicação do evento: " + event.getClass().getName(), e);
+                throw new RuntimeException(String.format(
+                    "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
             }
         }
     }
