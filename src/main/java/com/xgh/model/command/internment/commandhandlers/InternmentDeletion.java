@@ -1,14 +1,19 @@
 package com.xgh.model.command.internment.commandhandlers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.model.command.internment.Internment;
 import com.xgh.model.command.internment.commands.DeleteInternment;
 
+@Component
 public class InternmentDeletion implements CommandHandler<DeleteInternment> {
 
-	private EventStore repository;
+	private final EventStore repository;
 	
+	@Autowired
 	public InternmentDeletion(EventStore repository) {
 		this.repository = repository;
 	}
