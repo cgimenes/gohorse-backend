@@ -13,7 +13,7 @@ public class SupplierSampleData {
 
     public Supplier getSample() {
         Supplier supplier = new Supplier();
-        supplier.register(new SupplierId());
+        //supplier.register(new SupplierId());
         eventStore.push(supplier);
         return supplier;
     }

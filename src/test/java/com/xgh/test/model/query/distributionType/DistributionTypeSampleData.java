@@ -11,7 +11,7 @@ public class DistributionTypeSampleData {
     @Autowired
     private DistributionTypeRepository distributionTypeRepository;
 
-    public DistributionType getSampleDistributionType() {
+    public DistributionType getSample() {
         DistributionType distributionType = new DistributionType("Ração");
         distributionTypeRepository.save(distributionType);
         return distributionType;

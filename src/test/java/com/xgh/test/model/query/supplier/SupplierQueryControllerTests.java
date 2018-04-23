@@ -89,8 +89,8 @@ public class SupplierQueryControllerTests {
     }
 
     private UUID createSampleEntity() {
-        com.xgh.model.query.address.Address address = addressSampleData.getSampleAddress();
-        com.xgh.model.query.distributionType.DistributionType distributionType = distributionTypeSampleData.getSampleDistributionType();
+        com.xgh.model.query.address.Address address = addressSampleData.getSample();
+        com.xgh.model.query.distributionType.DistributionType distributionType = distributionTypeSampleData.getSample();
         Supplier supplier = new Supplier(UUID.randomUUID(), "Nestle", "44998015821",
                 "00000000191", address, distributionType, false);
         repository.save(supplier);

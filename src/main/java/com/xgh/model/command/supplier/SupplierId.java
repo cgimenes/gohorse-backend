@@ -5,7 +5,7 @@ import com.xgh.buildingblocks.entity.EntityId;
 import java.util.UUID;
 
 public class SupplierId extends EntityId {
-<<<<<<< HEAD
+
 
 	private static final long serialVersionUID = 1610905777342790995L;
 
@@ -22,22 +22,3 @@ public class SupplierId extends EntityId {
     }
     
 }
-
-
-
-=======
-    private static final long serialVersionUID = 1610905777342790995L;
-
-    public SupplierId(UUID id) {
-        super(id);
-    }
-
-    public SupplierId(String id) {
-        super(id);
-    }
-
-    public SupplierId() {
-        super();
-    }
-}
->>>>>>> origin/master
