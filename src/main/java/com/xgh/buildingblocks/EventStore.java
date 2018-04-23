@@ -31,7 +31,7 @@ public abstract class EventStore {
             entity = this.instanceEntity(entityType);
             invokeEntityReconstituteMethod(entity, events);
         } catch (Exception e) {
-            throw new RuntimeException("Não foi possível instanciar a entidade: " + entityType, e);
+            throw new RuntimeException(String.format("Não foi possível instanciar a entidade: %s", entityType), e);
         }
 
         return entity;
@@ -67,8 +67,8 @@ public abstract class EventStore {
             } catch(NoSuchMethodException ex) {
                 clazz = clazz.getSuperclass();
                 if (clazz == null) {
-                    throw new NoSuchMethodException(
-                            "Método 'reconstitute' não declarado na classe: " + entity.getClass().getName());
+                    throw new NoSuchMethodException(String.format(
+                        "Método 'reconstitute' não declarado na classe: %s", entity.getClass().getName()));
                 }
             }
         }

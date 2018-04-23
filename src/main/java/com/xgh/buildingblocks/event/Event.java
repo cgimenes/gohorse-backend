@@ -105,8 +105,8 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
             } catch(NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
                 if (clazz == null) {
-                    throw new NoSuchFieldException(
-                            "Campo 'entityId' não declarado na classe: " + event.getClass().getName());
+                    throw new NoSuchFieldException(String.format(
+                        "Campo 'entityId' não declarado na classe: %s", event.getClass().getName()));
                 }
             }
         }

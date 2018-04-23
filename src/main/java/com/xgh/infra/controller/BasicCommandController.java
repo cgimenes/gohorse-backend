@@ -13,7 +13,8 @@ public abstract class BasicCommandController<Register extends Command, Update ex
     @PostMapping
     public ResponseEntity<Void> register(@RequestBody Register command) {
         CommandBus.dispatch(command);
-        return ResponseEntity.created(URI.create(getBasePath() + "/" + command.getId().toString())).build();
+        URI locationHeader = URI.create(String.format("%s/%s", getBasePath(), command.getId()));
+        return ResponseEntity.created(locationHeader).build();
     }
 
     @PutMapping
