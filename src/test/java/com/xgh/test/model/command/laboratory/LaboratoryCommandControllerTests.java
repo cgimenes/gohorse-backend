@@ -31,6 +31,7 @@ import com.xgh.model.command.valueobjects.PostalCode;
 // TODO: comparar endereço
 // TODO: criar teste de falha de bad request e entity not found
 // TODO: verificar se os snapshots estão sendo salvos/deletados corretamente
+// TODO: refatorar testes dos comandos para reutilizar o registro
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")

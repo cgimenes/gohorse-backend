@@ -7,12 +7,12 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class UpdateLaboratory implements Command {
-	private static final long serialVersionUID = -4910695718010490673L;
-	
-	private final LaboratoryId id;
+    private static final long serialVersionUID = -4910695718010490673L;
+
+    private final LaboratoryId id;
     private final Name companyName;
     private final Phone phone;
-	private final Address address;
+    private final Address address;
 
     protected UpdateLaboratory() {
         this.id = null;
@@ -21,6 +21,7 @@ public final class UpdateLaboratory implements Command {
         this.address = null;
     }
 
+    @Override
     public LaboratoryId getId() {
         return id;
     }
@@ -33,7 +34,7 @@ public final class UpdateLaboratory implements Command {
         return phone;
     }
 
-	public Address getAddress() {
-		return address;
-	}
+    public Address getAddress() {
+        return address;
+    }
 }
