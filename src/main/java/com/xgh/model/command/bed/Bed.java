@@ -62,7 +62,7 @@ public class Bed extends AggregateRoot<BedId>{
 		return code;
 	}
 
-	public Boolean getBusy() {
+	public Boolean isBusy() {
 		return busy;
 	}
 }

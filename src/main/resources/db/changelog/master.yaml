@@ -50,4 +50,6 @@ databaseChangeLog:
     - include:
         file: db/changelog/0005-table-veterinary.yaml
     - include:
-        file: db/changelog/0006-table-owner.yaml    
+        file: db/changelog/0006-table-owner.yaml  
+    - include:
+        file: db/changelog/0008-table-bed.yaml  
