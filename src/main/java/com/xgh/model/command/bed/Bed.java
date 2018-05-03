@@ -46,12 +46,12 @@ public class Bed extends AggregateRoot<BedId>{
 
 	protected void when(BedWasRegistered event) {
 		this.code = event.getCode();
-		this.busy = event.getBusy();
+		this.busy = event.isBusy();
 	}
 
 	protected void when(BedWasUpdated event) {
 		this.code = event.getCode();
-		this.busy = event.getBusy();
+		this.busy = event.isBusy();
 	}
 	
 	protected void when(BedWasDeleted event) {

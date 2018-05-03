@@ -27,7 +27,7 @@ public class UpdateBed implements Command{
 		return this.code;
 	}
 	
-	public Boolean getBusy() {
+	public Boolean isBusy() {
 		return this.busy;
 	}
 }

@@ -7,17 +7,17 @@ import com.xgh.model.command.bed.commands.DeleteBed;
 
 public class BedDeletion implements CommandHandler<DeleteBed>{
 	
-	private final EventStore repository;
+	private final EventStore eventStore;
 	
-	public BedDeletion(EventStore repository) {
-		this.repository = repository;
+	public BedDeletion(EventStore eventStore) {
+		this.eventStore = eventStore;
 	}
 	
 	@Override
 	public void execute(DeleteBed command) {
-		Bed bed = repository.pull(Bed.class, command.getId());
+		Bed bed = eventStore.pull(Bed.class, command.getId());
 		bed.delete();
-		repository.push(bed);
+		eventStore.push(bed);
 	}
 
 }

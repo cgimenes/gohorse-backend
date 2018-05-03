@@ -7,16 +7,16 @@ import com.xgh.model.command.bed.commands.RegisterBed;
 
 public class BedRegistration implements CommandHandler<RegisterBed> {
 
-	private final EventStore repository;
+	private final EventStore eventStore;
 	
-	public BedRegistration(EventStore repository) {
-		this.repository = repository;
+	public BedRegistration(EventStore eventStore) {
+		this.eventStore = eventStore;
 	}
 	
 	@Override
 	public void execute(RegisterBed command) {
 		Bed bed = new Bed();
-		bed.register(command.getId(), command.getCode(), command.getBusy());
-		repository.push(bed);
+		bed.register(command.getId(), command.getCode(), command.isBusy());
+		eventStore.push(bed);
 	}
 }

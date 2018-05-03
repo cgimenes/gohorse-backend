@@ -5,9 +5,9 @@ import com.xgh.model.query.bed.BedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
-import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.bed.Bed;
 import com.xgh.model.command.bed.events.BedWasDeleted;
 import com.xgh.model.command.bed.events.BedWasRegistered;
@@ -16,12 +16,14 @@ import com.xgh.model.command.bed.events.BedWasUpdated;
 
 @Component
 public class BedProjector implements EventHandler{
+	private final EventStore eventStore;
+	private final BedRepository bedRepository;
 	
 	@Autowired
-	private PostgresEventStore eventStore;
-	
-	@Autowired
-	private BedRepository repository;
+	public BedProjector(EventStore eventStore, BedRepository bedRepository) {
+		this.eventStore = eventStore;
+		this.bedRepository = bedRepository;
+	}
 	
 	
 	@Override
@@ -42,7 +44,7 @@ public class BedProjector implements EventHandler{
 				entity.isBusy(),
 				entity.isDeleted());
 		
-		repository.save(projection);
+		bedRepository.save(projection);
 	}
 
 }

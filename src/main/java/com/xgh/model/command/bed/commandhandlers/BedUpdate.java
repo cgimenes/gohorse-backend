@@ -8,17 +8,17 @@ import com.xgh.model.command.bed.commands.UpdateBed;
 
 public class BedUpdate implements CommandHandler<UpdateBed>{
 
-	private final EventStore repository;
+	private final EventStore eventStore;
 	
-	public BedUpdate(EventStore repository) {
-		this.repository = repository;
+	public BedUpdate(EventStore eventStore) {
+		this.eventStore = eventStore;
 	}
 	
 	@Override
 	public void execute(UpdateBed command) {
-		Bed bed = repository.pull(Bed.class , command.getId());
-		bed.update(command.getCode(), command.getBusy());
-		repository.push(bed);
+		Bed bed = eventStore.pull(Bed.class , command.getId());
+		bed.update(command.getCode(), command.isBusy());
+		eventStore.push(bed);
 		
 	}
 }

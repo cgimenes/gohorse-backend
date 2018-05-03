@@ -25,7 +25,7 @@ public class BedWasRegistered extends Event<BedId> {
 		return this.code;
 	}
 
-	public Boolean getBusy() {
+	public Boolean isBusy() {
 		return this.busy;
 	}
 	
