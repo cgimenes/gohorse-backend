@@ -1,12 +1,18 @@
 package com.xgh.model.command.supplier.commandhandlers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.model.command.supplier.Supplier;
 import com.xgh.model.command.supplier.commands.RegisterSupplier;
 
+@Component
 public class SupplierRegistration implements CommandHandler<RegisterSupplier> {
-	private EventStore repository;
+	
+	@Autowired
+	private final EventStore repository;
 	
 	public SupplierRegistration(EventStore repository) {
 		this.repository = repository;
