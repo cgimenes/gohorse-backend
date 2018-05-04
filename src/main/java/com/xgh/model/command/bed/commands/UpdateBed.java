@@ -19,6 +19,7 @@ public class UpdateBed implements Command{
 		
 	}
 	
+	@Override
 	public BedId getId() {
 		return this.id;
 	}

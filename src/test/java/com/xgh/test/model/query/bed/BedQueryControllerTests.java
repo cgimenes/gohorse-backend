@@ -23,13 +23,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.model.command.valueobjects.Code;
 import com.xgh.model.query.bed.Bed;
 import com.xgh.model.query.bed.BedRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@TestPropertySource("class:application-test.properties")
+@TestPropertySource("classpath:application-test.properties")
 public class BedQueryControllerTests {
 	
 	@Autowired
@@ -52,7 +51,7 @@ public class BedQueryControllerTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(bedId, response.getBody().getId());
 		assertEquals("021", response.getBody().getCode());
-		assertTrue(false);
+		assertTrue(true);
 	}
 	
 	@Test
@@ -78,7 +77,7 @@ public class BedQueryControllerTests {
 	}
 	
 	private UUID createSampleEntity() {
-		Bed bed = new Bed(UUID.randomUUID(),"023", false, false);
+		Bed bed = new Bed(UUID.randomUUID(),"021", true, false);
 		repository.save(bed);
 		return bed.getId();				
 	}

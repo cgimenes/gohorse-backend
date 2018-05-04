@@ -13,6 +13,22 @@ databaseChangeLog:
                             nullable: false
                             primaryKey: true
                             primaryKeyName: pk_bed  
+                    - column:
+                        name: code
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: busy
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false                            
+                            
             - rollback:
                - dropTable: 
                   tableName: bed

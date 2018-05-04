@@ -13,6 +13,7 @@ public class DeleteBed implements Command{
 		this.id = null;
 	}
 
+	@Override
 	public BedId getId() {
 		return this.id;
 	}

@@ -62,10 +62,10 @@ public class BedCommandControllerTests {
 	public void update() {
 		Bed bed = new Bed();
 		
-		bed.register(new BedId(),new Code("021"), true);
+		bed.register(new BedId(),new Code("021"), new Boolean(true));
 		eventStore.push(bed);
 		
-		bed.update(new Code("022"), true);
+		bed.update(new Code("022"), new Boolean(true));
 		
 		RequestEntity<Bed> request = RequestEntity.put(URI.create("/bed")).body(bed);
 		ResponseEntity<Void> response =restTemplate.exchange(request, Void.class);
@@ -75,7 +75,7 @@ public class BedCommandControllerTests {
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 		assertTrue(bed.equals(bedFromStore));
 		assertEquals("022", bedFromStore.getCode().toString());
-		assertTrue(true);
+		assertTrue(bedFromStore.isBusy());
 		assertEquals("2",bedFromStore.getVersion().toString());
 	}
 	
@@ -83,7 +83,7 @@ public class BedCommandControllerTests {
 	public void delete() {
 		Bed bed = new Bed();
 		
-		bed.register(new BedId(), new Code("023"), false);
+		bed.register(new BedId(), new Code("023"), new Boolean(true));
 		eventStore.push(bed);
 		
 		HttpEntity<Bed> requestEntity = new HttpEntity<Bed>(bed);

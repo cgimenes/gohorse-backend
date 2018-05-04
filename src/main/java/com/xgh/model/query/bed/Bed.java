@@ -32,19 +32,19 @@ public final class Bed {
 	}
 
 	public UUID getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getCode() {
-		return code;
+		return this.code;
 	}
 
 	public Boolean getBusy() {
-		return busy;
+		return this.busy;
 	}
 
 	public Boolean isDeleted() {
-		return deleted;
+		return this.deleted;
 	}
 	
 	

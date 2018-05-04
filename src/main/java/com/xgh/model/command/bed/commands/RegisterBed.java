@@ -18,6 +18,7 @@ public class RegisterBed implements Command{
 		this.busy = null;
 	}
 
+	@Override
 	public BedId getId() {
 		return id;
 	}
