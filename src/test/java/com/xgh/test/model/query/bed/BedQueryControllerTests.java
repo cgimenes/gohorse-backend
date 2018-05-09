@@ -65,7 +65,8 @@ public class BedQueryControllerTests {
 		
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 		
-		Page<Bed> response = new ObjectMapper().readValue(responseEntity.getBody(), new TypeReference<Page<Bed>>() {});
+		Page<Bed> response = new ObjectMapper().readValue(responseEntity.getBody(), 
+				new TypeReference<Page<Bed>>() {});
 		for (int i = 0; i < 5; i++) {
 			assertEquals(bed.get(i), response.getContent().get(i).getId());
 		}
