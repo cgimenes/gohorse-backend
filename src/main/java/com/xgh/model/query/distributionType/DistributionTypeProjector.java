@@ -13,8 +13,6 @@ public class DistributionTypeProjector {
 
 		DistributionType distributionTypeProjection = new DistributionType(distributionType.getName());
 
-		// TODO find by code and number and complement
-
 		distributionTypeRepository.save(distributionTypeProjection);
 
 		return distributionTypeProjection;
