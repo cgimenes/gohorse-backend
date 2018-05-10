@@ -10,6 +10,12 @@ buildscript {
     }
 }
 
+task checkstyle(type: Exec) {
+    commandLine 'java', '-jar', 'checkstyle-8.9-all.jar', '-c', 'checkstyle.xml', '-o', 'checkstyle-result.xml', '-f', 'xml', 'src'
+} << {
+    println "Executed!"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
