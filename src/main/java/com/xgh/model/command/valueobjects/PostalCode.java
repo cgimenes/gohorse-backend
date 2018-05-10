@@ -47,7 +47,7 @@ public class PostalCode implements ValueObject {
         if (!code.matches("[0-9]{5}-[0-9]{3}")) {
             throw new IllegalArgumentException("O código do CEP deve estar no formato 99999-999");
         }
-        
+
         // TODO converter para enum
         if (!streetType.equals("Avenida") && !streetType.equals("Rua")) {
             throw new IllegalArgumentException("O tipo da rua deve ser: 'Rua' ou 'Avenida'");

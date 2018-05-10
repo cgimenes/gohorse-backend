@@ -8,7 +8,7 @@ import com.xgh.model.command.valueobjects.Code;
 public class BedWasRegistered extends Event<BedId> {
 	private Code code;
 	private Boolean busy;
-	
+
 	protected BedWasRegistered() {}
 
 	public BedWasRegistered(BedId id,Code code, Boolean busy, EntityVersion version) {

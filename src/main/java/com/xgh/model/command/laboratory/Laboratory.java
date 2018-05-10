@@ -37,7 +37,7 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
     public void update(Name companyName, Phone phone, Address address) {
         recordAndApply(new LaboratoryWasUpdated(this.id, companyName, phone, address, this.nextVersion()));
     }
-    
+
     public void delete() {
         recordAndApply(new LaboratoryWasDeleted(this.id, this.nextVersion()));
     }
@@ -53,7 +53,7 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
         this.phone = event.getPhone();
         this.address = event.getAddress();
     }
-    
+
     protected void when(LaboratoryWasDeleted event) {
         this.markDeleted();
     }

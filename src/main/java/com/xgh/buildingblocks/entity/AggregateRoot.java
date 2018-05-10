@@ -23,8 +23,8 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     /*
      * Grava o novo evento na lista de eventos à serem persistidos (uncommittedEvents)
      * e aplica o evento
-     * 
-     * TODO preecher o version com o nextVersion automagicamente 
+     *
+     * TODO preecher o version com o nextVersion automagicamente
      */
     protected void recordAndApply(Event<IdType> event) {
         if (this.isDeleted()) {
@@ -43,7 +43,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     }
 
     /*
-     * Aplica o evento, atualizando os metadados e invocando o handler do evento 
+     * Aplica o evento, atualizando os metadados e invocando o handler do evento
      */
     private void apply(Event<IdType> event) {
         this.updateMetadata(event);

@@ -77,7 +77,7 @@ public final class Veterinary {
     public LocalDate getBirthDate() {
         return this.birthDate;
     }
-    
+
     public Boolean isDeleted() {
         return deleted;
     }

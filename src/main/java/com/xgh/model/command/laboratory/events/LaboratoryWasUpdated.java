@@ -20,7 +20,7 @@ public class LaboratoryWasUpdated extends Event<LaboratoryId> {
         this.phone = phone;
         this.address = address;
     }
-    
+
     public Name getCompanyName() {
         return this.companyName;
     }

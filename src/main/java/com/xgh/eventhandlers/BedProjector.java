@@ -17,7 +17,7 @@ import com.xgh.model.command.bed.events.BedWasUpdated;
 public class BedProjector implements EventHandler{
 	private final EventStore eventStore;
 	private final BedRepository bedRepository;
-	
+
 	@Autowired
 	public BedProjector(EventStore eventStore, BedRepository bedRepository) {
 		this.eventStore = eventStore;
@@ -40,7 +40,7 @@ public class BedProjector implements EventHandler{
 				entity.getCode().getValue(),
 				entity.isBusy(),
 				entity.isDeleted());
-		
+
 		bedRepository.save(projection);
 	}
 }

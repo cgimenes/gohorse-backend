@@ -14,16 +14,16 @@ public class PostalCode {
 
     @Column(name = "street_type")
     private String streetType;
-    
+
     @Column(name = "street_name")
     private String streetName;
-    
+
     private String neighbourhood;
-    
+
     private String city;
-    
+
     private String state;
-    
+
     private String country;
 
     protected PostalCode() {}

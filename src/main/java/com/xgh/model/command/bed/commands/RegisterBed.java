@@ -8,7 +8,7 @@ public class RegisterBed implements Command {
 	private final BedId id;
 	private final Code code;
 	private final Boolean busy;
-	
+
 	protected RegisterBed() {
 		this.id = new BedId();
 		this.code = null;

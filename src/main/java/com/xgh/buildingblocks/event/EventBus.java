@@ -30,7 +30,7 @@ public class EventBus {
 
     /*
      * Dispara o evento para todos os handlers cadastrados e cada handler decide se
-     * irá ou não ser executado para o tipo do evento que foi disparado 
+     * irá ou não ser executado para o tipo do evento que foi disparado
      */
     public static void dispatch(Event<?> event) {
         logger.info(String.format("Disparando evento: %s com os dados: %s", event.getClass().getName(), event.toJson()));

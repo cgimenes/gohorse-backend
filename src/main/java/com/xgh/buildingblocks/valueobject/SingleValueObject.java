@@ -28,12 +28,12 @@ public abstract class SingleValueObject<T> implements ValueObject {
     public String toString() {
         return value.toString();
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hashCode(this.value);
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {

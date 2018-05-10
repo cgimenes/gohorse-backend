@@ -11,12 +11,12 @@ import com.xgh.model.command.bed.commands.UpdateBed;
 @Component
 public class BedUpdate implements CommandHandler<UpdateBed>{
 	private final EventStore eventStore;
-	
+
 	@Autowired
 	public BedUpdate(EventStore eventStore) {
 		this.eventStore = eventStore;
 	}
-	
+
 	@Override
 	public void execute(UpdateBed command) {
 		Bed bed = eventStore.pull(Bed.class , command.getId());

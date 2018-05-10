@@ -18,7 +18,7 @@ public class Owner extends AggregateRoot<OwnerId>{
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
-        
+
         if (name == null) {
             throw new NullMandatoryArgumentException("nome");
         }

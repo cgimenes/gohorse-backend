@@ -13,16 +13,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public final class Bed {
 	@Id
 	private UUID id;
-	
+
 	private String code;
-	
+
 	private Boolean busy;
-	
+
 	@JsonIgnore
 	private Boolean deleted = false;
-	
+
 	protected Bed() {}
-	
+
 	public Bed (UUID id, String code, Boolean busy, Boolean deleted) {
 		this.id = id;
 		this.code = code;

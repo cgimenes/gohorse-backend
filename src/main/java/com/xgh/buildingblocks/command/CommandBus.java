@@ -22,7 +22,7 @@ public class CommandBus {
         }
         return instance;
     }
-    
+
     public static void addHandler(Class<? extends Command> command, CommandHandler<?> handler) {
         logger.info(String.format("Adicionando handler '%s' do comando '%s' ao CommandBus", handler.getClass().getName(), command.getName()));
         getInstance().handlers.put(command, handler);
@@ -36,11 +36,11 @@ public class CommandBus {
         logger.info(String.format("Executando comando: %s; com os dados: %s", command.getClass().getName(), command.toJson()));
 
         CommandHandler<T> handler = (CommandHandler<T>) getInstance().handlers.get(command.getClass());
-        
+
         if (handler == null) {
             throw new RuntimeException(String.format("Nenhum handler encontrado para o comando: %s", command.getClass().getName()));
         }
-        
+
         handler.execute(command);
     }
 }

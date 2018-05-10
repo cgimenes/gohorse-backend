@@ -56,7 +56,7 @@ public final class Laboratory {
     public UUID getId() {
         return id;
     }
-    
+
     public Boolean isDeleted() {
         return deleted;
     }

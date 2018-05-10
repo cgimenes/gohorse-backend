@@ -10,12 +10,12 @@ import com.xgh.model.command.valueobjects.Code;
 public class Bed extends AggregateRoot<BedId>{
 	private Code code;
 	private Boolean busy;
-	
+
 	public void register(BedId id, Code code, Boolean busy) {
     	if (id == null) {
     		throw new NullMandatoryArgumentException("id");
     	}
-		
+
 		if (code == null) {
 			throw new NullMandatoryArgumentException("code");
 		}
@@ -30,7 +30,7 @@ public class Bed extends AggregateRoot<BedId>{
 	public void update(Code code, Boolean busy) {
 		recordAndApply(new BedWasUpdated(this.id, code, busy, this.nextVersion()));
 	}
-	
+
 	public void delete() {
 		recordAndApply(new BedWasDeleted(this.id, this.nextVersion()));
 	}
@@ -44,7 +44,7 @@ public class Bed extends AggregateRoot<BedId>{
 		this.code = event.getCode();
 		this.busy = event.isBusy();
 	}
-	
+
 	protected void when(BedWasDeleted event) {
 		this.markDeleted();
 	}
