@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+// TODO remover o extends da Serializable
 public interface JsonSerializable extends Serializable {
     /*
      * Serializa o value object em JSON

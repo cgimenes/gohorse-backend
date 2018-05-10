@@ -10,6 +10,15 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.saliman.cobertura' version '2.5.4'
+}
+
+task checkstyle(type: Exec) {
+    workingDir "$rootProject.projectDir/"
+    commandLine 'java', '-jar', "${project.projectDir}/checkstyle-8.9-all.jar", '-c', "${project.projectDir}/checkstyle.xml", '-o', "${project.projectDir}/checkstyle-result.xml", '-f', 'xml', "${project.projectDir}/src"
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -37,4 +46,8 @@ dependencies {
     runtime('com.h2database:h2')
     testCompile('junit:junit')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+cobertura {
+    coverageFormats = ['xml']
 }

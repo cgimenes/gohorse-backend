@@ -60,10 +60,6 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
         this.markDeleted();
     }
 
-    public Laboratory() {
-        super();
-    }
-
     public Name getCompanyName() {
         return companyName;
     }
