@@ -23,7 +23,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.CpfCnpj;
-import com.xgh.model.command.valueobjects.DistributionType;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.valueobjects.PostalCode;
@@ -55,7 +54,7 @@ public class SupplierCommandControllerTests {
 		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), new CpfCnpj("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
-				new DistributionType("Ração"));
+				new Name("Ração"));
 
 		ResponseEntity<Void> response = restTemplate.postForEntity("/suppliers", entity, Void.class);
 
@@ -76,7 +75,7 @@ public class SupplierCommandControllerTests {
 		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new CpfCnpj("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
-				new DistributionType("Ração"));
+				new Name("Ração"));
 		eventStore.push(entity);
 
 		entity.update(entity.getName(), new Phone("44998731154"), entity.getCpfCnpj(), entity.getAddress(),
@@ -101,7 +100,7 @@ public class SupplierCommandControllerTests {
 		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new CpfCnpj("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
-				new DistributionType("Ração"));
+				new Name("Ração"));
 
 		eventStore.push(entity);
 

@@ -12,7 +12,7 @@ public final class UpdateSupplier implements Command {
     private final CpfCnpj cpfCnpj;
     private final Phone phone;    
     private final Address address;
-    private final DistributionType distributionType;
+    private final Name distributionType;
 
     protected UpdateSupplier() {
         this.id = null;
@@ -39,7 +39,7 @@ public final class UpdateSupplier implements Command {
         return this.phone;
     }
 
-    public DistributionType getDistributionType() {
+    public Name getDistributionType() {
         return this.distributionType;
     }
 

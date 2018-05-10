@@ -14,7 +14,7 @@ public final class RegisterSupplier implements Command {
     private final CpfCnpj cpfCnpj;
     private final Phone phone;    
     private final Address address;
-    private final DistributionType distributionType;
+    private final Name distributionType;
 
     protected RegisterSupplier() {
         this.id = new SupplierId();
@@ -41,7 +41,7 @@ public final class RegisterSupplier implements Command {
         return this.phone;
     }
 
-    public DistributionType getDistributionType() {
+    public Name getDistributionType() {
         return this.distributionType;
     }
 

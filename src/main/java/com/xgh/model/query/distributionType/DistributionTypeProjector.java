@@ -9,9 +9,9 @@ public class DistributionTypeProjector {
 	@Autowired
 	private DistributionTypeRepository distributionTypeRepository;
 
-	public DistributionType execute(com.xgh.model.command.valueobjects.DistributionType distributionType) {
+	public DistributionType execute(com.xgh.model.command.valueobjects.Name distributionType) {
 
-		DistributionType distributionTypeProjection = new DistributionType(distributionType.getName());
+		DistributionType distributionTypeProjection = new DistributionType(distributionType.getValue());
 
 		distributionTypeRepository.save(distributionTypeProjection);
 

@@ -12,11 +12,11 @@ public class SupplierWasUpdated extends Event<SupplierId> {
     private Phone phone;
     private CpfCnpj cpfCnpj;
     private Address address;
-    private DistributionType distributionType;
+    private Name distributionType;
 
     protected SupplierWasUpdated() {}
 
-    public SupplierWasUpdated(SupplierId id, Name name, Phone phone, CpfCnpj cpfCnpj, Address address, DistributionType distributionType, EntityVersion version) {
+    public SupplierWasUpdated(SupplierId id, Name name, Phone phone, CpfCnpj cpfCnpj, Address address, Name distributionType, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
@@ -37,7 +37,7 @@ public class SupplierWasUpdated extends Event<SupplierId> {
         return cpfCnpj;
     }
 
-    public DistributionType getDistributionType() {
+    public Name getDistributionType() {
         return distributionType;
     }
 
