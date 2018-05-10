@@ -41,3 +41,6 @@ gradle-app.setting
 .project
 .settings
 bin
+
+# Checkstyle
+checkstyle-result.xml
