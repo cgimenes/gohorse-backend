@@ -8,17 +8,11 @@ import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.valueobjects.*;
 
 public class Owner extends AggregateRoot<OwnerId>{
-    private static final long serialVersionUID = -6278682205377779382L;
-
     private Name name;
     private Phone phone;
     private Cpf cpf;
     private Date birthDate;
     private Address address;
-
-    public Owner() {
-        super();
-    }
 
     public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
         if (id == null) {

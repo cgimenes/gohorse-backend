@@ -10,8 +10,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class Laboratory extends AggregateRoot<LaboratoryId> {
-    private static final long serialVersionUID = 7031562150242723400L;
-
     private Name companyName;
     private Phone phone;
     private Address address;

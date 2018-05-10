@@ -3,8 +3,6 @@ package com.xgh.model.command.valueobjects;
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
 public class Name extends SingleValueObject<String> {
-    private static final long serialVersionUID = 3018741585560237802L;
-
     protected Name() {}
 
     public Name(String name) {

@@ -32,8 +32,7 @@ public abstract class BasicQueryService<Entity, Repository extends BasicJpaRepos
     }
 
     @SuppressWarnings("unchecked")
-    private String getEntityName()
-    {
+    private String getEntityName() {
         return ((Class<Entity>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0]).getSimpleName();
     }

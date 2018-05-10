@@ -10,8 +10,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public class UpdateVeterinary implements Command {
-    private static final long serialVersionUID = -8599483144628000021L;
-
     private final VeterinaryId id;
     private final Name name;
     private final Address address;

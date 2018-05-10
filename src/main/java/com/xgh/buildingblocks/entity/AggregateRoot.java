@@ -7,8 +7,6 @@ import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
 
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
-    private static final long serialVersionUID = 325564934279313058L;
-
     /*
      * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
      */

@@ -1,14 +1,12 @@
 package com.xgh.buildingblocks;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-// TODO remover o extends da Serializable
-public interface JsonSerializable extends Serializable {
+public interface JsonSerializable {
     /*
      * Serializa o value object em JSON
      */

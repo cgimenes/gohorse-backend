@@ -15,8 +15,11 @@ databaseChangeLog:
         name: TYPE_CRMV
         value: varchar(13)
     - property:
+        name: TYPE_CODE
+        value: varchar(20)
+    - property:
         name: TYPE_EMAIL
-        value: varchar(40)
+        value: varchar(100)
     - property:
         name: TYPE_INTEGER
         value: integer
@@ -34,7 +37,7 @@ databaseChangeLog:
         value: bool
     - property:
         name: TYPE_DESCRIPTION
-        value: varchar(30)
+        value: varchar(100)
     - property:
         name: TYPE_POSTALCODE
         value: varchar(9)
@@ -64,3 +67,5 @@ databaseChangeLog:
         file: db/changelog/0007-table-supplier.yaml
     - include:
         file: db/changelog/0008-table-product.yaml
+    - include:
+        file: db/changelog/0009-table-bed.yaml  

@@ -49,5 +49,4 @@ public class LaboratoryProjector implements EventHandler {
 
         laboratoryRepository.save(laboratoryProjection);
     }
-
 }

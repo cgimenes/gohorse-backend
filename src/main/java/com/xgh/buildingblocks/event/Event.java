@@ -13,8 +13,6 @@ import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> implements ValueObject {
-    private static final long serialVersionUID = -8290936323951912398L;
-
     @JsonIgnore
     private Calendar ocurredOn;
     @JsonIgnore
