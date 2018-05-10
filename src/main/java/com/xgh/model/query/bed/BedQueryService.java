@@ -9,7 +9,6 @@ import com.xgh.infra.service.BasicQueryService;
 
 @Service
 public class BedQueryService extends BasicQueryService<Bed, BedRepository>{
-
 	@Autowired
 	public BedQueryService(BedRepository repository) {
 		super(repository);

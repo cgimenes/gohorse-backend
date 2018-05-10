@@ -6,10 +6,6 @@ import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.valueobjects.Code;
 
 public class BedWasRegistered extends Event<BedId> {
-
-
-	private static final long serialVersionUID = -8902279691670887369L;
-
 	private Code code;
 	private Boolean busy;
 	
@@ -28,9 +24,4 @@ public class BedWasRegistered extends Event<BedId> {
 	public Boolean isBusy() {
 		return this.busy;
 	}
-	
-	
-	
-	
-	
 }

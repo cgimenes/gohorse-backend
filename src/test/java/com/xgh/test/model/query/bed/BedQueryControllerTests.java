@@ -51,7 +51,7 @@ public class BedQueryControllerTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(bedId, response.getBody().getId());
 		assertEquals("021", response.getBody().getCode());
-		assertTrue(true);
+		assertTrue(response.getBody().getBusy());
 	}
 	
 	@Test

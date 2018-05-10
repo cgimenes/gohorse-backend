@@ -7,19 +7,10 @@ import com.xgh.model.command.bed.events.BedWasRegistered;
 import com.xgh.model.command.bed.events.BedWasUpdated;
 import com.xgh.model.command.valueobjects.Code;
 
-
 public class Bed extends AggregateRoot<BedId>{
-
-	private static final long serialVersionUID = -7513301137861578705L;
-	
-
 	private Code code;
 	private Boolean busy;
 	
-	public Bed() {
-		super();
-	}
-
 	public void register(BedId id, Code code, Boolean busy) {
     	if (id == null) {
     		throw new NullMandatoryArgumentException("id");

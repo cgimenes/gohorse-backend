@@ -5,8 +5,6 @@ import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.*;
 
 public final class RegisterOwner implements Command {
-    private static final long serialVersionUID = 7829193234187879671L;
-
     private final OwnerId id;
     private final Name name;
     private final Cpf cpf;

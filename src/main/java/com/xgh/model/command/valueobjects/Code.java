@@ -3,9 +3,6 @@ package com.xgh.model.command.valueobjects;
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
 public class Code extends SingleValueObject<String>{
-
-	private static final long serialVersionUID = 8049816788802823547L;
-	
 	protected Code() {}
 	
 	public Code(String code) {
@@ -17,7 +14,5 @@ public class Code extends SingleValueObject<String>{
 		if(code.length() > 20) {
 			throw new IllegalArgumentException("O código não deve ultrapassar 20 caracteres");
 		}
-		
 	}
-
 }

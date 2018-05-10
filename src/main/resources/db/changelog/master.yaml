@@ -15,6 +15,9 @@ databaseChangeLog:
         name: TYPE_CRMV
         value: varchar(13)
     - property:
+        name: TYPE_CODE
+        value: varchar(20)
+    - property:
         name: TYPE_EMAIL
         value: varchar(100)
     - property:

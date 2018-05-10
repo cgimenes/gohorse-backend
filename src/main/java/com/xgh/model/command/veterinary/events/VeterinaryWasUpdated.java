@@ -11,8 +11,6 @@ import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.VeterinaryId;
 
 public class VeterinaryWasUpdated extends Event<VeterinaryId> {
-    private static final long serialVersionUID = -4536989718000692293L;
-
     private Name name;
     private Address address;
     private Phone phone;

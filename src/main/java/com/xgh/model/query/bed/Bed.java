@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "bed")
 public final class Bed {
-
 	@Id
 	private UUID id;
 	
@@ -46,6 +45,4 @@ public final class Bed {
 	public Boolean isDeleted() {
 		return this.deleted;
 	}
-	
-	
 }

@@ -15,7 +15,7 @@ databaseChangeLog:
                             primaryKeyName: pk_bed  
                     - column:
                         name: code
-                        type: ${TYPE_NAME}
+                        type: ${TYPE_CODE}
                         constraints:
                             nullable: false
                     - column:

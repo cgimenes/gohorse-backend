@@ -13,7 +13,6 @@ import com.xgh.model.command.bed.events.BedWasDeleted;
 import com.xgh.model.command.bed.events.BedWasRegistered;
 import com.xgh.model.command.bed.events.BedWasUpdated;
 
-
 @Component
 public class BedProjector implements EventHandler{
 	private final EventStore eventStore;
@@ -24,8 +23,7 @@ public class BedProjector implements EventHandler{
 		this.eventStore = eventStore;
 		this.bedRepository = bedRepository;
 	}
-	
-	
+
 	@Override
 	public boolean isSubscribedTo(Event<?> event) {
 		return event instanceof BedWasDeleted
@@ -37,7 +35,6 @@ public class BedProjector implements EventHandler{
 	public void execute(Event<?> event) {
 		Bed entity = eventStore.pull(Bed.class, event.getEntityId());
 
-		
 		com.xgh.model.query.bed.Bed projection = new com.xgh.model.query.bed.Bed(
 				entity.getId().getValue(),
 				entity.getCode().getValue(),
@@ -46,5 +43,4 @@ public class BedProjector implements EventHandler{
 		
 		bedRepository.save(projection);
 	}
-
 }

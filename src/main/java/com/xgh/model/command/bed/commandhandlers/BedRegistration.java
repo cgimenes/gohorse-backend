@@ -10,7 +10,6 @@ import com.xgh.model.command.bed.commands.RegisterBed;
 
 @Component
 public class BedRegistration implements CommandHandler<RegisterBed> {
-
 	private final EventStore eventStore;
 	
 	@Autowired

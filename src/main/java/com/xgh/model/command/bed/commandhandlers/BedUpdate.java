@@ -10,7 +10,6 @@ import com.xgh.model.command.bed.commands.UpdateBed;
 
 @Component
 public class BedUpdate implements CommandHandler<UpdateBed>{
-
 	private final EventStore eventStore;
 	
 	@Autowired
@@ -23,6 +22,5 @@ public class BedUpdate implements CommandHandler<UpdateBed>{
 		Bed bed = eventStore.pull(Bed.class , command.getId());
 		bed.update(command.getCode(), command.isBusy());
 		eventStore.push(bed);
-		
 	}
 }

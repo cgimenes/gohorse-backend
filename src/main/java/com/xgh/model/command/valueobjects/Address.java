@@ -4,8 +4,6 @@ import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 
 public class Address implements ValueObject {
-    private static final long serialVersionUID = 2642148787979337627L;
-
     private PostalCode postalCode;
     private Integer number;
     private String complement;

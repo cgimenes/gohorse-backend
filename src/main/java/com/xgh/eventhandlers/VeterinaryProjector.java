@@ -52,5 +52,4 @@ public class VeterinaryProjector implements EventHandler {
 
         repository.save(projection);
     }
-
 }

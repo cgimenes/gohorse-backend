@@ -4,8 +4,6 @@ import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 
 public class PostalCode implements ValueObject {
-    private static final long serialVersionUID = 2103152608640452626L;
-
     private String code;
     private String streetType;
     private String streetName;

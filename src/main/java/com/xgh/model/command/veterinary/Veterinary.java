@@ -13,18 +13,12 @@ import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.events.VeterinaryWasRegistered;
 
 public class Veterinary extends AggregateRoot<VeterinaryId> {
-    private static final long serialVersionUID = 3238712574990382956L;
-
     private Name name;
     private Address address;
     private Phone phone;
     private Crmv crmv;
     private Email email;
     private Date birthDate;
-
-    public Veterinary() {
-        super();
-    }
 
     public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
         if (id == null) {

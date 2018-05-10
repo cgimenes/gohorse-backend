@@ -8,8 +8,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public class LaboratoryWasUpdated extends Event<LaboratoryId> {
-    private static final long serialVersionUID = 8837633091108416524L;
-
     private Name companyName;
     private Phone phone;
     private Address address;

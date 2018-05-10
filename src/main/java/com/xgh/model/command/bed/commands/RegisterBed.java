@@ -4,10 +4,7 @@ import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.valueobjects.Code;
 
-public class RegisterBed implements Command{
-
-	private static final long serialVersionUID = 1825556867663334196L;
-	
+public class RegisterBed implements Command {
 	private final BedId id;
 	private final Code code;
 	private final Boolean busy;
@@ -30,8 +27,4 @@ public class RegisterBed implements Command{
 	public Boolean isBusy() {
 		return this.busy;
 	}
-	
-	
-	
-	
 }

@@ -5,8 +5,6 @@ import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.*;
 
 public final class UpdateOwner implements Command {
-    private static final long serialVersionUID = -5468719672345592356L;
-
     private final OwnerId id;
     private final Name name;
     private final Cpf cpf;

@@ -6,8 +6,6 @@ import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Name;
 
 public class RegisterProduct implements Command {
-    private static final long serialVersionUID = -8237710187160369840L;
-
     private final ProductId id;
     private final Name name;
     private final Float price;
