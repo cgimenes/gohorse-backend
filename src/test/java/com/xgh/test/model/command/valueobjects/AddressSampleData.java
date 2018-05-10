@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class AddressSampleData {
 
 	public Address getSample() {
-		Address address = new Address(new PostalCode( "87005140", "Rua Tabaete", "Rua", "Jardim Tabaetê", "Maringá", "Paraná", "Brasil"), 33, "Apartamento 69");
+		Address address = new Address(new PostalCode( "87005-140", "Rua", "Rua Tabaete", "Jardim Tabaetê", "Maringá", "Paraná", "Brasil"), 33, "Apartamento 69");
         return address;
 	}
 }
