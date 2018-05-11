@@ -7,7 +7,7 @@ import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.valueobjects.*;
 
-public class Owner extends AggregateRoot<OwnerId>{
+public class Owner extends AggregateRoot<OwnerId> {
     private Name name;
     private Phone phone;
     private Cpf cpf;

@@ -1,12 +1,11 @@
 package com.xgh.test.model.command.product;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.net.URI;
-
+import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.model.command.product.Product;
+import com.xgh.model.command.product.ProductId;
 import com.xgh.model.command.supplier.Supplier;
 import com.xgh.model.command.supplier.SupplierId;
+import com.xgh.model.command.valueobjects.Name;
 import com.xgh.test.model.command.supplier.SupplierSampleData;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,18 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.product.Product;
-import com.xgh.model.command.product.ProductId;
-import com.xgh.model.command.valueobjects.Name;
+import java.net.URI;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)

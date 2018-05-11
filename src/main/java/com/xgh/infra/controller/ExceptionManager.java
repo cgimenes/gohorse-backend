@@ -1,5 +1,9 @@
 package com.xgh.infra.controller;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.xgh.exceptions.DeletedEntityException;
+import com.xgh.exceptions.EntityNotFoundException;
+import com.xgh.exceptions.NullMandatoryArgumentException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -11,11 +15,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.xgh.exceptions.DeletedEntityException;
-import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.exceptions.NullMandatoryArgumentException;
 
 @ControllerAdvice
 public class ExceptionManager {
@@ -33,41 +32,46 @@ public class ExceptionManager {
     /*
      * Exception Handlers
      */
-    @ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({ Exception.class })
-    public @ResponseBody ErrorResponse handleException(Exception ex) {
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({Exception.class})
+    public @ResponseBody
+    ErrorResponse handleException(Exception ex) {
         logger.fatal(ex);
 
         return new ErrorResponse(INTERNAL_ERROR, "Erro interno não tratado");
     }
 
-    @ResponseStatus(code=HttpStatus.NOT_FOUND)
-    @ExceptionHandler({ EntityNotFoundException.class })
-    public @ResponseBody ErrorResponse handleException(EntityNotFoundException ex) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({EntityNotFoundException.class})
+    public @ResponseBody
+    ErrorResponse handleException(EntityNotFoundException ex) {
         logger.info(ex);
 
         return new ErrorResponse(ENTITY_NOT_FOUND, ex.getMessage());
     }
 
-    @ResponseStatus(code=HttpStatus.NOT_FOUND)
-    @ExceptionHandler({ javax.persistence.EntityNotFoundException.class })
-    public @ResponseBody ErrorResponse handleException(javax.persistence.EntityNotFoundException ex) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({javax.persistence.EntityNotFoundException.class})
+    public @ResponseBody
+    ErrorResponse handleException(javax.persistence.EntityNotFoundException ex) {
         logger.info(ex);
 
         return new ErrorResponse(ENTITY_NOT_FOUND, "Entidade não encontrada");
     }
 
-    @ResponseStatus(code=HttpStatus.NOT_FOUND)
-    @ExceptionHandler({ DeletedEntityException.class })
-    public @ResponseBody ErrorResponse handleException(DeletedEntityException ex) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({DeletedEntityException.class})
+    public @ResponseBody
+    ErrorResponse handleException(DeletedEntityException ex) {
         logger.info(ex);
 
         return new ErrorResponse(ENTITY_NOT_FOUND, "Entidade não encontrada");
     }
 
-    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ HttpMessageConversionException.class })
-    public @ResponseBody ErrorResponse handleException(HttpMessageConversionException ex) {
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({HttpMessageConversionException.class})
+    public @ResponseBody
+    ErrorResponse handleException(HttpMessageConversionException ex) {
         if (ex.getCause() == null) {
             return handleException((Exception) ex);
         }
@@ -84,17 +88,19 @@ public class ExceptionManager {
         return new ErrorResponse(BAD_REQUEST, ex.getCause().getCause().getMessage());
     }
 
-    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ NullMandatoryArgumentException.class })
-    public @ResponseBody ErrorResponse handleException(NullMandatoryArgumentException ex) {
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({NullMandatoryArgumentException.class})
+    public @ResponseBody
+    ErrorResponse handleException(NullMandatoryArgumentException ex) {
         logger.info(ex);
 
         return new ErrorResponse(BAD_REQUEST, ex.getMessage());
     }
 
-    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
-    public @ResponseBody ErrorResponse handleException(MethodArgumentTypeMismatchException ex) {
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
+    public @ResponseBody
+    ErrorResponse handleException(MethodArgumentTypeMismatchException ex) {
         logger.info(ex);
 
         return new ErrorResponse(TYPE_MISMATCH, String.format(
@@ -103,17 +109,19 @@ public class ExceptionManager {
                 ex.getRequiredType()));
     }
 
-    @ResponseStatus(code=HttpStatus.NOT_FOUND)
-    @ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
-    public @ResponseBody ErrorResponse handleException(HttpRequestMethodNotSupportedException ex) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
+    public @ResponseBody
+    ErrorResponse handleException(HttpRequestMethodNotSupportedException ex) {
         logger.info(ex);
 
         return new ErrorResponse(ROUTE_NOT_FOUND, "Rota não encontrada");
     }
 
-    @ResponseStatus(code=HttpStatus.NOT_FOUND)
-    @ExceptionHandler({ HttpMessageNotReadableException.class })
-    public @ResponseBody ErrorResponse handleException(HttpMessageNotReadableException ex) {
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    @ExceptionHandler({HttpMessageNotReadableException.class})
+    public @ResponseBody
+    ErrorResponse handleException(HttpMessageNotReadableException ex) {
         logger.info(ex);
 
         return new ErrorResponse(BAD_REQUEST, "Falha ao ler o corpo da mensagem");

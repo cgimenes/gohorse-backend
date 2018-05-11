@@ -9,7 +9,7 @@ import com.xgh.model.command.bed.Bed;
 import com.xgh.model.command.bed.commands.DeleteBed;
 
 @Component
-public class BedDeletion implements CommandHandler<DeleteBed>{
+public class BedDeletion implements CommandHandler<DeleteBed> {
     private final EventStore eventStore;
 
     @Autowired

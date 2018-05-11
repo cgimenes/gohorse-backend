@@ -1,18 +1,17 @@
 package com.xgh.eventhandlers;
 
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.model.query.address.Address;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
-import com.xgh.model.query.address.AddressProjector;
 import com.xgh.model.command.laboratory.Laboratory;
 import com.xgh.model.command.laboratory.events.LaboratoryWasDeleted;
 import com.xgh.model.command.laboratory.events.LaboratoryWasRegistered;
 import com.xgh.model.command.laboratory.events.LaboratoryWasUpdated;
+import com.xgh.model.query.address.Address;
+import com.xgh.model.query.address.AddressProjector;
 import com.xgh.model.query.laboratory.LaboratoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class LaboratoryProjector implements EventHandler {
