@@ -11,7 +11,7 @@ public class BedWasRegistered extends Event<BedId> {
 
     protected BedWasRegistered() {}
 
-    public BedWasRegistered(BedId id,Code code, Boolean busy, EntityVersion version) {
+    public BedWasRegistered(BedId id, Code code, Boolean busy, EntityVersion version) {
         super(id, version);
         this.code = code;
         this.busy = busy;

@@ -11,7 +11,7 @@ public class UpdateBed implements Command {
 
     protected UpdateBed() {
         this.id = null;
-        this.code  = null;
+        this.code = null;
         this.busy = null;
     }
 

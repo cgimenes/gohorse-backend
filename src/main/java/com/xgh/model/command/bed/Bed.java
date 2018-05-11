@@ -7,7 +7,7 @@ import com.xgh.model.command.bed.events.BedWasRegistered;
 import com.xgh.model.command.bed.events.BedWasUpdated;
 import com.xgh.model.command.valueobjects.Code;
 
-public class Bed extends AggregateRoot<BedId>{
+public class Bed extends AggregateRoot<BedId> {
     private Code code;
     private Boolean busy;
 
