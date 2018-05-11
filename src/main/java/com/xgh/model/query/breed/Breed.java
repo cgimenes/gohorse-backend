@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.xgh.model.command.valueobjects.Name;
+
 @Entity
 @Table(name="breed")
 public class Breed {
@@ -14,13 +16,11 @@ public class Breed {
 	@GeneratedValue
 	private UUID id;
 	
-	private String name;
+	private Name name;
 	
 	protected Breed() {}
 
-	public Breed(UUID id, String name) {
-		super();
-		this.id = id;
+	public Breed(Name name) {
 		this.name = name;
 	}
 
@@ -28,7 +28,7 @@ public class Breed {
 		return id;
 	}
 
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
 	

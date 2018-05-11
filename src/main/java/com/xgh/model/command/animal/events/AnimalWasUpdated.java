@@ -1,16 +1,16 @@
-package com.xgh.model.command.animal.commands;
+package com.xgh.model.command.animal.events;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.entity.EntityVersion;
+import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 
-public final class RegisterAnimal implements Command{
-	private static final long serialVersionUID = -4460061586391159971L;
+public class AnimalWasUpdated extends Event<AnimalId> {
+	private static final long serialVersionUID = -2290433458911901044L;
 	
-	private AnimalId id;
 	private Name name;
 	private OwnerId owner;
 	private Name breed;
@@ -20,20 +20,19 @@ public final class RegisterAnimal implements Command{
 	private Float weight;
 	private boolean castrated;
 	
-	protected RegisterAnimal() {
-		this.id = new AnimalId();
-		this.name = null;
-		this.owner = null;
-		this.breed = null;
-		this.specie = null;
-		this.sex = null;
-		this.birthDate = null;
-		this.weight = null;
-		this.castrated = false;
-	}
-
-	public AnimalId getId() {
-		return id;
+	public AnimalWasUpdated() {}
+	
+	public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate,
+			Float weight, boolean castrated, EntityVersion version) {
+		super(id,version);
+		this.name = name;
+		this.owner = owner;
+		this.breed = breed;
+		this.specie = specie;
+		this.sex = sex;
+		this.birthDate = birthDate;
+		this.weight = weight;
+		this.castrated = castrated;
 	}
 
 	public Name getName() {
@@ -67,5 +66,4 @@ public final class RegisterAnimal implements Command{
 	public boolean isCastrated() {
 		return castrated;
 	}
-
 }

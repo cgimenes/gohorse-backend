@@ -2,25 +2,29 @@ package com.xgh.model.command.animal;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
+import com.xgh.model.command.animal.events.AnimalWasDeleted;
 import com.xgh.model.command.animal.events.AnimalWasRegistered;
-import com.xgh.model.command.owner.Owner;
+import com.xgh.model.command.animal.events.AnimalWasUpdated;
+import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.*;
 
 public final class Animal extends AggregateRoot<AnimalId> {
 	private static final long serialVersionUID = 3118505285619458826L;
 
 	private Name name;
-	private Owner owner;
-	private String breed;
+	private OwnerId owner;
+	private Name breed;
+	private Name specie;
+	private Sex sex;
 	private Date birthDate;
 	private Float weight;
-	private boolean castrated = false;
+	private Boolean castrated = false;
 	
 	public Animal() {
 		super();
 	}
 	
-	public void register(AnimalId id, Name name, Owner owner, String breed, Date birthDate, Float weight, boolean castrated) {
+	public void register(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate, Float weight, Boolean castrated) {
 		if(id == null) {
 			throw new NullMandatoryArgumentException("id");
 		}
@@ -37,34 +41,68 @@ public final class Animal extends AggregateRoot<AnimalId> {
 			throw new NullMandatoryArgumentException("Raça");
 		}
 		
+		if(specie == null) {
+			throw new NullMandatoryArgumentException("Espécie");
+		}
+		
+		if(sex == null) {
+			throw new NullMandatoryArgumentException("Sexo");
+		}
+		
 		if(birthDate == null) {
 			throw new NullMandatoryArgumentException("Data de Nascimento");
 		}
 		
-		recordAndApply(new AnimalWasRegistered(id, name, owner, breed, birthDate, weight, castrated, this.nextVersion()));
+		recordAndApply(new AnimalWasRegistered(id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
 	}
 	
 	protected void when(AnimalWasRegistered event) {
 		this.id = event.getEntityId();
 		this.name = event.getName();
+		this.owner = event.getOwner();
 		this.breed = event.getBreed();
+		this.specie = event.getSpecie();
+		this.sex = event.getSex();
 		this.birthDate = event.getBirthDate();
 		this.weight = event.getWeight();
 		this.castrated = event.isCastrated();
 	}
+	
+	protected void when(AnimalWasUpdated event) {
+		this.name = event.getName();
+		this.owner = event.getOwner();
+		this.breed = event.getBreed();
+		this.specie = event.getSpecie();
+		this.sex = event.getSex();
+		this.birthDate = event.getBirthDate();
+		this.weight = event.getWeight();
+		this.castrated = event.isCastrated();
+	}
+	
+    protected void when(AnimalWasDeleted event) {
+        this.markDeleted();
+    }
 
 	public Name getName() {
 		return name;
 	}
 
-	public Owner getOwner() {
+	public OwnerId getOwner() {
 		return owner;
 	}
 
-	public String getBreed() {
+	public Name getBreed() {
 		return breed;
 	}
-
+	
+	public Name getSpecie() {
+		return specie;
+	}
+	
+	public Sex getSex() {
+		return sex;
+	}
+	
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -73,8 +111,16 @@ public final class Animal extends AggregateRoot<AnimalId> {
 		return weight;
 	}
 
-	public boolean isCastrated() {
+	public Boolean isCastrated() {
 		return castrated;
 	}
+
+	public void update(Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate, Float weight, Boolean castrated) {
+		recordAndApply(new AnimalWasUpdated(this.id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
+	}
+
+    public void delete() {
+        recordAndApply(new AnimalWasDeleted(this.id, this.nextVersion()));
+    }
 	
 }

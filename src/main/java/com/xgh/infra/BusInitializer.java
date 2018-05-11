@@ -2,10 +2,17 @@ package com.xgh.infra;
 
 import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.event.EventBus;
+import com.xgh.eventhandlers.AnimalProjector;
 import com.xgh.eventhandlers.LaboratoryProjector;
 import com.xgh.eventhandlers.OwnerProjector;
 import com.xgh.eventhandlers.VeterinaryProjector;
 import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.model.command.animal.commandhandlers.AnimalDeletion;
+import com.xgh.model.command.animal.commandhandlers.AnimalRegistration;
+import com.xgh.model.command.animal.commandhandlers.AnimalUpdate;
+import com.xgh.model.command.animal.commands.DeleteAnimal;
+import com.xgh.model.command.animal.commands.RegisterAnimal;
+import com.xgh.model.command.animal.commands.UpdateAnimal;
 import com.xgh.model.command.laboratory.commandhandlers.LaboratoryDeletion;
 import com.xgh.model.command.laboratory.commandhandlers.LaboratoryRegistration;
 import com.xgh.model.command.laboratory.commandhandlers.LaboratoryUpdate;
@@ -63,6 +70,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         CommandBus.addHandler(RegisterOwner.class, new OwnerRegistration(eventStore));
         CommandBus.addHandler(UpdateOwner.class, new OwnerUpdate(eventStore));
         CommandBus.addHandler(DeleteOwner.class, new OwnerDeletion(eventStore));
+        // Animal
+        CommandBus.addHandler(RegisterAnimal.class, new AnimalRegistration(eventStore));
+        CommandBus.addHandler(UpdateAnimal.class, new AnimalUpdate(eventStore));
+        CommandBus.addHandler(DeleteAnimal.class, new AnimalDeletion(eventStore));        
     }
 
     private void initializeEventBus() {
@@ -70,6 +81,7 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         EventBus.addHandler(context.getBean(LaboratoryProjector.class));
         EventBus.addHandler(context.getBean(VeterinaryProjector.class));
         EventBus.addHandler(context.getBean(OwnerProjector.class));
+        EventBus.addHandler(context.getBean(AnimalProjector.class));
     }
 
     @Override

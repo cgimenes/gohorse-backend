@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.command.owner.Owner;
 import com.xgh.model.query.breed.Breed;
+import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.specie.Specie;
 
 @Entity
@@ -35,12 +35,12 @@ public final class Animal {
 	@JoinColumn(name = "specie_id")
 	private Specie specie;
 	
-	private char sex;
+	private String sex;
 	
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
 	
-	private boolean castrated = false;
+	private Boolean castrated = false;
 	
 	private Float weight;
 	
@@ -49,7 +49,8 @@ public final class Animal {
 	
 	protected Animal() {}
 
-	public Animal(UUID id, String name, Owner owner, Breed breed, Specie specie, char sex, LocalDate birthDate, boolean castrated, Float weight, Boolean deleted) {
+	public Animal(UUID id, String name, Owner owner, Breed breed, Specie specie, String sex, LocalDate birthDate, 
+			Boolean castrated, Float weight, Boolean deleted) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -83,7 +84,7 @@ public final class Animal {
 		return specie;
 	}
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
@@ -91,7 +92,7 @@ public final class Animal {
 		return birthDate;
 	}
 
-	public boolean isCastrated() {
+	public Boolean isCastrated() {
 		return castrated;
 	}
 

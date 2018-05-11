@@ -16,7 +16,7 @@ import com.xgh.model.command.animal.commands.RegisterAnimal;
 public class AnimalCommandController {
 	
 	@PostMapping
-	public ReponseEntity<Void> register(@RequestBody RegisterAnimal command){
+	public ResponseEntity<Void> register(@RequestBody RegisterAnimal command){
 		CommandBus.dispatch(command);
 		return ResponseEntity.created(URI.create("/animals/" + command.getId().toString())).build();
 	}

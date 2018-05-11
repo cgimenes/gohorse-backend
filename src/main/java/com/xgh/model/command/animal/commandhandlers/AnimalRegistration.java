@@ -15,7 +15,7 @@ public class AnimalRegistration implements CommandHandler<RegisterAnimal>{
 	@Override
 	public void execute(RegisterAnimal command) {
 		Animal animal = new Animal();
-		animal.register(command.getId(), command.getName(), command.getOwner(), command.getBreed(), command.getBirthDate(), command.getWeight(), command.isCastrated());
+		animal.register(command.getId(), command.getName(), command.getOwner(), command.getBreed(), command.getSpecie(), command.getSex(), command.getBirthDate(), command.getWeight(), command.isCastrated());
 		repository.push(animal);
 	}
 	

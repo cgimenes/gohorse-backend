@@ -7,21 +7,21 @@ import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 
-public final class RegisterAnimal implements Command{
-	private static final long serialVersionUID = -4460061586391159971L;
+public class UpdateAnimal implements Command{
+	private static final long serialVersionUID = -6198995221819888973L;
 	
-	private AnimalId id;
-	private Name name;
-	private OwnerId owner;
-	private Name breed;
-	private Name specie;
-	private Sex sex;
-	private Date birthDate;
-	private Float weight;
-	private boolean castrated;
+	private final AnimalId id;
+	private final Name name;
+	private final OwnerId owner;
+	private final Name breed;
+	private final Name specie;
+	private final Sex sex;
+	private final Date birthDate;
+	private final Float weight;
+	private final boolean castrated = false;
 	
-	protected RegisterAnimal() {
-		this.id = new AnimalId();
+	protected UpdateAnimal() {
+		this.id = null;
 		this.name = null;
 		this.owner = null;
 		this.breed = null;
@@ -29,7 +29,6 @@ public final class RegisterAnimal implements Command{
 		this.sex = null;
 		this.birthDate = null;
 		this.weight = null;
-		this.castrated = false;
 	}
 
 	public AnimalId getId() {
@@ -51,7 +50,7 @@ public final class RegisterAnimal implements Command{
 	public Name getSpecie() {
 		return specie;
 	}
-	
+
 	public Sex getSex() {
 		return sex;
 	}
@@ -67,5 +66,5 @@ public final class RegisterAnimal implements Command{
 	public boolean isCastrated() {
 		return castrated;
 	}
-
+	
 }
