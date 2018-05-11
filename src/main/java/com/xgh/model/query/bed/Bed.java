@@ -11,38 +11,38 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "bed")
 public final class Bed {
-	@Id
-	private UUID id;
+    @Id
+    private UUID id;
 
-	private String code;
+    private String code;
 
-	private Boolean busy;
+    private Boolean busy;
 
-	@JsonIgnore
-	private Boolean deleted = false;
+    @JsonIgnore
+    private Boolean deleted = false;
 
-	protected Bed() {}
+    protected Bed() {}
 
-	public Bed (UUID id, String code, Boolean busy, Boolean deleted) {
-		this.id = id;
-		this.code = code;
-		this.busy = busy;
-		this.deleted = deleted;
-	}
+    public Bed (UUID id, String code, Boolean busy, Boolean deleted) {
+        this.id = id;
+        this.code = code;
+        this.busy = busy;
+        this.deleted = deleted;
+    }
 
-	public UUID getId() {
-		return this.id;
-	}
+    public UUID getId() {
+        return this.id;
+    }
 
-	public String getCode() {
-		return this.code;
-	}
+    public String getCode() {
+        return this.code;
+    }
 
-	public Boolean getBusy() {
-		return this.busy;
-	}
+    public Boolean getBusy() {
+        return this.busy;
+    }
 
-	public Boolean isDeleted() {
-		return this.deleted;
-	}
+    public Boolean isDeleted() {
+        return this.deleted;
+    }
 }

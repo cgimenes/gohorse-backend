@@ -15,32 +15,32 @@ import com.xgh.model.command.bed.events.BedWasUpdated;
 
 @Component
 public class BedProjector implements EventHandler{
-	private final EventStore eventStore;
-	private final BedRepository bedRepository;
+    private final EventStore eventStore;
+    private final BedRepository bedRepository;
 
-	@Autowired
-	public BedProjector(EventStore eventStore, BedRepository bedRepository) {
-		this.eventStore = eventStore;
-		this.bedRepository = bedRepository;
-	}
+    @Autowired
+    public BedProjector(EventStore eventStore, BedRepository bedRepository) {
+        this.eventStore = eventStore;
+        this.bedRepository = bedRepository;
+    }
 
-	@Override
-	public boolean isSubscribedTo(Event<?> event) {
-		return event instanceof BedWasDeleted
-			|| event instanceof BedWasRegistered
-			|| event instanceof BedWasUpdated;
-	}
+    @Override
+    public boolean isSubscribedTo(Event<?> event) {
+        return event instanceof BedWasDeleted
+            || event instanceof BedWasRegistered
+            || event instanceof BedWasUpdated;
+    }
 
-	@Override
-	public void execute(Event<?> event) {
-		Bed entity = eventStore.pull(Bed.class, event.getEntityId());
+    @Override
+    public void execute(Event<?> event) {
+        Bed entity = eventStore.pull(Bed.class, event.getEntityId());
 
-		com.xgh.model.query.bed.Bed projection = new com.xgh.model.query.bed.Bed(
-				entity.getId().getValue(),
-				entity.getCode().getValue(),
-				entity.isBusy(),
-				entity.isDeleted());
+        com.xgh.model.query.bed.Bed projection = new com.xgh.model.query.bed.Bed(
+                entity.getId().getValue(),
+                entity.getCode().getValue(),
+                entity.isBusy(),
+                entity.isDeleted());
 
-		bedRepository.save(projection);
-	}
+        bedRepository.save(projection);
+    }
 }

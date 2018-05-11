@@ -13,8 +13,8 @@ import com.xgh.model.command.bed.commands.UpdateBed;
 @RestController
 @RequestMapping("/bed")
 public class BedCommandController extends BasicCommandController<RegisterBed, UpdateBed, DeleteBed>{
-	@Override
-	protected String getBasePath() {
-		return "/bed";
-	}
+    @Override
+    protected String getBasePath() {
+        return "/bed";
+    }
 }

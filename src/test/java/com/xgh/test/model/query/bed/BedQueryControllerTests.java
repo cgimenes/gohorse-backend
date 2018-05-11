@@ -31,55 +31,55 @@ import com.xgh.test.model.query.Page;
 @TestPropertySource("classpath:application-test.properties")
 public class BedQueryControllerTests {
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-	@Autowired
-	private BedRepository repository;
+    @Autowired
+    private BedRepository repository;
 
-	@Before
-	public void before() {
-		repository.deleteAll();
-	}
+    @Before
+    public void before() {
+        repository.deleteAll();
+    }
 
-	@Test
-	public void findById() {
-		UUID bedId = createSampleEntity();
+    @Test
+    public void findById() {
+        UUID bedId = createSampleEntity();
 
-		ResponseEntity<Bed> response = restTemplate.getForEntity("/bed/{id}", Bed.class, bedId);
+        ResponseEntity<Bed> response = restTemplate.getForEntity("/bed/{id}", Bed.class, bedId);
 
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals(bedId, response.getBody().getId());
-		assertEquals("021", response.getBody().getCode());
-		assertTrue(response.getBody().getBusy());
-	}
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(bedId, response.getBody().getId());
+        assertEquals("021", response.getBody().getCode());
+        assertTrue(response.getBody().getBusy());
+    }
 
-	@Test
-	public void findAllWithOnePage() throws IOException{
-		List<UUID> bed = new ArrayList<>();
-		for(int i = 0; i < 5; i++) {
-			bed.add(createSampleEntity());
-		}
+    @Test
+    public void findAllWithOnePage() throws IOException{
+        List<UUID> bed = new ArrayList<>();
+        for(int i = 0; i < 5; i++) {
+            bed.add(createSampleEntity());
+        }
 
-		ResponseEntity<String> responseEntity = restTemplate.getForEntity("/bed", String.class);
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity("/bed", String.class);
 
-		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-		Page<Bed> response = new ObjectMapper().readValue(responseEntity.getBody(),
-				new TypeReference<Page<Bed>>() {});
-		for (int i = 0; i < 5; i++) {
-			assertEquals(bed.get(i), response.getContent().get(i).getId());
-		}
-	}
+        Page<Bed> response = new ObjectMapper().readValue(responseEntity.getBody(),
+                new TypeReference<Page<Bed>>() {});
+        for (int i = 0; i < 5; i++) {
+            assertEquals(bed.get(i), response.getContent().get(i).getId());
+        }
+    }
 
-	@Test
-	public void findAllWithManyPages() {
-		//criar
-	}
+    @Test
+    public void findAllWithManyPages() {
+        //criar
+    }
 
-	private UUID createSampleEntity() {
-		Bed bed = new Bed(UUID.randomUUID(),"021", true, false);
-		repository.save(bed);
-		return bed.getId();
-	}
+    private UUID createSampleEntity() {
+        Bed bed = new Bed(UUID.randomUUID(),"021", true, false);
+        repository.save(bed);
+        return bed.getId();
+    }
 }

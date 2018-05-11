@@ -10,8 +10,8 @@ import com.xgh.infra.controller.BasicQueryController;
 @RestController
 @RequestMapping("/bed")
 public class BedQueryController extends BasicQueryController<Bed, BedQueryService>{
-	@Autowired
-	public	BedQueryController(BedQueryService service) {
-		super(service);
-	}
+    @Autowired
+    public    BedQueryController(BedQueryService service) {
+        super(service);
+    }
 }

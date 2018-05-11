@@ -5,9 +5,9 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.bed.BedId;
 
 public class BedWasDeleted extends Event<BedId> {
-	protected BedWasDeleted() {}
+    protected BedWasDeleted() {}
 
-	public BedWasDeleted(BedId id, EntityVersion version) {
-		super(id, version);
-	}
+    public BedWasDeleted(BedId id, EntityVersion version) {
+        super(id, version);
+    }
 }
