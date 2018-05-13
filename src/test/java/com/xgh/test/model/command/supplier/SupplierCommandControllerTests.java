@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.CpfCnpj;
+import com.xgh.model.command.valueobjects.Cpf;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.valueobjects.PostalCode;
@@ -51,7 +51,7 @@ public class SupplierCommandControllerTests {
 	@Test
 	public void registerWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), new CpfCnpj("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), new Cpf("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));
@@ -72,7 +72,7 @@ public class SupplierCommandControllerTests {
 	@Test
 	public void updateWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new CpfCnpj("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new Cpf("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));
@@ -97,7 +97,7 @@ public class SupplierCommandControllerTests {
 	@Test
 	public void deleteWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new CpfCnpj("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new Cpf("00000000191"),
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));

@@ -11,7 +11,7 @@ public final class RegisterSupplier implements Command {
 	
 	private final SupplierId id;
     private final Name name;
-    private final CpfCnpj cpfCnpj;
+    private final Document cpfCnpj;
     private final Phone phone;    
     private final Address address;
     private final Name distributionType;
@@ -33,7 +33,7 @@ public final class RegisterSupplier implements Command {
         return this.name;
     }
 
-    public CpfCnpj getCpfCnpj() {
+    public Document getCpfCnpj() {
         return this.cpfCnpj;
     }
 

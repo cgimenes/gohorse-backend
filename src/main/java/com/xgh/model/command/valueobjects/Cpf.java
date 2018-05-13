@@ -1,19 +1,32 @@
 package com.xgh.model.command.valueobjects;
 
-import com.xgh.buildingblocks.valueobject.SingleValueObject;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
-public class Cpf extends SingleValueObject<String> {
-    private static final long serialVersionUID = 9088893750584545887L;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-    protected Cpf() {}
+@JsonDeserialize(as = Cpf.class)
+public class Cpf implements Document {
+	private static final long serialVersionUID = 9088893750584545887L;
 
-    public Cpf(String cpf) {
-        super(cpf);
-        CPFValidator validator = new CPFValidator();
-        validator.initialize(null);
-        if (!validator.isValid(cpf, null)) {
-            throw new IllegalArgumentException("CPF inválido!");
-        }
-    }
+	private String cpf;
+
+	public Cpf(@JsonProperty("value") String cpf) {
+		this.cpf = cpf;
+		CPFValidator validator = new CPFValidator();
+		validator.initialize(null);
+		if (!validator.isValid(cpf, null)) {
+			throw new IllegalArgumentException("CPF inválido!");
+		}
+	}
+
+	@Override
+	public String toString() {
+		return this.cpf.toString();
+	}
+
+	public String getValue() {
+		return this.cpf;
+	}
+
 }

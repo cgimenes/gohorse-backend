@@ -13,11 +13,11 @@ public class Supplier extends AggregateRoot<SupplierId> {
 
 	private Name name;
 	private Phone phone;
-	private CpfCnpj cpfCnpj;
+	private Document cpfCnpj;
 	private Address address;
 	private Name distributionType;
 
-	public void register(SupplierId id, Name name, Phone phone, CpfCnpj cpfCnpj, Address address,
+	public void register(SupplierId id, Name name, Phone phone, Document cpfCnpj, Address address,
 			Name distributionType) {
 		if (id == null) {
 			throw new NullMandatoryArgumentException("ID");
@@ -47,7 +47,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
 				new SupplierWasRegistered(id, name, phone, cpfCnpj, address, distributionType, this.nextVersion()));
 	}
 
-	public void update(Name name, Phone phone, CpfCnpj cpfCnpj, Address address, Name distributionType) {
+	public void update(Name name, Phone phone, Document cpfCnpj, Address address, Name distributionType) {
 		recordAndApply(
 				new SupplierWasUpdated(this.id, name, phone, cpfCnpj, address, distributionType, this.nextVersion()));
 	}
@@ -81,7 +81,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
 		return this.name;
 	}
 
-	public CpfCnpj getCpfCnpj() {
+	public Document getCpfCnpj() {
 		return this.cpfCnpj;
 	}
 
