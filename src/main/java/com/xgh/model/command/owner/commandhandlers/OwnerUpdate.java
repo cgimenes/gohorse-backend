@@ -19,7 +19,7 @@ public class OwnerUpdate implements CommandHandler<UpdateOwner>{
     @Override
     public void execute(UpdateOwner command) {
         Owner owner = eventStore.pull(Owner.class, command.getId());
-        owner.update(command.getName(), command.getPhone(),command.getCpf(),command.getBirthDate(),command.getAddress());
+        owner.update(command.getName(), command.getPhone(),command.getDocument().getValue(),command.getBirthDate(),command.getAddress());
         eventStore.push(owner);
     }
 }

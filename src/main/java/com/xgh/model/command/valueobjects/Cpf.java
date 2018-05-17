@@ -10,7 +10,7 @@ public class Cpf implements Document {
 
 	private String cpf;
 	
-	private Cpf(String cpf) {
+	public Cpf(String cpf) {
 		this.cpf = cpf.toString();
 		CPFValidator validator = new CPFValidator();
 		validator.initialize(null);

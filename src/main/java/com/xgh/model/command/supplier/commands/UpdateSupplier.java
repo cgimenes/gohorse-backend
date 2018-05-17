@@ -9,7 +9,7 @@ public final class UpdateSupplier implements Command {
 
     private final SupplierId id;
     private final Name name;
-    private final Document cpfCnpj;
+    private final Document document;
     private final Phone phone;    
     private final Address address;
     private final Name distributionType;
@@ -17,7 +17,7 @@ public final class UpdateSupplier implements Command {
     protected UpdateSupplier() {
         this.id = null;
         this.name = null;
-        this.cpfCnpj = null;
+        this.document = null;
         this.phone = null;
         this.distributionType = null;
         this.address = null;
@@ -31,8 +31,8 @@ public final class UpdateSupplier implements Command {
         return this.name;
     }
 
-    public Document getCpfCnpj() {
-        return this.cpfCnpj;
+    public Document getDocument() {
+        return this.document;
     }
 
     public Phone getPhone() {

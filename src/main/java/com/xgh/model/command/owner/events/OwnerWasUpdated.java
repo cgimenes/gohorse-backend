@@ -10,17 +10,17 @@ public class OwnerWasUpdated extends Event<OwnerId> {
 
     private Name name;
     private Phone phone;
-    private Cpf cpf;
+    private String document;
     private Date birthDate;
     private Address address;
 
     protected OwnerWasUpdated() {}
 
-    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address, EntityVersion version) {
+    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, String document, Date birthDate, Address address, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
-        this.cpf = cpf;
+        this.document = document;
         this.birthDate = birthDate;
         this.address = address;
     }
@@ -33,8 +33,8 @@ public class OwnerWasUpdated extends Event<OwnerId> {
         return phone;
     }
 
-    public Cpf getCpf() {
-        return cpf;
+    public String getDocument() {
+        return document;
     }
 
     public Date getBirthDate() {

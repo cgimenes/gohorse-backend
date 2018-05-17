@@ -12,7 +12,7 @@ public class Owner extends AggregateRoot<OwnerId>{
 
     private Name name;
     private Phone phone;
-    private Cpf cpf;
+    private String document;
     private Date birthDate;
     private Address address;
 
@@ -20,7 +20,7 @@ public class Owner extends AggregateRoot<OwnerId>{
         super();
     }
 
-    public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
+    public void register(OwnerId id, Name name, Phone phone, String document, Date birthDate, Address address) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -33,7 +33,7 @@ public class Owner extends AggregateRoot<OwnerId>{
             throw new NullMandatoryArgumentException("telefone");
         }
 
-        if (cpf == null) {
+        if (document == null) {
             throw new NullMandatoryArgumentException("CPF");
         }
 
@@ -45,11 +45,11 @@ public class Owner extends AggregateRoot<OwnerId>{
             throw new NullMandatoryArgumentException("endereço");
         }
 
-        recordAndApply(new OwnerWasRegistered(id, name, phone, cpf, birthDate, address, this.nextVersion()));
+        recordAndApply(new OwnerWasRegistered(id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
-    public void update(Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
-        recordAndApply(new OwnerWasUpdated(this.id, name, phone, cpf, birthDate, address, this.nextVersion()));
+    public void update(Name name, Phone phone, String document, Date birthDate, Address address) {
+        recordAndApply(new OwnerWasUpdated(this.id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
     public void delete() {
@@ -59,7 +59,7 @@ public class Owner extends AggregateRoot<OwnerId>{
     protected void when(OwnerWasRegistered event) {
         this.id = event.getEntityId();
         this.name = event.getName();
-        this.cpf = event.getCpf();
+        this.document = event.getDocument();
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
@@ -67,7 +67,7 @@ public class Owner extends AggregateRoot<OwnerId>{
 
     protected void when(OwnerWasUpdated event) {
         this.name = event.getName();
-        this.cpf = event.getCpf();
+        this.document = event.getDocument();
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
@@ -81,8 +81,8 @@ public class Owner extends AggregateRoot<OwnerId>{
         return this.name;
     }
 
-    public Cpf getCpf() {
-        return this.cpf;
+    public String getDocument() {
+        return this.document;
     }
 
     public Phone getPhone() {

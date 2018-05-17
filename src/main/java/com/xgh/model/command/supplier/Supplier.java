@@ -47,9 +47,9 @@ public class Supplier extends AggregateRoot<SupplierId> {
 				new SupplierWasRegistered(id, name, phone, document, address, distributionType, this.nextVersion()));
 	}
 
-	public void update(Name name, Phone phone, String cpfCnpj, Address address, Name distributionType) {
+	public void update(Name name, Phone phone, String document, Address address, Name distributionType) {
 		recordAndApply(
-				new SupplierWasUpdated(this.id, name, phone, cpfCnpj, address, distributionType, this.nextVersion()));
+				new SupplierWasUpdated(this.id, name, phone, document, address, distributionType, this.nextVersion()));
 	}
 
 	public void delete() {
@@ -67,7 +67,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
 
 	protected void when(SupplierWasUpdated event) {
 		this.name = event.getName();
-		this.document = event.getCpfCnpj();
+		this.document = event.getDocument();
 		this.phone = event.getPhone();
 		this.address = event.getAddress();
 		this.distributionType = event.getDistributionType();
