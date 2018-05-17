@@ -10,13 +10,13 @@ public class SupplierWasUpdated extends Event<SupplierId> {
 
     private Name name;
     private Phone phone;
-    private Document cpfCnpj;
+    private String cpfCnpj;
     private Address address;
     private Name distributionType;
 
     protected SupplierWasUpdated() {}
 
-    public SupplierWasUpdated(SupplierId id, Name name, Phone phone, Document cpfCnpj, Address address, Name distributionType, EntityVersion version) {
+    public SupplierWasUpdated(SupplierId id, Name name, Phone phone, String cpfCnpj, Address address, Name distributionType, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
@@ -33,7 +33,7 @@ public class SupplierWasUpdated extends Event<SupplierId> {
         return phone;
     }
 
-    public Document getCpfCnpj() {
+    public String getCpfCnpj() {
         return cpfCnpj;
     }
 

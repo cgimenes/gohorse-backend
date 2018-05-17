@@ -21,7 +21,7 @@ public class SupplierRegistration implements CommandHandler<RegisterSupplier> {
 	@Override
 	public void execute(RegisterSupplier command) {
 		Supplier supplier = new Supplier();
-		supplier.register(command.getId(), command.getName(), command.getPhone(), command.getCpfCnpj(), command.getAddress(), command.getDistributionType());
+		supplier.register(command.getId(), command.getName(), command.getPhone(), command.getDocument().getValue(), command.getAddress(), command.getDistributionType());
 		repository.push(supplier);
 	}
 }

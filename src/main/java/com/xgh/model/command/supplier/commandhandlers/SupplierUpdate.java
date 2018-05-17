@@ -21,7 +21,7 @@ public class SupplierUpdate implements CommandHandler<UpdateSupplier>{
 	@Override
 	public void execute(UpdateSupplier command) {
 		Supplier supplier = repository.pull(Supplier.class, command.getId());
-		supplier.update(command.getName(), command.getPhone(),command.getCpfCnpj(),command.getAddress(), command.getDistributionType());
+		supplier.update(command.getName(), command.getPhone(),command.getCpfCnpj().getValue(),command.getAddress(), command.getDistributionType());
 		repository.push(supplier);
 	}
 }

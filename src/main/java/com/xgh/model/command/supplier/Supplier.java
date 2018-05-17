@@ -13,11 +13,11 @@ public class Supplier extends AggregateRoot<SupplierId> {
 
 	private Name name;
 	private Phone phone;
-	private Document cpfCnpj;
+	private String document;
 	private Address address;
 	private Name distributionType;
 
-	public void register(SupplierId id, Name name, Phone phone, Document cpfCnpj, Address address,
+	public void register(SupplierId id, Name name, Phone phone, String document, Address address,
 			Name distributionType) {
 		if (id == null) {
 			throw new NullMandatoryArgumentException("ID");
@@ -31,8 +31,8 @@ public class Supplier extends AggregateRoot<SupplierId> {
 			throw new NullMandatoryArgumentException("Telefone");
 		}
 
-		if (cpfCnpj == null) {
-			throw new NullMandatoryArgumentException("CPF_CNPJ");
+		if (document == null) {
+			throw new NullMandatoryArgumentException("CPF/CNPJ");
 		}
 
 		if (address == null) {
@@ -44,10 +44,10 @@ public class Supplier extends AggregateRoot<SupplierId> {
 		}
 
 		recordAndApply(
-				new SupplierWasRegistered(id, name, phone, cpfCnpj, address, distributionType, this.nextVersion()));
+				new SupplierWasRegistered(id, name, phone, document, address, distributionType, this.nextVersion()));
 	}
 
-	public void update(Name name, Phone phone, Document cpfCnpj, Address address, Name distributionType) {
+	public void update(Name name, Phone phone, String cpfCnpj, Address address, Name distributionType) {
 		recordAndApply(
 				new SupplierWasUpdated(this.id, name, phone, cpfCnpj, address, distributionType, this.nextVersion()));
 	}
@@ -59,7 +59,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
 	protected void when(SupplierWasRegistered event) {
 		this.id = event.getEntityId();
 		this.name = event.getName();
-		this.cpfCnpj = event.getCpfCnpj();
+		this.document = event.getDocument();
 		this.phone = event.getPhone();
 		this.address = event.getAddress();
 		this.distributionType = event.getDistributionType();
@@ -67,7 +67,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
 
 	protected void when(SupplierWasUpdated event) {
 		this.name = event.getName();
-		this.cpfCnpj = event.getCpfCnpj();
+		this.document = event.getCpfCnpj();
 		this.phone = event.getPhone();
 		this.address = event.getAddress();
 		this.distributionType = event.getDistributionType();
@@ -81,8 +81,8 @@ public class Supplier extends AggregateRoot<SupplierId> {
 		return this.name;
 	}
 
-	public Document getCpfCnpj() {
-		return this.cpfCnpj;
+	public String getDocument() {
+		return this.document;
 	}
 
 	public Phone getPhone() {

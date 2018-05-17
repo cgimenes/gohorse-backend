@@ -10,8 +10,8 @@ public final class RegisterSupplier implements Command {
 	
 	
 	private final SupplierId id;
-    private final Name name;
-    private final Document cpfCnpj;
+    private final Name name;       
+    private final Document document;
     private final Phone phone;    
     private final Address address;
     private final Name distributionType;
@@ -19,7 +19,7 @@ public final class RegisterSupplier implements Command {
     protected RegisterSupplier() {
         this.id = new SupplierId();
         this.name = null;
-        this.cpfCnpj = null;
+        this.document = null;
         this.phone = null;
         this.distributionType = null;
         this.address = null;
@@ -33,8 +33,8 @@ public final class RegisterSupplier implements Command {
         return this.name;
     }
 
-    public Document getCpfCnpj() {
-        return this.cpfCnpj;
+    public Document getDocument() {
+        return this.document;
     }
 
     public Phone getPhone() {

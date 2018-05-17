@@ -2,7 +2,6 @@ package com.xgh.model.command.valueobjects;
 
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(as = Cpf.class)
@@ -10,9 +9,9 @@ public class Cpf implements Document {
 	private static final long serialVersionUID = 9088893750584545887L;
 
 	private String cpf;
-
-	public Cpf(@JsonProperty("value") String cpf) {
-		this.cpf = cpf;
+	
+	private Cpf(String cpf) {
+		this.cpf = cpf.toString();
 		CPFValidator validator = new CPFValidator();
 		validator.initialize(null);
 		if (!validator.isValid(cpf, null)) {

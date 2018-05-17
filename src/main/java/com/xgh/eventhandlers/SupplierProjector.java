@@ -46,8 +46,8 @@ public class SupplierProjector implements EventHandler{
         com.xgh.model.query.supplier.Supplier projection = new com.xgh.model.query.supplier.Supplier(
                 entity.getId().getValue(),
                 entity.getName().getValue(),
-                entity.getCpfCnpj().getValue(),
                 entity.getPhone().getValue(),
+                entity.getDocument(),                
                 addressProjection,
                 distributionTypeProjection,
                 entity.isDeleted());

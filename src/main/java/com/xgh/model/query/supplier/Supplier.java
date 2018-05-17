@@ -3,6 +3,7 @@ package com.xgh.model.query.supplier;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,7 +24,8 @@ public final class Supplier {
 
     private String phone;
 
-    private String cpfCnpj;    
+    @Column(name="cpf_cnpj")
+    private String document;    
 
     @ManyToOne
     @JoinColumn(name="address_id")
@@ -38,10 +40,10 @@ public final class Supplier {
 
     protected Supplier() {}
 
-    public Supplier(UUID id, String name, String phone, String cpfCnpj, Address address, DistributionType distributionType, Boolean deleted) {
+    public Supplier(UUID id, String name, String phone, String document, Address address, DistributionType distributionType, Boolean deleted) {
         this.id = id;
         this.name = name;
-        this.cpfCnpj = cpfCnpj;
+        this.document = document;
         this.phone = phone;        
         this.address = address;
         this.distributionType = distributionType;
@@ -59,9 +61,21 @@ public final class Supplier {
     public String getPhone() {
         return phone;
     }
-
-    public String getCpfCnpj() {
-        return cpfCnpj;
+    
+    public String getDocument() {
+        return document;
     }
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public DistributionType getDistributionType() {
+		return distributionType;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}       
+    
 }

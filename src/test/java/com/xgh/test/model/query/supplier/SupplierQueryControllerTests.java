@@ -61,7 +61,7 @@ public class SupplierQueryControllerTests {
         assertEquals(supplierId, response.getBody().getId());
         assertEquals("Nestle", response.getBody().getName());
         assertEquals("44998015821", response.getBody().getPhone());
-        assertEquals("00000000191", response.getBody().getCpfCnpj());
+        assertEquals("00000000191", response.getBody().getDocument());
     }
 
     @Test    

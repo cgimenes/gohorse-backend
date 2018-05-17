@@ -22,7 +22,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Cpf;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.valueobjects.PostalCode;
@@ -51,7 +50,7 @@ public class SupplierCommandControllerTests {
 	@Test
 	public void registerWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), new Cpf("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), "00000000191",
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));
@@ -64,7 +63,7 @@ public class SupplierCommandControllerTests {
 		assertTrue(entity.equals(entityFromStore));
 		assertEquals("Nestle", entityFromStore.getName().toString());
 		assertEquals("44998015821", entityFromStore.getPhone().toString());
-		assertEquals("00000000191", entityFromStore.getCpfCnpj().toString());
+		assertEquals("00000000191", entityFromStore.getDocument().toString());
 		assertEquals("/suppliers/" + entity.getId(), response.getHeaders().getLocation().getPath());
 		assertEquals("1", entityFromStore.getVersion().toString());
 	}
@@ -72,13 +71,13 @@ public class SupplierCommandControllerTests {
 	@Test
 	public void updateWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new Cpf("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));
 		eventStore.push(entity);
 
-		entity.update(entity.getName(), new Phone("44998731154"), entity.getCpfCnpj(), entity.getAddress(),
+		entity.update(entity.getName(), new Phone("44998731154"), entity.getDocument(), entity.getAddress(),
 				entity.getDistributionType());
 
 		RequestEntity<Supplier> request = RequestEntity.put(URI.create("/suppliers")).body(entity);
@@ -90,14 +89,14 @@ public class SupplierCommandControllerTests {
 		assertTrue(entity.equals(entityFromStore));
 		assertEquals("Nestle", entityFromStore.getName().toString());
 		assertEquals("44998731154", entityFromStore.getPhone().toString());
-		assertEquals("00000000191", entityFromStore.getCpfCnpj().toString());
+		assertEquals("00000000191", entityFromStore.getDocument().toString());
 		assertEquals("2", entityFromStore.getVersion().toString());
 	}
 
 	@Test
 	public void deleteWithSuccess() {
 		Supplier entity = new Supplier();
-		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), new Cpf("00000000191"),
+		entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
 				new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
 						null),
 				new Name("Ração"));

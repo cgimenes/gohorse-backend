@@ -10,17 +10,17 @@ public class SupplierWasRegistered extends Event<SupplierId> {
 
     private Name name;
     private Phone phone;
-    private Document cpfCnpj;
+    private String document;
     private Address address;
     private Name distributionType;
 
     protected SupplierWasRegistered() {}
 
-    public SupplierWasRegistered(SupplierId id, Name name, Phone phone, Document cpfCnpj, Address address, Name distributionType, EntityVersion version) {
+    public SupplierWasRegistered(SupplierId id, Name name, Phone phone, String document, Address address, Name distributionType, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
-        this.cpfCnpj = cpfCnpj;
+        this.document = document;
         this.address = address;
         this.distributionType = distributionType;
     }
@@ -33,8 +33,8 @@ public class SupplierWasRegistered extends Event<SupplierId> {
         return phone;
     }
 
-    public Document getCpfCnpj() {
-        return cpfCnpj;
+    public String getDocument() {
+        return document;
     }
 
     public Name getDistributionType() {
