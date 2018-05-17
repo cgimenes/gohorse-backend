@@ -7,8 +7,6 @@ import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
 
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
-    private static final long serialVersionUID = 325564934279313058L;
-
     /*
      * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
      */
@@ -25,8 +23,8 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     /*
      * Grava o novo evento na lista de eventos à serem persistidos (uncommittedEvents)
      * e aplica o evento
-     * 
-     * TODO preecher o version com o nextVersion automagicamente 
+     *
+     * TODO preecher o version com o nextVersion automagicamente
      */
     protected void recordAndApply(Event<IdType> event) {
         if (this.isDeleted()) {
@@ -45,7 +43,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     }
 
     /*
-     * Aplica o evento, atualizando os metadados e invocando o handler do evento 
+     * Aplica o evento, atualizando os metadados e invocando o handler do evento
      */
     private void apply(Event<IdType> event) {
         this.updateMetadata(event);
@@ -67,7 +65,8 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
             try {
               handlerMethod.invoke(this, event);
             } catch (Exception e) {
-                throw new RuntimeException("Não foi possível invocar o método de aplicação do evento: " + event.getClass().getName(), e);
+                throw new RuntimeException(String.format(
+                    "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
             }
         }
     }

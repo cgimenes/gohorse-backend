@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.xgh.model.command.veterinary.VeterinaryId;
+import com.xgh.model.query.veterinary.VeterinaryRepository;
+import com.xgh.test.model.query.Page;
+import com.xgh.test.model.query.address.AddressSampleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,26 +18,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.command.valueobjects.Email;
-import com.xgh.model.command.valueobjects.Name;
-import com.xgh.model.command.valueobjects.Phone;
-import com.xgh.model.command.valueobjects.PostalCode;
 import com.xgh.model.query.veterinary.Veterinary;
 
-// TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
@@ -45,14 +36,14 @@ public class VeterinaryQueryControllerTests {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private PostgresEventStore eventStore;
+    private AddressSampleData addressSampleData;
 
     @Autowired
-    protected JdbcTemplate connection;
+    private VeterinaryRepository repository;
 
     @Before
     public void before() {
-        connection.update("truncate table veterinary");
+        repository.deleteAll();
     }
 
     @Test
@@ -71,7 +62,6 @@ public class VeterinaryQueryControllerTests {
         assertEquals("1986-10-03", response.getBody().getBirthDate().toString());
     }
 
-    // TODO corrigir
     @Test
     public void findAllWithOnePage() throws IOException {
         List<UUID> veterinarians = new ArrayList<>();
@@ -83,27 +73,18 @@ public class VeterinaryQueryControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        Page<Veterinary> response = new ObjectMapper().readValue(responseEntity.getBody(),
-                new TypeReference<Page<Veterinary>>() {
-                });
+        Page<Veterinary> response = new ObjectMapper().findAndRegisterModules().readValue(
+                responseEntity.getBody(), new TypeReference<Page<Veterinary>>() {});
         for (int i = 0; i < 5; i++) {
             assertEquals(veterinarians.get(i), response.getContent().get(i).getId());
         }
     }
 
-    @Test
-    public void findAllWithManyPages() {
-        // TODO criar
-    }
-
     private UUID createSampleEntity() {
-        com.xgh.model.command.veterinary.Veterinary veterinary = new com.xgh.model.command.veterinary.Veterinary();
-        veterinary.register(new VeterinaryId(), new Name("Ricardo Requena"),
-                new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
-                        null),
-                new Phone("44998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-                new Date(LocalDate.of(1986, 10, 03)));
-        eventStore.push(veterinary);
-        return veterinary.getId().getValue();
+        com.xgh.model.query.address.Address address = addressSampleData.getSample();
+        Veterinary veterinary = new Veterinary(UUID.randomUUID(), "Ricardo Requena", address, "44998015821",
+                "9375", "espacoanimal.vet@hotmail.com", LocalDate.parse("1986-10-03"), false);
+        repository.save(veterinary);
+        return veterinary.getId();
     }
 }

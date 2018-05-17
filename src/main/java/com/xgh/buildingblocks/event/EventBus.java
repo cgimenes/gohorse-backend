@@ -23,13 +23,14 @@ public class EventBus {
         return instance;
     }
 
-    public static void addHandler(EventHandler eventHandler) {
-        getInstance().handlers.add(eventHandler);
+    public static void addHandler(EventHandler handler) {
+        logger.info(String.format("Adicionando handler '%s' ao EventBus", handler.getClass().getName()));
+        getInstance().handlers.add(handler);
     }
 
     /*
      * Dispara o evento para todos os handlers cadastrados e cada handler decide se
-     * irá ou não ser executado para o tipo do evento que foi disparado 
+     * irá ou não ser executado para o tipo do evento que foi disparado
      */
     public static void dispatch(Event<?> event) {
         logger.info(String.format("Disparando evento: %s com os dados: %s", event.getClass().getName(), event.toJson()));

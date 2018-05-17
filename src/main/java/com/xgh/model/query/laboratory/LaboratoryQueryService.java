@@ -1,25 +1,13 @@
 package com.xgh.model.query.laboratory;
 
-import java.util.UUID;
-
+import com.xgh.infra.service.BasicQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.xgh.Constants;
-
 @Service
-public class LaboratoryQueryService {
+public class LaboratoryQueryService extends BasicQueryService<Laboratory, LaboratoryRepository> {
     @Autowired
-    private LaboratoryRepository repository;
-
-    public Page<Laboratory> findAll(int page) {
-        PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
-        return repository.findAll(request);
+    public LaboratoryQueryService(LaboratoryRepository repository) {
+        super(repository);
     }
-    
-	public Laboratory findById(UUID id) {
-		return repository.getOne(id);
-	}
 }

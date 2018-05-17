@@ -5,8 +5,6 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public abstract class SingleValueObject<T> implements ValueObject {
-    private static final long serialVersionUID = -1149703165422656566L;
-
     private final T value;
 
     protected SingleValueObject() {
@@ -30,12 +28,12 @@ public abstract class SingleValueObject<T> implements ValueObject {
     public String toString() {
         return value.toString();
     }
-    
+
     @Override
     public int hashCode() {
         return Objects.hashCode(this.value);
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {

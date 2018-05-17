@@ -6,8 +6,6 @@ import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.*;
 
 public class OwnerWasRegistered extends Event<OwnerId> {
-    private static final long serialVersionUID = -3062625947435023015L;
-
     private Name name;
     private Phone phone;
     private Cpf cpf;

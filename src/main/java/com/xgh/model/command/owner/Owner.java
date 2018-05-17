@@ -7,24 +7,18 @@ import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.valueobjects.*;
 
-public final class Owner extends AggregateRoot<OwnerId>{
-    private static final long serialVersionUID = -6278682205377779382L;
-
+public final class Owner extends AggregateRoot<OwnerId> {
     private Name name;
     private Phone phone;
     private Cpf cpf;
     private Date birthDate;
     private Address address;
 
-    public Owner() {
-        super();
-    }
-
     public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
-        
+
         if (name == null) {
             throw new NullMandatoryArgumentException("nome");
         }

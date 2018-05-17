@@ -17,13 +17,11 @@ import com.xgh.model.query.address.Address;
 @Table(name = "laboratory")
 public final class Laboratory {
     @Id
-    @Column(name = "id")
     private UUID id;
 
     @Column(name = "company_name")
     private String companyName;
 
-    @Column(name = "phone")
     private String phone;
 
     @ManyToOne
@@ -31,7 +29,6 @@ public final class Laboratory {
     private Address address;
 
     @JsonIgnore
-    @Column(name = "deleted")
     private Boolean deleted = false;
 
     protected Laboratory() {}
@@ -59,7 +56,7 @@ public final class Laboratory {
     public UUID getId() {
         return id;
     }
-    
+
     public Boolean isDeleted() {
         return deleted;
     }

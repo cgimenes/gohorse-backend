@@ -13,102 +13,96 @@ import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.events.VeterinaryWasRegistered;
 
 public class Veterinary extends AggregateRoot<VeterinaryId> {
-	private static final long serialVersionUID = 3238712574990382956L;
-	
-	private Name name;
-	private Address address;
-	private Phone phone;
-	private Crmv crmv;
-	private Email email;
-	private Date birthDate;
+    private Name name;
+    private Address address;
+    private Phone phone;
+    private Crmv crmv;
+    private Email email;
+    private Date birthDate;
 
-	public Veterinary() {
-		super();
-	}
+    public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+        if (id == null) {
+            throw new NullMandatoryArgumentException("id");
+        }
 
-	public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
-    	if (id == null) {
-    		throw new NullMandatoryArgumentException("id");
-    	}
-		
-		if (name == null) {
-			throw new NullMandatoryArgumentException("nome");
-		}
+        if (name == null) {
+            throw new NullMandatoryArgumentException("nome");
+        }
 
-		if (address == null) {
-			throw new NullMandatoryArgumentException("endereço");
-		}
+        if (address == null) {
+            throw new NullMandatoryArgumentException("endereço");
+        }
 
-		if (phone == null) {
-			throw new NullMandatoryArgumentException("telefone");
-		}
+        if (phone == null) {
+            throw new NullMandatoryArgumentException("telefone");
+        }
 
-		if (crmv == null) {
-			throw new NullMandatoryArgumentException("CRMV");
-		}
-		
-		if (email == null) {
-			throw new NullMandatoryArgumentException("e-mail");
-		}
-		
-		if (birthDate == null) {
-			throw new NullMandatoryArgumentException("data de nascimento");
-		}
+        if (crmv == null) {
+            throw new NullMandatoryArgumentException("CRMV");
+        }
 
-		recordAndApply(new VeterinaryWasRegistered(id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
-	}
+        if (email == null) {
+            throw new NullMandatoryArgumentException("e-mail");
+        }
 
-	public void update(Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
-		recordAndApply(new VeterinaryWasUpdated(this.id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
-	}
-	
-	public void delete() {
-		recordAndApply(new VeterinaryWasDeleted(this.id, this.nextVersion()));
-	}
+        if (birthDate == null) {
+            throw new NullMandatoryArgumentException("data de nascimento");
+        }
 
-	protected void when(VeterinaryWasRegistered event) {
-		this.name = event.getName();
-		this.address = event.getAddress();
-		this.phone = event.getPhone();
-		this.crmv = event.getCrmv();
-		this.email = event.getEmail();
-		this.birthDate = event.getBirthDate();
-	}
+        recordAndApply(new VeterinaryWasRegistered(id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
+    }
 
-	protected void when(VeterinaryWasUpdated event) {
-		this.name = event.getName();
-		this.address = event.getAddress();
-		this.phone = event.getPhone();
-		this.crmv = event.getCrmv();
-		this.email = event.getEmail();
-		this.birthDate = event.getBirthDate();
-	}
-	
-	protected void when(VeterinaryWasDeleted event) {
-		this.markDeleted();
-	}
+    public void update(Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+        recordAndApply(new VeterinaryWasUpdated(this.id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
+    }
 
-	public Name getName() {
-		return name;
-	}
+    public void delete() {
+        recordAndApply(new VeterinaryWasDeleted(this.id, this.nextVersion()));
+    }
 
-	public Address getAddress() {
-		return address;
-	}
+    protected void when(VeterinaryWasRegistered event) {
+        this.name = event.getName();
+        this.address = event.getAddress();
+        this.phone = event.getPhone();
+        this.crmv = event.getCrmv();
+        this.email = event.getEmail();
+        this.birthDate = event.getBirthDate();
+    }
 
-	public Phone getPhone() {
-		return phone;
-	}
+    protected void when(VeterinaryWasUpdated event) {
+        this.name = event.getName();
+        this.address = event.getAddress();
+        this.phone = event.getPhone();
+        this.crmv = event.getCrmv();
+        this.email = event.getEmail();
+        this.birthDate = event.getBirthDate();
+    }
 
-	public Crmv getCrmv() {
-		return crmv;
-	}
+    protected void when(VeterinaryWasDeleted event) {
+        this.markDeleted();
+    }
 
-	public Email getEmail() {
-		return email;
-	}
+    public Name getName() {
+        return name;
+    }
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
+    public Address getAddress() {
+        return address;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Crmv getCrmv() {
+        return crmv;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
 }

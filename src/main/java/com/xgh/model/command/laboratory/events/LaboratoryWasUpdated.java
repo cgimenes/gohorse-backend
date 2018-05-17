@@ -8,30 +8,28 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public class LaboratoryWasUpdated extends Event<LaboratoryId> {
-	private static final long serialVersionUID = 8837633091108416524L;
-	
-	private Name companyName;
-	private Phone phone;
-	private Address address;
+    private Name companyName;
+    private Phone phone;
+    private Address address;
 
-	protected LaboratoryWasUpdated() {}
-	
+    protected LaboratoryWasUpdated() {}
+
     public LaboratoryWasUpdated(LaboratoryId id, Name companyName, Phone phone, Address address, EntityVersion version) {
         super(id, version);
         this.companyName = companyName;
         this.phone = phone;
-		this.address = address;
+        this.address = address;
     }
-    
-	public Name getCompanyName() {
-		return this.companyName;
-	}
 
-	public Phone getPhone() {
-		return this.phone;
-	}
+    public Name getCompanyName() {
+        return this.companyName;
+    }
 
-	public Address getAddress() {
-		return this.address;
-	}
+    public Phone getPhone() {
+        return this.phone;
+    }
+
+    public Address getAddress() {
+        return this.address;
+    }
 }
