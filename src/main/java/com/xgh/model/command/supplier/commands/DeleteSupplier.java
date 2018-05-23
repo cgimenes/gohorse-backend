@@ -13,6 +13,7 @@ public class DeleteSupplier implements Command {
         this.id = null;
     }
 
+	@Override
     public SupplierId getId() {
         return id;
     }
