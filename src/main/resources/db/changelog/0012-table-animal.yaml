@@ -56,7 +56,7 @@ databaseChangeLog:
                             nullable: false
                     - column:
                         name: weight
-                        type: ${TYPE_INTEGER}
+                        type: ${TYPE_FLOAT}
                     - column:
                         name: deleted
                         type: ${TYPE_BOOL}

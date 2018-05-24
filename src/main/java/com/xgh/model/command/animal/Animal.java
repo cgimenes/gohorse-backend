@@ -9,8 +9,6 @@ import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.*;
 
 public final class Animal extends AggregateRoot<AnimalId> {
-	private static final long serialVersionUID = 3118505285619458826L;
-
 	private Name name;
 	private OwnerId owner;
 	private Name breed;
@@ -20,37 +18,33 @@ public final class Animal extends AggregateRoot<AnimalId> {
 	private Float weight;
 	private Boolean castrated = false;
 	
-	public Animal() {
-		super();
-	}
-	
 	public void register(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate, Float weight, Boolean castrated) {
 		if(id == null) {
 			throw new NullMandatoryArgumentException("id");
 		}
 		
 		if(name == null) {
-			throw new NullMandatoryArgumentException("Nome");
+			throw new NullMandatoryArgumentException("nome");
 		}
 		
 		if(owner == null) {
-			throw new NullMandatoryArgumentException("Proprietario");
+			throw new NullMandatoryArgumentException("proprietario");
 		}
 		
 		if(breed == null){
-			throw new NullMandatoryArgumentException("Raça");
+			throw new NullMandatoryArgumentException("raça");
 		}
 		
 		if(specie == null) {
-			throw new NullMandatoryArgumentException("Espécie");
+			throw new NullMandatoryArgumentException("espécie");
 		}
 		
 		if(sex == null) {
-			throw new NullMandatoryArgumentException("Sexo");
+			throw new NullMandatoryArgumentException("sexo");
 		}
 		
 		if(birthDate == null) {
-			throw new NullMandatoryArgumentException("Data de Nascimento");
+			throw new NullMandatoryArgumentException("data de nascimento");
 		}
 		
 		recordAndApply(new AnimalWasRegistered(id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
@@ -122,5 +116,4 @@ public final class Animal extends AggregateRoot<AnimalId> {
     public void delete() {
         recordAndApply(new AnimalWasDeleted(this.id, this.nextVersion()));
     }
-	
 }

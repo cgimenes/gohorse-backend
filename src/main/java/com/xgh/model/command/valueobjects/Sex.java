@@ -2,14 +2,17 @@ package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
-public class Sex extends SingleValueObject<String>{
-	private static final long serialVersionUID = -8130975290806456961L;
-	
-	protected Sex() {}
-	
-	public Sex(char sex) {
-		if(sex != 'F' && sex != 'M') {
-			throw new IllegalArgumentException("Sexo Inválido!");
-		}
-	}
+public class Sex extends SingleValueObject<Character> {
+    protected Sex() {}
+
+    public Sex(String sex) {
+        this(sex.charAt(0));
+    }
+
+    public Sex(char sex) {
+        super(sex);
+        if (sex != 'F' && sex != 'M') {
+            throw new IllegalArgumentException("Sexo Inválido!");
+        }
+    }
 }

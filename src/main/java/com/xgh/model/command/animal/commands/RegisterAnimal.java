@@ -7,65 +7,62 @@ import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 
-public final class RegisterAnimal implements Command{
-	private static final long serialVersionUID = -4460061586391159971L;
-	
-	private AnimalId id;
-	private Name name;
-	private OwnerId owner;
-	private Name breed;
-	private Name specie;
-	private Sex sex;
-	private Date birthDate;
-	private Float weight;
-	private boolean castrated;
-	
-	protected RegisterAnimal() {
-		this.id = new AnimalId();
-		this.name = null;
-		this.owner = null;
-		this.breed = null;
-		this.specie = null;
-		this.sex = null;
-		this.birthDate = null;
-		this.weight = null;
-		this.castrated = false;
-	}
+public final class RegisterAnimal implements Command {
+    private AnimalId id;
+    private Name name;
+    private OwnerId owner;
+    private Name breed;
+    private Name specie;
+    private Sex sex;
+    private Date birthDate;
+    private Float weight;
+    private boolean castrated;
 
-	public AnimalId getId() {
-		return id;
-	}
+    protected RegisterAnimal() {
+        this.id = new AnimalId();
+        this.name = null;
+        this.owner = null;
+        this.breed = null;
+        this.specie = null;
+        this.sex = null;
+        this.birthDate = null;
+        this.weight = null;
+        this.castrated = false;
+    }
 
-	public Name getName() {
-		return name;
-	}
+    public AnimalId getId() {
+        return id;
+    }
 
-	public OwnerId getOwner() {
-		return owner;
-	}
+    public Name getName() {
+        return name;
+    }
 
-	public Name getBreed() {
-		return breed;
-	}
+    public OwnerId getOwner() {
+        return owner;
+    }
 
-	public Name getSpecie() {
-		return specie;
-	}
-	
-	public Sex getSex() {
-		return sex;
-	}
-	
-	public Date getBirthDate() {
-		return birthDate;
-	}
+    public Name getBreed() {
+        return breed;
+    }
 
-	public Float getWeight() {
-		return weight;
-	}
+    public Name getSpecie() {
+        return specie;
+    }
 
-	public boolean isCastrated() {
-		return castrated;
-	}
+    public Sex getSex() {
+        return sex;
+    }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Float getWeight() {
+        return weight;
+    }
+
+    public boolean isCastrated() {
+        return castrated;
+    }
 }

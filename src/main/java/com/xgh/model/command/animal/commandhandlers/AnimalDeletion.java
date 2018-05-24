@@ -4,10 +4,14 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.model.command.animal.Animal;
 import com.xgh.model.command.animal.commands.DeleteAnimal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class AnimalDeletion implements CommandHandler<DeleteAnimal>{
+@Component
+public class AnimalDeletion implements CommandHandler<DeleteAnimal> {
 	private EventStore repository;
-	
+
+	@Autowired
 	public AnimalDeletion(EventStore repository) {
 		this.repository = repository;
 	}
@@ -18,5 +22,4 @@ public class AnimalDeletion implements CommandHandler<DeleteAnimal>{
 		animal.delete();
 		repository.push(animal);
 	}
-
 }

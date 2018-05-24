@@ -1,23 +1,18 @@
 package com.xgh.model.command.animal;
 
-import java.net.URI;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.xgh.infra.controller.BasicCommandController;
+import com.xgh.model.command.animal.commands.DeleteAnimal;
+import com.xgh.model.command.animal.commands.RegisterAnimal;
+import com.xgh.model.command.animal.commands.UpdateAnimal;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xgh.buildingblocks.command.CommandBus;
-import com.xgh.model.command.animal.commands.RegisterAnimal;
-
 @RestController
 @RequestMapping("/animals")
-public class AnimalCommandController {
-	
-	@PostMapping
-	public ResponseEntity<Void> register(@RequestBody RegisterAnimal command){
-		CommandBus.dispatch(command);
-		return ResponseEntity.created(URI.create("/animals/" + command.getId().toString())).build();
-	}
+public class AnimalCommandController extends BasicCommandController<RegisterAnimal, UpdateAnimal, DeleteAnimal> {
+
+    @Override
+    protected String getBasePath() {
+        return "/animals";
+    }
 }

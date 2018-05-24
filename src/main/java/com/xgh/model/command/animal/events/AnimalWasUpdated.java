@@ -9,8 +9,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 
 public class AnimalWasUpdated extends Event<AnimalId> {
-	private static final long serialVersionUID = -2290433458911901044L;
-	
 	private Name name;
 	private OwnerId owner;
 	private Name breed;

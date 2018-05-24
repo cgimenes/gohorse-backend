@@ -42,7 +42,7 @@ public class ProductProjector implements EventHandler {
         Optional<Supplier> supplier = supplierRepository.findById(entity.getSupplierId().getValue());
 
         if (!supplier.isPresent()) {
-            throw new RuntimeException("Falha na projeção da entidade 'Supplier'");
+            throw new RuntimeException(Supplier.class.getSimpleName());
         }
 
         com.xgh.model.query.product.Product projection = new com.xgh.model.query.product.Product(

@@ -64,7 +64,7 @@ public class AnimalCommandControllerTests {
         assertEquals("/animals/" + entity.getId(), response.getHeaders().getLocation().getPath());
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino", entityFromStore.getName().toString());
-        assertEquals(owner.getId(), entityFromStore.getOwner().getValue());
+        assertEquals(owner.getId().getValue(), entityFromStore.getOwner().getValue());
         assertEquals("Xinauzer", entityFromStore.getBreed().toString());
         assertEquals("Cachorro", entityFromStore.getSpecie().toString());
         assertEquals("M", entityFromStore.getSex().toString());
@@ -100,7 +100,7 @@ public class AnimalCommandControllerTests {
         assertEquals("Splitz", entityFromStore.getBreed().toString());
         assertEquals("Cachorro", entityFromStore.getSpecie().toString());
         assertEquals("M", entityFromStore.getSex().toString());
-        assertEquals(new Date(LocalDate.of(1001, 01, 01)), entityFromStore.getBirthDate());
+        assertEquals(new Date(LocalDate.of(1002, 02, 02)), entityFromStore.getBirthDate());
         assertEquals(new Float(10), entityFromStore.getWeight());
         assertEquals(false, entityFromStore.isCastrated());
         assertEquals("2", entityFromStore.getVersion().toString());

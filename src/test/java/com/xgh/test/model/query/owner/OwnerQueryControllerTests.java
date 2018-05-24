@@ -3,17 +3,14 @@ package com.xgh.test.model.query.owner;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.xgh.model.query.address.Address;
 import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.owner.OwnerRepository;
 import com.xgh.test.model.query.Page;
-import com.xgh.test.model.query.address.AddressSampleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +37,7 @@ public class OwnerQueryControllerTests {
     private OwnerRepository repository;
 
     @Autowired
-    private AddressSampleData addressSampleData;
+    private OwnerSampleData ownerSampleData;
 
     @Before
     public void before() {
@@ -49,7 +46,7 @@ public class OwnerQueryControllerTests {
 
     @Test
     public void findById() {
-        UUID ownerId = createSampleEntity();
+        UUID ownerId = ownerSampleData.getSample().getId();
 
         ResponseEntity<Owner> response = restTemplate.getForEntity("/owners/{id}", Owner.class,
                 ownerId);
@@ -66,7 +63,7 @@ public class OwnerQueryControllerTests {
     public void findAllWithOnePage() throws IOException {
         List<UUID> owners = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            owners.add(createSampleEntity());
+            owners.add(ownerSampleData.getSample().getId());
         }
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("/owners", String.class);
@@ -79,12 +76,4 @@ public class OwnerQueryControllerTests {
             assertEquals(owners.get(i), response.getContent().get(i).getId());
         }
     }
-
-    private UUID createSampleEntity() {
-        Address address = addressSampleData.getSample();
-        Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false);
-        repository.save(owner);
-        return owner.getId();
-    }
-
 }
