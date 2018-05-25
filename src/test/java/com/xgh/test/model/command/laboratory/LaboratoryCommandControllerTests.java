@@ -43,10 +43,6 @@ public class LaboratoryCommandControllerTests {
     @Autowired
     private PostgresEventStore eventStore;
 
-    @Before
-    public void before() {
-    }
-
     @Test
     public void registerWithSuccess() {
         Laboratory entity = new Laboratory();

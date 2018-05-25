@@ -34,11 +34,11 @@ public final class Animal extends AggregateRoot<AnimalId> {
 		if(breed == null){
 			throw new NullMandatoryArgumentException("raça");
 		}
-		
+
 		if(specie == null) {
 			throw new NullMandatoryArgumentException("espécie");
 		}
-		
+
 		if(sex == null) {
 			throw new NullMandatoryArgumentException("sexo");
 		}
@@ -61,7 +61,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
 		this.weight = event.getWeight();
 		this.castrated = event.isCastrated();
 	}
-	
+
 	protected void when(AnimalWasUpdated event) {
 		this.name = event.getName();
 		this.owner = event.getOwner();
@@ -72,7 +72,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
 		this.weight = event.getWeight();
 		this.castrated = event.isCastrated();
 	}
-	
+
     protected void when(AnimalWasDeleted event) {
         this.markDeleted();
     }
@@ -88,15 +88,15 @@ public final class Animal extends AggregateRoot<AnimalId> {
 	public Name getBreed() {
 		return breed;
 	}
-	
+
 	public Name getSpecie() {
 		return specie;
 	}
-	
+
 	public Sex getSex() {
 		return sex;
 	}
-	
+
 	public Date getBirthDate() {
 		return birthDate;
 	}

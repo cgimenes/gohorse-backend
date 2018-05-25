@@ -11,6 +11,7 @@ import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.buildingblocks.entity.EntityId;
 
+// TODO tentar mudar para interface
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
     protected abstract void saveEvent(Event<?> event, String entityType);

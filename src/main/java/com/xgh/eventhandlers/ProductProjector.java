@@ -2,6 +2,7 @@ package com.xgh.eventhandlers;
 
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
+import com.xgh.exceptions.ProjectionFailedException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.product.Product;
 import com.xgh.model.command.product.events.ProductWasDeleted;
@@ -42,7 +43,7 @@ public class ProductProjector implements EventHandler {
         Optional<Supplier> supplier = supplierRepository.findById(entity.getSupplierId().getValue());
 
         if (!supplier.isPresent()) {
-            throw new RuntimeException(Supplier.class.getSimpleName());
+            throw new ProjectionFailedException(Supplier.class.getSimpleName());
         }
 
         com.xgh.model.query.product.Product projection = new com.xgh.model.query.product.Product(
