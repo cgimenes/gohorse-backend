@@ -36,15 +36,19 @@ public abstract class SingleValueObject<T> implements ValueObject {
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         SingleValueObject<T> other = (SingleValueObject<T>) obj;
-        if (value == null)
+        if (value == null) {
             return other.getValue() == null;
+        }
         return value.equals(other.getValue());
     }
 }

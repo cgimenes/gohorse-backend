@@ -1,6 +1,5 @@
 package com.xgh.test.model.query.animal;
 
-
 import static org.junit.Assert.assertEquals;
 
 import com.fasterxml.jackson.core.type.TypeReference;

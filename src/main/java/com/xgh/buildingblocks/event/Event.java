@@ -11,24 +11,24 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.UUID;
 
-public abstract class Event<IdType extends EntityId> implements ValueObject {
+public abstract class Event<IdT extends EntityId> implements ValueObject {
     @JsonIgnore
     private Calendar ocurredOn;
     @JsonIgnore
-    private IdType entityId;
+    private IdT entityId;
     @JsonIgnore
     private EntityVersion entityVersion;
 
     protected Event() {
     }
 
-    protected Event(IdType entityId, EntityVersion entityVersion) {
+    protected Event(IdT entityId, EntityVersion entityVersion) {
         this.entityId = entityId;
         this.entityVersion = entityVersion;
         this.ocurredOn = Calendar.getInstance();
     }
 
-    public IdType getEntityId() {
+    public IdT getEntityId() {
         return this.entityId;
     }
 

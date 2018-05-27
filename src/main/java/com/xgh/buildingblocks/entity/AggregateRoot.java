@@ -5,7 +5,7 @@ import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
 import java.lang.reflect.Method;
 
-abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
+public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<IdT> {
     /*
      * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
      */
@@ -25,7 +25,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
      *
      * TODO preecher o version com o nextVersion automagicamente
      */
-    protected void recordAndApply(Event<IdType> event) {
+    protected void recordAndApply(Event<IdT> event) {
         if (this.isDeleted()) {
             throw new DeletedEntityException();
         }
@@ -44,12 +44,12 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     /*
      * Aplica o evento, atualizando os metadados e invocando o handler do evento
      */
-    private void apply(Event<IdType> event) {
+    private void apply(Event<IdT> event) {
         this.updateMetadata(event);
         this.invokeHandlerMethod(event);
     }
 
-    private void updateMetadata(Event<IdType> event) {
+    private void updateMetadata(Event<IdT> event) {
         this.id = event.getEntityId();
         this.version = event.getEntityVersion();
     }
@@ -99,7 +99,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
         }
 
         while (events.hasNext()) {
-            this.apply((Event<IdType>) events.next());
+            this.apply((Event<IdT>) events.next());
         }
     }
 

@@ -56,8 +56,8 @@ public abstract class EventStore {
     /*
      * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
      */
-    private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException,
-            IllegalAccessException, IllegalArgumentException,
+    private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events)
+            throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
         Class<?> clazz = entity.getClass();
         while (true) {

@@ -82,12 +82,12 @@ public class InternmentCommandControllerTests {
 
         Internment entityFromStore = eventStore.pull(Internment.class, entity.getId());
 
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertTrue(entity.equals(entityFromStore));
         assertEquals(newBedId, entityFromStore.getBedId());
         assertEquals(new Date("2018-04-28"), entityFromStore.getBusyUntil());
         assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
         assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
-        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
     @Test

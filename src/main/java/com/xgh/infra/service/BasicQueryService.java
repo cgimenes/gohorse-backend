@@ -10,20 +10,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 // TODO logar
-public abstract class BasicQueryService<Entity, Repository extends BasicJpaRepository<Entity, UUID>> {
-    private final Repository repository;
+public abstract class BasicQueryService<EntityT, RepositoryT extends BasicJpaRepository<EntityT, UUID>> {
+    private final RepositoryT repository;
 
-    protected BasicQueryService(Repository repository) {
+    protected BasicQueryService(RepositoryT repository) {
         this.repository = repository;
     }
 
-    public Page<Entity> findAll(int page) {
+    public Page<EntityT> findAll(int page) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
         return repository.findByDeletedFalse(request);
     }
 
-    public Entity findById(UUID id) {
-        Optional<Entity> entity = repository.findOneByIdAndDeletedFalse(id);
+    public EntityT findById(UUID id) {
+        Optional<EntityT> entity = repository.findOneByIdAndDeletedFalse(id);
         if (!entity.isPresent()) {
             throw new EntityNotFoundException(getEntityName());
         }
@@ -32,7 +32,7 @@ public abstract class BasicQueryService<Entity, Repository extends BasicJpaRepos
 
     @SuppressWarnings("unchecked")
     private String getEntityName() {
-        return ((Class<Entity>) ((ParameterizedType) getClass()
+        return ((Class<EntityT>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0]).getSimpleName();
     }
 }

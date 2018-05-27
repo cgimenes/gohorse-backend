@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface BasicJpaRepository<Entity, ID> extends JpaRepository<Entity, ID> {
-    Page<Entity> findByDeletedFalse(Pageable pageable);
+public interface BasicJpaRepository<EntityT, IdT> extends JpaRepository<EntityT, IdT> {
+    Page<EntityT> findByDeletedFalse(Pageable pageable);
 
-    Optional<Entity> findOneByIdAndDeletedFalse(ID id);
+    Optional<EntityT> findOneByIdAndDeletedFalse(IdT id);
 }

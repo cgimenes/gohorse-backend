@@ -2,25 +2,29 @@ package com.xgh.buildingblocks.entity;
 
 import com.xgh.buildingblocks.JsonSerializable;
 
-public abstract class DomainEntity<IdType extends EntityId> implements JsonSerializable {
-    protected IdType id;
+public abstract class DomainEntity<IdT extends EntityId> implements JsonSerializable {
+    protected IdT id;
 
-    public IdType getId() {
+    public IdT getId() {
         return id;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        if (id == null)
+        }
+        if (id == null) {
             return false;
-        DomainEntity<IdType> other = (DomainEntity<IdType>) obj;
+        }
+        DomainEntity<IdT> other = (DomainEntity<IdT>) obj;
         return id.equals(other.getId());
     }
 
