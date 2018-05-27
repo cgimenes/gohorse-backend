@@ -2,8 +2,9 @@ package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
-public class Phone extends SingleValueObject<String>{
-    protected Phone() {}
+public class Phone extends SingleValueObject<String> {
+    protected Phone() {
+    }
 
     public Phone(String phone) {
         super(phone);

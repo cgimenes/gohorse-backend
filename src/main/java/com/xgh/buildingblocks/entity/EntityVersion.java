@@ -3,7 +3,8 @@ package com.xgh.buildingblocks.entity;
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
 public class EntityVersion extends SingleValueObject<Integer> {
-    protected EntityVersion() {}
+    protected EntityVersion() {
+    }
 
     public EntityVersion(Integer version) {
         super(version);

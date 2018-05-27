@@ -4,7 +4,8 @@ import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
 // TODO mudar pra enum
 public class Sex extends SingleValueObject<Character> {
-    protected Sex() {}
+    protected Sex() {
+    }
 
     public Sex(String sex) {
         this(sex.charAt(0));

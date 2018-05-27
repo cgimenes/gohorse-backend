@@ -1,13 +1,8 @@
 package com.xgh.model.command.veterinary.commands;
 
 import com.xgh.buildingblocks.command.Command;
+import com.xgh.model.command.valueobjects.*;
 import com.xgh.model.command.veterinary.VeterinaryId;
-import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.command.valueobjects.Email;
-import com.xgh.model.command.valueobjects.Name;
-import com.xgh.model.command.valueobjects.Phone;
 
 public class RegisterVeterinary implements Command {
     private final VeterinaryId id;

@@ -29,8 +29,8 @@ public class LaboratoryProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof LaboratoryWasDeleted
-            || event instanceof LaboratoryWasRegistered
-            || event instanceof LaboratoryWasUpdated;
+                || event instanceof LaboratoryWasRegistered
+                || event instanceof LaboratoryWasUpdated;
     }
 
     @Override

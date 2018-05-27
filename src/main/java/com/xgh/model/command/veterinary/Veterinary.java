@@ -2,15 +2,10 @@ package com.xgh.model.command.veterinary;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
+import com.xgh.model.command.valueobjects.*;
 import com.xgh.model.command.veterinary.events.VeterinaryWasDeleted;
-import com.xgh.model.command.veterinary.events.VeterinaryWasUpdated;
-import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.command.valueobjects.Email;
-import com.xgh.model.command.valueobjects.Name;
-import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.events.VeterinaryWasRegistered;
+import com.xgh.model.command.veterinary.events.VeterinaryWasUpdated;
 
 public class Veterinary extends AggregateRoot<VeterinaryId> {
     private Name name;

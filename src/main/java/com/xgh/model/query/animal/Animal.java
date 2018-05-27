@@ -41,7 +41,8 @@ public final class Animal {
     @JsonIgnore
     private Boolean deleted = false;
 
-    protected Animal() {}
+    protected Animal() {
+    }
 
     public Animal(UUID id, String name, Owner owner, Breed breed, Specie specie, Character sex, LocalDate birthDate,
                   Boolean castrated, Float weight, Boolean deleted) {

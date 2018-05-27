@@ -1,12 +1,11 @@
 package com.xgh.model.query.bed;
 
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.UUID;
 
 @Entity
 @Table(name = "bed")
@@ -21,9 +20,10 @@ public final class Bed {
     @JsonIgnore
     private Boolean deleted = false;
 
-    protected Bed() {}
+    protected Bed() {
+    }
 
-    public Bed (UUID id, String code, Boolean busy, Boolean deleted) {
+    public Bed(UUID id, String code, Boolean busy, Boolean deleted) {
         this.id = id;
         this.code = code;
         this.busy = busy;

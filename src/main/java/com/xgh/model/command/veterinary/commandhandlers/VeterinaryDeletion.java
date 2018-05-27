@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VeterinaryDeletion implements CommandHandler<DeleteVeterinary>{
+public class VeterinaryDeletion implements CommandHandler<DeleteVeterinary> {
 
     private final EventStore eventStore;
 

@@ -4,7 +4,8 @@ import com.xgh.buildingblocks.valueobject.SingleValueObject;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
 public class Cpf extends SingleValueObject<String> {
-    protected Cpf() {}
+    protected Cpf() {
+    }
 
     public Cpf(String cpf) {
         super(cpf);

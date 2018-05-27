@@ -1,10 +1,10 @@
 package com.xgh.buildingblocks.command;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommandBus {
     private static final Logger logger = LogManager.getLogger(CommandBus.class);
@@ -15,7 +15,10 @@ public class CommandBus {
      * Singleton
      */
     private static CommandBus instance;
-    private CommandBus() {}
+
+    private CommandBus() {
+    }
+
     private static CommandBus getInstance() {
         if (instance == null) {
             instance = new CommandBus();

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LaboratoryDeletion implements CommandHandler<DeleteLaboratory>{
+public class LaboratoryDeletion implements CommandHandler<DeleteLaboratory> {
 
     private final EventStore eventStore;
 

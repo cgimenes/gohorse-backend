@@ -34,12 +34,12 @@ import com.xgh.test.model.command.owner.OwnerSampleData;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
 public class AnimalCommandControllerTests {
-	@Autowired
+    @Autowired
     private TestRestTemplate restTemplate;
 
     @Autowired
     private PostgresEventStore eventStore;
-    
+
     @Autowired
     private OwnerSampleData ownerSampleData;
 
@@ -47,10 +47,10 @@ public class AnimalCommandControllerTests {
     public void registerWithSuccess() {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
-        
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"), 
-        				new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)), 
-        				new Float(35),false);
+
+        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
+                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                        new Float(35),false);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/animals", entity, Void.class);
 
@@ -72,17 +72,17 @@ public class AnimalCommandControllerTests {
 
     @Test
     public void updateWithSuccess() {
-    	Animal entity = new Animal();
+        Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
-        
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"), 
-        				new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)), 
-        				new Float(35),false);
+
+        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
+                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                        new Float(35),false);
         eventStore.push(entity);
 
-        entity.update(new Name("Severino Benner"),owner.getId(), new Name("Splitz"), 
-				new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1002, 02, 02)), 
-				new Float(10),false);
+        entity.update(new Name("Severino Benner"),owner.getId(), new Name("Splitz"),
+                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1002, 02, 02)),
+                new Float(10),false);
 
         RequestEntity<Animal> request = RequestEntity.put(URI.create("/animals")).body(entity);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -104,12 +104,12 @@ public class AnimalCommandControllerTests {
 
     @Test
     public void deleteWithSuccess() {
-    	Animal entity = new Animal();
+        Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
-        
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"), 
-        				new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)), 
-        				new Float(35),false);
+
+        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
+                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                        new Float(35),false);
         eventStore.push(entity);
 
         HttpEntity<Animal> requestEntity = new HttpEntity<>(entity);

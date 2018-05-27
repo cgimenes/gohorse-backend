@@ -55,16 +55,16 @@ public class AnimalProjector implements EventHandler {
         com.xgh.model.query.specie.Specie specieProjection = specieProjector.execute(entity.getSpecie());
 
         com.xgh.model.query.animal.Animal projection = new com.xgh.model.query.animal.Animal(
-            entity.getId().getValue(),
-            entity.getName().getValue(),
-            owner.get(),
-            breedProjection,
-            specieProjection,
-            entity.getSex().getValue(),
-            entity.getBirthDate().getValue(),
-            entity.isCastrated(),
-            entity.getWeight(),
-            entity.isDeleted()
+                entity.getId().getValue(),
+                entity.getName().getValue(),
+                owner.get(),
+                breedProjection,
+                specieProjection,
+                entity.getSex().getValue(),
+                entity.getBirthDate().getValue(),
+                entity.isCastrated(),
+                entity.getWeight(),
+                entity.isDeleted()
         );
 
         repository.save(projection);

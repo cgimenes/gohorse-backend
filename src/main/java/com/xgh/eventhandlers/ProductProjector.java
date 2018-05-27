@@ -32,8 +32,8 @@ public class ProductProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof ProductWasDeleted
-            || event instanceof ProductWasRegistered
-            || event instanceof ProductWasUpdated;
+                || event instanceof ProductWasRegistered
+                || event instanceof ProductWasUpdated;
     }
 
     @Override

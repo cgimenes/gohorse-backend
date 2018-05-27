@@ -25,8 +25,8 @@ public class BedProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof BedWasDeleted
-            || event instanceof BedWasRegistered
-            || event instanceof BedWasUpdated;
+                || event instanceof BedWasRegistered
+                || event instanceof BedWasUpdated;
     }
 
     @Override

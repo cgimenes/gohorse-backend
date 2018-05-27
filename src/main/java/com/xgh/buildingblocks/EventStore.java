@@ -1,20 +1,22 @@
 package com.xgh.buildingblocks;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
-
 import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-import com.xgh.buildingblocks.entity.EntityId;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
 
 // TODO tentar mudar para interface
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
+
     protected abstract void saveEvent(Event<?> event, String entityType);
+
     public abstract <T extends AggregateRoot<?>> boolean entityExists(Class<T> entityType, EntityId id);
 
     /*
@@ -56,8 +58,8 @@ public abstract class EventStore {
      * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
      */
     private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events) throws NoSuchMethodException, SecurityException,
-                                                                                                 IllegalAccessException, IllegalArgumentException,
-                                                                                                 InvocationTargetException {
+            IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
         Class<?> clazz = entity.getClass();
         while (true) {
             try {
@@ -65,11 +67,11 @@ public abstract class EventStore {
                 method.setAccessible(true);
                 method.invoke(entity, new EventStream(events));
                 return;
-            } catch(NoSuchMethodException ex) {
+            } catch (NoSuchMethodException ex) {
                 clazz = clazz.getSuperclass();
                 if (clazz == null) {
                     throw new NoSuchMethodException(String.format(
-                        "Método 'reconstitute' não declarado na classe: %s", entity.getClass().getName()));
+                            "Método 'reconstitute' não declarado na classe: %s", entity.getClass().getName()));
                 }
             }
         }
@@ -80,8 +82,8 @@ public abstract class EventStore {
      */
     private <T extends AggregateRoot<?>> T instanceEntity(Class<T> entityType) throws
             NoSuchMethodException, SecurityException,
-                                                                InstantiationException, IllegalAccessException,
-                                                                IllegalArgumentException, InvocationTargetException {
+            InstantiationException, IllegalAccessException,
+            IllegalArgumentException, InvocationTargetException {
         return entityType.getConstructor().newInstance();
     }
 }

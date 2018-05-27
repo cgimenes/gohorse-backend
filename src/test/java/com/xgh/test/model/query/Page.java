@@ -9,7 +9,8 @@ import java.util.List;
 public class Page<T> {
     private final List<T> content = new ArrayList<>();
 
-    protected Page() {}
+    protected Page() {
+    }
 
     public List<T> getContent() {
         return content;

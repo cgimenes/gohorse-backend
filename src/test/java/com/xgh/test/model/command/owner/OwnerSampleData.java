@@ -17,7 +17,7 @@ import com.xgh.model.command.valueobjects.PostalCode;
 
 @Component
 public class OwnerSampleData {
-	@Autowired
+    @Autowired
     private EventStore eventStore;
 
     public Owner getSample() {

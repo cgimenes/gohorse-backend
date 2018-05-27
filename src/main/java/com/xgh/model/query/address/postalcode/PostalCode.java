@@ -26,10 +26,11 @@ public class PostalCode {
 
     private String country;
 
-    protected PostalCode() {}
+    protected PostalCode() {
+    }
 
     public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
-            String state, String country) {
+                      String state, String country) {
         this.code = code;
         this.streetType = streetType;
         this.streetName = streetName;

@@ -9,5 +9,6 @@ public class SupplierWasCreated extends Event<SupplierId> {
         super(id, version);
     }
 
-    protected SupplierWasCreated() {}
+    protected SupplierWasCreated() {
+    }
 }

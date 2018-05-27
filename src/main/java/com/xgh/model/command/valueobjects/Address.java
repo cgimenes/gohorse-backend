@@ -8,7 +8,8 @@ public class Address implements ValueObject {
     private Integer number;
     private String complement;
 
-    protected Address() {}
+    protected Address() {
+    }
 
     public Address(PostalCode postalCode, Integer number, String complement) {
         if (postalCode == null) {

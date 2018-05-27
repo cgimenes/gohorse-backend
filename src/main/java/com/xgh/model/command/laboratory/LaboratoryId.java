@@ -1,8 +1,8 @@
 package com.xgh.model.command.laboratory;
 
-import java.util.UUID;
-
 import com.xgh.buildingblocks.entity.EntityId;
+
+import java.util.UUID;
 
 // TODO: remover construtores desnecessários dos ids
 public class LaboratoryId extends EntityId {

@@ -1,12 +1,11 @@
 package com.xgh.model.command.owner;
 
 import com.xgh.infra.controller.BasicCommandController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.xgh.model.command.owner.commands.DeleteOwner;
 import com.xgh.model.command.owner.commands.RegisterOwner;
 import com.xgh.model.command.owner.commands.UpdateOwner;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/owners")

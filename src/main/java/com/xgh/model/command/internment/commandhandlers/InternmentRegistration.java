@@ -1,8 +1,5 @@
 package com.xgh.model.command.internment.commandhandlers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.exceptions.EntityNotFoundException;
@@ -10,6 +7,8 @@ import com.xgh.model.command.animal.Animal;
 import com.xgh.model.command.bed.Bed;
 import com.xgh.model.command.internment.Internment;
 import com.xgh.model.command.internment.commands.RegisterInternment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class InternmentRegistration implements CommandHandler<RegisterInternment> {

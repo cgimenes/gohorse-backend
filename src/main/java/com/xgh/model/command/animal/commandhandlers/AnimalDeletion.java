@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalDeletion implements CommandHandler<DeleteAnimal> {
-	private EventStore repository;
+    private EventStore repository;
 
-	@Autowired
-	public AnimalDeletion(EventStore repository) {
-		this.repository = repository;
-	}
-	
-	@Override
-	public void execute(DeleteAnimal command) {
-		Animal animal = repository.pull(Animal.class, command.getId());
-		animal.delete();
-		repository.push(animal);
-	}
+    @Autowired
+    public AnimalDeletion(EventStore repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void execute(DeleteAnimal command) {
+        Animal animal = repository.pull(Animal.class, command.getId());
+        animal.delete();
+        repository.push(animal);
+    }
 }

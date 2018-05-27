@@ -1,16 +1,10 @@
 package com.xgh.model.query.laboratory;
 
-import java.util.UUID;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.address.Address;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 // TODO criar uma classe base para entidades do query model
 @Entity
@@ -25,13 +19,14 @@ public final class Laboratory {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name="address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @JsonIgnore
     private Boolean deleted = false;
 
-    protected Laboratory() {}
+    protected Laboratory() {
+    }
 
     public Laboratory(UUID id, String companyName, String phone, Address address, Boolean deleted) {
         this.id = id;

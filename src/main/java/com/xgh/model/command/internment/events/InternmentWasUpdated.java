@@ -20,7 +20,7 @@ public class InternmentWasUpdated extends Event<InternmentId> {
     }
 
     public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
-            EntityVersion version) {
+                                EntityVersion version) {
         super(id, version);
         this.bedId = bedId;
         this.animalId = animalId;

@@ -1,16 +1,16 @@
 package com.xgh.buildingblocks.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.buildingblocks.entity.EntityVersion;
+import com.xgh.buildingblocks.valueobject.ValueObject;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.UUID;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.buildingblocks.valueobject.ValueObject;
-import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.buildingblocks.entity.EntityVersion;
 
 public abstract class Event<IdType extends EntityId> implements ValueObject {
     @JsonIgnore
@@ -20,7 +20,8 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
     @JsonIgnore
     private EntityVersion entityVersion;
 
-    protected Event() {}
+    protected Event() {
+    }
 
     protected Event(IdType entityId, EntityVersion entityVersion) {
         this.entityId = entityId;
@@ -69,12 +70,12 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
             return event;
         } catch (Exception e) {
             throw new RuntimeException(String.format(
-                "Não foi possível deserializar o evento: %s - entityId = %s; entityVersion = %s; ocurredOn = %s; data = %s",
-                eventType,
-                entityId,
-                entityVersion,
-                ocurredOn.getTime(),
-                data), e);
+                    "Não foi possível deserializar o evento: %s - entityId = %s; entityVersion = %s; ocurredOn = %s; data = %s",
+                    eventType,
+                    entityId,
+                    entityVersion,
+                    ocurredOn.getTime(),
+                    data), e);
         }
     }
 
@@ -100,11 +101,11 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
             try {
                 field = clazz.getDeclaredField("entityId");
                 break;
-            } catch(NoSuchFieldException e) {
+            } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
                 if (clazz == null) {
                     throw new NoSuchFieldException(String.format(
-                        "Campo 'entityId' não declarado na classe: %s", event.getClass().getName()));
+                            "Campo 'entityId' não declarado na classe: %s", event.getClass().getName()));
                 }
             }
         }

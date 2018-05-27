@@ -1,8 +1,8 @@
 package com.xgh.model.command.valueobjects;
 
-import java.time.LocalDate;
-
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
+
+import java.time.LocalDate;
 
 // TODO excluir essa classe
 public class Date extends SingleValueObject<LocalDate> {

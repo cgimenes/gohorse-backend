@@ -18,7 +18,8 @@ public class Supplier {
         this.id = id;
     }
 
-    protected Supplier() {}
+    protected Supplier() {
+    }
 
     public UUID getId() {
         return id;

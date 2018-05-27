@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalUpdate implements CommandHandler<UpdateAnimal> {
-	private EventStore repository;
+    private EventStore repository;
 
-	@Autowired
-	public AnimalUpdate(EventStore repository) {
-		this.repository = repository;
-	}
-	
-	@Override
-	public void execute(UpdateAnimal command) {
-		Animal animal = repository.pull(Animal.class, command.getId());
-		animal.update(command.getName(), command.getOwner(), command.getBreed(), command.getSpecie(), command.getSex(), command.getBirthDate(), command.getWeight(), command.isCastrated());
-		repository.push(animal);
-	}
+    @Autowired
+    public AnimalUpdate(EventStore repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void execute(UpdateAnimal command) {
+        Animal animal = repository.pull(Animal.class, command.getId());
+        animal.update(command.getName(), command.getOwner(), command.getBreed(), command.getSpecie(), command.getSex(), command.getBirthDate(), command.getWeight(), command.isCastrated());
+        repository.push(animal);
+    }
 }

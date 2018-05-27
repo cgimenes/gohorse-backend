@@ -1,32 +1,32 @@
 package com.xgh.model.query.breed;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Entity
-@Table(name="breed")
+@Table(name = "breed")
 public class Breed {
-	@Id
-	@GeneratedValue
-	private UUID id;
-	
-	private String name;
-	
-	protected Breed() {}
+    @Id
+    @GeneratedValue
+    private UUID id;
 
-	public Breed(String name) {
-		this.name = name;
-	}
+    private String name;
 
-	public UUID getId() {
-		return id;
-	}
+    protected Breed() {
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Breed(String name) {
+        this.name = name;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -1,12 +1,8 @@
 package com.xgh.eventhandlers;
 
-import java.util.Optional;
-
-import com.xgh.exceptions.ProjectionFailedException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
+import com.xgh.exceptions.ProjectionFailedException;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.internment.Internment;
 import com.xgh.model.command.internment.events.InternmentWasDeleted;
@@ -17,6 +13,10 @@ import com.xgh.model.query.animal.AnimalRepository;
 import com.xgh.model.query.bed.Bed;
 import com.xgh.model.query.bed.BedRepository;
 import com.xgh.model.query.internment.InternmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class InternmentProjector implements EventHandler {
@@ -28,7 +28,7 @@ public class InternmentProjector implements EventHandler {
 
     @Autowired
     public InternmentProjector(PostgresEventStore eventStore, InternmentRepository internmentRepository,
-            AnimalRepository animalRepository, BedRepository bedRepository) {
+                               AnimalRepository animalRepository, BedRepository bedRepository) {
         this.eventStore = eventStore;
         this.internmentRepository = internmentRepository;
         this.animalRepository = animalRepository;
@@ -38,8 +38,8 @@ public class InternmentProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof InternmentWasDeleted
-            || event instanceof InternmentWasRegistered
-            || event instanceof InternmentWasUpdated;
+                || event instanceof InternmentWasRegistered
+                || event instanceof InternmentWasUpdated;
     }
 
     @Override
@@ -58,13 +58,13 @@ public class InternmentProjector implements EventHandler {
         }
 
         com.xgh.model.query.internment.Internment internmentProjection =
-            new com.xgh.model.query.internment.Internment(
-                entity.getId().getValue(),
-                bed.get(),
-                animal.get(),
-                entity.getBusyAt().getValue(),
-                entity.getBusyUntil().getValue(),
-                entity.isDeleted());
+                new com.xgh.model.query.internment.Internment(
+                        entity.getId().getValue(),
+                        bed.get(),
+                        animal.get(),
+                        entity.getBusyAt().getValue(),
+                        entity.getBusyUntil().getValue(),
+                        entity.isDeleted());
 
         internmentRepository.save(internmentProjection);
     }

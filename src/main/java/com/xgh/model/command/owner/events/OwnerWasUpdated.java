@@ -12,7 +12,8 @@ public class OwnerWasUpdated extends Event<OwnerId> {
     private Date birthDate;
     private Address address;
 
-    protected OwnerWasUpdated() {}
+    protected OwnerWasUpdated() {
+    }
 
     public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address, EntityVersion version) {
         super(id, version);

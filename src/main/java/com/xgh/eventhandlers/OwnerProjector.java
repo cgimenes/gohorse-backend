@@ -28,8 +28,8 @@ public class OwnerProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof OwnerWasDeleted
-            || event instanceof OwnerWasRegistered
-            || event instanceof OwnerWasUpdated;
+                || event instanceof OwnerWasRegistered
+                || event instanceof OwnerWasUpdated;
     }
 
     @Override

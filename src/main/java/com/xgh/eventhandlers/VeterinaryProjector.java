@@ -29,8 +29,8 @@ public class VeterinaryProjector implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event<?> event) {
         return event instanceof VeterinaryWasDeleted
-            || event instanceof VeterinaryWasRegistered
-            || event instanceof VeterinaryWasUpdated;
+                || event instanceof VeterinaryWasRegistered
+                || event instanceof VeterinaryWasUpdated;
     }
 
     @Override

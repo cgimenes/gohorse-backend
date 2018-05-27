@@ -1,19 +1,18 @@
 package com.xgh.infra.repository;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
-
+import com.xgh.buildingblocks.EventStore;
+import com.xgh.buildingblocks.entity.AggregateRoot;
+import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.buildingblocks.entity.EntityVersion;
+import com.xgh.buildingblocks.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.xgh.buildingblocks.EventStore;
-import com.xgh.buildingblocks.entity.AggregateRoot;
-import com.xgh.buildingblocks.event.Event;
-import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.buildingblocks.entity.EntityVersion;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class PostgresEventStore extends EventStore {
@@ -41,10 +40,10 @@ public class PostgresEventStore extends EventStore {
     protected <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
         return connection.query(
                 "select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
-                + "from event "
-                + "where entity_id = ? "
-                + "and entity_type = ? "
-                + "order by entity_version asc",
+                        + "from event "
+                        + "where entity_id = ? "
+                        + "and entity_type = ? "
+                        + "order by entity_version asc",
                 eventRowMapper,
                 id.getValue(),
                 entityType.getName());
@@ -54,15 +53,15 @@ public class PostgresEventStore extends EventStore {
     @Override
     protected void saveEvent(Event<?> event, String entityType) {
         connection.update(
-            "insert into event ("
-            + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"
-            + ") VALUES (?, ?, ?, ?, ?, ?)",
-            event.getEntityId().getValue(),
-            event.getEntityVersion().getValue(),
-            entityType,
-            event.getType(),
-            event.getOcurredOn(),
-            event.toJson()
+                "insert into event ("
+                        + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"
+                        + ") VALUES (?, ?, ?, ?, ?, ?)",
+                event.getEntityId().getValue(),
+                event.getEntityVersion().getValue(),
+                entityType,
+                event.getType(),
+                event.getOcurredOn(),
+                event.toJson()
         );
     }
 

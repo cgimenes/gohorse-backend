@@ -12,10 +12,11 @@ public class PostalCode implements ValueObject {
     private String state;
     private String country;
 
-    protected PostalCode() {}
+    protected PostalCode() {
+    }
 
     public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
-            String state, String country) {
+                      String state, String country) {
         if (code == null) {
             throw new NullMandatoryArgumentException("código");
         }

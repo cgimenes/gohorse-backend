@@ -20,7 +20,7 @@ public final class Product {
 
     private Float amount;
 
-    @JoinColumn(name="supplier_id")
+    @JoinColumn(name = "supplier_id")
     @ManyToOne
     private Supplier supplier;
 
@@ -37,7 +37,8 @@ public final class Product {
         this.deleted = deleted;
     }
 
-    protected Product() {}
+    protected Product() {
+    }
 
     public UUID getId() {
         return id;

@@ -12,7 +12,8 @@ public class OwnerWasRegistered extends Event<OwnerId> {
     private Date birthDate;
     private Address address;
 
-    protected OwnerWasRegistered() {}
+    protected OwnerWasRegistered() {
+    }
 
     public OwnerWasRegistered(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address, EntityVersion version) {
         super(id, version);

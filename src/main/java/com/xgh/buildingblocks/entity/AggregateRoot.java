@@ -1,10 +1,10 @@
 package com.xgh.buildingblocks.entity;
 
-import java.lang.reflect.Method;
-
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
+
+import java.lang.reflect.Method;
 
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
     /*
@@ -63,10 +63,10 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
         if (handlerMethod != null) {
             handlerMethod.setAccessible(true);
             try {
-              handlerMethod.invoke(this, event);
+                handlerMethod.invoke(this, event);
             } catch (Exception e) {
                 throw new RuntimeException(String.format(
-                    "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
+                        "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
             }
         }
     }
