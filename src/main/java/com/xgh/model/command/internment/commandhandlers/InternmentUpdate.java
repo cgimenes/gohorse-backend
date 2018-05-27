@@ -22,8 +22,6 @@ public class InternmentUpdate implements CommandHandler<UpdateInternment> {
 
     @Override
     public void execute(UpdateInternment command) {
-        Internment internment = eventStore.pull(Internment.class, command.getId());
-
         if (!eventStore.entityExists(Bed.class, command.getBedId())) {
             throw new EntityNotFoundException(Bed.class.getSimpleName());
         }
@@ -32,6 +30,7 @@ public class InternmentUpdate implements CommandHandler<UpdateInternment> {
             throw new EntityNotFoundException(Animal.class.getSimpleName());
         }
 
+        Internment internment = eventStore.pull(Internment.class, command.getId());
         internment.update(command.getBedId(), command.getAnimalId(), command.getBusyAt(), command.getBusyUntil());
         eventStore.push(internment);
     }

@@ -1,13 +1,10 @@
 package com.xgh.test.model.query.bed;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.model.query.bed.Bed;
+import com.xgh.model.query.bed.BedRepository;
+import com.xgh.test.model.query.Page;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,34 +14,33 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.model.query.bed.Bed;
-import com.xgh.model.query.bed.BedRepository;
-import com.xgh.test.model.query.Page;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
+@DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class BedQueryControllerTests {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private BedRepository repository;
-
-    @Before
-    public void before() {
-        repository.deleteAll();
-    }
+    private BedSampleData bedSampleData;
 
     @Test
     public void findById() {
-        UUID bedId = createSampleEntity();
+        UUID bedId = bedSampleData.getSample().getId();
 
         ResponseEntity<Bed> response = restTemplate.getForEntity("/bed/{id}", Bed.class, bedId);
 
@@ -55,10 +51,10 @@ public class BedQueryControllerTests {
     }
 
     @Test
-    public void findAllWithOnePage() throws IOException{
+    public void findAllWithOnePage() throws IOException {
         List<UUID> bed = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            bed.add(createSampleEntity());
+        for (int i = 0; i < 5; i++) {
+            bed.add(bedSampleData.getSample().getId());
         }
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("/bed", String.class);
@@ -66,7 +62,8 @@ public class BedQueryControllerTests {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         Page<Bed> response = new ObjectMapper().readValue(responseEntity.getBody(),
-                new TypeReference<Page<Bed>>() {});
+                new TypeReference<Page<Bed>>() {
+                });
         for (int i = 0; i < 5; i++) {
             assertEquals(bed.get(i), response.getContent().get(i).getId());
         }
@@ -74,12 +71,6 @@ public class BedQueryControllerTests {
 
     @Test
     public void findAllWithManyPages() {
-        //criar
-    }
-
-    private UUID createSampleEntity() {
-        Bed bed = new Bed(UUID.randomUUID(),"021", true, false);
-        repository.save(bed);
-        return bed.getId();
+        // TODO criar
     }
 }

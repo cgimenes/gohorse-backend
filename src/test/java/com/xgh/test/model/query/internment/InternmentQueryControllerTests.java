@@ -1,11 +1,15 @@
 package com.xgh.test.model.query.internment;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.model.query.animal.Animal;
+import com.xgh.model.query.bed.Bed;
+import com.xgh.model.query.internment.Internment;
+import com.xgh.model.query.internment.InternmentRepository;
+import com.xgh.test.model.query.Page;
+import com.xgh.test.model.query.animal.AnimalSampleData;
+import com.xgh.test.model.query.bed.BedSampleData;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,53 +19,44 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.animal.AnimalId;
-import com.xgh.model.command.bed.BedId;
-import com.xgh.model.command.internment.InternmentId;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.query.internment.Internment;
-import com.xgh.test.model.query.Page;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
+@DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class InternmentQueryControllerTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Autowired
-    protected JdbcTemplate connection;
+    private InternmentRepository repository;
 
     @Autowired
-    private PostgresEventStore eventStore;
+    private BedSampleData bedSampleData;
 
-    @Before
-    public void before() {
-        connection.update("truncate table internment");
-    }
+    @Autowired
+    private AnimalSampleData animalSampleData;
 
     @Test
-    private void findById() {
+    public void findById() {
         UUID internmentId = createSampleEntity();
         ResponseEntity<Internment> response = restTemplate.getForEntity("/internments/{id}", Internment.class,
                 internmentId);
 
-        com.xgh.model.command.internment.Internment internmentFromStore = eventStore
-                .pull(com.xgh.model.command.internment.Internment.class, new InternmentId(internmentId));
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        // TODO: Validar ID de leito e animal sem utilizar o eventStore
-        // assertEquals(internmentFromStore.getAnimalId(),
-        // response.getBody().getAnimalId());
-        // assertEquals(internmentFromStore.getBedId(), response.getBody().getBedId());
-        assertEquals(new Date("2018-04-20"), response.getBody().getBusyAt());
-        assertEquals(new Date("2018-04-25"), response.getBody().getBusyUntil());
+        assertEquals(LocalDate.of(2018, 10, 10), response.getBody().getBusyAt());
+        assertEquals(LocalDate.of(2018, 10, 15), response.getBody().getBusyUntil());
     }
 
     @Test
@@ -75,7 +70,7 @@ public class InternmentQueryControllerTests {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
-        Page<Internment> response = new ObjectMapper().readValue(responseEntity.getBody(),
+        Page<Internment> response = new ObjectMapper().findAndRegisterModules().readValue(responseEntity.getBody(),
                 new TypeReference<Page<Internment>>() {
                 });
         for (int i = 0; i < 5; i++) {
@@ -84,10 +79,16 @@ public class InternmentQueryControllerTests {
     }
 
     private UUID createSampleEntity() {
-        com.xgh.model.command.internment.Internment internment = new com.xgh.model.command.internment.Internment();
-        internment.register(new InternmentId(), new BedId(), new AnimalId(), new Date("2018-04-20"),
-                new Date("2018-04-25"));
-        eventStore.push(internment);
-        return internment.getId().getValue();
+        Bed bed = bedSampleData.getSample();
+        Animal animal = animalSampleData.getSample();
+
+        Internment internment = new Internment(UUID.randomUUID(),
+                bed,
+                animal,
+                LocalDate.of(2018, 10, 10),
+                LocalDate.of(2018, 10, 15),
+                false);
+        repository.save(internment);
+        return internment.getId();
     }
 }

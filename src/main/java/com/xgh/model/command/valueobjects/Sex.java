@@ -2,6 +2,7 @@ package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
+// TODO mudar pra enum
 public class Sex extends SingleValueObject<Character> {
     protected Sex() {}
 

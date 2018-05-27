@@ -43,10 +43,6 @@ public class AnimalCommandControllerTests {
     @Autowired
     private OwnerSampleData ownerSampleData;
 
-    @Before
-    public void before() {
-    }
-
     @Test
     public void registerWithSuccess() {
         Animal entity = new Animal();

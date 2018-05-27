@@ -1,5 +1,6 @@
 package com.xgh.model.query.internment;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -10,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.bed.Bed;
 
@@ -29,10 +29,10 @@ public class Internment {
     private Animal animal;
 
     @Column(name = "busy_at")
-    private Date busyAt;
+    private LocalDate busyAt;
 
     @Column(name = "busy_until")
-    private Date busyUntil;
+    private LocalDate busyUntil;
 
     @JsonIgnore
     private Boolean deleted = false;
@@ -40,7 +40,7 @@ public class Internment {
     protected Internment() {
     }
 
-    public Internment(UUID id, Bed bed, Animal animal, Date busyAt, Date busyUntil, Boolean deleted) {
+    public Internment(UUID id, Bed bed, Animal animal, LocalDate busyAt, LocalDate busyUntil, Boolean deleted) {
         this.id = id;
         this.bed = bed;
         this.animal = animal;
@@ -61,11 +61,11 @@ public class Internment {
         return animal;
     }
 
-    public Date getBusyAt() {
+    public LocalDate getBusyAt() {
         return busyAt;
     }
 
-    public Date getBusyUntil() {
+    public LocalDate getBusyUntil() {
         return busyUntil;
     }
 

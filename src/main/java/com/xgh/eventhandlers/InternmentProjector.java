@@ -62,8 +62,8 @@ public class InternmentProjector implements EventHandler {
                 entity.getId().getValue(),
                 bed.get(),
                 animal.get(),
-                entity.getBusyAt(),
-                entity.getBusyUntil(),
+                entity.getBusyAt().getValue(),
+                entity.getBusyUntil().getValue(),
                 entity.isDeleted());
 
         internmentRepository.save(internmentProjection);

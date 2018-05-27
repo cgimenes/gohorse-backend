@@ -36,11 +36,6 @@ public class BedCommandControllerTests {
     @Autowired
     private PostgresEventStore eventStore;
 
-    @Before
-    public void before() {
-
-    }
-
     @Test
     public void register() {
         Bed bed = new Bed();
