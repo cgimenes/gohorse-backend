@@ -1,7 +1,6 @@
 package com.xgh.buildingblocks.valueobject;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-
 import java.util.Objects;
 
 public abstract class SingleValueObject<T> implements ValueObject {

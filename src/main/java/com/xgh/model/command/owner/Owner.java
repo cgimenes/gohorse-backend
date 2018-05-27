@@ -5,7 +5,11 @@ import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.owner.events.OwnerWasUpdated;
-import com.xgh.model.command.valueobjects.*;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Cpf;
+import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
 
 public final class Owner extends AggregateRoot<OwnerId> {
     private Name name;

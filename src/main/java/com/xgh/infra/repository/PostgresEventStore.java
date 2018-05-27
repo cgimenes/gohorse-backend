@@ -5,14 +5,13 @@ import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class PostgresEventStore extends EventStore {

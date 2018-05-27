@@ -3,7 +3,6 @@ package com.xgh.buildingblocks.entity;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
-
 import java.lang.reflect.Method;
 
 abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {

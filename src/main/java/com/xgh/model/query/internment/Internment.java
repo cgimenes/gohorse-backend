@@ -3,10 +3,14 @@ package com.xgh.model.query.internment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.bed.Bed;
-
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "internment")

@@ -11,10 +11,9 @@ import com.xgh.model.command.product.events.ProductWasUpdated;
 import com.xgh.model.query.product.ProductRepository;
 import com.xgh.model.query.supplier.Supplier;
 import com.xgh.model.query.supplier.SupplierRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class ProductProjector implements EventHandler {

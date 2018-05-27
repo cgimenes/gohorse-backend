@@ -1,10 +1,9 @@
 package com.xgh.buildingblocks.command;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CommandBus {
     private static final Logger logger = LogManager.getLogger(CommandBus.class);

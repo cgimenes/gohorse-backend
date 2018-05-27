@@ -5,6 +5,9 @@ import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventHandler;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
@@ -13,10 +16,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Set;
 
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {

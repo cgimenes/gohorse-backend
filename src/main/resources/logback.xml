@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration>
- 
+
 <configuration>
     <contextName>default</contextName>
     <jmxConfigurator/>
- 
+
     <appender name="gelf" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
         <host>udp:localhost</host>
         <port>12201</port>
@@ -17,13 +17,13 @@
             <level>INFO</level>
         </filter>
    </appender>
- 
+
    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
        <encoder>
            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
        </encoder>
     </appender>
- 
+
     <root level="WARN">
         <appender-ref ref="gelf" />
         <appender-ref ref="STDOUT" />

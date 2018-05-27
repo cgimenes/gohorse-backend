@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.valueobject.ValueObject;
-
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

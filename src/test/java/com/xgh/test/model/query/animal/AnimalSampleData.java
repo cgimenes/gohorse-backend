@@ -5,11 +5,10 @@ import com.xgh.model.query.animal.AnimalRepository;
 import com.xgh.test.model.query.breed.BreedSampleData;
 import com.xgh.test.model.query.owner.OwnerSampleData;
 import com.xgh.test.model.query.specie.SpecieSampleData;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component("QueryAnimalSampleData")
 public class AnimalSampleData {

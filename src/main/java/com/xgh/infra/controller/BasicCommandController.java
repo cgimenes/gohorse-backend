@@ -2,13 +2,12 @@ package com.xgh.infra.controller;
 
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.buildingblocks.command.CommandBus;
+import java.net.URI;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.net.URI;
 
 public abstract class BasicCommandController<Register extends Command, Update extends Command, Delete extends Command> {
     protected abstract String getBasePath();

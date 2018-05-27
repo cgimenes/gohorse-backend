@@ -13,10 +13,9 @@ import com.xgh.model.query.breed.BreedProjector;
 import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.owner.OwnerRepository;
 import com.xgh.model.query.specie.SpecieProjector;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class AnimalProjector implements EventHandler {

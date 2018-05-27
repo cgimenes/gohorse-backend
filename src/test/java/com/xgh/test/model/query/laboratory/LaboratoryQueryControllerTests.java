@@ -2,16 +2,17 @@ package com.xgh.test.model.query.laboratory;
 
 import static org.junit.Assert.assertEquals;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.model.query.address.Address;
+import com.xgh.model.query.laboratory.Laboratory;
+import com.xgh.model.query.laboratory.LaboratoryRepository;
+import com.xgh.test.model.query.Page;
+import com.xgh.test.model.query.address.AddressSampleData;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import com.xgh.model.query.address.Address;
-import com.xgh.model.query.laboratory.LaboratoryRepository;
-import com.xgh.test.model.query.Page;
-import com.xgh.test.model.query.address.AddressSampleData;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +25,12 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.model.query.laboratory.Laboratory;
-
 // TODO: testar address
 // TODO: criar teste de falha de bad request e entity not found
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
-@DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class LaboratoryQueryControllerTests {
 
     @Autowired
@@ -70,7 +67,8 @@ public class LaboratoryQueryControllerTests {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         Page<Laboratory> response = new ObjectMapper().readValue(responseEntity.getBody(),
-                new TypeReference<Page<Laboratory>>() {});
+                new TypeReference<Page<Laboratory>>() {
+                });
         for (int i = 0; i < 5; i++) {
             assertEquals(laboratories.get(i), response.getContent().get(i).getId());
         }

@@ -6,7 +6,6 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;

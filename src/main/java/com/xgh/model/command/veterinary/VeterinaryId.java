@@ -1,7 +1,6 @@
 package com.xgh.model.command.veterinary;
 
 import com.xgh.buildingblocks.entity.EntityId;
-
 import java.util.UUID;
 
 public class VeterinaryId extends EntityId {

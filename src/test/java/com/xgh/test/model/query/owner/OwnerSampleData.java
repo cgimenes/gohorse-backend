@@ -4,11 +4,10 @@ import com.xgh.model.query.address.Address;
 import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.owner.OwnerRepository;
 import com.xgh.test.model.query.address.AddressSampleData;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component("QueryOwnerSampleData")
 public class OwnerSampleData {

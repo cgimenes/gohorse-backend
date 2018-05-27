@@ -3,12 +3,11 @@ package com.xgh.infra.service;
 import com.xgh.Constants;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.infra.repository.BasicJpaRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 // TODO logar
 public abstract class BasicQueryService<Entity, Repository extends BasicJpaRepository<Entity, UUID>> {

@@ -13,10 +13,9 @@ import com.xgh.model.query.animal.AnimalRepository;
 import com.xgh.model.query.bed.Bed;
 import com.xgh.model.query.bed.BedRepository;
 import com.xgh.model.query.internment.InternmentRepository;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class InternmentProjector implements EventHandler {

@@ -1,7 +1,6 @@
 package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
-
 import java.time.LocalDate;
 
 // TODO excluir essa classe
