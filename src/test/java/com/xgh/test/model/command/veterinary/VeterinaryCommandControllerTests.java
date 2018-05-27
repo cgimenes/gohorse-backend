@@ -4,7 +4,6 @@ import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.valueobjects.*;
 import com.xgh.model.command.veterinary.Veterinary;
 import com.xgh.model.command.veterinary.VeterinaryId;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

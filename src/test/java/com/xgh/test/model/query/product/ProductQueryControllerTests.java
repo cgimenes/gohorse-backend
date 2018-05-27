@@ -6,7 +6,6 @@ import com.xgh.model.query.product.Product;
 import com.xgh.model.query.product.ProductRepository;
 import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.supplier.SupplierSampleData;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
-@DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ProductQueryControllerTests {
 
     @Autowired
@@ -68,7 +67,8 @@ public class ProductQueryControllerTests {
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 
         Page<Product> response = new ObjectMapper().findAndRegisterModules().readValue(
-                responseEntity.getBody(), new TypeReference<Page<Product>>() {});
+                responseEntity.getBody(), new TypeReference<Page<Product>>() {
+                });
         for (int i = 0; i < 5; i++) {
             assertEquals(products.get(i), response.getContent().get(i).getId());
         }

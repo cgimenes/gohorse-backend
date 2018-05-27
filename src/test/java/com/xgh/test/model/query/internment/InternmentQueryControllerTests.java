@@ -9,8 +9,6 @@ import com.xgh.model.query.internment.InternmentRepository;
 import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.animal.AnimalSampleData;
 import com.xgh.test.model.query.bed.BedSampleData;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
-@DirtiesContext(classMode=DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class InternmentQueryControllerTests {
     @Autowired
     private TestRestTemplate restTemplate;

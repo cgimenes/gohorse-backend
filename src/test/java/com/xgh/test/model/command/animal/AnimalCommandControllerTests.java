@@ -1,26 +1,5 @@
 package com.xgh.test.model.command.animal;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.net.URI;
-import java.time.LocalDate;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.animal.Animal;
 import com.xgh.model.command.animal.AnimalId;
@@ -29,6 +8,21 @@ import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 import com.xgh.test.model.command.owner.OwnerSampleData;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.*;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.net.URI;
+import java.time.LocalDate;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -48,9 +42,9 @@ public class AnimalCommandControllerTests {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
 
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
-                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
-                        new Float(35),false);
+        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
+                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                new Float(35), false);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/animals", entity, Void.class);
 
@@ -75,14 +69,14 @@ public class AnimalCommandControllerTests {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
 
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
-                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
-                        new Float(35),false);
+        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
+                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                new Float(35), false);
         eventStore.push(entity);
 
-        entity.update(new Name("Severino Benner"),owner.getId(), new Name("Splitz"),
+        entity.update(new Name("Severino Benner"), owner.getId(), new Name("Splitz"),
                 new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1002, 02, 02)),
-                new Float(10),false);
+                new Float(10), false);
 
         RequestEntity<Animal> request = RequestEntity.put(URI.create("/animals")).body(entity);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -107,9 +101,9 @@ public class AnimalCommandControllerTests {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
 
-        entity.register(new AnimalId(), new Name("Severino"),owner.getId(), new Name("Xinauzer"),
-                        new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
-                        new Float(35),false);
+        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
+                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                new Float(35), false);
         eventStore.push(entity);
 
         HttpEntity<Animal> requestEntity = new HttpEntity<>(entity);
