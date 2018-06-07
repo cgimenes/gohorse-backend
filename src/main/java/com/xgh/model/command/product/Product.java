@@ -9,8 +9,6 @@ import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Name;
 
 public class Product extends AggregateRoot<ProductId> {
-    private static final long serialVersionUID = 6667051063449205999L;
-
     private Name name;
     private Float price;
     private Name brand;
@@ -66,10 +64,6 @@ public class Product extends AggregateRoot<ProductId> {
 
     protected void when(ProductWasDeleted event) {
         this.markDeleted();
-    }
-
-    public Product() {
-        super();
     }
 
     public Name getName() {

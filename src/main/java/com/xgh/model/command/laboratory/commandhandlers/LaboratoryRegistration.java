@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LaboratoryRegistration implements CommandHandler<RegisterLaboratory>{
+public class LaboratoryRegistration implements CommandHandler<RegisterLaboratory> {
 
     private final EventStore eventStore;
 

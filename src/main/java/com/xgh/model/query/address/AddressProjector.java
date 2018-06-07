@@ -1,10 +1,9 @@
 package com.xgh.model.query.address;
 
 import com.xgh.model.query.address.postalcode.PostalCode;
+import com.xgh.model.query.address.postalcode.PostalCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.xgh.model.query.address.postalcode.PostalCodeRepository;
 
 @Component
 public class AddressProjector {

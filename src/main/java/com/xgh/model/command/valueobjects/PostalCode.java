@@ -4,8 +4,6 @@ import com.xgh.buildingblocks.valueobject.ValueObject;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 
 public class PostalCode implements ValueObject {
-    private static final long serialVersionUID = 2103152608640452626L;
-
     private String code;
     private String streetType;
     private String streetName;
@@ -14,10 +12,11 @@ public class PostalCode implements ValueObject {
     private String state;
     private String country;
 
-    protected PostalCode() {}
+    protected PostalCode() {
+    }
 
     public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
-            String state, String country) {
+                      String state, String country) {
         if (code == null) {
             throw new NullMandatoryArgumentException("código");
         }
@@ -49,7 +48,7 @@ public class PostalCode implements ValueObject {
         if (!code.matches("[0-9]{5}-[0-9]{3}")) {
             throw new IllegalArgumentException("O código do CEP deve estar no formato 99999-999");
         }
-        
+
         // TODO converter para enum
         if (!streetType.equals("Avenida") && !streetType.equals("Rua")) {
             throw new IllegalArgumentException("O tipo da rua deve ser: 'Rua' ou 'Avenida'");

@@ -5,6 +5,9 @@ import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventHandler;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.reflections.Reflections;
@@ -14,16 +17,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Set;
-
 @Component
 public class BusInitializer implements ApplicationListener<ContextRefreshedEvent> {
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     private final DefaultListableBeanFactory context;
-
     private final Reflections reflections = new Reflections("com.xgh");
 
     @Autowired
@@ -31,6 +29,12 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         this.context = context;
     }
 
+    /*
+     * Pesquisa todas as classes do tipo CommandHandler que estão dentro do pacote com.xgh,
+     * obtém a classe de command que o command handler executa,
+     * obtém uma instância do command handler usando o container de injeção do Spring
+     * e adiciona no CommandBus
+     */
     private void initializeCommandBus() {
         logger.info("Inicializando command bus");
 
@@ -42,6 +46,11 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
         
     }
 
+    /*
+     * Pesquisa todas as classes do tipo EventHandler que estão dentro do pacote com.xgh,
+     * obtém uma instância do event handler usando o container de injeção do Spring
+     * e adiciona no EventBus
+     */
     private void initializeEventBus() {
         logger.info("Inicializando event bus");
 

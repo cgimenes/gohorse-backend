@@ -7,8 +7,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class RegisterLaboratory implements Command {
-    private static final long serialVersionUID = 864620291981116409L;
-
     private final LaboratoryId id;
     private final Name companyName;
     private final Phone phone;

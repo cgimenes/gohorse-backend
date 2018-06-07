@@ -1,36 +1,34 @@
 package com.xgh.buildingblocks.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.buildingblocks.entity.EntityVersion;
+import com.xgh.buildingblocks.valueobject.ValueObject;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.buildingblocks.valueobject.ValueObject;
-import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.buildingblocks.entity.EntityVersion;
-
-public abstract class Event<IdType extends EntityId> implements ValueObject {
-    private static final long serialVersionUID = -8290936323951912398L;
-
+public abstract class Event<IdT extends EntityId> implements ValueObject {
     @JsonIgnore
     private Calendar ocurredOn;
     @JsonIgnore
-    private IdType entityId;
+    private IdT entityId;
     @JsonIgnore
     private EntityVersion entityVersion;
 
-    protected Event() {}
+    protected Event() {
+    }
 
-    protected Event(IdType entityId, EntityVersion entityVersion) {
+    protected Event(IdT entityId, EntityVersion entityVersion) {
         this.entityId = entityId;
         this.entityVersion = entityVersion;
         this.ocurredOn = Calendar.getInstance();
     }
 
-    public IdType getEntityId() {
+    public IdT getEntityId() {
         return this.entityId;
     }
 
@@ -71,12 +69,12 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
             return event;
         } catch (Exception e) {
             throw new RuntimeException(String.format(
-                "Não foi possível deserializar o evento: %s - entityId = %s; entityVersion = %s; ocurredOn = %s; data = %s",
-                eventType,
-                entityId,
-                entityVersion,
-                ocurredOn.getTime(),
-                data), e);
+                    "Não foi possível deserializar o evento: %s - entityId = %s; entityVersion = %s; ocurredOn = %s; data = %s",
+                    eventType,
+                    entityId,
+                    entityVersion,
+                    ocurredOn.getTime(),
+                    data), e);
         }
     }
 
@@ -102,11 +100,11 @@ public abstract class Event<IdType extends EntityId> implements ValueObject {
             try {
                 field = clazz.getDeclaredField("entityId");
                 break;
-            } catch(NoSuchFieldException e) {
+            } catch (NoSuchFieldException e) {
                 clazz = clazz.getSuperclass();
                 if (clazz == null) {
                     throw new NoSuchFieldException(String.format(
-                        "Campo 'entityId' não declarado na classe: %s", event.getClass().getName()));
+                            "Campo 'entityId' não declarado na classe: %s", event.getClass().getName()));
                 }
             }
         }

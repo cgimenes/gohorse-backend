@@ -2,9 +2,12 @@ package com.xgh.model.query.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.supplier.Supplier;
-
-import javax.persistence.*;
 import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -20,7 +23,7 @@ public final class Product {
 
     private Float amount;
 
-    @JoinColumn(name="supplier_id")
+    @JoinColumn(name = "supplier_id")
     @ManyToOne
     private Supplier supplier;
 
@@ -37,7 +40,8 @@ public final class Product {
         this.deleted = deleted;
     }
 
-    protected Product() {}
+    protected Product() {
+    }
 
     public UUID getId() {
         return id;

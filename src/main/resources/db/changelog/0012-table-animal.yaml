@@ -1,0 +1,67 @@
+databaseChangeLog:
+    - changeSet:
+        id: 12
+        author: joao.silva
+        changes:                                
+            - createTable:
+                tableName: animal
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_animal
+                    - column:
+                        name: name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: owner_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            foreignKeyName: fk_animal_owner
+                            references: owner(id)
+                            nullable: false        
+                    - column:
+                        name: breed_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            foreignKeyName: fk_animal_breed
+                            references: breed(id)
+                            nullable: false
+                    - column:
+                        name: specie_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            foreignKeyName: fk_animal_specie
+                            references: specie(id)
+                            nullable: false
+                    - column:
+                        name: sex
+                        type: ${TYPE_SEX}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: birth_date
+                        type: ${TYPE_DATE}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: castrated     
+                        type: ${TYPE_BOOL}          
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: weight
+                        type: ${TYPE_FLOAT}
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false
+            - rollback:
+               - dropTable: 
+                  tableName: animal

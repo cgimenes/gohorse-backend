@@ -2,10 +2,9 @@ package com.xgh.model.command.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.SingleValueObject;
 
-public class Phone extends SingleValueObject<String>{
-    private static final long serialVersionUID = -9115543650570612238L;
-
-    protected Phone() {}
+public class Phone extends SingleValueObject<String> {
+    protected Phone() {
+    }
 
     public Phone(String phone) {
         super(phone);

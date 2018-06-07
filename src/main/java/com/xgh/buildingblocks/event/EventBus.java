@@ -2,7 +2,6 @@ package com.xgh.buildingblocks.event;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +14,10 @@ public class EventBus {
      * Singleton
      */
     private static EventBus instance;
-    private EventBus() {}
+
+    private EventBus() {
+    }
+
     private static EventBus getInstance() {
         if (instance == null) {
             instance = new EventBus();
@@ -30,7 +32,7 @@ public class EventBus {
 
     /*
      * Dispara o evento para todos os handlers cadastrados e cada handler decide se
-     * irá ou não ser executado para o tipo do evento que foi disparado 
+     * irá ou não ser executado para o tipo do evento que foi disparado
      */
     public static void dispatch(Event<?> event) {
         logger.info(String.format("Disparando evento: %s com os dados: %s", event.getClass().getName(), event.toJson()));

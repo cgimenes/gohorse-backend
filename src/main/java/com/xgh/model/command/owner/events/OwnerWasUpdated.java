@@ -3,18 +3,21 @@ package com.xgh.model.command.owner.events;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.*;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Cpf;
+import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
 
 public class OwnerWasUpdated extends Event<OwnerId> {
-    private static final long serialVersionUID = 9166049599376937830L;
-
     private Name name;
     private Phone phone;
     private String document;
     private Date birthDate;
     private Address address;
 
-    protected OwnerWasUpdated() {}
+    protected OwnerWasUpdated() {
+    }
 
     public OwnerWasUpdated(OwnerId id, Name name, Phone phone, String document, Date birthDate, Address address, EntityVersion version) {
         super(id, version);

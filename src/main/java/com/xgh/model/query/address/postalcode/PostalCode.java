@@ -14,22 +14,23 @@ public class PostalCode {
 
     @Column(name = "street_type")
     private String streetType;
-    
+
     @Column(name = "street_name")
     private String streetName;
-    
+
     private String neighbourhood;
-    
+
     private String city;
-    
+
     private String state;
-    
+
     private String country;
 
-    protected PostalCode() {}
+    protected PostalCode() {
+    }
 
     public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
-            String state, String country) {
+                      String state, String country) {
         this.code = code;
         this.streetType = streetType;
         this.streetName = streetName;

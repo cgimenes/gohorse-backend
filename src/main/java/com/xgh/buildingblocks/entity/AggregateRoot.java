@@ -1,14 +1,11 @@
 package com.xgh.buildingblocks.entity;
 
-import java.lang.reflect.Method;
-
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
+import java.lang.reflect.Method;
 
-abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntity<IdType> {
-    private static final long serialVersionUID = 325564934279313058L;
-
+public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<IdT> {
     /*
      * Eventos que foram gerados durante um ciclo de execução e que faltam ser persistidos
      */
@@ -25,10 +22,10 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     /*
      * Grava o novo evento na lista de eventos à serem persistidos (uncommittedEvents)
      * e aplica o evento
-     * 
-     * TODO preecher o version com o nextVersion automagicamente 
+     *
+     * TODO preecher o version com o nextVersion automagicamente
      */
-    protected void recordAndApply(Event<IdType> event) {
+    protected void recordAndApply(Event<IdT> event) {
         if (this.isDeleted()) {
             throw new DeletedEntityException();
         }
@@ -45,14 +42,14 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
     }
 
     /*
-     * Aplica o evento, atualizando os metadados e invocando o handler do evento 
+     * Aplica o evento, atualizando os metadados e invocando o handler do evento
      */
-    private void apply(Event<IdType> event) {
+    private void apply(Event<IdT> event) {
         this.updateMetadata(event);
         this.invokeHandlerMethod(event);
     }
 
-    private void updateMetadata(Event<IdType> event) {
+    private void updateMetadata(Event<IdT> event) {
         this.id = event.getEntityId();
         this.version = event.getEntityVersion();
     }
@@ -65,10 +62,10 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
         if (handlerMethod != null) {
             handlerMethod.setAccessible(true);
             try {
-              handlerMethod.invoke(this, event);
+                handlerMethod.invoke(this, event);
             } catch (Exception e) {
                 throw new RuntimeException(String.format(
-                    "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
+                        "Não foi possível invocar o método de aplicação do evento: %s", event.getClass().getName()), e);
             }
         }
     }
@@ -102,7 +99,7 @@ abstract public class AggregateRoot<IdType extends EntityId> extends DomainEntit
         }
 
         while (events.hasNext()) {
-            this.apply((Event<IdType>) events.next());
+            this.apply((Event<IdT>) events.next());
         }
     }
 

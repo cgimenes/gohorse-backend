@@ -10,8 +10,6 @@ import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class Laboratory extends AggregateRoot<LaboratoryId> {
-    private static final long serialVersionUID = 7031562150242723400L;
-
     private Name companyName;
     private Phone phone;
     private Address address;
@@ -39,7 +37,7 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
     public void update(Name companyName, Phone phone, Address address) {
         recordAndApply(new LaboratoryWasUpdated(this.id, companyName, phone, address, this.nextVersion()));
     }
-    
+
     public void delete() {
         recordAndApply(new LaboratoryWasDeleted(this.id, this.nextVersion()));
     }
@@ -55,13 +53,9 @@ public final class Laboratory extends AggregateRoot<LaboratoryId> {
         this.phone = event.getPhone();
         this.address = event.getAddress();
     }
-    
+
     protected void when(LaboratoryWasDeleted event) {
         this.markDeleted();
-    }
-
-    public Laboratory() {
-        super();
     }
 
     public Name getCompanyName() {

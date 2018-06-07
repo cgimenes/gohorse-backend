@@ -1,15 +1,14 @@
 package com.xgh.infra.repository;
 
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
-import java.util.Optional;
-
 @NoRepositoryBean
-public interface BasicJpaRepository<Entity, ID> extends JpaRepository<Entity, ID> {
-    Page<Entity> findByDeletedFalse(Pageable pageable);
+public interface BasicJpaRepository<EntityT, IdT> extends JpaRepository<EntityT, IdT> {
+    Page<EntityT> findByDeletedFalse(Pageable pageable);
 
-    Optional<Entity> findOneByIdAndDeletedFalse(ID id);
+    Optional<EntityT> findOneByIdAndDeletedFalse(IdT id);
 }

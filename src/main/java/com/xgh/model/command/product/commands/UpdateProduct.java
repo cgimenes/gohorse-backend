@@ -6,8 +6,6 @@ import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Name;
 
 public class UpdateProduct implements Command {
-    private static final long serialVersionUID = 6747170909962376932L;
-
     private final ProductId id;
     private final Name name;
     private final Float price;

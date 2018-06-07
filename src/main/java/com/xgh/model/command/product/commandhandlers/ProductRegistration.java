@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductRegistration implements CommandHandler<RegisterProduct>{
+public class ProductRegistration implements CommandHandler<RegisterProduct> {
 
     private final EventStore eventStore;
 

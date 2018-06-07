@@ -7,8 +7,6 @@ import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Name;
 
 public class ProductWasRegistered extends Event<ProductId> {
-    private static final long serialVersionUID = 1431507180460156516L;
-
     private final Name name;
     private final Float price;
     private final Name brand;

@@ -3,10 +3,18 @@ package com.xgh.test.model.command.veterinary;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Crmv;
+import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Email;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
+import com.xgh.model.command.valueobjects.PostalCode;
+import com.xgh.model.command.veterinary.Veterinary;
+import com.xgh.model.command.veterinary.VeterinaryId;
 import java.net.URI;
 import java.time.LocalDate;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +29,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.command.valueobjects.Email;
-import com.xgh.model.command.valueobjects.Name;
-import com.xgh.model.command.valueobjects.Phone;
-import com.xgh.model.command.valueobjects.PostalCode;
-import com.xgh.model.command.veterinary.Veterinary;
-import com.xgh.model.command.veterinary.VeterinaryId;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
@@ -42,11 +39,6 @@ public class VeterinaryCommandControllerTests {
 
     @Autowired
     private PostgresEventStore eventStore;
-
-    @Before
-    public void before() {
-
-    }
 
     @Test
     public void registerWithSuccess() {

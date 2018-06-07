@@ -1,17 +1,15 @@
 package com.xgh.model.query.owner;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.model.query.address.Address;
 import java.time.LocalDate;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.query.address.Address;
 
 @Entity
 @Table(name = "owner")
@@ -30,13 +28,14 @@ public final class Owner {
     private LocalDate birthDate;
 
     @ManyToOne
-    @JoinColumn(name="address_id")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @JsonIgnore
     private Boolean deleted = false;
 
-    protected Owner() {}
+    protected Owner() {
+    }
 
     public Owner(UUID id, String name, String document, String phone, LocalDate birthDate, Address address, Boolean deleted) {
         this.id = id;

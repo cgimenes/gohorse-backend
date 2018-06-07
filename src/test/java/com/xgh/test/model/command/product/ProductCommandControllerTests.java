@@ -3,12 +3,14 @@ package com.xgh.test.model.command.product;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.net.URI;
-
+import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.model.command.product.Product;
+import com.xgh.model.command.product.ProductId;
 import com.xgh.model.command.supplier.Supplier;
 import com.xgh.model.command.supplier.SupplierId;
+import com.xgh.model.command.valueobjects.Name;
 import com.xgh.test.model.command.supplier.SupplierSampleData;
-import org.junit.Before;
+import java.net.URI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.product.Product;
-import com.xgh.model.command.product.ProductId;
-import com.xgh.model.command.valueobjects.Name;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-test.properties")
@@ -41,10 +38,6 @@ public class ProductCommandControllerTests {
 
     @Autowired
     private SupplierSampleData supplierSampleData;
-
-    @Before
-    public void before() {
-    }
 
     @Test
     public void registerWithSuccess() {

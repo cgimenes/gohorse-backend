@@ -1,15 +1,13 @@
 package com.xgh.model.query.address;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xgh.model.query.address.postalcode.PostalCode;
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.query.address.postalcode.PostalCode;
 
 @Entity
 @Table(name = "address")
@@ -26,7 +24,8 @@ public class Address {
 
     private String complement;
 
-    protected Address() {}
+    protected Address() {
+    }
 
     public Address(PostalCode postalCode, Integer number, String complement) {
         this.postalCode = postalCode;

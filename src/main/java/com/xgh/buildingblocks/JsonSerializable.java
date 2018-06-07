@@ -1,13 +1,11 @@
 package com.xgh.buildingblocks;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import java.text.SimpleDateFormat;
 
-public interface JsonSerializable extends Serializable {
+public interface JsonSerializable {
     /*
      * Serializa o value object em JSON
      */
@@ -19,7 +17,7 @@ public interface JsonSerializable extends Serializable {
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(String.format(
-                "Falha ao serializar objeto do tipo: %s", this.getClass().getName()), e);
+                    "Falha ao serializar objeto do tipo: %s", this.getClass().getName()), e);
         }
     }
 }

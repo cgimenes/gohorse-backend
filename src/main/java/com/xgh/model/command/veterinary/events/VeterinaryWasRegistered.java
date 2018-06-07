@@ -1,18 +1,16 @@
 package com.xgh.model.command.veterinary.events;
 
+import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.command.veterinary.VeterinaryId;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Crmv;
 import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Email;
-import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
+import com.xgh.model.command.veterinary.VeterinaryId;
 
 public class VeterinaryWasRegistered extends Event<VeterinaryId> {
-    private static final long serialVersionUID = -6601994182805982237L;
-
     private Name name;
     private Address address;
     private Phone phone;
@@ -20,10 +18,11 @@ public class VeterinaryWasRegistered extends Event<VeterinaryId> {
     private Email email;
     private Date birthDate;
 
-    protected VeterinaryWasRegistered() {}
+    protected VeterinaryWasRegistered() {
+    }
 
     public VeterinaryWasRegistered(VeterinaryId id, Name name, Address address, Phone phone,
-            Crmv crmv, Email email, Date birthDate, EntityVersion version) {
+                                   Crmv crmv, Email email, Date birthDate, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.address = address;

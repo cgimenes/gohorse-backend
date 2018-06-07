@@ -1,0 +1,23 @@
+databaseChangeLog:
+    - changeSet:
+        id: 10
+        author: joao.silva
+        changes:   
+            - createTable:
+                tableName: breed
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_breed
+                    - column:
+                        name: name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+            - rollback:
+               - dropTable: 
+                  tableName: breed       

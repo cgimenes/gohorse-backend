@@ -1,17 +1,16 @@
 package com.xgh.eventhandlers;
 
 import com.xgh.buildingblocks.EventStore;
-import com.xgh.model.query.address.AddressProjector;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.owner.events.OwnerWasUpdated;
+import com.xgh.model.query.address.AddressProjector;
 import com.xgh.model.query.owner.OwnerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class OwnerProjector implements EventHandler {

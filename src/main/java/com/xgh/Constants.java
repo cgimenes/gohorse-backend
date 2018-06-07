@@ -15,6 +15,6 @@ public enum Constants {
     }
 
     public Integer asInteger() {
-        return (Integer)value;
+        return (Integer) value;
     }
 }

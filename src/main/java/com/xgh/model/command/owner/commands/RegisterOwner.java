@@ -2,11 +2,13 @@ package com.xgh.model.command.owner.commands;
 
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.*;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Cpf;
+import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
 
 public final class RegisterOwner implements Command {
-    private static final long serialVersionUID = 7829193234187879671L;
-
     private final OwnerId id;
     private final Name name;
     private final Document document;
