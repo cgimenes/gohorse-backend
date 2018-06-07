@@ -10,12 +10,10 @@ public class UpdateBed implements Command{
 	
 	private final BedId id;
 	private final Code code;
-	private final Boolean busy;
 	
 	protected UpdateBed() {
 		this.id = null;
 		this.code  = null;
-		this.busy = null;
 		
 	}
 	
@@ -28,7 +26,4 @@ public class UpdateBed implements Command{
 		return this.code;
 	}
 	
-	public Boolean isBusy() {
-		return this.busy;
-	}
 }

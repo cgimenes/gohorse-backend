@@ -14,13 +14,12 @@ public class Bed extends AggregateRoot<BedId>{
 	
 
 	private Code code;
-	private Boolean busy;
 	
 	public Bed() {
 		super();
 	}
 
-	public void register(BedId id, Code code, Boolean busy) {
+	public void register(BedId id, Code code) {
     	if (id == null) {
     		throw new NullMandatoryArgumentException("id");
     	}
@@ -29,15 +28,13 @@ public class Bed extends AggregateRoot<BedId>{
 			throw new NullMandatoryArgumentException("code");
 		}
 
-		if (busy == null) {
-			throw new NullMandatoryArgumentException("busy");
-		}
+		
 
-		recordAndApply(new BedWasRegistered(id, code, busy, this.nextVersion()));
+		recordAndApply(new BedWasRegistered(id, code, this.nextVersion()));
 	}
 
-	public void update(Code code, Boolean busy) {
-		recordAndApply(new BedWasUpdated(this.id, code, busy, this.nextVersion()));
+	public void update(Code code) {
+		recordAndApply(new BedWasUpdated(this.id, code, this.nextVersion()));
 	}
 	
 	public void delete() {
@@ -46,12 +43,10 @@ public class Bed extends AggregateRoot<BedId>{
 
 	protected void when(BedWasRegistered event) {
 		this.code = event.getCode();
-		this.busy = event.isBusy();
 	}
 
 	protected void when(BedWasUpdated event) {
 		this.code = event.getCode();
-		this.busy = event.isBusy();
 	}
 	
 	protected void when(BedWasDeleted event) {
@@ -62,7 +57,5 @@ public class Bed extends AggregateRoot<BedId>{
 		return code;
 	}
 
-	public Boolean isBusy() {
-		return busy;
-	}
+
 }

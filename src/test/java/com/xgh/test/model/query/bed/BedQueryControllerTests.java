@@ -51,7 +51,6 @@ public class BedQueryControllerTests {
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(bedId, response.getBody().getId());
 		assertEquals("021", response.getBody().getCode());
-		assertTrue(true);
 	}
 	
 	@Test
@@ -78,7 +77,7 @@ public class BedQueryControllerTests {
 	}
 	
 	private UUID createSampleEntity() {
-		Bed bed = new Bed(UUID.randomUUID(),"021", true, false);
+		Bed bed = new Bed(UUID.randomUUID(),"021",false);
 		repository.save(bed);
 		return bed.getId();				
 	}

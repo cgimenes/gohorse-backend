@@ -41,7 +41,6 @@ public class BedProjector implements EventHandler{
 		com.xgh.model.query.bed.Bed projection = new com.xgh.model.query.bed.Bed(
 				entity.getId().getValue(),
 				entity.getCode().getValue(),
-				entity.isBusy(),
 				entity.isDeleted());
 		
 		bedRepository.save(projection);

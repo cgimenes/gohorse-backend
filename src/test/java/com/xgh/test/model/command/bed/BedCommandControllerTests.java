@@ -44,7 +44,7 @@ public class BedCommandControllerTests {
 	@Test
 	public void register() {
 		Bed bed = new Bed();
-		bed.register(new BedId(), new Code("021"), new Boolean(true));
+		bed.register(new BedId(), new Code("021"));
 		
 		ResponseEntity<Void> response = restTemplate.postForEntity("/bed", bed, Void.class);
 		
@@ -54,7 +54,6 @@ public class BedCommandControllerTests {
 		assertEquals("/bed/" + bed.getId(),response.getHeaders().getLocation().getPath());
 		assertTrue(bed.equals(bedFromStore));
 		assertEquals("021",bedFromStore.getCode().toString());
-		assertTrue(bedFromStore.isBusy());//certo? ver se esta ocupado
 		assertEquals("1", bedFromStore.getVersion().toString());
 	}
 	
@@ -62,10 +61,10 @@ public class BedCommandControllerTests {
 	public void update() {
 		Bed bed = new Bed();
 		
-		bed.register(new BedId(),new Code("021"), new Boolean(true));
+		bed.register(new BedId(),new Code("021"));
 		eventStore.push(bed);
 		
-		bed.update(new Code("022"), new Boolean(true));
+		bed.update(new Code("022"));
 		
 		RequestEntity<Bed> request = RequestEntity.put(URI.create("/bed")).body(bed);
 		ResponseEntity<Void> response =restTemplate.exchange(request, Void.class);
@@ -75,7 +74,6 @@ public class BedCommandControllerTests {
 		assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
 		assertTrue(bed.equals(bedFromStore));
 		assertEquals("022", bedFromStore.getCode().toString());
-		assertTrue(bedFromStore.isBusy());
 		assertEquals("2",bedFromStore.getVersion().toString());
 	}
 	
@@ -83,7 +81,7 @@ public class BedCommandControllerTests {
 	public void delete() {
 		Bed bed = new Bed();
 		
-		bed.register(new BedId(), new Code("023"), new Boolean(true));
+		bed.register(new BedId(), new Code("023"));
 		eventStore.push(bed);
 		
 		HttpEntity<Bed> requestEntity = new HttpEntity<Bed>(bed);
