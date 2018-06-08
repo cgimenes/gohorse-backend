@@ -72,7 +72,7 @@ public class OwnerCommandControllerTests {
 				new Date(LocalDate.of(1001, 01, 01)), address);
 		eventStore.push(owner);
 
-        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("09450600929"), new Date(LocalDate.of(1002, 02, 02)), address);
+        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("09450600929").toString(), new Date(LocalDate.of(1002, 02, 02)), address);
 
 		RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
 		ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);

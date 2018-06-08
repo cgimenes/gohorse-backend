@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonDeserialize(as = Cnpj.class)
 public class Cnpj implements Document {
-	private static final long serialVersionUID = 9088893750584545887L;
 
 	private String cnpj;
 
