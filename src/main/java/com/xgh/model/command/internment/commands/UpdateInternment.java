@@ -7,8 +7,6 @@ import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 
 public class UpdateInternment implements Command {
-    private static final long serialVersionUID = -558533399289381447L;
-
     private final InternmentId id;
     private final BedId bedId;
     private final AnimalId animalId;

@@ -8,16 +8,12 @@ import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 
 public class InternmentWasRegistered extends Event<InternmentId> {
-    private static final long serialVersionUID = 2553347792033362364L;
-
     private BedId bedId;
     private AnimalId animalId;
     private Date busyAt;
     private Date busyUntil;
 
-    protected InternmentWasRegistered() {
-
-    }
+    protected InternmentWasRegistered() {}
 
     public InternmentWasRegistered(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
                                    EntityVersion version) {

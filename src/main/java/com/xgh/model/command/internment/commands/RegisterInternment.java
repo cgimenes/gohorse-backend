@@ -7,8 +7,6 @@ import com.xgh.model.command.internment.InternmentId;
 import com.xgh.model.command.valueobjects.Date;
 
 public class RegisterInternment implements Command {
-    private static final long serialVersionUID = -4390730779141246809L;
-
     private final InternmentId id;
     private final BedId bedId;
     private final AnimalId animalId;
@@ -16,7 +14,7 @@ public class RegisterInternment implements Command {
     private final Date busyUntil;
 
     public RegisterInternment() {
-        this.id = null;
+        this.id = new InternmentId();
         this.bedId = null;
         this.animalId = null;
         this.busyAt = null;

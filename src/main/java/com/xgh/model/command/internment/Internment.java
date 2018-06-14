@@ -10,8 +10,6 @@ import com.xgh.model.command.internment.events.InternmentWasUpdated;
 import com.xgh.model.command.valueobjects.Date;
 
 public class Internment extends AggregateRoot<InternmentId> {
-    private static final long serialVersionUID = 513769173122252062L;
-
     private BedId bedId;
     private AnimalId animalId;
     private Date busyAt;
