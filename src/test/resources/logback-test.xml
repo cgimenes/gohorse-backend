@@ -2,7 +2,7 @@
 <!DOCTYPE configuration>
 
 <configuration>
-    <contextName>test</contextName>
+    <contextName>default</contextName>
     <jmxConfigurator/>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

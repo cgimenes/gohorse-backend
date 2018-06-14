@@ -2,17 +2,14 @@ package com.xgh.buildingblocks;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.text.SimpleDateFormat;
+import com.xgh.ApplicationContextProvider;
 
 public interface JsonSerializable {
     /*
      * Serializa o value object em JSON
      */
     default String toJson() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+        ObjectMapper mapper = ApplicationContextProvider.getApplicationContext().getBean(ObjectMapper.class);
         try {
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
