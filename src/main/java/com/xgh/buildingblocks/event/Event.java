@@ -2,7 +2,6 @@ package com.xgh.buildingblocks.event;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.xgh.ApplicationContextProvider;
 import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
@@ -88,7 +87,8 @@ public abstract class Event<IdT extends EntityId> implements ValueObject {
         try {
             return (ValueObject) mapper.readValue(json, Class.forName(type));
         } catch (ClassNotFoundException | IOException e) {
-            throw new RuntimeException(String.format("Falha ao deserializar objeto do tipo: %s, com os dados: %s", type, json), e);
+            throw new RuntimeException(String.format(
+                "Falha ao deserializar objeto do tipo: %s, com os dados: %s", type, json), e);
         }
     }
 
