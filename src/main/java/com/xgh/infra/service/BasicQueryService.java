@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
 
 // TODO logar
 public abstract class BasicQueryService<EntityT, RepositoryT extends BasicJpaRepository<EntityT, UUID>> {
-    private final RepositoryT repository;
+    protected final RepositoryT repository;
 
     protected BasicQueryService(RepositoryT repository) {
         this.repository = repository;

@@ -1,6 +1,9 @@
 package com.xgh.infra.controller;
 
+
 import com.xgh.infra.service.BasicQueryService;
+
+
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public abstract class BasicQueryController<EntityT, ServiceT extends BasicQueryService<EntityT, ?>> {
-    private final ServiceT service;
+    protected final ServiceT service;
 
     protected BasicQueryController(ServiceT service) {
         this.service = service;
