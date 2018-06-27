@@ -1,10 +1,10 @@
 databaseChangeLog:
     - changeSet:
         id: 7
-        author: marcelo.gimenes
+        author: andre.conceicao
         changes:                                
             - createTable:
-                tableName: supplier
+                tableName: distribution_type
                 columns:
                     - column:
                         name: id
@@ -12,8 +12,13 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: pk_supplier
+                            primaryKeyName: pk_distribution_type
+                    - column:
+                        name: name
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false                                              
             - rollback:
                - dropTable: 
-                  tableName: supplier
+                  tableName: distribution_type
                                               

@@ -3,7 +3,7 @@ package com.xgh.model.command.owner.commands;
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Cpf;
+import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
@@ -11,7 +11,7 @@ import com.xgh.model.command.valueobjects.Phone;
 public final class UpdateOwner implements Command {
     private final OwnerId id;
     private final Name name;
-    private final Cpf cpf;
+    private final Document document;
     private final Phone phone;
     private final Date birthDate;
     private final Address address;
@@ -19,7 +19,7 @@ public final class UpdateOwner implements Command {
     protected UpdateOwner() {
         this.id = null;
         this.name = null;
-        this.cpf = null;
+        this.document = null;
         this.phone = null;
         this.birthDate = null;
         this.address = null;
@@ -34,8 +34,8 @@ public final class UpdateOwner implements Command {
         return name;
     }
 
-    public Cpf getCpf() {
-        return cpf;
+    public Document getDocument() {
+        return document;
     }
 
     public Phone getPhone() {

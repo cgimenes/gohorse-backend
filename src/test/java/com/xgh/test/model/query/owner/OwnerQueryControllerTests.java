@@ -45,7 +45,7 @@ public class OwnerQueryControllerTests {
         assertEquals(ownerId, response.getBody().getId());
         assertEquals("Dono Master", response.getBody().getName());
         assertEquals("44313371337", response.getBody().getPhone());
-        assertEquals("09450600929", response.getBody().getCpf());
+        assertEquals("09450600929", response.getBody().getDocument());
         assertEquals("1911-01-01", response.getBody().getBirthDate().toString());
     }
 

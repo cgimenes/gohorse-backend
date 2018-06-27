@@ -22,7 +22,7 @@ public class OwnerSampleData {
         Owner owner = new Owner();
         Address address = new Address(new PostalCode("87024-360", "Rua", "Garimpo", "Jardim Diamante", "Maringá", "PR", "Brasil"),
                 389, null);
-        owner.register(new OwnerId(), new Name("Zé do ai"), new Phone("44313371337"), new Cpf("09450600929"),
+        owner.register(new OwnerId(), new Name("Zé do ai"), new Phone("44313371337"), new Cpf("09450600929").toString(),
                 new Date(LocalDate.of(1001, 01, 01)), address);
         eventStore.push(owner);
         return owner;
