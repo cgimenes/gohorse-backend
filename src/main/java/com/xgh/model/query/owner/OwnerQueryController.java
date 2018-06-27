@@ -1,7 +1,6 @@
 package com.xgh.model.query.owner;
 
 import com.xgh.infra.controller.BasicQueryController;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +16,11 @@ public class OwnerQueryController extends BasicQueryController<Owner, OwnerQuery
     public OwnerQueryController(OwnerQueryService service) {
         super(service);
     }
-    
+
     @GetMapping("/find")
-    public ResponseEntity<Page<Owner>> findByName(@RequestParam(name = "name") String name, 
-    											  @RequestParam(name = "page", defaultValue = "0") int pageNumber){
-    	Page<Owner> page = this.service.findByNameContainingIgnoreCase(pageNumber,name);
+    public ResponseEntity<Page<Owner>> findByName(@RequestParam(name = "name") String name,
+                                                  @RequestParam(name = "page", defaultValue = "0") int pageNumber) {
+        Page<Owner> page = this.service.findByNameContainingIgnoreCase(pageNumber, name);
         return ResponseEntity.ok().body(page);
     }
 }

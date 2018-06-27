@@ -1,9 +1,6 @@
 package com.xgh.infra.controller;
 
-
 import com.xgh.infra.service.BasicQueryService;
-
-
 import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
