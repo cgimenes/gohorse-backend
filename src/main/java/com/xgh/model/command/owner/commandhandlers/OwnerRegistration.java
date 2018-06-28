@@ -19,7 +19,13 @@ public class OwnerRegistration implements CommandHandler<RegisterOwner> {
     @Override
     public void execute(RegisterOwner command) {
         Owner owner = new Owner();
-        owner.register(command.getId(), command.getName(), command.getPhone(), command.getDocument().getValue(), command.getBirthDate(), command.getAddress());
+        owner.register(
+                command.getId(),
+                command.getName(),
+                command.getPhone(),
+                command.getDocument(),
+                command.getBirthDate(),
+                command.getAddress());
         eventStore.push(owner);
     }
 }

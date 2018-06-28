@@ -67,8 +67,6 @@ databaseChangeLog:
     - include:
         file: db/changelog/0006-table-owner.yaml
     - include:
-        file: db/changelog/0007-table-distribution_type.yaml    
-    - include:
         file: db/changelog/0008-table-supplier.yaml
     - include:
         file: db/changelog/0009-table-bed.yaml

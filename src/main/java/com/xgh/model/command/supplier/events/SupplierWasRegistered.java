@@ -3,20 +3,29 @@ package com.xgh.model.command.supplier.events;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.supplier.SupplierId;
-import com.xgh.model.command.valueobjects.*;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
 
 public class SupplierWasRegistered extends Event<SupplierId> {
-    private static final long serialVersionUID = -3062625947435023015L;
-
     private Name name;
     private Phone phone;
     private String document;
     private Address address;
     private Name distributionType;
 
-    protected SupplierWasRegistered() {}
+    protected SupplierWasRegistered() {
+    }
 
-    public SupplierWasRegistered(SupplierId id, Name name, Phone phone, String document, Address address, Name distributionType, EntityVersion version) {
+    public SupplierWasRegistered(
+            SupplierId id,
+            Name name,
+            Phone phone,
+            String document,
+            Address address,
+            Name distributionType,
+            EntityVersion version
+    ) {
         super(id, version);
         this.name = name;
         this.phone = phone;

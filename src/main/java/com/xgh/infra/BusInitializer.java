@@ -38,12 +38,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
     private void initializeCommandBus() {
         logger.info("Inicializando command bus");
 
-
         Set<Class<? extends CommandHandler>> handlers = reflections.getSubTypesOf(CommandHandler.class);
         for (Class<? extends CommandHandler> handler : handlers) {
             CommandBus.addHandler(getCommandClass(handler), context.getBean(handler));
         }
-        
     }
 
     /*

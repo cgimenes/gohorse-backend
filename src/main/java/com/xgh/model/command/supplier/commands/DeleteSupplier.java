@@ -4,16 +4,13 @@ import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.supplier.SupplierId;
 
 public class DeleteSupplier implements Command {
+    private final SupplierId id;
 
-	private static final long serialVersionUID = -4733864348075219484L;
-	
-	private final SupplierId id;
-	
-	protected DeleteSupplier() {
+    protected DeleteSupplier() {
         this.id = null;
     }
 
-	@Override
+    @Override
     public SupplierId getId() {
         return id;
     }

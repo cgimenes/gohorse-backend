@@ -3,8 +3,8 @@ package com.xgh.model.command.owner.commands;
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 

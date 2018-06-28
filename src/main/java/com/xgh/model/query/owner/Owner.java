@@ -21,7 +21,7 @@ public final class Owner {
 
     private String phone;
 
-    @Column(name="cpf")
+    @Column(name = "cpf")
     private String document;
 
     @Column(name = "birth_date")

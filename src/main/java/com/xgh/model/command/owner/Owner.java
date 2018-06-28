@@ -7,13 +7,14 @@ import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.owner.events.OwnerWasUpdated;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class Owner extends AggregateRoot<OwnerId> {
     private Name name;
     private Phone phone;
-    private String document;
+    private Document document;
     private Date birthDate;
     private Address address;
 
@@ -21,7 +22,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
         super();
     }
 
-    public void register(OwnerId id, Name name, Phone phone, String document, Date birthDate, Address address) {
+    public void register(OwnerId id, Name name, Phone phone, Document document, Date birthDate, Address address) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -49,7 +50,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
         recordAndApply(new OwnerWasRegistered(id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
-    public void update(Name name, Phone phone, String document, Date birthDate, Address address) {
+    public void update(Name name, Phone phone, Document document, Date birthDate, Address address) {
         recordAndApply(new OwnerWasUpdated(this.id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
@@ -82,7 +83,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
         return this.name;
     }
 
-    public String getDocument() {
+    public Document getDocument() {
         return this.document;
     }
 

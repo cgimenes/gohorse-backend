@@ -31,13 +31,6 @@ databaseChangeLog:
                             references: address(id)
                             nullable: false       
                     - column:
-                        name: distribution_type_id
-                        type: ${TYPE_UUID}  
-                        constraints:
-                            foreignKeyName: fk_supplier_distribution_type
-                            references: distribution_type(id)
-                            nullable: false                                                            
-                    - column:
                         name: phone
                         type: ${TYPE_PHONE}
                         constraints:

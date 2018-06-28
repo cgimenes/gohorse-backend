@@ -2,98 +2,97 @@ package com.xgh.model.command.supplier;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
-import com.xgh.model.command.supplier.events.SupplierWasUpdated;
 import com.xgh.model.command.supplier.events.SupplierWasDeleted;
 import com.xgh.model.command.supplier.events.SupplierWasRegistered;
-import com.xgh.model.command.valueobjects.*;
+import com.xgh.model.command.supplier.events.SupplierWasUpdated;
+import com.xgh.model.command.valueobjects.Address;
+import com.xgh.model.command.valueobjects.Name;
+import com.xgh.model.command.valueobjects.Phone;
 
 public class Supplier extends AggregateRoot<SupplierId> {
+    private Name name;
+    private Phone phone;
+    private String document;
+    private Address address;
+    private Name distributionType;
 
-	private static final long serialVersionUID = -1219322620120223404L;
+    public void register(SupplierId id, Name name, Phone phone, String document, Address address,
+                         Name distributionType) {
+        if (id == null) {
+            throw new NullMandatoryArgumentException("ID");
+        }
 
-	private Name name;
-	private Phone phone;
-	private String document;
-	private Address address;
-	private Name distributionType;
+        if (name == null) {
+            throw new NullMandatoryArgumentException("Nome");
+        }
 
-	public void register(SupplierId id, Name name, Phone phone, String document, Address address,
-			Name distributionType) {
-		if (id == null) {
-			throw new NullMandatoryArgumentException("ID");
-		}
+        if (phone == null) {
+            throw new NullMandatoryArgumentException("Telefone");
+        }
 
-		if (name == null) {
-			throw new NullMandatoryArgumentException("Nome");
-		}
+        if (document == null) {
+            throw new NullMandatoryArgumentException("CPF/CNPJ");
+        }
 
-		if (phone == null) {
-			throw new NullMandatoryArgumentException("Telefone");
-		}
+        if (address == null) {
+            throw new NullMandatoryArgumentException("Endereço");
+        }
 
-		if (document == null) {
-			throw new NullMandatoryArgumentException("CPF/CNPJ");
-		}
+        if (distributionType == null) {
+            throw new NullMandatoryArgumentException("Tipo de distribuição");
+        }
 
-		if (address == null) {
-			throw new NullMandatoryArgumentException("Endereço");
-		}
+        recordAndApply(
+                new SupplierWasRegistered(id, name, phone, document, address, distributionType, this.nextVersion()));
+    }
 
-		if (distributionType == null) {
-			throw new NullMandatoryArgumentException("Tipo de distribuição");
-		}
+    public void update(Name name, Phone phone, String document, Address address, Name distributionType) {
+        recordAndApply(
+                new SupplierWasUpdated(this.id, name, phone, document, address, distributionType, this.nextVersion()));
+    }
 
-		recordAndApply(
-				new SupplierWasRegistered(id, name, phone, document, address, distributionType, this.nextVersion()));
-	}
+    public void delete() {
+        recordAndApply(new SupplierWasDeleted(this.id, this.nextVersion()));
+    }
 
-	public void update(Name name, Phone phone, String document, Address address, Name distributionType) {
-		recordAndApply(
-				new SupplierWasUpdated(this.id, name, phone, document, address, distributionType, this.nextVersion()));
-	}
+    protected void when(SupplierWasRegistered event) {
+        this.id = event.getEntityId();
+        this.name = event.getName();
+        this.document = event.getDocument();
+        this.phone = event.getPhone();
+        this.address = event.getAddress();
+        this.distributionType = event.getDistributionType();
+    }
 
-	public void delete() {
-		recordAndApply(new SupplierWasDeleted(this.id, this.nextVersion()));
-	}
+    protected void when(SupplierWasUpdated event) {
+        this.name = event.getName();
+        this.document = event.getDocument();
+        this.phone = event.getPhone();
+        this.address = event.getAddress();
+        this.distributionType = event.getDistributionType();
+    }
 
-	protected void when(SupplierWasRegistered event) {
-		this.id = event.getEntityId();
-		this.name = event.getName();
-		this.document = event.getDocument();
-		this.phone = event.getPhone();
-		this.address = event.getAddress();
-		this.distributionType = event.getDistributionType();
-	}
+    protected void when(SupplierWasDeleted event) {
+        this.markDeleted();
+    }
 
-	protected void when(SupplierWasUpdated event) {
-		this.name = event.getName();
-		this.document = event.getDocument();
-		this.phone = event.getPhone();
-		this.address = event.getAddress();
-		this.distributionType = event.getDistributionType();
-	}
+    public Name getName() {
+        return this.name;
+    }
 
-	protected void when(SupplierWasDeleted event) {
-		this.markDeleted();
-	}
+    public String getDocument() {
+        return this.document;
+    }
 
-	public Name getName() {
-		return this.name;
-	}
+    public Phone getPhone() {
+        return this.phone;
+    }
 
-	public String getDocument() {
-		return this.document;
-	}
+    public Name getDistributionType() {
+        return this.distributionType;
+    }
 
-	public Phone getPhone() {
-		return this.phone;
-	}
-
-	public Name getDistributionType() {
-		return this.distributionType;
-	}
-
-	public Address getAddress() {
-		return this.address;
-	}
+    public Address getAddress() {
+        return this.address;
+    }
 }

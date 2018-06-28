@@ -17,7 +17,7 @@ public class Address {
     private final UUID id = UUID.randomUUID();
 
     @ManyToOne
-    @JoinColumn(name="postal_code_id")
+    @JoinColumn(name = "postal_code_id")
     private PostalCode postalCode;
 
     private Integer number;
