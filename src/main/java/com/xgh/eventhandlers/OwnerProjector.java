@@ -41,7 +41,7 @@ public class OwnerProjector implements EventHandler {
         com.xgh.model.query.owner.Owner projection = new com.xgh.model.query.owner.Owner(
                 entity.getId().getValue(),
                 entity.getName().getValue(),
-                entity.getCpf().getValue(),
+                entity.getDocument().getValue(),
                 entity.getPhone().getValue(),
                 entity.getBirthDate().getValue(),
                 addressProjection,

@@ -7,16 +7,12 @@ import com.xgh.model.query.address.postalcode.PostalCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("QueryAddressSampleData")
 public class AddressSampleData {
-    private final PostalCodeRepository postalCodeRepository;
-    private final AddressRepository addressRepository;
-
     @Autowired
-    protected AddressSampleData(PostalCodeRepository postalcodeRepository, AddressRepository addressRepository) {
-        this.postalCodeRepository = postalcodeRepository;
-        this.addressRepository = addressRepository;
-    }
+    private PostalCodeRepository postalCodeRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     public Address getSample() {
         PostalCode postalCode = new PostalCode("87040-000", "Avenida", "Do Toninho", "Bairro Pacífico", "Londrina", "Paraná", "Brasil");

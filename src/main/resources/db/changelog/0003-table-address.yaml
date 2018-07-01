@@ -14,12 +14,12 @@ databaseChangeLog:
                             primaryKey: true
                             primaryKeyName: pk_address
                     - column:
-                        name: postalcode_id     
+                        name: postal_code_id     
                         type: ${TYPE_POSTALCODE}          
                         constraints:
                             nullable: false
-                            foreignKeyName: fk_address_postalcode
-                            references: postalcode(id)
+                            foreignKeyName: fk_address_postal_code
+                            references: postal_code(id)
                     - column:
                         name: number
                         type: ${TYPE_INTEGER}

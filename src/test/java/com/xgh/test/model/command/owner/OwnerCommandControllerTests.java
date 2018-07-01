@@ -45,7 +45,7 @@ public class OwnerCommandControllerTests {
         Address address = new Address(new PostalCode("87024-360", "Rua", "Garimpo", "Jardim Diamante", "Maringá", "PR", "Brasil"),
                 389, null);
 
-        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09450600929"),
+        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"),
                 new Date(LocalDate.of(1001, 01, 01)), address);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
@@ -57,7 +57,7 @@ public class OwnerCommandControllerTests {
         assertTrue(owner.equals(ownerFromStore));
         assertEquals("Dono Master", ownerFromStore.getName().toString());
         assertEquals("44313371337", ownerFromStore.getPhone().toString());
-        assertEquals("09450600929", ownerFromStore.getCpf().toString());
+        assertEquals("00000000191", ownerFromStore.getDocument().toString());
         assertEquals(new Date(LocalDate.of(1001, 01, 01)), ownerFromStore.getBirthDate());
         assertEquals("1", ownerFromStore.getVersion().toString());
     }
@@ -68,11 +68,11 @@ public class OwnerCommandControllerTests {
         Address address = new Address(new PostalCode("87024-360", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
-        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09450600929"),
+        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09090385975"),
                 new Date(LocalDate.of(1001, 01, 01)), address);
         eventStore.push(owner);
 
-        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("09450600929"), new Date(LocalDate.of(1002, 02, 02)), address);
+        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("00000000191"), new Date(LocalDate.of(1002, 02, 02)), address);
 
         RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -83,7 +83,7 @@ public class OwnerCommandControllerTests {
         assertTrue(owner.equals(ownerFromStore));
         assertEquals("Dono Master", ownerFromStore.getName().toString());
         assertEquals("44000000000", ownerFromStore.getPhone().toString());
-        assertEquals("09450600929", ownerFromStore.getCpf().toString());
+        assertEquals("00000000191", ownerFromStore.getDocument().toString());
         assertEquals(new Date(LocalDate.of(1002, 02, 02)), ownerFromStore.getBirthDate());
         assertEquals("2", ownerFromStore.getVersion().toString());
     }
@@ -95,7 +95,8 @@ public class OwnerCommandControllerTests {
         Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
-        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09450600929"), data, address);
+        owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"), data,
+                address);
         eventStore.push(owner);
 
         HttpEntity<Owner> requestEntity = new HttpEntity<>(owner);

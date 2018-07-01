@@ -1,8 +1,8 @@
 databaseChangeLog:
     - changeSet:
-        id: 13
+        id: 14
         author: alexandre.requena
-        changes:   
+        changes:
             - createTable:
                 tableName: internment
                 columns:
@@ -12,17 +12,17 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: pk_internment            
+                            primaryKeyName: pk_internment
                     - column:
-                        name: animal_id     
-                        type: ${TYPE_UUID}          
+                        name: animal_id
+                        type: ${TYPE_UUID}
                         constraints:
                             foreignKeyName: fk_internment_animal
                             references: animal(id)
                             nullable: false
                     - column:
-                        name: bed_id     
-                        type: ${TYPE_UUID}          
+                        name: bed_id
+                        type: ${TYPE_UUID}
                         constraints:
                             foreignKeyName: fk_internment_bed
                             references: bed(id)
@@ -31,7 +31,7 @@ databaseChangeLog:
                         name: busy_at
                         type: ${TYPE_DATE}
                         constraints:
-                            nullable: false   
+                            nullable: false
                     - column:
                         name: busy_until
                         type: ${TYPE_DATE}
@@ -43,5 +43,5 @@ databaseChangeLog:
                         constraints:
                             nullable: false
             - rollback:
-               - dropTable: 
+               - dropTable:
                   tableName: internment

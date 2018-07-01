@@ -1,31 +1,37 @@
-package com.xgh.model.command.owner.events;
+package com.xgh.model.command.supplier.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
-import com.xgh.model.command.owner.OwnerId;
+import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Date;
-import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
-public class OwnerWasRegistered extends Event<OwnerId> {
+public class SupplierWasUpdated extends Event<SupplierId> {
     private Name name;
     private Phone phone;
-    private Document document;
-    private Date birthDate;
+    private String document;
     private Address address;
+    private Name distributionType;
 
-    protected OwnerWasRegistered() {
+    protected SupplierWasUpdated() {
     }
 
-    public OwnerWasRegistered(OwnerId id, Name name, Phone phone, Document document, Date birthDate, Address address, EntityVersion version) {
+    public SupplierWasUpdated(
+            SupplierId id,
+            Name name,
+            Phone phone,
+            String document,
+            Address address,
+            Name distributionType,
+            EntityVersion version
+    ) {
         super(id, version);
         this.name = name;
         this.phone = phone;
         this.document = document;
-        this.birthDate = birthDate;
         this.address = address;
+        this.distributionType = distributionType;
     }
 
     public Name getName() {
@@ -36,12 +42,12 @@ public class OwnerWasRegistered extends Event<OwnerId> {
         return phone;
     }
 
-    public Document getDocument() {
+    public String getDocument() {
         return document;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Name getDistributionType() {
+        return distributionType;
     }
 
     public Address getAddress() {

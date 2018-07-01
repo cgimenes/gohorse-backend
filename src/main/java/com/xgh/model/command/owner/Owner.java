@@ -6,19 +6,23 @@ import com.xgh.model.command.owner.events.OwnerWasDeleted;
 import com.xgh.model.command.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.owner.events.OwnerWasUpdated;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Cpf;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public final class Owner extends AggregateRoot<OwnerId> {
     private Name name;
     private Phone phone;
-    private Cpf cpf;
+    private Document document;
     private Date birthDate;
     private Address address;
 
-    public void register(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
+    public Owner() {
+        super();
+    }
+
+    public void register(OwnerId id, Name name, Phone phone, Document document, Date birthDate, Address address) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -31,7 +35,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
             throw new NullMandatoryArgumentException("telefone");
         }
 
-        if (cpf == null) {
+        if (document == null) {
             throw new NullMandatoryArgumentException("CPF");
         }
 
@@ -43,11 +47,11 @@ public final class Owner extends AggregateRoot<OwnerId> {
             throw new NullMandatoryArgumentException("endereço");
         }
 
-        recordAndApply(new OwnerWasRegistered(id, name, phone, cpf, birthDate, address, this.nextVersion()));
+        recordAndApply(new OwnerWasRegistered(id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
-    public void update(Name name, Phone phone, Cpf cpf, Date birthDate, Address address) {
-        recordAndApply(new OwnerWasUpdated(this.id, name, phone, cpf, birthDate, address, this.nextVersion()));
+    public void update(Name name, Phone phone, Document document, Date birthDate, Address address) {
+        recordAndApply(new OwnerWasUpdated(this.id, name, phone, document, birthDate, address, this.nextVersion()));
     }
 
     public void delete() {
@@ -57,7 +61,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
     protected void when(OwnerWasRegistered event) {
         this.id = event.getEntityId();
         this.name = event.getName();
-        this.cpf = event.getCpf();
+        this.document = event.getDocument();
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
@@ -65,7 +69,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
 
     protected void when(OwnerWasUpdated event) {
         this.name = event.getName();
-        this.cpf = event.getCpf();
+        this.document = event.getDocument();
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
@@ -79,8 +83,8 @@ public final class Owner extends AggregateRoot<OwnerId> {
         return this.name;
     }
 
-    public Cpf getCpf() {
-        return this.cpf;
+    public Document getDocument() {
+        return this.document;
     }
 
     public Phone getPhone() {

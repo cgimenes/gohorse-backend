@@ -1,10 +1,10 @@
 databaseChangeLog:
     - changeSet:
-        id: 10
+        id: 12
         author: joao.silva
         changes:   
             - createTable:
-                tableName: breed
+                tableName: specie
                 columns:
                     - column:
                         name: id
@@ -12,12 +12,12 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: pk_breed
+                            primaryKeyName: pk_specie
                     - column:
-                        name: name
-                        type: ${TYPE_NAME}
+                        name: name     
+                        type: ${TYPE_NAME}          
                         constraints:
                             nullable: false
             - rollback:
                - dropTable: 
-                  tableName: breed       
+                  tableName: specie       

@@ -4,15 +4,15 @@ import com.xgh.buildingblocks.entity.EntityId;
 import java.util.UUID;
 
 public class SupplierId extends EntityId {
-    public SupplierId(UUID id) {
-        super(id);
-    }
-
-    public SupplierId(String id) {
-        super(id);
-    }
-
     public SupplierId() {
         super();
+    }
+
+    public SupplierId(String value) {
+        super(value);
+    }
+
+    public SupplierId(UUID value) {
+        super(value);
     }
 }

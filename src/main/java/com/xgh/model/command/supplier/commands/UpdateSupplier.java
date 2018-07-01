@@ -1,49 +1,48 @@
-package com.xgh.model.command.owner.commands;
+package com.xgh.model.command.supplier.commands;
 
 import com.xgh.buildingblocks.command.Command;
-import com.xgh.model.command.owner.OwnerId;
+import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
-public final class UpdateOwner implements Command {
-    private final OwnerId id;
+public final class UpdateSupplier implements Command {
+    private final SupplierId id;
     private final Name name;
     private final Document document;
     private final Phone phone;
-    private final Date birthDate;
     private final Address address;
+    private final Name distributionType;
 
-    protected UpdateOwner() {
+    protected UpdateSupplier() {
         this.id = null;
         this.name = null;
         this.document = null;
         this.phone = null;
-        this.birthDate = null;
+        this.distributionType = null;
         this.address = null;
     }
 
     @Override
-    public OwnerId getId() {
-        return id;
+    public SupplierId getId() {
+        return this.id;
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Document getDocument() {
-        return document;
+        return this.document;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Name getDistributionType() {
+        return this.distributionType;
     }
 
     public Address getAddress() {

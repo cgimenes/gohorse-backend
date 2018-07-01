@@ -4,11 +4,11 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.supplier.SupplierId;
 
-public class SupplierWasCreated extends Event<SupplierId> {
-    public SupplierWasCreated(SupplierId id, EntityVersion version) {
-        super(id, version);
+public class SupplierWasDeleted extends Event<SupplierId> {
+    protected SupplierWasDeleted() {
     }
 
-    protected SupplierWasCreated() {
+    public SupplierWasDeleted(SupplierId id, EntityVersion version) {
+        super(id, version);
     }
 }

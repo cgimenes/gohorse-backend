@@ -4,26 +4,26 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Cpf;
 import com.xgh.model.command.valueobjects.Date;
+import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 
 public class OwnerWasUpdated extends Event<OwnerId> {
     private Name name;
     private Phone phone;
-    private Cpf cpf;
+    private Document document;
     private Date birthDate;
     private Address address;
 
     protected OwnerWasUpdated() {
     }
 
-    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Cpf cpf, Date birthDate, Address address, EntityVersion version) {
+    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Document document, Date birthDate, Address address, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
-        this.cpf = cpf;
+        this.document = document;
         this.birthDate = birthDate;
         this.address = address;
     }
@@ -36,8 +36,8 @@ public class OwnerWasUpdated extends Event<OwnerId> {
         return phone;
     }
 
-    public Cpf getCpf() {
-        return cpf;
+    public Document getDocument() {
+        return document;
     }
 
     public Date getBirthDate() {

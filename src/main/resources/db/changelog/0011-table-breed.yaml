@@ -4,7 +4,7 @@ databaseChangeLog:
         author: joao.silva
         changes:   
             - createTable:
-                tableName: specie
+                tableName: breed
                 columns:
                     - column:
                         name: id
@@ -12,12 +12,12 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                             primaryKey: true
-                            primaryKeyName: pk_specie
+                            primaryKeyName: pk_breed
                     - column:
-                        name: name     
-                        type: ${TYPE_NAME}          
+                        name: name
+                        type: ${TYPE_NAME}
                         constraints:
                             nullable: false
             - rollback:
                - dropTable: 
-                  tableName: specie       
+                  tableName: breed       

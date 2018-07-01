@@ -4,7 +4,7 @@ databaseChangeLog:
         author: marcelo.gimenes
         changes:   
             - createTable:
-                tableName: postalcode
+                tableName: postal_code
                 columns:
                     - column:
                         name: id
@@ -45,4 +45,4 @@ databaseChangeLog:
                             nullable: false
             - rollback:
                - dropTable: 
-                  tableName: postalcode
+                  tableName: postal_code
