@@ -1,0 +1,33 @@
+databaseChangeLog:
+    - changeSet:
+        id: 15
+        author: andre.conceicao
+        changes:
+            - createTable:
+                tableName: additional_registers
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                            primaryKeyName: pk_enum
+                    - column:
+                        name: type
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: value
+                        type: ${TYPE_DESCRIPTION}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                            nullable: false
+            - rollback:
+               - dropTable:
+                  tableName: additional_registers
