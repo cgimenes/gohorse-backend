@@ -20,7 +20,7 @@ public class AdditionalRegisterQueryController extends BasicQueryController<Addi
     @GetMapping("/find")
     public ResponseEntity<Page<AdditionalRegister>> findByType(@RequestParam(name = "type") String type,
                                                   @RequestParam(name = "page", defaultValue = "0") int pageNumber) {
-        Page<AdditionalRegister> page = this.service.findByNameContainingIgnoreCase(pageNumber, type);
+        Page<AdditionalRegister> page = this.service.findByTypeContainingIgnoreCase(pageNumber, type);
         return ResponseEntity.ok().body(page);
     }
 }

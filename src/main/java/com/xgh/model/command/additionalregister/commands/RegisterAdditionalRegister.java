@@ -21,7 +21,7 @@ public final class RegisterAdditionalRegister implements Command {
         return this.id;
     }
 
-    public Name getRegisterType() {
+    public Name getType() {
         return this.type;
     }
 

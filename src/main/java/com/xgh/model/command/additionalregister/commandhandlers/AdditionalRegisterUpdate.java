@@ -20,7 +20,7 @@ public class AdditionalRegisterUpdate implements CommandHandler<UpdateAdditional
     public void execute(UpdateAdditionalRegister command) {
         AdditionalRegister additionalRegister = eventStore.pull(AdditionalRegister.class, command.getId());
         additionalRegister.update(
-                command.getRegisterType(),
+                command.getType(),
                 command.getValue());
         eventStore.push(additionalRegister);
     }

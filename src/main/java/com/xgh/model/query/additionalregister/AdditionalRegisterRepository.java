@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdditionalRegisterRepository extends BasicJpaRepository<AdditionalRegister, UUID> {
-    Page<AdditionalRegister> findByNameContainingIgnoreCase(Pageable pageable, String name);
+    Page<AdditionalRegister> findByTypeContainingIgnoreCase(Pageable pageable, String type);
 }

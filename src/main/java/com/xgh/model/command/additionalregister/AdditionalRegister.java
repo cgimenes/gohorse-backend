@@ -42,7 +42,7 @@ public final class AdditionalRegister extends AggregateRoot<AdditionalRegisterId
 
     protected void when(AdditionalRegisterWasRegistered event) {
         this.id = event.getEntityId();
-        this.type = event.getRegisterType();
+        this.type = event.getType();
         this.value = event.getValue();
     }
 

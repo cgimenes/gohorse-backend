@@ -14,8 +14,8 @@ public class AdditionalRegisterQueryService extends BasicQueryService<Additional
         super(repository);
     }
     
-    public Page<AdditionalRegister> findByNameContainingIgnoreCase(int page, String type) {
+    public Page<AdditionalRegister> findByTypeContainingIgnoreCase(int page, String type) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
-        return this.repository.findByNameContainingIgnoreCase(request,type);
+        return this.repository.findByTypeContainingIgnoreCase(request,type);
     }
 }

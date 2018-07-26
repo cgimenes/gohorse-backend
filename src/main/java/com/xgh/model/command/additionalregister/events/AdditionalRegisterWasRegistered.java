@@ -19,7 +19,7 @@ public class AdditionalRegisterWasRegistered extends Event<AdditionalRegisterId>
         this.value = value;
     }
 
-    public Name getRegisterType() {
+    public Name getType() {
         return type;
     }
 

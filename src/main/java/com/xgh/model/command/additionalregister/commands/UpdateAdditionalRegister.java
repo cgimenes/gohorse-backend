@@ -21,7 +21,7 @@ public final class UpdateAdditionalRegister implements Command {
         return id;
     }
 
-    public Name getRegisterType() {
+    public Name getType() {
         return type;
     }
 

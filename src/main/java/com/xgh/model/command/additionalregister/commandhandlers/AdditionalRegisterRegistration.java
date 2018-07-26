@@ -21,7 +21,7 @@ public class AdditionalRegisterRegistration implements CommandHandler<RegisterAd
         AdditionalRegister additionalRegister = new AdditionalRegister();
         additionalRegister.register(
                 command.getId(),
-                command.getRegisterType(),
+                command.getType(),
                 command.getValue());
         eventStore.push(additionalRegister);
     }
