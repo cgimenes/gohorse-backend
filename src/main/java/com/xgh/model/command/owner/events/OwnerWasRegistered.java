@@ -4,22 +4,22 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
+import java.time.LocalDate;
 
 public class OwnerWasRegistered extends Event<OwnerId> {
     private Name name;
     private Phone phone;
     private Document document;
-    private Date birthDate;
+    private LocalDate birthDate;
     private Address address;
 
     protected OwnerWasRegistered() {
     }
 
-    public OwnerWasRegistered(OwnerId id, Name name, Phone phone, Document document, Date birthDate, Address address, EntityVersion version) {
+    public OwnerWasRegistered(OwnerId id, Name name, Phone phone, Document document, LocalDate birthDate, Address address, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
@@ -40,7 +40,7 @@ public class OwnerWasRegistered extends Event<OwnerId> {
         return document;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 

@@ -19,20 +19,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalProjector implements EventHandler {
-    @Autowired
-    private PostgresEventStore eventStore;
+    private final PostgresEventStore eventStore;
+    private final AnimalRepository repository;
+    private final BreedProjector breedProjector;
+    private final SpecieProjector specieProjector;
+    private final OwnerRepository ownerRepository;
 
     @Autowired
-    private AnimalRepository repository;
-
-    @Autowired
-    private BreedProjector breedProjector;
-
-    @Autowired
-    private SpecieProjector specieProjector;
-
-    @Autowired
-    private OwnerRepository ownerRepository;
+    public AnimalProjector(PostgresEventStore eventStore, AnimalRepository repository, BreedProjector breedProjector, SpecieProjector specieProjector, OwnerRepository ownerRepository) {
+        this.eventStore = eventStore;
+        this.repository = repository;
+        this.breedProjector = breedProjector;
+        this.specieProjector = specieProjector;
+        this.ownerRepository = ownerRepository;
+    }
 
     @Override
     public boolean isSubscribedTo(Event<?> event) {
@@ -59,8 +59,8 @@ public class AnimalProjector implements EventHandler {
                 owner.get(),
                 breedProjection,
                 specieProjection,
-                entity.getSex().getValue(),
-                entity.getBirthDate().getValue(),
+                entity.getSex().asCharacter(),
+                entity.getBirthDate(),
                 entity.isCastrated(),
                 entity.getWeight(),
                 entity.isDeleted()

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.bed.Bed;
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;

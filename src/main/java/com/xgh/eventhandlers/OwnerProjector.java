@@ -43,7 +43,7 @@ public class OwnerProjector implements EventHandler {
                 entity.getName().getValue(),
                 entity.getDocument().getValue(),
                 entity.getPhone().getValue(),
-                entity.getBirthDate().getValue(),
+                entity.getBirthDate(),
                 addressProjection,
                 entity.isDeleted());
 

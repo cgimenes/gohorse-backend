@@ -1,11 +1,10 @@
 package com.xgh.model.command.internment.commands;
 
-import java.time.LocalDateTime;
-
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.InternmentId;
+import java.time.LocalDateTime;
 
 public class RegisterInternment implements Command {
     private final InternmentId id;

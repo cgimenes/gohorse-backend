@@ -3,20 +3,20 @@ package com.xgh.model.command.animal.commands;
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
+import java.time.LocalDate;
 
 public final class RegisterAnimal implements Command {
-    private AnimalId id;
-    private Name name;
-    private OwnerId owner;
-    private Name breed;
-    private Name specie;
-    private Sex sex;
-    private Date birthDate;
-    private Float weight;
-    private boolean castrated;
+    private final AnimalId id;
+    private final Name name;
+    private final OwnerId owner;
+    private final Name breed;
+    private final Name specie;
+    private final Sex sex;
+    private final LocalDate birthDate;
+    private final Float weight;
+    private final boolean castrated;
 
     protected RegisterAnimal() {
         this.id = new AnimalId();
@@ -30,6 +30,7 @@ public final class RegisterAnimal implements Command {
         this.castrated = false;
     }
 
+    @Override
     public AnimalId getId() {
         return id;
     }
@@ -54,7 +55,7 @@ public final class RegisterAnimal implements Command {
         return sex;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 

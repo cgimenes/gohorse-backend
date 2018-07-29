@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalDeletion implements CommandHandler<DeleteAnimal> {
-    private EventStore repository;
+    private final EventStore repository;
 
     @Autowired
     public AnimalDeletion(EventStore repository) {

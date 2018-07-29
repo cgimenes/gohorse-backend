@@ -7,7 +7,10 @@ public class NullMandatoryArgumentException extends RuntimeException {
     private static final long serialVersionUID = 4655238758476367545L;
 
     public NullMandatoryArgumentException(String field) {
-        // TODO mostrar qual classe disparou esse erro
-        super(String.format("O campo %s é obrigatório", field));
+        super(String.format("O campo '%s' é obrigatório para o tipo '%s'", field, getCallerClassName()));
+    }
+
+    private static String getCallerClassName() {
+        return Thread.currentThread().getStackTrace()[3].getClassName();
     }
 }

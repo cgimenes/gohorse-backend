@@ -6,9 +6,9 @@ import com.xgh.model.command.animal.events.AnimalWasDeleted;
 import com.xgh.model.command.animal.events.AnimalWasRegistered;
 import com.xgh.model.command.animal.events.AnimalWasUpdated;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
+import java.time.LocalDate;
 
 public final class Animal extends AggregateRoot<AnimalId> {
     private Name name;
@@ -16,11 +16,11 @@ public final class Animal extends AggregateRoot<AnimalId> {
     private Name breed;
     private Name specie;
     private Sex sex;
-    private Date birthDate;
+    private LocalDate birthDate;
     private Float weight;
     private Boolean castrated = false;
 
-    public void register(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate, Float weight, Boolean castrated) {
+    public void register(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -53,7 +53,6 @@ public final class Animal extends AggregateRoot<AnimalId> {
     }
 
     protected void when(AnimalWasRegistered event) {
-        this.id = event.getEntityId();
         this.name = event.getName();
         this.owner = event.getOwner();
         this.breed = event.getBreed();
@@ -99,7 +98,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return sex;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
@@ -111,7 +110,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return castrated;
     }
 
-    public void update(Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate, Float weight, Boolean castrated) {
+    public void update(Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         recordAndApply(new AnimalWasUpdated(this.id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
     }
 

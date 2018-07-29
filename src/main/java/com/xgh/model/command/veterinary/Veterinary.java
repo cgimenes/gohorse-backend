@@ -4,13 +4,13 @@ import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Email;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.events.VeterinaryWasDeleted;
 import com.xgh.model.command.veterinary.events.VeterinaryWasRegistered;
 import com.xgh.model.command.veterinary.events.VeterinaryWasUpdated;
+import java.time.LocalDate;
 
 public class Veterinary extends AggregateRoot<VeterinaryId> {
     private Name name;
@@ -18,9 +18,9 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
     private Phone phone;
     private Crmv crmv;
     private Email email;
-    private Date birthDate;
+    private LocalDate birthDate;
 
-    public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+    public void register(VeterinaryId id, Name name, Address address, Phone phone, Crmv crmv, Email email, LocalDate birthDate) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -52,7 +52,7 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
         recordAndApply(new VeterinaryWasRegistered(id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
     }
 
-    public void update(Name name, Address address, Phone phone, Crmv crmv, Email email, Date birthDate) {
+    public void update(Name name, Address address, Phone phone, Crmv crmv, Email email, LocalDate birthDate) {
         recordAndApply(new VeterinaryWasUpdated(this.id, name, address, phone, crmv, email, birthDate, this.nextVersion()));
     }
 
@@ -102,7 +102,7 @@ public class Veterinary extends AggregateRoot<VeterinaryId> {
         return email;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 }

@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SupplierProjector implements EventHandler {
-    private AddressProjector addressProjector;
-    private PostgresEventStore eventStore;
-    private SupplierRepository repository;
+    private final AddressProjector addressProjector;
+    private final PostgresEventStore eventStore;
+    private final SupplierRepository repository;
 
     @Autowired
     public SupplierProjector(

@@ -1,7 +1,5 @@
 package com.xgh.model.command.internment;
 
-import java.time.LocalDateTime;
-
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.animal.AnimalId;
@@ -9,7 +7,7 @@ import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.events.InternmentWasDeleted;
 import com.xgh.model.command.internment.events.InternmentWasRegistered;
 import com.xgh.model.command.internment.events.InternmentWasUpdated;
-import com.xgh.model.command.valueobjects.Date;
+import java.time.LocalDateTime;
 
 public class Internment extends AggregateRoot<InternmentId> {
     private BedId bedId;

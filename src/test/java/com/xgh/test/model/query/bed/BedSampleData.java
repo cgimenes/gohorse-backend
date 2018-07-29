@@ -16,7 +16,7 @@ public class BedSampleData {
     }
 
     public Bed getSample() {
-        Bed bed = new Bed(UUID.randomUUID(), "021", true, false);
+        Bed bed = new Bed(UUID.randomUUID(), "021", false);
         repository.save(bed);
         return bed;
     }

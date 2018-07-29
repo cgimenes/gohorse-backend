@@ -4,9 +4,9 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
+import java.time.LocalDate;
 
 public class AnimalWasUpdated extends Event<AnimalId> {
     private Name name;
@@ -14,14 +14,14 @@ public class AnimalWasUpdated extends Event<AnimalId> {
     private Name breed;
     private Name specie;
     private Sex sex;
-    private Date birthDate;
+    private LocalDate birthDate;
     private Float weight;
     private boolean castrated;
 
-    public AnimalWasUpdated() {
+    protected AnimalWasUpdated() {
     }
 
-    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, Date birthDate,
+    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate,
                             Float weight, boolean castrated, EntityVersion version) {
         super(id, version);
         this.name = name;
@@ -54,7 +54,7 @@ public class AnimalWasUpdated extends Event<AnimalId> {
         return sex;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 

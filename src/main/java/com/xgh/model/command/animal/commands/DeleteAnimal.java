@@ -10,6 +10,7 @@ public class DeleteAnimal implements Command {
         this.id = null;
     }
 
+    @Override
     public AnimalId getId() {
         return id;
     }

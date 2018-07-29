@@ -1,13 +1,11 @@
 package com.xgh.model.command.internment.events;
 
-import java.time.LocalDateTime;
-
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.InternmentId;
-import com.xgh.model.command.valueobjects.Date;
+import java.time.LocalDateTime;
 
 public class InternmentWasUpdated extends Event<InternmentId> {
     private BedId bedId;
@@ -17,7 +15,7 @@ public class InternmentWasUpdated extends Event<InternmentId> {
 
     protected InternmentWasUpdated() {}
 
-    public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, 
+    public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId,
     		LocalDateTime busyAt, LocalDateTime busyUntil, EntityVersion version) {
         super(id, version);
         this.bedId = bedId;

@@ -5,8 +5,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BreedProjector {
+    private final BreedRepository breedRepository;
+
     @Autowired
-    private BreedRepository breedRepository;
+    public BreedProjector(BreedRepository breedRepository) {
+        this.breedRepository = breedRepository;
+    }
 
     public Breed execute(com.xgh.model.command.valueobjects.Name breed) {
         Breed breedProjection = new Breed(
