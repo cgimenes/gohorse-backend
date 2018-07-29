@@ -1,5 +1,7 @@
 package com.xgh.model.command.internment;
 
+import java.time.LocalDateTime;
+
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.animal.AnimalId;
@@ -12,14 +14,14 @@ import com.xgh.model.command.valueobjects.Date;
 public class Internment extends AggregateRoot<InternmentId> {
     private BedId bedId;
     private AnimalId animalId;
-    private Date busyAt;
-    private Date busyUntil;
+    private LocalDateTime busyAt;
+    private LocalDateTime busyUntil;
 
     public Internment() {
         super();
     }
 
-    public void register(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil) {
+    public void register(InternmentId id, BedId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -39,7 +41,7 @@ public class Internment extends AggregateRoot<InternmentId> {
         recordAndApply(new InternmentWasRegistered(id, bedId, animalId, busyAt, busyUntil, this.nextVersion()));
     }
 
-    public void update(BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil) {
+    public void update(BedId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
         recordAndApply(new InternmentWasUpdated(this.id, bedId, animalId, busyAt, busyUntil, this.nextVersion()));
     }
 
@@ -73,11 +75,11 @@ public class Internment extends AggregateRoot<InternmentId> {
         return animalId;
     }
 
-    public Date getBusyAt() {
+    public LocalDateTime getBusyAt() {
         return busyAt;
     }
 
-    public Date getBusyUntil() {
+    public LocalDateTime getBusyUntil() {
         return busyUntil;
     }
 

@@ -1,5 +1,7 @@
 package com.xgh.model.command.internment.events;
 
+import java.time.LocalDateTime;
+
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
@@ -10,13 +12,13 @@ import com.xgh.model.command.valueobjects.Date;
 public class InternmentWasUpdated extends Event<InternmentId> {
     private BedId bedId;
     private AnimalId animalId;
-    private Date busyAt;
-    private Date busyUntil;
+    private LocalDateTime busyAt;
+    private LocalDateTime busyUntil;
 
     protected InternmentWasUpdated() {}
 
-    public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
-                                EntityVersion version) {
+    public InternmentWasUpdated(InternmentId id, BedId bedId, AnimalId animalId, 
+    		LocalDateTime busyAt, LocalDateTime busyUntil, EntityVersion version) {
         super(id, version);
         this.bedId = bedId;
         this.animalId = animalId;
@@ -32,11 +34,11 @@ public class InternmentWasUpdated extends Event<InternmentId> {
         return animalId;
     }
 
-    public Date getBusyAt() {
+    public LocalDateTime getBusyAt() {
         return busyAt;
     }
 
-    public Date getBusyUntil() {
+    public LocalDateTime getBusyUntil() {
         return busyUntil;
     }
 
