@@ -14,18 +14,15 @@ public final class Bed {
 
     private String code;
 
-    private Boolean busy;
-
     @JsonIgnore
     private Boolean deleted = false;
 
     protected Bed() {
     }
 
-    public Bed(UUID id, String code, Boolean busy, Boolean deleted) {
+    public Bed(UUID id, String code, Boolean deleted) {
         this.id = id;
         this.code = code;
-        this.busy = busy;
         this.deleted = deleted;
     }
 
@@ -35,10 +32,6 @@ public final class Bed {
 
     public String getCode() {
         return this.code;
-    }
-
-    public Boolean getBusy() {
-        return this.busy;
     }
 
     public Boolean isDeleted() {
