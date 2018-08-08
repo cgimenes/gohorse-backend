@@ -4,7 +4,7 @@ databaseChangeLog:
         author: andre.conceicao
         changes:
             - createTable:
-                tableName: additional_registers
+                tableName: enumerator
                 columns:
                     - column:
                         name: id
@@ -14,12 +14,12 @@ databaseChangeLog:
                             primaryKey: true
                             primaryKeyName: pk_enum
                     - column:
-                        name: type
+                        name: group
                         type: ${TYPE_NAME}
                         constraints:
                             nullable: false
                     - column:
-                        name: value
+                        name: name
                         type: ${TYPE_DESCRIPTION}
                         constraints:
                             nullable: false
@@ -30,4 +30,4 @@ databaseChangeLog:
                             nullable: false
             - rollback:
                - dropTable:
-                  tableName: additional_registers
+                  tableName: enumerator

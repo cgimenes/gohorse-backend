@@ -81,5 +81,5 @@ databaseChangeLog:
     - include:
         file: db/changelog/0014-table-internment.yaml        
     - include:
-        file: db/changelog/0015-table-additional_registers.yaml          
+        file: db/changelog/0015-table-enumerator.yaml          
     

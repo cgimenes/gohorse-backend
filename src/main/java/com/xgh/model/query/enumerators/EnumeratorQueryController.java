@@ -1,4 +1,4 @@
-package com.xgh.model.query.additionalregister;
+package com.xgh.model.query.enumerators;
 
 import com.xgh.infra.controller.BasicQueryController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/enums")
-public class AdditionalRegisterQueryController extends BasicQueryController<AdditionalRegister, AdditionalRegisterQueryService> {
+@RequestMapping("/enumerators")
+public class EnumeratorQueryController extends BasicQueryController<Enumerator, EnumeratorQueryService> {
     @Autowired
-    public AdditionalRegisterQueryController(AdditionalRegisterQueryService service) {
+    public EnumeratorQueryController(EnumeratorQueryService service) {
         super(service);
     }
 
     @GetMapping("/find")
-    public ResponseEntity<Page<AdditionalRegister>> findByType(@RequestParam(name = "type") String type,
+    public ResponseEntity<Page<Enumerator>> findByType(@RequestParam(name = "type") String type,
                                                   @RequestParam(name = "page", defaultValue = "0") int pageNumber) {
-        Page<AdditionalRegister> page = this.service.findByTypeContainingIgnoreCase(pageNumber, type);
+        Page<Enumerator> page = this.service.findByTypeContainingIgnoreCase(pageNumber, type);
         return ResponseEntity.ok().body(page);
     }
 }
