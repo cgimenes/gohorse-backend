@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "animal")
+@Table(name = "appointment")
 public final class Appointment {
     @Id
     private UUID id;

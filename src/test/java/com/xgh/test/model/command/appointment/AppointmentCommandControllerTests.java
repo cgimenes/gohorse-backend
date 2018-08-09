@@ -132,14 +132,14 @@ public class AppointmentCommandControllerTests {
 
         HttpEntity<Appointment> requestEntity = new HttpEntity<>(entity);
 
-        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/appointments"), HttpMethod.DELETE,
+        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/appointments/cancel"), HttpMethod.PUT,
                 requestEntity, Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
         Appointment entityFromStore = eventStore.pull(Appointment.class, entity.getId());
 
-        assertTrue(entityFromStore.isDeleted());
+        assertEquals(AppointmentStatus.CANCELLED, entityFromStore.getStatus());
     }
 
     @Test
@@ -148,13 +148,13 @@ public class AppointmentCommandControllerTests {
 
         HttpEntity<Appointment> requestEntity = new HttpEntity<>(entity);
 
-        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/appointments"), HttpMethod.DELETE,
+        ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/appointments/finish"), HttpMethod.PUT,
                 requestEntity, Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
 
         Appointment entityFromStore = eventStore.pull(Appointment.class, entity.getId());
 
-        assertTrue(entityFromStore.isDeleted());
+        assertEquals(AppointmentStatus.FINISHED, entityFromStore.getStatus());
     }
 }

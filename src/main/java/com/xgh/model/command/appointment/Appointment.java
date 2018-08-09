@@ -70,6 +70,14 @@ public final class Appointment extends AggregateRoot<AppointmentId> {
         this.address = event.getAddress();
     }
 
+    protected void when(AppointmentWasCancelled event) {
+        this.status = AppointmentStatus.CANCELLED;
+    }
+
+    protected void when(AppointmentWasFinished event) {
+        this.status = AppointmentStatus.FINISHED;
+    }
+
     protected void when(AppointmentWasDeleted event) {
         this.markDeleted();
     }
