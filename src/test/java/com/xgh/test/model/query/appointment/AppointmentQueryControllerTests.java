@@ -43,13 +43,14 @@ public class AppointmentQueryControllerTests {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(entity.getId(), response.getBody().getId());
-        assertEquals(entity.getAddress(), response.getBody().getAddress());
-        assertEquals(entity.getAnimal(), response.getBody().getAnimal());
+        assertEquals(entity.getAddress().getNumber(), response.getBody().getAddress().getNumber());
+        assertEquals(entity.getAddress().getPostalCode().getStreetName(), response.getBody().getAddress().getPostalCode().getStreetName());
+        assertEquals(entity.getAnimal().getId(), response.getBody().getAnimal().getId());
         assertEquals(entity.getAppointmentType(), response.getBody().getAppointmentType());
         assertEquals(entity.getDateTime(), response.getBody().getDateTime());
         assertEquals(entity.getPlace(), response.getBody().getPlace());
         assertEquals(entity.getStatus(), response.getBody().getStatus());
-        assertEquals(entity.getVeterinary(), response.getBody().getVeterinary());
+        assertEquals(entity.getVeterinary().getId(), response.getBody().getVeterinary().getId());
         assertEquals(entity.getDeleted(), response.getBody().getDeleted());
     }
 

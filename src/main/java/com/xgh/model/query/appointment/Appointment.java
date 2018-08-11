@@ -6,6 +6,7 @@ import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.veterinary.Veterinary;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,8 +28,12 @@ public final class Appointment {
     private Veterinary veterinary;
 
     private LocalDateTime dateTime;
+
     private String status;
-    private String type;
+
+    @Column(name = "type")
+    private String appointmentType;
+
     private String place;
 
     @ManyToOne
@@ -41,14 +46,14 @@ public final class Appointment {
     protected Appointment() {
     }
 
-    public Appointment(UUID id, Animal animal, Veterinary veterinary, LocalDateTime dateTime, String status, String type, String place, Address address, Boolean deleted) {
+    public Appointment(UUID id, Animal animal, Veterinary veterinary, LocalDateTime dateTime, String status, String appointmentType, String place, Address address, Boolean deleted) {
         super();
         this.id = id;
         this.animal = animal;
         this.veterinary = veterinary;
         this.dateTime = dateTime;
         this.status = status;
-        this.type = type;
+        this.appointmentType = appointmentType;
         this.place = place;
         this.address = address;
         this.deleted = deleted;
@@ -75,7 +80,7 @@ public final class Appointment {
     }
 
     public String getAppointmentType() {
-        return type;
+        return appointmentType;
     }
 
     public String getPlace() {
