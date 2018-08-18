@@ -16,7 +16,6 @@ public class XghApplication {
     }
 
     @Configuration
-    @EnableWebMvc
     public static class WebConfig implements WebMvcConfigurer {
 
         @Override
