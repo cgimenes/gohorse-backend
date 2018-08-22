@@ -7,12 +7,12 @@ import com.xgh.model.command.valueobjects.Name;
 
 public final class RegisterEnumerator implements Command {
     private final EnumeratorId id;
-    private final Name group;
+    private final Name kind;
     private final Description name;
 
     protected RegisterEnumerator() {
         this.id = new EnumeratorId();
-        this.group = null;
+        this.kind = null;
         this.name = null;
     }
 
@@ -21,8 +21,8 @@ public final class RegisterEnumerator implements Command {
         return this.id;
     }
 
-    public Name getGroup() {
-        return this.group;
+    public Name getKind() {
+        return this.kind;
     }
 
     public Description getName() {

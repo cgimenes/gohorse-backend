@@ -22,7 +22,7 @@ public class EnumeratorRegistration implements CommandHandler<RegisterEnumerator
         Enumerator enumerator = new Enumerator();
         enumerator.register(
                 command.getId(),
-                command.getGroup(),
+                command.getKind(),
                 command.getName());
         eventStore.push(enumerator);
     }

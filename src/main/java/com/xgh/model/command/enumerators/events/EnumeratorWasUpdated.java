@@ -7,20 +7,20 @@ import com.xgh.model.command.enumerators.EnumeratorId;
 import com.xgh.model.command.valueobjects.Description;
 
 public class EnumeratorWasUpdated extends Event<EnumeratorId> {
-    private Name group;
+    private Name kind;
     private Description name;
 
     protected EnumeratorWasUpdated() {
     }
 
-    public EnumeratorWasUpdated(EnumeratorId id, Name group, Description name, EntityVersion version) {
+    public EnumeratorWasUpdated(EnumeratorId id, Name kind, Description name, EntityVersion version) {
         super(id, version);
-        this.group = group;
+        this.kind = kind;
         this.name = name;
     }
 
-    public Name getGroup() {
-        return group;
+    public Name getKind() {
+        return kind;
     }
 
     public Description getName() {

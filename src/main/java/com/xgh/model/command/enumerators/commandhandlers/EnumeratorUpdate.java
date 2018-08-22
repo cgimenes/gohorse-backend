@@ -21,7 +21,7 @@ public class EnumeratorUpdate implements CommandHandler<UpdateEnumerator> {
     public void execute(UpdateEnumerator command) {
         Enumerator enumerator = eventStore.pull(Enumerator.class, command.getId());
         enumerator.update(
-                command.getGroup(),
+                command.getKind(),
                 command.getName());
         eventStore.push(enumerator);
     }

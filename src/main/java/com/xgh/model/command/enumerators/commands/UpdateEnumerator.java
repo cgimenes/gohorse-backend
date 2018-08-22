@@ -7,12 +7,12 @@ import com.xgh.model.command.valueobjects.Description;
 
 public final class UpdateEnumerator implements Command {
     private final EnumeratorId id;
-    private final Name group;
+    private final Name kind;
     private final Description name;
 
     protected UpdateEnumerator() {
         this.id = null;
-        this.group = null;
+        this.kind = null;
         this.name = null;
     }
 
@@ -21,8 +21,8 @@ public final class UpdateEnumerator implements Command {
         return id;
     }
 
-    public Name getGroup() {
-        return group;
+    public Name getKind() {
+        return kind;
     }
 
     public Description getName() {

@@ -14,7 +14,7 @@ databaseChangeLog:
                             primaryKey: true
                             primaryKeyName: pk_enum
                     - column:
-                        name: group
+                        name: kind
                         type: ${TYPE_NAME}
                         constraints:
                             nullable: false

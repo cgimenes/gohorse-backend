@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EnumeratorRepository extends BasicJpaRepository<Enumerator, UUID> {
-    Page<Enumerator> findByGroupContainingIgnoreCase(Pageable pageable, String group);
+    Page<Enumerator> findByKindContainingIgnoreCase(Pageable pageable, String kind);
 }

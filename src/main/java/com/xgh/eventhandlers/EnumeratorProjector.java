@@ -36,7 +36,7 @@ public class EnumeratorProjector implements EventHandler {
 
         com.xgh.model.query.enumerators.Enumerator projection = new com.xgh.model.query.enumerators.Enumerator(
                 entity.getId().getValue(),
-                entity.getGroup().getValue(),
+                entity.getKind().getValue(),
                 entity.getName().getValue(),
                 entity.isDeleted());
 

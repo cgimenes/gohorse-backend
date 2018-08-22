@@ -7,12 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "enumerators")
+@Table(name = "enumerator")
 public final class Enumerator {
     @Id
     private UUID id;
 
-    private String group;
+    private String kind;
 
     private String name;
 
@@ -22,15 +22,15 @@ public final class Enumerator {
     protected Enumerator() {
     }
 
-    public Enumerator(UUID id, String group, String name, Boolean deleted) {
+    public Enumerator(UUID id, String kind, String name, Boolean deleted) {
         this.id = id;
-        this.group = group;
+        this.kind = kind;
         this.name = name;
         this.deleted = deleted;
     }
 
-    public String getGroup() {
-        return group;
+    public String getKind() {
+        return kind;
     }
 
     public String getName() {

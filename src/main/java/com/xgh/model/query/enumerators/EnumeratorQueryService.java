@@ -14,8 +14,8 @@ public class EnumeratorQueryService extends BasicQueryService<Enumerator, Enumer
         super(repository);
     }
     
-    public Page<Enumerator> findByTypeContainingIgnoreCase(int page, String group) {
+    public Page<Enumerator> findByTypeContainingIgnoreCase(int page, String kind) {
         PageRequest request = PageRequest.of(page, Constants.PAGE_SIZE.asInteger());
-        return this.repository.findByGroupContainingIgnoreCase(request,group);
+        return this.repository.findByKindContainingIgnoreCase(request,kind);
     }
 }
