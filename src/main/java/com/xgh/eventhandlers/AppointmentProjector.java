@@ -47,7 +47,10 @@ public class AppointmentProjector implements EventHandler {
     public void execute(Event<?> event) {
         Appointment entity = eventStore.pull(Appointment.class, event.getEntityId());
 
-        Address addressProjection = addressProjector.execute(entity.getAddress());
+        Address addressProjection = null;
+        if (entity.getAddress() != null) {
+            addressProjection = addressProjector.execute(entity.getAddress());
+        }
 
         Optional<Animal> animal = animalRepository.findById(entity.getAnimal().getValue());
         Optional<Veterinary> veterinary = veterinaryRepository.findById(entity.getVeterinary().getValue());

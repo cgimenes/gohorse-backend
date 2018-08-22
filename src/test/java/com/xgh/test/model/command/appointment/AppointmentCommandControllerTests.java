@@ -157,4 +157,26 @@ public class AppointmentCommandControllerTests {
 
         assertEquals(AppointmentStatus.FINISHED, entityFromStore.getStatus());
     }
+
+    @Test
+    public void registerConflicted() {
+        Appointment firstEntity = appointmentSampleData.getSample();
+
+        Appointment entity = new Appointment();
+
+        AnimalId animalId = animalSampleData.getSample().getId();
+        VeterinaryId veterinaryId = veterinarySampleData.getSample().getId();
+
+        entity.register(new AppointmentId(),
+                animalId,
+                veterinaryId,
+                firstEntity.getDateTime(),
+                AppointmentType.FIRST,
+                AppointmentPlace.CLINIC,
+                null);
+
+        ResponseEntity<Void> response = restTemplate.postForEntity("/appointments", entity, Void.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
 }

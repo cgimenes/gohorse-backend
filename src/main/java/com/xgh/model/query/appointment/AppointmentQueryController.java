@@ -18,7 +18,7 @@ public class AppointmentQueryController extends BasicQueryController<Appointment
     }
 
     @GetMapping("/{year}/{month}")
-    protected List<String> findDatesWithAppointmentByMonth(@PathVariable Integer year, @PathVariable Integer month) {
+    protected List<LocalDate> findDatesWithAppointmentByMonth(@PathVariable Integer year, @PathVariable Integer month) {
         return service.findDatesWithAppointmentByMonth(LocalDate.of(year, month, 1));
     }
 

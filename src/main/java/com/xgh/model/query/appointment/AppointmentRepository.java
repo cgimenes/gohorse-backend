@@ -19,4 +19,6 @@ public interface AppointmentRepository extends BasicJpaRepository<Appointment, U
     }
 
     List<Appointment> findByDateTimeBetweenOrderByDateTimeAsc(LocalDateTime from, LocalDateTime to);
+
+    boolean existsByDateTime(LocalDateTime dateTime);
 }

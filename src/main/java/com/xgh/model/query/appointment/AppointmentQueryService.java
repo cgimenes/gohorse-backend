@@ -19,10 +19,10 @@ public class AppointmentQueryService extends BasicQueryService<Appointment, Appo
         return repository.findByDate(date);
     }
 
-    public List<String> findDatesWithAppointmentByMonth(LocalDate month) {
+    public List<LocalDate> findDatesWithAppointmentByMonth(LocalDate month) {
         return repository.findDatesWithAppointmentByMonth(month)
                 .stream()
-                .map(appointment -> appointment.getDateTime().toLocalDate().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .map(appointment -> appointment.getDateTime().toLocalDate())
                 .collect(Collectors.toList());
     }
 }
