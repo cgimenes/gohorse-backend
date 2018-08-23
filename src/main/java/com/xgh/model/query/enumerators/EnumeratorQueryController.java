@@ -1,6 +1,9 @@
 package com.xgh.model.query.enumerators;
 
 import com.xgh.infra.controller.BasicQueryController;
+
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,12 @@ public class EnumeratorQueryController extends BasicQueryController<Enumerator, 
         super(service);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<HashMap<String,Enumerator>> findAllEnumerators() {
+    	HashMap<String,Enumerator> enumerators = this.service.findAllGroupingByKind();
+        return ResponseEntity.ok().body(enumerators);
+    }
+    
     @GetMapping("/find")
     public ResponseEntity<Page<Enumerator>> findByType(@RequestParam(name = "type") String type,
                                                   @RequestParam(name = "page", defaultValue = "0") int pageNumber) {
