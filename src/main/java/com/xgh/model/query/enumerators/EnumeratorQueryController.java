@@ -2,7 +2,7 @@ package com.xgh.model.query.enumerators;
 
 import com.xgh.infra.controller.BasicQueryController;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,8 +21,8 @@ public class EnumeratorQueryController extends BasicQueryController<Enumerator, 
     }
 
     @GetMapping("/all")
-    public ResponseEntity<HashMap<String,Enumerator>> findAllEnumerators() {
-    	HashMap<String,Enumerator> enumerators = this.service.findAllGroupingByKind();
+    public ResponseEntity<ArrayList<EnumeratorGroup>> findAllEnumerators() {
+    	ArrayList<EnumeratorGroup> enumerators = this.service.findAllGroupingByKind();
         return ResponseEntity.ok().body(enumerators);
     }
     

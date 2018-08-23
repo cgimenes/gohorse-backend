@@ -3,7 +3,7 @@ package com.xgh.model.query.enumerators;
 import com.xgh.Constants;
 import com.xgh.infra.service.BasicQueryService;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,28 @@ public class EnumeratorQueryService extends BasicQueryService<Enumerator, Enumer
         return this.repository.findByKindContainingIgnoreCase(request,kind);
     }
 
-	public HashMap<String,Enumerator> findAllGroupingByKind() {	
+	public ArrayList<EnumeratorGroup> findAllGroupingByKind() {	
 		
 		List<Enumerator> allKinds = this.repository.findAll();				  
 		
-		HashMap<String,Enumerator> allKindsGrouped = new HashMap<String,Enumerator>();	
+		ArrayList<EnumeratorGroup> allKindsGrouped = new ArrayList<EnumeratorGroup>();	
 		
-		for(int i = 0; i < allKinds.size(); i++) {   
-		    allKindsGrouped.put(allKinds.get(i).getKind(), allKinds.get(i));
+		for(int i = 0; i < allKinds.size(); i++) { 
+				
+			String kind = allKinds.get(i).getKind();
+			boolean found = false;
+			
+			for (EnumeratorGroup enumeratorGroup : allKindsGrouped) {
+				if (enumeratorGroup.getName() == kind ) {
+					enumeratorGroup.addEnumerator(allKinds.get(i));
+					found = true;
+				}											
+			}
+			
+			if (!found) {
+				allKindsGrouped.add( new EnumeratorGroup(kind, allKinds.get(i)) );
+			}
+
 		}		
 		
 		return allKindsGrouped;
