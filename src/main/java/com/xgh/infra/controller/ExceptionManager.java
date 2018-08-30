@@ -1,9 +1,12 @@
 package com.xgh.infra.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.google.common.collect.Maps;
 import com.xgh.exceptions.DeletedEntityException;
+import com.xgh.exceptions.EntityFieldConflictedException;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.exceptions.NullMandatoryArgumentException;
+import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -95,6 +98,20 @@ public class ExceptionManager {
         logger.info(ex);
 
         return new ErrorResponse(BAD_REQUEST, ex.getMessage());
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({EntityFieldConflictedException.class})
+    public @ResponseBody
+    ErrorResponse handleException(EntityFieldConflictedException ex) {
+        logger.info(ex);
+
+        return new ErrorResponse(BAD_REQUEST, ex.getMessage(), new HashMap<String, String>() {
+            private static final long serialVersionUID = 1241756225957278590L;
+            {
+                put("conflictedField", ex.getFieldName());
+            }
+        });
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

@@ -10,13 +10,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppointmentRepository extends BasicJpaRepository<Appointment, UUID> {
     default List<Appointment> findByDate(LocalDate date) {
-        return findByDeletedFalseAndDateTimeBetween(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+        return findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
     }
 
     default List<Appointment> findDatesWithAppointmentByMonth(LocalDate date) {
         LocalDateTime month = date.withDayOfMonth(1).atStartOfDay();
-        return findByDeletedFalseAndDateTimeBetween(month, month.plusMonths(1).withDayOfMonth(1).minusDays(1));
+        return findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(month, month.plusMonths(1).withDayOfMonth(1).minusDays(1));
     }
 
-    List<Appointment> findByDeletedFalseAndDateTimeBetween(LocalDateTime from, LocalDateTime to);
+    List<Appointment> findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(LocalDateTime from, LocalDateTime to);
+
+    boolean existsByDateTime(LocalDateTime dateTime);
 }
