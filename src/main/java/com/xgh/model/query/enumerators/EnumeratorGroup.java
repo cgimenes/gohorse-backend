@@ -21,7 +21,7 @@ public final class EnumeratorGroup {
     	this.enumerators.add(enumerator);    	
     }
     
-    public void addEnumerator( Enumerator enumerator) {
+    public void addEnumerator( Enumerator enumerator ) {
     	enumerators.add(enumerator);
     }
 

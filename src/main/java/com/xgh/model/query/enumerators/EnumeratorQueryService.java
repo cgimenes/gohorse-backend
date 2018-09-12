@@ -36,7 +36,6 @@ public class EnumeratorQueryService extends BasicQueryService<Enumerator, Enumer
 			
 			for (EnumeratorGroup enumeratorGroup : allKindsGrouped) {
 				if (enumeratorGroup.getName() == kind ) {
-					enumeratorGroup.addEnumerator(allKinds.get(i));
 					found = true;
 				}											
 			}

@@ -24,10 +24,13 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                     - column:
+                        name: auto_generated
+                        type: ${TYPE_BOOL}
+                    - column:
                         name: deleted
                         type: ${TYPE_BOOL}
                         constraints:
-                            nullable: false
+                          nullable: false
             - rollback:
                - dropTable:
                   tableName: enumerator
