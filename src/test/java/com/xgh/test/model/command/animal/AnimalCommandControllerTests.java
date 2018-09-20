@@ -7,7 +7,6 @@ import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.animal.Animal;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.owner.Owner;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
 import com.xgh.test.model.command.owner.OwnerSampleData;
@@ -40,13 +39,16 @@ public class AnimalCommandControllerTests {
     @Autowired
     private OwnerSampleData ownerSampleData;
 
+    @Autowired
+    private AnimalSampleData animalSampleData;
+
     @Test
     public void registerWithSuccess() {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
 
         entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
-                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
+                new Name("Cachorro"), Sex.MALE, LocalDate.of(1001, 01, 01),
                 new Float(35), false);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/animals", entity, Void.class);
@@ -61,7 +63,7 @@ public class AnimalCommandControllerTests {
         assertEquals("Xinauzer", entityFromStore.getBreed().toString());
         assertEquals("Cachorro", entityFromStore.getSpecie().toString());
         assertEquals("M", entityFromStore.getSex().toString());
-        assertEquals(new Date(LocalDate.of(1001, 01, 01)), entityFromStore.getBirthDate());
+        assertEquals(LocalDate.of(1001, 01, 01), entityFromStore.getBirthDate());
         assertEquals(new Float(35), entityFromStore.getWeight());
         assertEquals(false, entityFromStore.isCastrated());
         assertEquals("1", entityFromStore.getVersion().toString());
@@ -69,16 +71,10 @@ public class AnimalCommandControllerTests {
 
     @Test
     public void updateWithSuccess() {
-        Animal entity = new Animal();
-        Owner owner = ownerSampleData.getSample();
+        Animal entity = animalSampleData.getSample();
 
-        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
-                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
-                new Float(35), false);
-        eventStore.push(entity);
-
-        entity.update(new Name("Severino Benner"), owner.getId(), new Name("Splitz"),
-                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1002, 02, 02)),
+        entity.update(new Name("Severino Benner"), entity.getOwner(), new Name("Splitz"),
+                new Name("Cachorro"), Sex.MALE, LocalDate.of(1002, 02, 02),
                 new Float(10), false);
 
         RequestEntity<Animal> request = RequestEntity.put(URI.create("/animals")).body(entity);
@@ -89,11 +85,11 @@ public class AnimalCommandControllerTests {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino Benner", entityFromStore.getName().toString());
-        assertEquals(owner.getId(), entityFromStore.getOwner());
+        assertEquals(entity.getOwner(), entityFromStore.getOwner());
         assertEquals("Splitz", entityFromStore.getBreed().toString());
         assertEquals("Cachorro", entityFromStore.getSpecie().toString());
         assertEquals("M", entityFromStore.getSex().toString());
-        assertEquals(new Date(LocalDate.of(1002, 02, 02)), entityFromStore.getBirthDate());
+        assertEquals(LocalDate.of(1002, 02, 02), entityFromStore.getBirthDate());
         assertEquals(new Float(10), entityFromStore.getWeight());
         assertEquals(false, entityFromStore.isCastrated());
         assertEquals("2", entityFromStore.getVersion().toString());
@@ -101,13 +97,7 @@ public class AnimalCommandControllerTests {
 
     @Test
     public void deleteWithSuccess() {
-        Animal entity = new Animal();
-        Owner owner = ownerSampleData.getSample();
-
-        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new Name("Xinauzer"),
-                new Name("Cachorro"), new Sex('M'), new Date(LocalDate.of(1001, 01, 01)),
-                new Float(35), false);
-        eventStore.push(entity);
+        Animal entity = animalSampleData.getSample();
 
         HttpEntity<Animal> requestEntity = new HttpEntity<>(entity);
 

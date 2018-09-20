@@ -19,11 +19,6 @@ databaseChangeLog:
                         constraints:
                             nullable: false
                     - column:
-                        name: busy
-                        type: ${TYPE_BOOL}
-                        constraints:
-                            nullable: false
-                    - column:
                         name: deleted
                         type: ${TYPE_BOOL}
                         constraints:

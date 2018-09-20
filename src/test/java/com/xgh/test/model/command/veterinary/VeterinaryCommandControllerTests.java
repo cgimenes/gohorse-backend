@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Email;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
@@ -47,7 +46,7 @@ public class VeterinaryCommandControllerTests {
                 new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
                         null),
                 new Phone("44998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-                new Date(LocalDate.of(1986, 10, 03)));
+                LocalDate.of(1986, 10, 03));
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/veterinarians", entity, Void.class);
 
@@ -70,12 +69,12 @@ public class VeterinaryCommandControllerTests {
                 new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
                         null),
                 new Phone("44998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-                new Date(LocalDate.of(1986, 10, 03)));
+                LocalDate.of(1986, 10, 03));
         eventStore.push(entity);
 
         entity.update(entity.getName(), entity.getAddress(), new Phone("44998731154"), entity.getCrmv(),
                 new Email("ricardo.requena@hotmail.com"),
-                new Date(LocalDate.of(1986, 10, 03)));
+                LocalDate.of(1986, 10, 03));
 
         RequestEntity<Veterinary> request = RequestEntity.put(URI.create("/veterinarians")).body(entity);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -98,7 +97,7 @@ public class VeterinaryCommandControllerTests {
                 new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
                         null),
                 new Phone("44998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
-                new Date(LocalDate.of(1986, 10, 03)));
+                LocalDate.of(1986, 10, 03));
 
         eventStore.push(entity);
 

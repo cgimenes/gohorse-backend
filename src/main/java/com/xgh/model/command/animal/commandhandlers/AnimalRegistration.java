@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalRegistration implements CommandHandler<RegisterAnimal> {
-    private EventStore repository;
+    private final EventStore repository;
 
     @Autowired
     public AnimalRegistration(EventStore repository) {

@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-        id: 15
+        id: 16
         author: andre.conceicao
         changes:
             - createTable:

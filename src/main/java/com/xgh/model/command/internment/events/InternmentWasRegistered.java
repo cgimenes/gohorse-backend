@@ -5,18 +5,18 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.InternmentId;
-import com.xgh.model.command.valueobjects.Date;
+import java.time.LocalDateTime;
 
 public class InternmentWasRegistered extends Event<InternmentId> {
     private BedId bedId;
     private AnimalId animalId;
-    private Date busyAt;
-    private Date busyUntil;
+    private LocalDateTime busyAt;
+    private LocalDateTime busyUntil;
 
     protected InternmentWasRegistered() {}
 
-    public InternmentWasRegistered(InternmentId id, BedId bedId, AnimalId animalId, Date busyAt, Date busyUntil,
-                                   EntityVersion version) {
+    public InternmentWasRegistered(InternmentId id, BedId bedId, AnimalId animalId,
+    		LocalDateTime busyAt, LocalDateTime busyUntil, EntityVersion version) {
         super(id, version);
         this.bedId = bedId;
         this.animalId = animalId;
@@ -32,11 +32,11 @@ public class InternmentWasRegistered extends Event<InternmentId> {
         return animalId;
     }
 
-    public Date getBusyAt() {
+    public LocalDateTime getBusyAt() {
         return busyAt;
     }
 
-    public Date getBusyUntil() {
+    public LocalDateTime getBusyUntil() {
         return busyUntil;
     }
 

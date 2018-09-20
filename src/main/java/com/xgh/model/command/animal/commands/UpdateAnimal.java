@@ -3,9 +3,9 @@ package com.xgh.model.command.animal.commands;
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.owner.OwnerId;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
+import java.time.LocalDate;
 
 public class UpdateAnimal implements Command {
     private final AnimalId id;
@@ -14,9 +14,9 @@ public class UpdateAnimal implements Command {
     private final Name breed;
     private final Name specie;
     private final Sex sex;
-    private final Date birthDate;
+    private final LocalDate birthDate;
     private final Float weight;
-    private final boolean castrated = false;
+    private final boolean castrated;
 
     protected UpdateAnimal() {
         this.id = null;
@@ -27,8 +27,10 @@ public class UpdateAnimal implements Command {
         this.sex = null;
         this.birthDate = null;
         this.weight = null;
+        this.castrated = false;
     }
 
+    @Override
     public AnimalId getId() {
         return id;
     }
@@ -53,7 +55,7 @@ public class UpdateAnimal implements Command {
         return sex;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 

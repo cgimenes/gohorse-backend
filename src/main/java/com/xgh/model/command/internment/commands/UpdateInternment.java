@@ -4,14 +4,14 @@ import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.InternmentId;
-import com.xgh.model.command.valueobjects.Date;
+import java.time.LocalDateTime;
 
 public class UpdateInternment implements Command {
     private final InternmentId id;
     private final BedId bedId;
     private final AnimalId animalId;
-    private final Date busyAt;
-    private final Date busyUntil;
+    private final LocalDateTime busyAt;
+    private final LocalDateTime busyUntil;
 
     public UpdateInternment() {
         this.id = null;
@@ -34,11 +34,11 @@ public class UpdateInternment implements Command {
         return animalId;
     }
 
-    public Date getBusyAt() {
+    public LocalDateTime getBusyAt() {
         return busyAt;
     }
 
-    public Date getBusyUntil() {
+    public LocalDateTime getBusyUntil() {
         return busyUntil;
     }
 

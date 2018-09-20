@@ -12,7 +12,7 @@ import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.animal.AnimalSampleData;
 import com.xgh.test.model.query.bed.BedSampleData;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -52,8 +52,8 @@ public class InternmentQueryControllerTests {
                 internmentId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(LocalDate.of(2018, 10, 10), response.getBody().getBusyAt());
-        assertEquals(LocalDate.of(2018, 10, 15), response.getBody().getBusyUntil());
+        assertEquals(LocalDateTime.of(2018, 10, 10, 10, 10, 10), response.getBody().getBusyAt());
+        assertEquals(LocalDateTime.of(2018, 10, 10, 12, 10, 10), response.getBody().getBusyUntil());
     }
 
     @Test
@@ -82,8 +82,8 @@ public class InternmentQueryControllerTests {
         Internment internment = new Internment(UUID.randomUUID(),
                 bed,
                 animal,
-                LocalDate.of(2018, 10, 10),
-                LocalDate.of(2018, 10, 15),
+                LocalDateTime.of(2018, 10, 10, 10, 10, 10),
+                LocalDateTime.of(2018, 10, 10, 12, 10, 10),
                 false);
         repository.save(internment);
         return internment.getId();

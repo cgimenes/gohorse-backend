@@ -14,7 +14,7 @@ public class BedSampleData {
 
     public Bed getSample() {
         Bed bed = new Bed();
-        bed.register(new BedId(), new Code("123"), false);
+        bed.register(new BedId(), new Code("123"));
         eventStore.push(bed);
         return bed;
     }

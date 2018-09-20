@@ -87,7 +87,8 @@ public class ProductCommandControllerTests {
     @Test
     public void deleteWithSuccess() {
         Product entity = new Product();
-        entity.register(new ProductId(), new Name("Produto bom"), 10.50f, new Name("Marca vagabunda"), 2f, new SupplierId());
+        Supplier supplier = supplierSampleData.getSample();
+        entity.register(new ProductId(), new Name("Produto bom"), 10.50f, new Name("Marca vagabunda"), 2f, supplier.getId());
         eventStore.push(entity);
 
         HttpEntity<Product> requestEntity = new HttpEntity<>(entity);

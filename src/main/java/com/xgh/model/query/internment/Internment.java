@@ -3,7 +3,7 @@ package com.xgh.model.query.internment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.animal.Animal;
 import com.xgh.model.query.bed.Bed;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,10 +27,10 @@ public class Internment {
     private Animal animal;
 
     @Column(name = "busy_at")
-    private LocalDate busyAt;
+    private LocalDateTime busyAt;
 
     @Column(name = "busy_until")
-    private LocalDate busyUntil;
+    private LocalDateTime busyUntil;
 
     @JsonIgnore
     private Boolean deleted = false;
@@ -38,7 +38,7 @@ public class Internment {
     protected Internment() {
     }
 
-    public Internment(UUID id, Bed bed, Animal animal, LocalDate busyAt, LocalDate busyUntil, Boolean deleted) {
+    public Internment(UUID id, Bed bed, Animal animal, LocalDateTime busyAt, LocalDateTime busyUntil, Boolean deleted) {
         this.id = id;
         this.bed = bed;
         this.animal = animal;
@@ -59,11 +59,11 @@ public class Internment {
         return animal;
     }
 
-    public LocalDate getBusyAt() {
+    public LocalDateTime getBusyAt() {
         return busyAt;
     }
 
-    public LocalDate getBusyUntil() {
+    public LocalDateTime getBusyUntil() {
         return busyUntil;
     }
 

@@ -3,17 +3,17 @@ package com.xgh.model.command.owner.commands;
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Document;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
+import java.time.LocalDate;
 
 public final class UpdateOwner implements Command {
     private final OwnerId id;
     private final Name name;
     private final Document document;
     private final Phone phone;
-    private final Date birthDate;
+    private final LocalDate birthDate;
     private final Address address;
 
     protected UpdateOwner() {
@@ -42,7 +42,7 @@ public final class UpdateOwner implements Command {
         return phone;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 

@@ -19,7 +19,7 @@ public class BedRegistration implements CommandHandler<RegisterBed> {
     @Override
     public void execute(RegisterBed command) {
         Bed bed = new Bed();
-        bed.register(command.getId(), command.getCode(), command.isBusy());
+        bed.register(command.getId(), command.getCode());
         eventStore.push(bed);
     }
 }

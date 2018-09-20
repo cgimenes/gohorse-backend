@@ -19,7 +19,7 @@ public class BedUpdate implements CommandHandler<UpdateBed> {
     @Override
     public void execute(UpdateBed command) {
         Bed bed = eventStore.pull(Bed.class, command.getId());
-        bed.update(command.getCode(), command.isBusy());
+        bed.update(command.getCode());
         eventStore.push(bed);
     }
 }

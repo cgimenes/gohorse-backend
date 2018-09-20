@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalUpdate implements CommandHandler<UpdateAnimal> {
-    private EventStore repository;
+    private final EventStore repository;
 
     @Autowired
     public AnimalUpdate(EventStore repository) {

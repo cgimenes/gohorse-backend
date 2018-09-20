@@ -46,7 +46,7 @@ public class VeterinaryProjector implements EventHandler {
                 entity.getPhone().getValue(),
                 entity.getCrmv().getValue(),
                 entity.getEmail() != null ? entity.getEmail().getValue() : null,
-                entity.getBirthDate().getValue(),
+                entity.getBirthDate(),
                 entity.isDeleted());
 
         repository.save(projection);

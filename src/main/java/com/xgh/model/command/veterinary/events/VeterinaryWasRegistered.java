@@ -4,11 +4,11 @@ import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Crmv;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Email;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.veterinary.VeterinaryId;
+import java.time.LocalDate;
 
 public class VeterinaryWasRegistered extends Event<VeterinaryId> {
     private Name name;
@@ -16,13 +16,13 @@ public class VeterinaryWasRegistered extends Event<VeterinaryId> {
     private Phone phone;
     private Crmv crmv;
     private Email email;
-    private Date birthDate;
+    private LocalDate birthDate;
 
     protected VeterinaryWasRegistered() {
     }
 
     public VeterinaryWasRegistered(VeterinaryId id, Name name, Address address, Phone phone,
-                                   Crmv crmv, Email email, Date birthDate, EntityVersion version) {
+                                   Crmv crmv, Email email, LocalDate birthDate, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.address = address;
@@ -52,7 +52,7 @@ public class VeterinaryWasRegistered extends Event<VeterinaryId> {
         return this.email;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return this.birthDate;
     }
 

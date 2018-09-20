@@ -8,10 +8,10 @@ import com.xgh.model.command.animal.AnimalId;
 import com.xgh.model.command.bed.BedId;
 import com.xgh.model.command.internment.Internment;
 import com.xgh.model.command.internment.InternmentId;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.test.model.command.animal.AnimalSampleData;
 import com.xgh.test.model.command.bed.BedSampleData;
 import java.net.URI;
+import java.time.LocalDateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class InternmentCommandControllerTests {
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();
-        entity.register(new InternmentId(), bedId, animalId, new Date("2018-04-20"), new Date("2018-04-25"));
+        entity.register(new InternmentId(), bedId, animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
 
         ResponseEntity<Void> response = restTemplate.postForEntity(URI.create("/internments"), entity, Void.class);
 
@@ -60,8 +60,8 @@ public class InternmentCommandControllerTests {
         assertEquals(entity.getId(), entityFromStore.getId());
         assertEquals(entity.getBedId(), entityFromStore.getBedId());
         assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
-        assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
-        assertEquals(new Date("2018-04-25"), entityFromStore.getBusyUntil());
+        assertEquals(LocalDateTime.of(2018, 10, 10, 10, 10, 10), entityFromStore.getBusyAt());
+        assertEquals(LocalDateTime.of(2018, 10, 10, 12, 10, 10), entityFromStore.getBusyUntil());
         assertEquals("/internments/" + entity.getId(), response.getHeaders().getLocation().getPath());
     }
 
@@ -71,11 +71,11 @@ public class InternmentCommandControllerTests {
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();
-        entity.register(new InternmentId(), bedId, animalId, new Date("2018-04-20"), new Date("2018-04-25"));
+        entity.register(new InternmentId(), bedId, animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
         eventStore.push(entity);
 
         BedId newBedId = bedSampleData.getSample().getId();
-        entity.update(newBedId, entity.getAnimalId(), entity.getBusyAt(), new Date("2018-04-28"));
+        entity.update(newBedId, entity.getAnimalId(), entity.getBusyAt(), LocalDateTime.of(2018, 10, 12, 10, 10, 10));
 
         RequestEntity<Internment> request = RequestEntity.put(URI.create("/internments")).body(entity);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -85,9 +85,9 @@ public class InternmentCommandControllerTests {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertTrue(entity.equals(entityFromStore));
         assertEquals(newBedId, entityFromStore.getBedId());
-        assertEquals(new Date("2018-04-28"), entityFromStore.getBusyUntil());
         assertEquals(entity.getAnimalId(), entityFromStore.getAnimalId());
-        assertEquals(new Date("2018-04-20"), entityFromStore.getBusyAt());
+        assertEquals(LocalDateTime.of(2018, 10, 10, 10, 10, 10), entityFromStore.getBusyAt());
+        assertEquals(LocalDateTime.of(2018, 10, 12, 10, 10, 10), entityFromStore.getBusyUntil());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class InternmentCommandControllerTests {
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();
-        entity.register(new InternmentId(), bedId, animalId, new Date("2018-04-20"), new Date("2018-04-25"));
+        entity.register(new InternmentId(), bedId, animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
         eventStore.push(entity);
 
         HttpEntity<Internment> requestEntity = new HttpEntity<>(entity);

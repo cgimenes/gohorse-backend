@@ -8,7 +8,6 @@ import com.xgh.model.command.owner.Owner;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Address;
 import com.xgh.model.command.valueobjects.Cpf;
-import com.xgh.model.command.valueobjects.Date;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Phone;
 import com.xgh.model.command.valueobjects.PostalCode;
@@ -46,7 +45,7 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"),
-                new Date(LocalDate.of(1001, 01, 01)), address);
+                LocalDate.of(1001, 01, 01), address);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
 
@@ -58,7 +57,7 @@ public class OwnerCommandControllerTests {
         assertEquals("Dono Master", ownerFromStore.getName().toString());
         assertEquals("44313371337", ownerFromStore.getPhone().toString());
         assertEquals("00000000191", ownerFromStore.getDocument().toString());
-        assertEquals(new Date(LocalDate.of(1001, 01, 01)), ownerFromStore.getBirthDate());
+        assertEquals(LocalDate.of(1001, 01, 01), ownerFromStore.getBirthDate());
         assertEquals("1", ownerFromStore.getVersion().toString());
     }
 
@@ -69,10 +68,10 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09090385975"),
-                new Date(LocalDate.of(1001, 01, 01)), address);
+                LocalDate.of(1001, 01, 01), address);
         eventStore.push(owner);
 
-        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("00000000191"), new Date(LocalDate.of(1002, 02, 02)), address);
+        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("00000000191"), LocalDate.of(1002, 02, 02), address);
 
         RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -84,14 +83,14 @@ public class OwnerCommandControllerTests {
         assertEquals("Dono Master", ownerFromStore.getName().toString());
         assertEquals("44000000000", ownerFromStore.getPhone().toString());
         assertEquals("00000000191", ownerFromStore.getDocument().toString());
-        assertEquals(new Date(LocalDate.of(1002, 02, 02)), ownerFromStore.getBirthDate());
+        assertEquals(LocalDate.of(1002, 02, 02), ownerFromStore.getBirthDate());
         assertEquals("2", ownerFromStore.getVersion().toString());
     }
 
     @Test
     public void deleteWithSuccess() {
         Owner owner = new Owner();
-        Date data = new Date(LocalDate.of(1802, 02, 02));
+        LocalDate data = LocalDate.of(1802, 02, 02);
         Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
