@@ -82,3 +82,5 @@ databaseChangeLog:
         file: db/changelog/0014-table-internment.yaml        
     - include:
         file: db/changelog/0015-table-appointment.yaml
+    - include:
+        file: db/changelog/0016-table-enumerator.yaml
