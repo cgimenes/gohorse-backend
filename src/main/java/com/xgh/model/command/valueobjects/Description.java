@@ -12,7 +12,7 @@ public class Description extends SingleValueObject<String> {
             throw new IllegalArgumentException("É necessário que a descrição possua no mínimo 1 caracter");
         }
         if (description.length() > 100) {
-            throw new IllegalArgumentException("O limite máximo para o tamanho de uma descrição é de 200 caracteres");
+            throw new IllegalArgumentException("O limite máximo para o tamanho de uma descrição é de 100 caracteres");
         }
     }
 }
