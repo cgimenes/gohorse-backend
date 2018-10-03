@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class EventStream implements Iterator<Event<?>> {
-    private final List<Event<?>> events;
+public class EventStream implements Iterator<EntityEvent<?>> {
+    private final List<EntityEvent<?>> events;
 
     public EventStream() {
         this.events = new ArrayList<>();
     }
 
-    public EventStream(List<Event<?>> events) {
+    public EventStream(List<EntityEvent<?>> events) {
         this.events = events;
     }
 
@@ -21,11 +21,11 @@ public class EventStream implements Iterator<Event<?>> {
     }
 
     @Override
-    public Event<?> next() {
+    public EntityEvent<?> next() {
         return events.remove(0);
     }
 
-    public void add(Event<?> event) {
+    public void add(EntityEvent<?> event) {
         this.events.add(event);
     }
 }

@@ -1,9 +1,9 @@
 package com.xgh.model.command.operational.laboratory.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.laboratory.LaboratoryId;
 
-public class DeleteLaboratory implements Command {
+public class DeleteLaboratory implements EntityCommand {
     private final LaboratoryId id;
 
     protected DeleteLaboratory() {

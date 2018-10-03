@@ -1,11 +1,11 @@
 package com.xgh.model.command.operational.product.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.product.ProductId;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Name;
 
-public class UpdateProduct implements Command {
+public class UpdateProduct implements EntityCommand {
     private final ProductId id;
     private final Name name;
     private final Float price;

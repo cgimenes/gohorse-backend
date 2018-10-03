@@ -1,14 +1,14 @@
 package com.xgh.model.command.operational.animal.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Sex;
 import java.time.LocalDate;
 
-public class AnimalWasRegistered extends Event<AnimalId> {
+public class AnimalWasRegistered extends EntityEvent<AnimalId> {
     private Name name;
     private OwnerId owner;
     private Name breed;

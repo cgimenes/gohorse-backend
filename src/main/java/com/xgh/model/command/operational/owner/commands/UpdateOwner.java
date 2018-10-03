@@ -1,6 +1,6 @@
 package com.xgh.model.command.operational.owner.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
@@ -8,7 +8,7 @@ import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import java.time.LocalDate;
 
-public final class UpdateOwner implements Command {
+public final class UpdateOwner implements EntityCommand {
     private final OwnerId id;
     private final Name name;
     private final Document document;

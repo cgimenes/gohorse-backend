@@ -1,11 +1,11 @@
 package com.xgh.model.command.operational.bed.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.bed.BedId;
 import com.xgh.model.command.operational.valueobjects.Code;
 
-public class BedWasRegistered extends Event<BedId> {
+public class BedWasRegistered extends EntityEvent<BedId> {
     private Code code;
 
     protected BedWasRegistered() {

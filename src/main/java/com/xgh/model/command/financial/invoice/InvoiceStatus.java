@@ -1,5 +1,5 @@
 package com.xgh.model.command.financial.invoice;
 
-public enum InvoiceType {
-    PAYABLE, RECEIVABLE
+public enum InvoiceStatus {
+    CREATED, PAID
 }

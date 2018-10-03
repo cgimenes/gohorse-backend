@@ -1,5 +1,6 @@
-package com.xgh.eventhandlers.projectors;
+package com.xgh.eventhandlers.operational;
 
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.exceptions.ProjectionFailedException;
@@ -29,15 +30,15 @@ public class ProductProjector implements EventHandler {
     }
 
     @Override
-    public boolean isSubscribedTo(Event<?> event) {
+    public boolean isSubscribedTo(Event event) {
         return event instanceof ProductWasDeleted
                 || event instanceof ProductWasRegistered
                 || event instanceof ProductWasUpdated;
     }
 
     @Override
-    public void execute(Event<?> event) {
-        Product entity = eventStore.pull(Product.class, event.getEntityId());
+    public void execute(Event event) {
+        Product entity = eventStore.pull(Product.class, ((EntityEvent<?>) event).getEntityId());
 
         Optional<Supplier> supplier = supplierRepository.findById(entity.getSupplierId().getValue());
 

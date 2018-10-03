@@ -1,5 +1,6 @@
-package com.xgh.eventhandlers.projectors;
+package com.xgh.eventhandlers.operational;
 
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.exceptions.ProjectionFailedException;
@@ -35,15 +36,15 @@ public class AnimalProjector implements EventHandler {
     }
 
     @Override
-    public boolean isSubscribedTo(Event<?> event) {
+    public boolean isSubscribedTo(Event event) {
         return event instanceof AnimalWasDeleted
                 || event instanceof AnimalWasRegistered
                 || event instanceof AnimalWasUpdated;
     }
 
     @Override
-    public void execute(Event<?> event) {
-        Animal entity = eventStore.pull(Animal.class, event.getEntityId());
+    public void execute(Event event) {
+        Animal entity = eventStore.pull(Animal.class, ((EntityEvent<?>) event).getEntityId());
 
         Optional<Owner> owner = ownerRepository.findById(entity.getOwner().getValue());
         if (!owner.isPresent()) {

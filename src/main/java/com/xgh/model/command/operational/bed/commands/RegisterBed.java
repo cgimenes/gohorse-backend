@@ -1,10 +1,10 @@
 package com.xgh.model.command.operational.bed.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.bed.BedId;
 import com.xgh.model.command.operational.valueobjects.Code;
 
-public class RegisterBed implements Command {
+public class RegisterBed implements EntityCommand {
     private final BedId id;
     private final Code code;
 

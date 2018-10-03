@@ -1,6 +1,7 @@
-package com.xgh.eventhandlers.projectors;
+package com.xgh.eventhandlers.operational;
 
 import com.xgh.buildingblocks.EventStore;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.model.command.operational.veterinary.Veterinary;
@@ -27,15 +28,15 @@ public class VeterinaryProjector implements EventHandler {
     }
 
     @Override
-    public boolean isSubscribedTo(Event<?> event) {
+    public boolean isSubscribedTo(Event event) {
         return event instanceof VeterinaryWasDeleted
                 || event instanceof VeterinaryWasRegistered
                 || event instanceof VeterinaryWasUpdated;
     }
 
     @Override
-    public void execute(Event<?> event) {
-        Veterinary entity = eventStore.pull(Veterinary.class, event.getEntityId());
+    public void execute(Event event) {
+        Veterinary entity = eventStore.pull(Veterinary.class, ((EntityEvent<?>) event).getEntityId());
 
         Address addressProjection = addressProjector.execute(entity.getAddress());
 

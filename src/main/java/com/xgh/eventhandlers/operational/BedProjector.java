@@ -1,6 +1,7 @@
-package com.xgh.eventhandlers.projectors;
+package com.xgh.eventhandlers.operational;
 
 import com.xgh.buildingblocks.EventStore;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.model.command.operational.bed.Bed;
@@ -23,15 +24,15 @@ public class BedProjector implements EventHandler {
     }
 
     @Override
-    public boolean isSubscribedTo(Event<?> event) {
+    public boolean isSubscribedTo(Event event) {
         return event instanceof BedWasDeleted
                 || event instanceof BedWasRegistered
                 || event instanceof BedWasUpdated;
     }
 
     @Override
-    public void execute(Event<?> event) {
-        Bed entity = eventStore.pull(Bed.class, event.getEntityId());
+    public void execute(Event event) {
+        Bed entity = eventStore.pull(Bed.class, ((EntityEvent<?>) event).getEntityId());
 
         com.xgh.model.query.operational.bed.Bed projection = new com.xgh.model.query.operational.bed.Bed(
                 entity.getId().getValue(),

@@ -1,6 +1,6 @@
 package com.xgh.model.command.operational.veterinary.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Crmv;
 import com.xgh.model.command.operational.valueobjects.Email;
@@ -9,7 +9,7 @@ import com.xgh.model.command.operational.valueobjects.Phone;
 import com.xgh.model.command.operational.veterinary.VeterinaryId;
 import java.time.LocalDate;
 
-public class UpdateVeterinary implements Command {
+public class UpdateVeterinary implements EntityCommand {
     private final VeterinaryId id;
     private final Name name;
     private final Address address;

@@ -1,6 +1,6 @@
 package com.xgh.infra;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.buildingblocks.command.CommandBus;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.buildingblocks.event.EventBus;
@@ -62,10 +62,10 @@ public class BusInitializer implements ApplicationListener<ContextRefreshedEvent
      * Obtém a classe do comando que um dado command handler executa, usando reflection
      */
     @SuppressWarnings("unchecked")
-    private Class<? extends Command> getCommandClass(Class<? extends CommandHandler> handlerClass) {
+    private Class<? extends EntityCommand> getCommandClass(Class<? extends CommandHandler> handlerClass) {
         ParameterizedType parameterizedType = (ParameterizedType) handlerClass.getGenericInterfaces()[0];
         Type[] typeArguments = parameterizedType.getActualTypeArguments();
-        return (Class<? extends Command>) typeArguments[0];
+        return (Class<? extends EntityCommand>) typeArguments[0];
     }
 
     @Override

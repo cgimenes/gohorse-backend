@@ -50,7 +50,6 @@ public final class Animal {
 
     public Animal(UUID id, String name, Owner owner, Breed breed, Specie specie, Character sex, LocalDate birthDate,
                   Boolean castrated, Float weight, Boolean deleted) {
-        super();
         this.id = id;
         this.name = name;
         this.owner = owner;

@@ -1,7 +1,7 @@
 package com.xgh.model.command.operational.owner.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
@@ -9,7 +9,7 @@ import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import java.time.LocalDate;
 
-public class OwnerWasUpdated extends Event<OwnerId> {
+public class OwnerWasUpdated extends EntityEvent<OwnerId> {
     private Name name;
     private Phone phone;
     private Document document;

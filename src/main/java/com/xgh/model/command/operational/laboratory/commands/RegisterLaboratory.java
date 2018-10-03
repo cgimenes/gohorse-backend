@@ -1,12 +1,12 @@
 package com.xgh.model.command.operational.laboratory.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.laboratory.LaboratoryId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 
-public final class RegisterLaboratory implements Command {
+public final class RegisterLaboratory implements EntityCommand {
     private final LaboratoryId id;
     private final Name companyName;
     private final Phone phone;

@@ -4,7 +4,7 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -18,11 +18,11 @@ public class PostgresEventStore extends EventStore {
     // TODO migrar para Mongo
     private final JdbcTemplate connection;
 
-    private final RowMapper<Event<?>> eventRowMapper = (rs, rowNum) -> {
+    private final RowMapper<EntityEvent<?>> eventRowMapper = (rs, rowNum) -> {
         Calendar ocurredOn = Calendar.getInstance();
         ocurredOn.setTime(rs.getDate("ocurred_on"));
 
-        return Event.fromJson(
+        return EntityEvent.fromJson(
                 rs.getString("event_type"),
                 UUID.fromString(rs.getString("entity_id")),
                 new EntityVersion(rs.getInt("entity_version")),
@@ -36,7 +36,7 @@ public class PostgresEventStore extends EventStore {
     }
 
     @Override
-    protected <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id) {
+    protected <T extends AggregateRoot<?>> List<EntityEvent<?>> getEvents(Class<T> entityType, EntityId id) {
         return connection.query(
                 "select entity_id, entity_version, entity_type, event_type, ocurred_on, event_data "
                         + "from event "
@@ -50,7 +50,7 @@ public class PostgresEventStore extends EventStore {
 
     // TODO tratar exceção de concorrência
     @Override
-    protected void saveEvent(Event<?> event, String entityType) {
+    protected void saveEvent(EntityEvent<?> event, String entityType) {
         connection.update(
                 "insert into event ("
                         + "entity_id, entity_version, entity_type, event_type, ocurred_on, event_data"

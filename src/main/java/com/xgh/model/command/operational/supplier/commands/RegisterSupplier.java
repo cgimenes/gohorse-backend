@@ -1,13 +1,13 @@
 package com.xgh.model.command.operational.supplier.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 
-public final class RegisterSupplier implements Command {
+public final class RegisterSupplier implements EntityCommand {
     private final SupplierId id;
     private final Name name;
     private final Document document;

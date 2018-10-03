@@ -1,5 +1,6 @@
-package com.xgh.eventhandlers.projectors;
+package com.xgh.eventhandlers.operational;
 
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.infra.repository.PostgresEventStore;
@@ -30,15 +31,15 @@ public class SupplierProjector implements EventHandler {
     }
 
     @Override
-    public boolean isSubscribedTo(Event<?> event) {
+    public boolean isSubscribedTo(Event event) {
         return event instanceof SupplierWasDeleted
                 || event instanceof SupplierWasRegistered
                 || event instanceof SupplierWasUpdated;
     }
 
     @Override
-    public void execute(Event<?> event) {
-        Supplier entity = eventStore.pull(Supplier.class, event.getEntityId());
+    public void execute(Event event) {
+        Supplier entity = eventStore.pull(Supplier.class, ((EntityEvent<?>) event).getEntityId());
 
         com.xgh.model.query.operational.address.Address addressProjection = addressProjector.execute(entity.getAddress());
 

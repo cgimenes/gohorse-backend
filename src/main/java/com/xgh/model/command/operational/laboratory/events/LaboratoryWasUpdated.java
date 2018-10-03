@@ -1,13 +1,13 @@
 package com.xgh.model.command.operational.laboratory.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.laboratory.LaboratoryId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 
-public class LaboratoryWasUpdated extends Event<LaboratoryId> {
+public class LaboratoryWasUpdated extends EntityEvent<LaboratoryId> {
     private Name companyName;
     private Phone phone;
     private Address address;

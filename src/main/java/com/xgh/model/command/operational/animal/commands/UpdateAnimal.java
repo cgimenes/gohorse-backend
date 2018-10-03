@@ -1,13 +1,13 @@
 package com.xgh.model.command.operational.animal.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Sex;
 import java.time.LocalDate;
 
-public class UpdateAnimal implements Command {
+public class UpdateAnimal implements EntityCommand {
     private final AnimalId id;
     private final Name name;
     private final OwnerId owner;

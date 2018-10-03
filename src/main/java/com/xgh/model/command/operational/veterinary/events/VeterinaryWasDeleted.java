@@ -1,10 +1,10 @@
 package com.xgh.model.command.operational.veterinary.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.veterinary.VeterinaryId;
 
-public class VeterinaryWasDeleted extends Event<VeterinaryId> {
+public class VeterinaryWasDeleted extends EntityEvent<VeterinaryId> {
     protected VeterinaryWasDeleted() {
     }
 

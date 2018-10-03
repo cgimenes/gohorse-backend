@@ -1,7 +1,7 @@
 package com.xgh.model.command.operational.veterinary.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Crmv;
 import com.xgh.model.command.operational.valueobjects.Email;
@@ -10,7 +10,7 @@ import com.xgh.model.command.operational.valueobjects.Phone;
 import com.xgh.model.command.operational.veterinary.VeterinaryId;
 import java.time.LocalDate;
 
-public class VeterinaryWasRegistered extends Event<VeterinaryId> {
+public class VeterinaryWasRegistered extends EntityEvent<VeterinaryId> {
     private Name name;
     private Address address;
     private Phone phone;

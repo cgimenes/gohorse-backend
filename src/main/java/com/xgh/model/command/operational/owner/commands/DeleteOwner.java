@@ -1,9 +1,9 @@
 package com.xgh.model.command.operational.owner.commands;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.owner.OwnerId;
 
-public class DeleteOwner implements Command {
+public class DeleteOwner implements EntityCommand {
     private final OwnerId id;
 
     protected DeleteOwner() {

@@ -1,12 +1,12 @@
 package com.xgh.model.command.operational.product.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.product.ProductId;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Name;
 
-public class ProductWasUpdated extends Event<ProductId> {
+public class ProductWasUpdated extends EntityEvent<ProductId> {
     private final Name name;
     private final Float price;
     private final Name brand;
