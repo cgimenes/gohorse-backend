@@ -9,6 +9,7 @@ import com.xgh.exceptions.EntityNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 public abstract class EventStore {
     protected abstract <T extends AggregateRoot<?>> List<EntityEvent<?>> getEvents(Class<T> entityType, EntityId id);
@@ -43,6 +44,7 @@ public abstract class EventStore {
      * dispara os event handlers para cada evento
      */
     // TODO transação
+    @Transactional
     public void push(AggregateRoot<?> entity) {
         EventStream uncommittedEvents = entity.getUncommittedEvents();
         while (uncommittedEvents.hasNext()) {

@@ -7,11 +7,11 @@ import com.xgh.model.command.financial.account.events.AccountWasDeleted;
 import javax.validation.constraints.NotNull;
 
 public class Account extends AggregateRoot<AccountId> {
-    private AccountType type;
+    private AccountType accountType;
     private EntityId accountOwner;
 
-    public void create(@NotNull AccountId id, @NotNull AccountType type, @NotNull EntityId accountOwner) {
-        recordAndApply(new AccountWasCreated(id, type, accountOwner, nextVersion()));
+    public void create(@NotNull AccountId id, @NotNull AccountType accountType, @NotNull EntityId accountOwner) {
+        recordAndApply(new AccountWasCreated(id, accountType, accountOwner, nextVersion()));
     }
 
     public void delete() {
@@ -19,7 +19,7 @@ public class Account extends AggregateRoot<AccountId> {
     }
 
     protected void when(AccountWasCreated event) {
-        this.type = event.getAccountType();
+        this.accountType = event.getAccountType();
         this.accountOwner = event.getAccountOwner();
     }
 
@@ -28,7 +28,7 @@ public class Account extends AggregateRoot<AccountId> {
     }
 
     public AccountType getAccountType() {
-        return type;
+        return accountType;
     }
 
     public EntityId getAccountOwner() {

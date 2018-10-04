@@ -19,7 +19,6 @@ public class AddressProjector {
     public Address execute(com.xgh.model.command.operational.valueobjects.Address address) {
         PostalCode postalcodeProjection = projectPostalCode(address.getPostalCode());
 
-
         Address addressProjection = new Address(
                 postalcodeProjection,
                 address.getNumber(),

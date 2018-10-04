@@ -7,20 +7,20 @@ import com.xgh.model.command.financial.account.AccountId;
 import com.xgh.model.command.financial.account.AccountType;
 
 public class AccountWasCreated extends EntityEvent<AccountId> {
-    private AccountType type;
+    private AccountType accountType;
     private EntityId accountOwner;
 
     protected AccountWasCreated() {
     }
 
-    public AccountWasCreated(AccountId id, AccountType type, EntityId accountOwner, EntityVersion entityVersion) {
+    public AccountWasCreated(AccountId id, AccountType accountType, EntityId accountOwner, EntityVersion entityVersion) {
         super(id, entityVersion);
-        this.type = type;
+        this.accountType = accountType;
         this.accountOwner = accountOwner;
     }
 
     public AccountType getAccountType() {
-        return type;
+        return accountType;
     }
 
     public EntityId getAccountOwner() {
