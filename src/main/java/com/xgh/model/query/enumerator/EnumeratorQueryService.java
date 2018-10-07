@@ -1,4 +1,4 @@
-package com.xgh.model.query.enumerators;
+package com.xgh.model.query.enumerator;
 
 import com.xgh.Constants;
 import com.xgh.infra.service.BasicQueryService;
@@ -6,8 +6,6 @@ import com.xgh.infra.service.BasicQueryService;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

@@ -1,9 +1,9 @@
-package com.xgh.model.command.enumerators.commandhandlers;
+package com.xgh.model.command.enumerator.commandhandlers;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
-import com.xgh.model.command.enumerators.Enumerator;
-import com.xgh.model.command.enumerators.commands.RegisterEnumerator;
+import com.xgh.model.command.enumerator.Enumerator;
+import com.xgh.model.command.enumerator.commands.RegisterEnumerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.xgh.model.query.enumerators;
+package com.xgh.model.query.enumerator;
 
 import com.xgh.infra.controller.BasicQueryController;
 

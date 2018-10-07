@@ -1,11 +1,11 @@
-package com.xgh.model.command.enumerators;
+package com.xgh.model.command.enumerator;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.valueobjects.Name;
-import com.xgh.model.command.enumerators.events.EnumeratorWasDeleted;
-import com.xgh.model.command.enumerators.events.EnumeratorWasRegistered;
-import com.xgh.model.command.enumerators.events.EnumeratorWasUpdated;
+import com.xgh.model.command.enumerator.events.EnumeratorWasDeleted;
+import com.xgh.model.command.enumerator.events.EnumeratorWasRegistered;
+import com.xgh.model.command.enumerator.events.EnumeratorWasUpdated;
 import com.xgh.model.command.valueobjects.Description;
 
 public final class Enumerator extends AggregateRoot<EnumeratorId> {

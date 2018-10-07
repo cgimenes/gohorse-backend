@@ -1,7 +1,7 @@
-package com.xgh.model.command.enumerators.commands;
+package com.xgh.model.command.enumerator.commands;
 
 import com.xgh.buildingblocks.command.Command;
-import com.xgh.model.command.enumerators.EnumeratorId;
+import com.xgh.model.command.enumerator.EnumeratorId;
 
 public class DeleteEnumerator implements Command {
     private final EnumeratorId id;

@@ -1,26 +1,28 @@
-package com.xgh.model.command.enumerators.commandhandlers;
+package com.xgh.model.command.enumerator.commandhandlers;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
-import com.xgh.model.command.enumerators.Enumerator;
-import com.xgh.model.command.enumerators.commands.DeleteEnumerator;
+import com.xgh.model.command.enumerator.Enumerator;
+import com.xgh.model.command.enumerator.commands.UpdateEnumerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EnumeratorDeletion implements CommandHandler<DeleteEnumerator> {
+public class EnumeratorUpdate implements CommandHandler<UpdateEnumerator> {
     private final EventStore eventStore;
 
     @Autowired
-    public EnumeratorDeletion(EventStore eventStore) {
+    public EnumeratorUpdate(EventStore eventStore) {
         this.eventStore = eventStore;
     }
 
     @Override
-    public void execute(DeleteEnumerator command) {
+    public void execute(UpdateEnumerator command) {
         Enumerator enumerator = eventStore.pull(Enumerator.class, command.getId());
-        enumerator.delete();
+        enumerator.update(
+                command.getKind(),
+                command.getName());
         eventStore.push(enumerator);
     }
 }
