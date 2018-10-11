@@ -7,7 +7,6 @@ import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.product.Product;
 import com.xgh.model.command.product.ProductId;
 import com.xgh.model.command.supplier.Supplier;
-import com.xgh.model.command.supplier.SupplierId;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.test.model.command.supplier.SupplierSampleData;
 import java.net.URI;

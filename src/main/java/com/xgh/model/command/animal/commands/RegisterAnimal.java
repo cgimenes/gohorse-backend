@@ -2,6 +2,7 @@ package com.xgh.model.command.animal.commands;
 
 import com.xgh.buildingblocks.command.Command;
 import com.xgh.model.command.animal.AnimalId;
+import com.xgh.model.command.enumerators.EnumeratorId;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
@@ -11,8 +12,8 @@ public final class RegisterAnimal implements Command {
     private final AnimalId id;
     private final Name name;
     private final OwnerId owner;
-    private final Name breed;
-    private final Name specie;
+    private final EnumeratorId breed;
+    private final EnumeratorId specie;
     private final Sex sex;
     private final LocalDate birthDate;
     private final Float weight;
@@ -43,11 +44,11 @@ public final class RegisterAnimal implements Command {
         return owner;
     }
 
-    public Name getBreed() {
+    public EnumeratorId getBreed() {
         return breed;
     }
 
-    public Name getSpecie() {
+    public EnumeratorId getSpecie() {
         return specie;
     }
 

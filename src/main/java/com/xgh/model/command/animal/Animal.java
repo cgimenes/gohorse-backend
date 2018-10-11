@@ -5,6 +5,7 @@ import com.xgh.exceptions.NullMandatoryArgumentException;
 import com.xgh.model.command.animal.events.AnimalWasDeleted;
 import com.xgh.model.command.animal.events.AnimalWasRegistered;
 import com.xgh.model.command.animal.events.AnimalWasUpdated;
+import com.xgh.model.command.enumerators.EnumeratorId;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
@@ -13,14 +14,14 @@ import java.time.LocalDate;
 public final class Animal extends AggregateRoot<AnimalId> {
     private Name name;
     private OwnerId owner;
-    private Name breed;
-    private Name specie;
+    private EnumeratorId breed;
+    private EnumeratorId specie;
     private Sex sex;
     private LocalDate birthDate;
     private Float weight;
     private Boolean castrated = false;
 
-    public void register(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void register(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -86,11 +87,11 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return owner;
     }
 
-    public Name getBreed() {
+    public EnumeratorId getBreed() {
         return breed;
     }
 
-    public Name getSpecie() {
+    public EnumeratorId getSpecie() {
         return specie;
     }
 
@@ -110,7 +111,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return castrated;
     }
 
-    public void update(Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void update(Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         recordAndApply(new AnimalWasUpdated(this.id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
     }
 

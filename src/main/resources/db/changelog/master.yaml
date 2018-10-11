@@ -84,3 +84,6 @@ databaseChangeLog:
         file: db/changelog/0015-table-appointment.yaml
     - include:
         file: db/changelog/0016-table-enumerator.yaml
+    - include:
+        file: db/changelog/0017-table-animal.yaml
+        

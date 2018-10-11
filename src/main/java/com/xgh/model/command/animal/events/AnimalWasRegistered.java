@@ -3,6 +3,7 @@ package com.xgh.model.command.animal.events;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.model.command.animal.AnimalId;
+import com.xgh.model.command.enumerators.EnumeratorId;
 import com.xgh.model.command.owner.OwnerId;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Sex;
@@ -11,8 +12,8 @@ import java.time.LocalDate;
 public class AnimalWasRegistered extends Event<AnimalId> {
     private Name name;
     private OwnerId owner;
-    private Name breed;
-    private Name specie;
+    private EnumeratorId breed;
+    private EnumeratorId specie;
     private Sex sex;
     private LocalDate birthDate;
     private Float weight;
@@ -21,7 +22,7 @@ public class AnimalWasRegistered extends Event<AnimalId> {
     protected AnimalWasRegistered() {
     }
 
-    public AnimalWasRegistered(AnimalId id, Name name, OwnerId owner, Name breed, Name specie, Sex sex, LocalDate birthDate, Float weight, boolean castrated, EntityVersion version) {
+    public AnimalWasRegistered(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate, Float weight, boolean castrated, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.owner = owner;
@@ -41,11 +42,11 @@ public class AnimalWasRegistered extends Event<AnimalId> {
         return owner;
     }
 
-    public Name getBreed() {
+    public EnumeratorId getBreed() {
         return breed;
     }
 
-    public Name getSpecie() {
+    public EnumeratorId getSpecie() {
         return specie;
     }
 

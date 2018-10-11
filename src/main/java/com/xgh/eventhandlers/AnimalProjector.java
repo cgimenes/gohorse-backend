@@ -9,10 +9,10 @@ import com.xgh.model.command.animal.events.AnimalWasDeleted;
 import com.xgh.model.command.animal.events.AnimalWasRegistered;
 import com.xgh.model.command.animal.events.AnimalWasUpdated;
 import com.xgh.model.query.animal.AnimalRepository;
-import com.xgh.model.query.breed.BreedProjector;
+import com.xgh.model.query.enumerators.Enumerator;
+import com.xgh.model.query.enumerators.EnumeratorRepository;
 import com.xgh.model.query.owner.Owner;
 import com.xgh.model.query.owner.OwnerRepository;
-import com.xgh.model.query.specie.SpecieProjector;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,16 +21,16 @@ import org.springframework.stereotype.Component;
 public class AnimalProjector implements EventHandler {
     private final PostgresEventStore eventStore;
     private final AnimalRepository repository;
-    private final BreedProjector breedProjector;
-    private final SpecieProjector specieProjector;
+    private final EnumeratorRepository breedRepository;
+    private final EnumeratorRepository specieRepository;
     private final OwnerRepository ownerRepository;
 
     @Autowired
-    public AnimalProjector(PostgresEventStore eventStore, AnimalRepository repository, BreedProjector breedProjector, SpecieProjector specieProjector, OwnerRepository ownerRepository) {
+    public AnimalProjector(PostgresEventStore eventStore, AnimalRepository repository, EnumeratorRepository breedRepository, EnumeratorRepository specieRepository, OwnerRepository ownerRepository) {
         this.eventStore = eventStore;
         this.repository = repository;
-        this.breedProjector = breedProjector;
-        this.specieProjector = specieProjector;
+        this.breedRepository = breedRepository;
+        this.specieRepository = specieRepository;
         this.ownerRepository = ownerRepository;
     }
 
@@ -49,16 +49,23 @@ public class AnimalProjector implements EventHandler {
         if (!owner.isPresent()) {
             throw new ProjectionFailedException(Owner.class.getSimpleName());
         }
-
-        com.xgh.model.query.breed.Breed breedProjection = breedProjector.execute(entity.getBreed());
-        com.xgh.model.query.specie.Specie specieProjection = specieProjector.execute(entity.getSpecie());
+        
+        Optional<Enumerator> breed = breedRepository.findById(entity.getBreed().getValue());
+        if(!breed.isPresent()) {
+        	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
+        }
+        
+        Optional<Enumerator> specie = specieRepository.findById(entity.getSpecie().getValue());
+        if(!specie.isPresent()) {
+        	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
+        }
 
         com.xgh.model.query.animal.Animal projection = new com.xgh.model.query.animal.Animal(
                 entity.getId().getValue(),
                 entity.getName().getValue(),
                 owner.get(),
-                breedProjection,
-                specieProjection,
+                breed.get(),
+                specie.get(),
                 entity.getSex().asCharacter(),
                 entity.getBirthDate(),
                 entity.isCastrated(),
