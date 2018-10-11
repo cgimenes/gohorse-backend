@@ -7,7 +7,10 @@ import com.xgh.model.command.financial.valueobjects.Transaction;
 import java.util.List;
 
 public class InvoiceWasPaid extends EntityEvent<InvoiceId> {
-    private final List<Transaction> transactions;
+    private List<Transaction> transactions;
+
+    protected InvoiceWasPaid() {
+    }
 
     public InvoiceWasPaid(InvoiceId id, List<Transaction> transactions, EntityVersion entityVersion) {
         super(id, entityVersion);

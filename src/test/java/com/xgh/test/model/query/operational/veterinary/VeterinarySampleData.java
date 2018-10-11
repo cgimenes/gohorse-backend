@@ -1,4 +1,4 @@
-package com.xgh.test.model.query.veterinary;
+package com.xgh.test.model.query.operational.veterinary;
 
 import com.xgh.model.query.operational.veterinary.Veterinary;
 import com.xgh.model.query.operational.veterinary.VeterinaryRepository;

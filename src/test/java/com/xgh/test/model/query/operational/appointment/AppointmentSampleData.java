@@ -4,7 +4,7 @@ import com.xgh.model.query.operational.appointment.Appointment;
 import com.xgh.model.query.operational.appointment.AppointmentRepository;
 import com.xgh.test.model.query.operational.address.AddressSampleData;
 import com.xgh.test.model.query.operational.animal.AnimalSampleData;
-import com.xgh.test.model.query.veterinary.VeterinarySampleData;
+import com.xgh.test.model.query.operational.veterinary.VeterinarySampleData;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;

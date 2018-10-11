@@ -1,11 +1,11 @@
 package com.xgh.model.command.financial.invoice;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
-import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.model.command.financial.invoice.events.InvoiceWasCreated;
 import com.xgh.model.command.financial.invoice.events.InvoiceWasPaid;
 import com.xgh.model.command.financial.valueobjects.Transaction;
 import com.xgh.model.command.financial.valueobjects.Operation;
+import com.xgh.model.command.operational.valueobjects.OperationId;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,12 +14,11 @@ public class Invoice extends AggregateRoot<InvoiceId> {
     private LocalDateTime issueDate;
     private BigDecimal totalValue;
     private Operation operation;
-    // TODO ver se é necessário criar um supertipo para o identificador da operação, para melhorar a expressão do código
-    private EntityId operationId;
+    private OperationId operationId;
     private InvoiceStatus status;
     private List<Transaction> transactions;
 
-    public void register(InvoiceId id, LocalDateTime issueDate, BigDecimal totalValue, Operation operation, EntityId operationId, List<Transaction> transactions) {
+    public void register(InvoiceId id, LocalDateTime issueDate, BigDecimal totalValue, Operation operation, OperationId operationId, List<Transaction> transactions) {
         recordAndApply(new InvoiceWasCreated(id, issueDate, totalValue, operation, operationId, transactions, nextVersion()));
     }
 
@@ -48,7 +47,7 @@ public class Invoice extends AggregateRoot<InvoiceId> {
         return operation;
     }
 
-    public EntityId getOperationId() {
+    public OperationId getOperationId() {
         return operationId;
     }
 

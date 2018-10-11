@@ -11,11 +11,13 @@ import com.xgh.model.command.operational.appointment.AppointmentId;
 import com.xgh.model.command.operational.appointment.AppointmentPlace;
 import com.xgh.model.command.operational.appointment.AppointmentStatus;
 import com.xgh.model.command.operational.appointment.AppointmentType;
+import com.xgh.model.command.operational.appointment.commands.FinishAppointment;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.veterinary.VeterinaryId;
 import com.xgh.test.model.command.operational.animal.AnimalSampleData;
 import com.xgh.test.model.command.operational.valueobjects.AddressSampleData;
-import com.xgh.test.model.command.veterinary.VeterinarySampleData;
+import com.xgh.test.model.command.operational.veterinary.VeterinarySampleData;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.time.LocalDateTime;
 import org.junit.Test;
@@ -146,7 +148,8 @@ public class AppointmentCommandControllerTests {
     public void finishWithSuccess() {
         Appointment entity = appointmentSampleData.getSample();
 
-        HttpEntity<Appointment> requestEntity = new HttpEntity<>(entity);
+
+        HttpEntity<FinishAppointment> requestEntity = new HttpEntity<>(new FinishAppointment(entity.getId(), new BigDecimal(20.50)));
 
         ResponseEntity<Void> responseEntity = restTemplate.exchange(URI.create("/appointments/finish"), HttpMethod.PUT,
                 requestEntity, Void.class);

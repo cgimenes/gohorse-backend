@@ -10,6 +10,7 @@ import com.xgh.model.command.financial.invoice.commands.GenerateInvoices;
 import com.xgh.model.command.financial.valueobjects.Transaction;
 import com.xgh.model.command.financial.valueobjects.Operation;
 import com.xgh.model.command.operational.animal.Animal;
+import com.xgh.model.command.operational.appointment.Appointment;
 import com.xgh.model.command.operational.internment.Internment;
 import com.xgh.model.query.financial.account.AccountRepository;
 import com.xgh.model.query.operational.veterinary.Veterinary;
@@ -17,6 +18,7 @@ import com.xgh.model.query.operational.veterinary.VeterinaryRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import javax.transaction.Transactional;
@@ -67,7 +69,7 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
         List<Transaction> transactions = new ArrayList<>();
         for (Veterinary veterinary : veterinaries) {
             Account receiver = getAccountByOwner(veterinary.getId());
-            transactions.add(new Transaction(payer, receiver, splittedValue));
+            transactions.add(new Transaction(payer.getId(), receiver.getId(), splittedValue));
         }
 
         createInvoice(command, transactions);
@@ -97,7 +99,13 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
     }
 
     private void generateAppointmentInvoices(GenerateInvoices command) {
-        // RECEBER DO CLIENTE
-        // ADICIONO UM PARA O VETERINARIO
+        Appointment appointment = eventStore.pull(Appointment.class, command.getOperationId());
+        Animal animal = eventStore.pull(Animal.class, appointment.getAnimal());
+        Account payer = getAccountByOwner(animal.getOwner().getValue());
+
+        Account receiver = getAccountByOwner(appointment.getVeterinary().getValue());
+        List<Transaction> transactions = Arrays.asList(new Transaction(payer.getId(), receiver.getId(), command.getValue()));
+
+        createInvoice(command, transactions);
     }
 }

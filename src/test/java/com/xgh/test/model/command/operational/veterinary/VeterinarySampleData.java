@@ -1,4 +1,4 @@
-package com.xgh.test.model.command.veterinary;
+package com.xgh.test.model.command.operational.veterinary;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.model.command.operational.valueobjects.Address;

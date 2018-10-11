@@ -1,0 +1,41 @@
+databaseChangeLog:
+    - changeSet:
+        id: 20
+        author: marcelo.gimenes
+        changes:
+            - createTable:
+                tableName: transaction
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                    - column:
+                        name: origin_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                          foreignKeyName: fk_transaction_account_origin
+                          references: account(id)
+                          nullable: false
+                    - column:
+                        name: destination_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                          foreignKeyName: fk_transaction_account_destination
+                          references: account(id)
+                          nullable: false
+                    - column:
+                        name: invoice_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            foreignKeyName: fk_transaction_invoice
+                            references: invoice(id)
+                            nullable: false
+                    - column:
+                        name: value
+                        type: ${TYPE_CURRENCY}
+            - rollback:
+               - dropTable:
+                  tableName: transaction

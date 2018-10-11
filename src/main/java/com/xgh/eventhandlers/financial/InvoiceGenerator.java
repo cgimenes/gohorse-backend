@@ -6,23 +6,24 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.model.command.financial.valueobjects.Operation;
 import com.xgh.model.command.financial.invoice.commands.GenerateInvoices;
-import com.xgh.model.command.operational.internment.events.InternmentWasRegistered;
-import java.math.BigDecimal;
+import com.xgh.model.command.operational.Priceable;
+import com.xgh.model.command.operational.appointment.events.AppointmentWasFinished;
+import com.xgh.model.command.operational.valueobjects.OperationId;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InvoiceGenerator implements EventHandler {
     @Override
     public boolean isSubscribedTo(Event event) {
-        return event instanceof InternmentWasRegistered;
+        return event instanceof AppointmentWasFinished;
     }
 
     @Override
     public void execute(Event event) {
         GenerateInvoices command = new GenerateInvoices(
-                ((EntityEvent<?>) event).getEntityId(),
-                Operation.INTERNMENT,
-                new BigDecimal(10)
+                new OperationId(((EntityEvent<?>) event).getEntityId().getValue()),
+                Operation.APPOINTMENT,
+                ((Priceable) event).getPrice()
         );
         CommandBus.dispatch(command);
     }

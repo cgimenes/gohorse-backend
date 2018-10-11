@@ -1,11 +1,11 @@
 package com.xgh.model.command.financial.invoice.events;
 
-import com.xgh.buildingblocks.entity.EntityId;
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.financial.invoice.InvoiceId;
 import com.xgh.model.command.financial.valueobjects.Transaction;
 import com.xgh.model.command.financial.valueobjects.Operation;
+import com.xgh.model.command.operational.valueobjects.OperationId;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,10 +14,13 @@ public class InvoiceWasCreated extends EntityEvent<InvoiceId> {
     private LocalDateTime issueDate;
     private BigDecimal totalValue;
     private Operation operation;
-    private EntityId operationId;
-    private final List<Transaction> transactions;
+    private OperationId operationId;
+    private List<Transaction> transactions;
 
-    public InvoiceWasCreated(InvoiceId id, LocalDateTime issueDate, BigDecimal totalValue, Operation operation, EntityId operationId, List<Transaction> transactions, EntityVersion entityVersion) {
+    protected InvoiceWasCreated() {
+    }
+
+    public InvoiceWasCreated(InvoiceId id, LocalDateTime issueDate, BigDecimal totalValue, Operation operation, OperationId operationId, List<Transaction> transactions, EntityVersion entityVersion) {
         super(id, entityVersion);
         this.issueDate = issueDate;
         this.totalValue = totalValue;
@@ -38,7 +41,7 @@ public class InvoiceWasCreated extends EntityEvent<InvoiceId> {
         return operation;
     }
 
-    public EntityId getOperationId() {
+    public OperationId getOperationId() {
         return operationId;
     }
 

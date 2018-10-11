@@ -11,4 +11,8 @@ public class AccountId extends EntityId {
     public AccountId(UUID id) {
         super(id);
     }
+
+    public AccountId(String id) {
+        super(id);
+    }
 }

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AppointmentFinish implements CommandHandler<FinishAppointment> {
+public class AppointmentFinish implements CommandHandler<FinishAppointment>  {
     private final EventStore repository;
 
     @Autowired
@@ -19,7 +19,7 @@ public class AppointmentFinish implements CommandHandler<FinishAppointment> {
     @Override
     public void execute(FinishAppointment command) {
         Appointment appointment = repository.pull(Appointment.class, command.getId());
-        appointment.finish();
+        appointment.finish(command.getPrice());
         repository.push(appointment);
     }
 }

@@ -5,6 +5,9 @@ import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.financial.account.AccountId;
 
 public class AccountWasDeleted extends EntityEvent<AccountId> {
+    protected AccountWasDeleted() {
+    }
+
     public AccountWasDeleted(AccountId id, EntityVersion entityVersion) {
         super(id, entityVersion);
     }

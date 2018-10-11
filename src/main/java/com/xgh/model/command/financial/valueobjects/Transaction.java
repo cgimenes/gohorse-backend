@@ -1,25 +1,28 @@
 package com.xgh.model.command.financial.valueobjects;
 
 import com.xgh.buildingblocks.valueobject.ValueObject;
-import com.xgh.model.command.financial.account.Account;
+import com.xgh.model.command.financial.account.AccountId;
 import java.math.BigDecimal;
 
 public class Transaction implements ValueObject {
-    private Account origin;
-    private Account destination;
+    private AccountId origin;
+    private AccountId destination;
     private BigDecimal value;
 
-    public Transaction(Account origin, Account destination, BigDecimal value) {
+    protected Transaction() {
+    }
+
+    public Transaction(AccountId origin, AccountId destination, BigDecimal value) {
         this.origin = origin;
         this.destination = destination;
         this.value = value;
     }
 
-    public Account getOrigin() {
+    public AccountId getOrigin() {
         return origin;
     }
 
-    public Account getDestination() {
+    public AccountId getDestination() {
         return destination;
     }
 

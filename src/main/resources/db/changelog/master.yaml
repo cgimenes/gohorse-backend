@@ -86,3 +86,7 @@ databaseChangeLog:
         file: db/changelog/0016-table-enumerator.yaml
     - include:
         file: db/changelog/0018-table-account.yaml
+    - include:
+        file: db/changelog/0019-table-invoice.yaml
+    - include:
+        file: db/changelog/0020-table-transaction.yaml

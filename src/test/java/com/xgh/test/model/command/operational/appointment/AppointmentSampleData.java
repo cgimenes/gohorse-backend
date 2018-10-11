@@ -6,7 +6,7 @@ import com.xgh.model.command.operational.appointment.AppointmentId;
 import com.xgh.model.command.operational.appointment.AppointmentPlace;
 import com.xgh.model.command.operational.appointment.AppointmentType;
 import com.xgh.test.model.command.operational.animal.AnimalSampleData;
-import com.xgh.test.model.command.veterinary.VeterinarySampleData;
+import com.xgh.test.model.command.operational.veterinary.VeterinarySampleData;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -10,6 +10,7 @@ import com.xgh.model.command.operational.appointment.events.AppointmentWasUpdate
 import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.veterinary.VeterinaryId;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public final class Appointment extends AggregateRoot<AppointmentId> {
@@ -20,6 +21,7 @@ public final class Appointment extends AggregateRoot<AppointmentId> {
     private AppointmentType appointmentType;
     private AppointmentPlace place;
     private Address address;
+    private BigDecimal price;
 
     public void register(AppointmentId id, AnimalId animal, VeterinaryId veterinary, LocalDateTime dateTime, AppointmentType type, AppointmentPlace place, Address address) {
         if (id == null) {
@@ -76,6 +78,7 @@ public final class Appointment extends AggregateRoot<AppointmentId> {
 
     protected void when(AppointmentWasFinished event) {
         this.status = AppointmentStatus.FINISHED;
+        this.price = event.getPrice();
     }
 
     protected void when(AppointmentWasDeleted event) {
@@ -110,8 +113,8 @@ public final class Appointment extends AggregateRoot<AppointmentId> {
         recordAndApply(new AppointmentWasCancelled(this.id, this.nextVersion()));
     }
 
-    public void finish() {
-        recordAndApply(new AppointmentWasFinished(this.id, this.nextVersion()));
+    public void finish(BigDecimal price) {
+        recordAndApply(new AppointmentWasFinished(this.id, price, this.nextVersion()));
     }
 
     public AnimalId getAnimal() {
@@ -140,5 +143,9 @@ public final class Appointment extends AggregateRoot<AppointmentId> {
 
     public Address getAddress() {
         return address;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 }

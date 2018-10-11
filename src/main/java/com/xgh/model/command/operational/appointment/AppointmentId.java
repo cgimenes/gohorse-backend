@@ -1,9 +1,9 @@
 package com.xgh.model.command.operational.appointment;
 
-import com.xgh.buildingblocks.entity.EntityId;
+import com.xgh.model.command.operational.valueobjects.OperationId;
 import java.util.UUID;
 
-public class AppointmentId extends EntityId {
+public class AppointmentId extends OperationId {
     public AppointmentId() {
         super();
     }
