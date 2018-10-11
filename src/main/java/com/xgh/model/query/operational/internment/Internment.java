@@ -32,43 +32,50 @@ public class Internment {
     @Column(name = "busy_until")
     private LocalDateTime busyUntil;
 
+    private String status;
+
     @JsonIgnore
     private Boolean deleted = false;
 
     protected Internment() {
     }
 
-    public Internment(UUID id, Bed bed, Animal animal, LocalDateTime busyAt, LocalDateTime busyUntil, Boolean deleted) {
+    public Internment(UUID id, Bed bed, Animal animal, LocalDateTime busyAt, LocalDateTime busyUntil, String status, Boolean deleted) {
         this.id = id;
         this.bed = bed;
         this.animal = animal;
         this.busyAt = busyAt;
         this.busyUntil = busyUntil;
+        this.status = status;
         this.deleted = deleted;
     }
 
     public UUID getId() {
-        return id;
+        return this.id;
     }
 
     public Bed getBed() {
-        return bed;
+        return this.bed;
     }
 
     public Animal getAnimal() {
-        return animal;
+        return this.animal;
     }
 
     public LocalDateTime getBusyAt() {
-        return busyAt;
+        return this.busyAt;
     }
 
     public LocalDateTime getBusyUntil() {
-        return busyUntil;
+        return this.busyUntil;
     }
 
     public Boolean isDeleted() {
-        return deleted;
+        return this.deleted;
+    }
+
+    public String getStatus() {
+        return this.status;
     }
 
 }

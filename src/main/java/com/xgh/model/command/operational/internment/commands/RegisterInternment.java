@@ -1,6 +1,7 @@
 package com.xgh.model.command.operational.internment.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
+import com.xgh.model.command.operational.internment.InternmentStatus;
 import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.bed.BedId;
 import com.xgh.model.command.operational.internment.InternmentId;
@@ -12,6 +13,7 @@ public class RegisterInternment implements EntityCommand {
     private final AnimalId animalId;
     private final LocalDateTime busyAt;
     private final LocalDateTime busyUntil;
+    private final InternmentStatus status;
 
     public RegisterInternment() {
         this.id = new InternmentId();
@@ -19,6 +21,7 @@ public class RegisterInternment implements EntityCommand {
         this.animalId = null;
         this.busyAt = null;
         this.busyUntil = null;
+        this.status = null;
     }
 
     @Override
@@ -39,6 +42,10 @@ public class RegisterInternment implements EntityCommand {
     }
 
     public LocalDateTime getBusyUntil() {
-        return busyUntil;
+        return this.busyUntil;
+    }
+
+    public InternmentStatus getStatus() {
+        return this.status;
     }
 }

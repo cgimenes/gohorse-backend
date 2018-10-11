@@ -1,10 +1,10 @@
 package com.xgh.infra.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.google.common.collect.Maps;
 import com.xgh.exceptions.DeletedEntityException;
 import com.xgh.exceptions.EntityFieldConflictedException;
 import com.xgh.exceptions.EntityNotFoundException;
+import com.xgh.exceptions.InvalidArgumentException;
 import com.xgh.exceptions.NullMandatoryArgumentException;
 import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
@@ -31,6 +31,7 @@ public class ExceptionManager {
     private static final int BAD_REQUEST = 3;
     private static final int TYPE_MISMATCH = 4;
     private static final int ROUTE_NOT_FOUND = 5;
+    private static final int INVALID_ARGUMENT = 6;
 
     /*
      * Exception Handlers
@@ -124,6 +125,15 @@ public class ExceptionManager {
                 "Tipo inválido para o valor: '%s', esperado: '%s'",
                 ex.getValue(),
                 ex.getRequiredType()));
+    }
+    
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({InvalidArgumentException.class})
+    public @ResponseBody
+    ErrorResponse handleException(InvalidArgumentException ex) {
+        logger.info(ex);
+
+        return new ErrorResponse(INVALID_ARGUMENT, ex.getMessage());
     }
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)

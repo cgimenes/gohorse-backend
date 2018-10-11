@@ -25,14 +25,14 @@ public abstract class BasicQueryService<EntityT, RepositoryT extends BasicJpaRep
     public EntityT findById(UUID id) {
         Optional<EntityT> entity = repository.findOneByIdAndDeletedFalse(id);
         if (!entity.isPresent()) {
-            throw new EntityNotFoundException(getEntityName());
+            throw new EntityNotFoundException(getEntityName(), id);
         }
         return entity.get();
     }
 
     @SuppressWarnings("unchecked")
     private String getEntityName() {
-        return ((Class<EntityT>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0]).getSimpleName();
+        return ((Class<EntityT>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0])
+                .getSimpleName();
     }
 }

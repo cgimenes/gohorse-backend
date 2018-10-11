@@ -23,7 +23,7 @@ public class ProductUpdate implements CommandHandler<UpdateProduct> {
     public void execute(UpdateProduct command) {
         Product product = eventStore.pull(Product.class, command.getId());
         if (!eventStore.entityExists(Supplier.class, command.getSupplierId())) {
-            throw new EntityNotFoundException(Supplier.class.getSimpleName());
+            throw new EntityNotFoundException(Supplier.class.getSimpleName(), command.getSupplierId().getValue());
         }
         product.update(command.getName(), command.getPrice(), command.getBrand(), command.getSupplierId());
         eventStore.push(product);

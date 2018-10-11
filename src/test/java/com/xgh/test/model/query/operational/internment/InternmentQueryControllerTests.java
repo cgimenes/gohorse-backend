@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xgh.model.command.operational.internment.InternmentStatus;
 import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.model.query.operational.bed.Bed;
 import com.xgh.model.query.operational.internment.Internment;
@@ -84,6 +85,7 @@ public class InternmentQueryControllerTests {
                 animal,
                 LocalDateTime.of(2018, 10, 10, 10, 10, 10),
                 LocalDateTime.of(2018, 10, 10, 12, 10, 10),
+                InternmentStatus.ACTIVE.toString(),
                 false);
         repository.save(internment);
         return internment.getId();

@@ -23,11 +23,11 @@ public class InternmentRegistration implements CommandHandler<RegisterInternment
     @Override
     public void execute(RegisterInternment command) {
         if (!eventStore.entityExists(Bed.class, command.getBedId())) {
-            throw new EntityNotFoundException(Bed.class.getSimpleName());
+            throw new EntityNotFoundException(Bed.class.getSimpleName(), command.getBedId().getValue());
         }
 
         if (!eventStore.entityExists(Animal.class, command.getAnimalId())) {
-            throw new EntityNotFoundException(Animal.class.getSimpleName());
+            throw new EntityNotFoundException(Animal.class.getSimpleName(), command.getAnimalId().getValue());
         }
 
         Internment internment = new Internment();

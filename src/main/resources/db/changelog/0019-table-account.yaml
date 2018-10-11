@@ -4,7 +4,7 @@ databaseChangeLog:
         author: marcelo.gimenes
         changes:
             - createTable:
-                tableName: invoice
+                tableName: account
                 columns:
                     - column:
                         name: id
@@ -13,20 +13,20 @@ databaseChangeLog:
                             nullable: false
                             primaryKey: true
                     - column:
-                        name: issue_date
-                        type: ${TYPE_DATETIME}
-                    - column:
-                        name: total_value
-                        type: ${TYPE_CURRENCY}
-                    - column:
-                        name: operation
-                        type: ${TYPE_NAME}
-                    - column:
-                        name: operation_id
+                        name: owner_id
                         type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
                     - column:
-                        name: status
+                        name: account_type
                         type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                          nullable: false
             - rollback:
                - dropTable:
-                  tableName: invoice
+                  tableName: account

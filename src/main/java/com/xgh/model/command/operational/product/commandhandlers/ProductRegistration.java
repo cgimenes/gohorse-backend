@@ -23,7 +23,7 @@ public class ProductRegistration implements CommandHandler<RegisterProduct> {
     public void execute(RegisterProduct command) {
         Product product = new Product();
         if (!eventStore.entityExists(Supplier.class, command.getSupplierId())) {
-            throw new EntityNotFoundException(Supplier.class.getSimpleName());
+            throw new EntityNotFoundException(Supplier.class.getSimpleName(), command.getSupplierId().getValue());
         }
         product.register(command.getId(), command.getName(), command.getPrice(), command.getBrand(),
                 command.getAmount(), command.getSupplierId());
