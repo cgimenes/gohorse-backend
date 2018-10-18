@@ -17,7 +17,7 @@ public class InvoiceWasPaid extends EntityEvent<InvoiceId> {
         this.transactions = transactions;
     }
 
-    public List<Transaction> getPaidValue() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 }

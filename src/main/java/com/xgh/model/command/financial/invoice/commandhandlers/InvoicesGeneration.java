@@ -8,7 +8,6 @@ import com.xgh.model.command.financial.invoice.Invoice;
 import com.xgh.model.command.financial.invoice.InvoiceId;
 import com.xgh.model.command.financial.invoice.commands.GenerateInvoices;
 import com.xgh.model.command.financial.valueobjects.Transaction;
-import com.xgh.model.command.financial.valueobjects.Operation;
 import com.xgh.model.command.operational.animal.Animal;
 import com.xgh.model.command.operational.appointment.Appointment;
 import com.xgh.model.command.operational.internment.Internment;
@@ -81,7 +80,7 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
                 new InvoiceId(),
                 LocalDateTime.now(),
                 command.getValue(),
-                Operation.INTERNMENT,
+                command.getOperation(),
                 command.getOperationId(),
                 transactions
         );

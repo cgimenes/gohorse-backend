@@ -43,7 +43,6 @@ public abstract class EventStore {
      * Persiste os eventos que ainda não foram persistidos e
      * dispara os event handlers para cada evento
      */
-    // TODO transação
     @Transactional
     public void push(AggregateRoot<?> entity) {
         EventStream uncommittedEvents = entity.getUncommittedEvents();

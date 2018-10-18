@@ -6,7 +6,9 @@ import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
 import com.xgh.exceptions.ProjectionFailedException;
 import com.xgh.model.command.operational.appointment.Appointment;
+import com.xgh.model.command.operational.appointment.events.AppointmentWasCancelled;
 import com.xgh.model.command.operational.appointment.events.AppointmentWasDeleted;
+import com.xgh.model.command.operational.appointment.events.AppointmentWasFinished;
 import com.xgh.model.command.operational.appointment.events.AppointmentWasRegistered;
 import com.xgh.model.command.operational.appointment.events.AppointmentWasUpdated;
 import com.xgh.model.query.operational.appointment.AppointmentRepository;
@@ -41,7 +43,9 @@ public class AppointmentProjector implements EventHandler {
     public boolean isSubscribedTo(Event event) {
         return event instanceof AppointmentWasDeleted
                 || event instanceof AppointmentWasRegistered
-                || event instanceof AppointmentWasUpdated;
+                || event instanceof AppointmentWasUpdated
+                || event instanceof AppointmentWasFinished
+                || event instanceof AppointmentWasCancelled;
     }
 
     @Override

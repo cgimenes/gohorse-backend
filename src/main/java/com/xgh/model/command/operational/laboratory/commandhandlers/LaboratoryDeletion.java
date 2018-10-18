@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LaboratoryDeletion implements CommandHandler<DeleteLaboratory> {
-
     private final EventStore eventStore;
 
     @Autowired
