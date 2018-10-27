@@ -45,10 +45,10 @@ public class InvoiceProjector implements EventHandler {
         Invoice projection = new Invoice(
                 entity.getId().getValue(),
                 entity.getIssueDate(),
-                entity.getTotalValue(),
+                paymentDate, entity.getTotalValue(),
                 entity.getOperation().toString(),
                 entity.getOperationId().getValue(),
-                entity.getStatus().toString());
+                entity.getStatus().toString(), type);
 
         invoiceRepository.save(projection);
 
