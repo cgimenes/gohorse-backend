@@ -6,7 +6,6 @@ import java.time.Month;
 import java.time.Year;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 // TODO criar uma tabela para representar esse modelo, atualizando o mesmo quando necessário através de um EventHandler
 public class YearCashFlow {
@@ -23,7 +22,13 @@ public class YearCashFlow {
         this.year = year;
         initialBalances = new YearBalances().setBalance(Month.JANUARY, previousYearFinalBalance);
         for (Invoice invoice : invoices) {
+            switch (invoice.getType()) {
+                case "INCOME":
 
+                    break;
+                case "EXPENSE":
+                    break;
+            }
         }
     }
 }

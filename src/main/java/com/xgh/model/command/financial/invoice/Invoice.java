@@ -16,17 +16,20 @@ public class Invoice extends AggregateRoot<InvoiceId> {
     private Operation operation;
     private OperationId operationId;
     private InvoiceStatus status;
+    private LocalDateTime paymentDate;
     private List<Transaction> transactions;
+    private InvoiceType invoiceType;
 
     public void register(InvoiceId id, LocalDateTime issueDate, BigDecimal totalValue, Operation operation, OperationId operationId, List<Transaction> transactions) {
         recordAndApply(new InvoiceWasCreated(id, issueDate, totalValue, operation, operationId, transactions, nextVersion()));
     }
 
     public void pay() {
-        recordAndApply(new InvoiceWasPaid(id, transactions, nextVersion()));
+        recordAndApply(new InvoiceWasPaid(id, transactions, LocalDateTime.now(), nextVersion()));
     }
 
     protected void when(InvoiceWasPaid event) {
+        this.paymentDate = event.getPaymentDate();
         this.status = InvoiceStatus.PAID;
     }
 
@@ -61,5 +64,13 @@ public class Invoice extends AggregateRoot<InvoiceId> {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public InvoiceType getInvoiceType() {
+        return invoiceType;
     }
 }
