@@ -2,8 +2,8 @@ package com.xgh.test.model.query.enumerator;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.model.query.enumerator.Enumerator;
-import com.xgh.model.query.enumerator.EnumeratorRepository;
+import com.xgh.model.query.operational.enumerator.Enumerator;
+import com.xgh.model.query.operational.enumerator.EnumeratorRepository;
 import com.xgh.test.model.query.Page;
 import org.junit.Before;
 import org.junit.Test;

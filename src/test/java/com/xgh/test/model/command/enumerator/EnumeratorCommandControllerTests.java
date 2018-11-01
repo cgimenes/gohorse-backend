@@ -1,8 +1,8 @@
 package com.xgh.test.model.command.enumerator;
 
 import com.xgh.infra.repository.PostgresEventStore;
-import com.xgh.model.command.enumerator.Enumerator;
-import com.xgh.model.command.enumerator.EnumeratorId;
+import com.xgh.model.command.operational.enumerator.Enumerator;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.valueobjects.Name;
 import com.xgh.model.command.valueobjects.Description;
 import org.junit.Test;

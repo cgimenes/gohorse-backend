@@ -1,0 +1,14 @@
+databaseChangeLog:
+    - changeSet:
+        id: 18
+        author: alexandre.requena
+        changes:
+            - addColumn:
+                columns:
+                - column:
+                    name: status
+                    type: ${TYPE_NAME}
+                    constraints:
+                        nullable: false
+                schemaName: public
+                tableName: internment

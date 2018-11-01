@@ -1,7 +1,7 @@
 package com.xgh.test.model.query.enumerator;
 
-import com.xgh.model.query.enumerator.Enumerator;
-import com.xgh.model.query.enumerator.EnumeratorRepository;
+import com.xgh.model.query.operational.enumerator.Enumerator;
+import com.xgh.model.query.operational.enumerator.EnumeratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.xgh.infra.controller;
 
-import com.xgh.buildingblocks.command.Command;
+import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.buildingblocks.command.CommandBus;
 import java.net.URI;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public abstract class BasicCommandController<RegisterT extends Command, UpdateT extends Command, DeleteT extends Command> {
+public abstract class BasicCommandController<RegisterT extends EntityCommand, UpdateT extends EntityCommand, DeleteT extends EntityCommand> {
     protected abstract String getBasePath();
 
     @PostMapping

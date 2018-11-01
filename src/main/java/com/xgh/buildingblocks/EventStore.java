@@ -2,7 +2,7 @@ package com.xgh.buildingblocks;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.buildingblocks.entity.EntityId;
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.EventBus;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.EntityNotFoundException;
@@ -12,9 +12,9 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class EventStore {
-    protected abstract <T extends AggregateRoot<?>> List<Event<?>> getEvents(Class<T> entityType, EntityId id);
+    protected abstract <T extends AggregateRoot<?>> List<EntityEvent<?>> getEvents(Class<T> entityType, EntityId id);
 
-    protected abstract void saveEvent(Event<?> event, String entityType);
+    protected abstract void saveEvent(EntityEvent<?> event, String entityType);
 
     public abstract <T extends AggregateRoot<?>> boolean entityExists(Class<T> entityType, EntityId id);
 
@@ -22,10 +22,10 @@ public abstract class EventStore {
      * Retorna uma entidade, realizando a reconstituição da mesma à partir de seus eventos
      */
     public <T extends AggregateRoot<?>> T pull(Class<T> entityType, EntityId id) {
-        List<Event<?>> events = this.getEvents(entityType, id);
+        List<EntityEvent<?>> events = this.getEvents(entityType, id);
 
         if (events.isEmpty()) {
-            throw new EntityNotFoundException(entityType.getSimpleName());
+            throw new EntityNotFoundException(entityType.getSimpleName(), id.getValue());
         }
 
         T entity;
@@ -43,12 +43,11 @@ public abstract class EventStore {
      * Persiste os eventos que ainda não foram persistidos e
      * dispara os event handlers para cada evento
      */
-    // TODO transação
     @Transactional
     public void push(AggregateRoot<?> entity) {
         EventStream uncommittedEvents = entity.getUncommittedEvents();
         while (uncommittedEvents.hasNext()) {
-            Event<?> event = uncommittedEvents.next();
+            EntityEvent<?> event = uncommittedEvents.next();
             this.saveEvent(event, entity.getType());
             EventBus.dispatch(event);
         }
@@ -57,7 +56,7 @@ public abstract class EventStore {
     /*
      * Instancia a entidade e a reconstitui à partir dos seus eventos, invocando o método "reconstitute" usando reflection
      */
-    private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<Event<?>> events)
+    private void invokeEntityReconstituteMethod(AggregateRoot<?> entity, List<EntityEvent<?>> events)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,
             InvocationTargetException {
         Class<?> clazz = entity.getClass();
