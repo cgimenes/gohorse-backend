@@ -1,11 +1,11 @@
-package com.xgh.model.command.operational.enumerators;
+package com.xgh.model.command.operational.enumerator;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasDeleted;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasRegistered;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasUpdated;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasDeleted;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasRegistered;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasUpdated;
 import com.xgh.model.command.operational.valueobjects.Description;
 
 public final class Enumerator extends AggregateRoot<EnumeratorId> {
@@ -42,6 +42,7 @@ public final class Enumerator extends AggregateRoot<EnumeratorId> {
     }
 
     protected void when(EnumeratorWasRegistered event) {
+        this.id = event.getEntityId();
         this.kind = event.getKind();
         this.name = event.getName();
     }

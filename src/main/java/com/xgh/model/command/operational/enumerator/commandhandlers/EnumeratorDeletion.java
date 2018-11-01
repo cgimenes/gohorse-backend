@@ -1,9 +1,9 @@
-package com.xgh.model.command.operational.enumerators.commandhandlers;
+package com.xgh.model.command.operational.enumerator.commandhandlers;
 
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
-import com.xgh.model.command.operational.enumerators.Enumerator;
-import com.xgh.model.command.operational.enumerators.commands.DeleteEnumerator;
+import com.xgh.model.command.operational.enumerator.Enumerator;
+import com.xgh.model.command.operational.enumerator.commands.DeleteEnumerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

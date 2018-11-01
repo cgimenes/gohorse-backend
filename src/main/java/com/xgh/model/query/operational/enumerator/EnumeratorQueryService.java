@@ -1,4 +1,4 @@
-package com.xgh.model.query.operational.enumerators;
+package com.xgh.model.query.operational.enumerator;
 
 import com.xgh.Constants;
 import com.xgh.infra.service.BasicQueryService;
@@ -49,7 +49,7 @@ public class EnumeratorQueryService extends BasicQueryService<Enumerator, Enumer
 				}											
 			}
 			
-			if (!found) {
+			if (!found & !current.isDeleted()) {
 				allKindsGrouped.add( new EnumeratorGroup(current.getKind(), allKinds.get(i)) );
 			}
 

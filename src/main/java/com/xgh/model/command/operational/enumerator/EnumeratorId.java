@@ -1,4 +1,4 @@
-package com.xgh.model.command.operational.enumerators;
+package com.xgh.model.command.operational.enumerator;
 
 import com.xgh.buildingblocks.entity.EntityId;
 import java.util.UUID;

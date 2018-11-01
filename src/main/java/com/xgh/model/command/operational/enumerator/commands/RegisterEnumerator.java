@@ -1,9 +1,9 @@
-package com.xgh.model.command.operational.enumerators.commands;
+package com.xgh.model.command.operational.enumerator.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
-import com.xgh.model.command.operational.enumerators.EnumeratorId;
-import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.valueobjects.Description;
+import com.xgh.model.command.operational.valueobjects.Name;
 
 public final class RegisterEnumerator implements EntityCommand {
     private final EnumeratorId id;
@@ -16,7 +16,6 @@ public final class RegisterEnumerator implements EntityCommand {
         this.name = null;
     }
 
-    @Override
     public EnumeratorId getId() {
         return this.id;
     }

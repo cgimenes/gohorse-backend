@@ -4,11 +4,11 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.Event;
 import com.xgh.buildingblocks.event.EventHandler;
-import com.xgh.model.command.operational.enumerators.Enumerator;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasDeleted;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasRegistered;
-import com.xgh.model.command.operational.enumerators.events.EnumeratorWasUpdated;
-import com.xgh.model.query.operational.enumerators.EnumeratorRepository;
+import com.xgh.model.command.operational.enumerator.Enumerator;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasDeleted;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasRegistered;
+import com.xgh.model.command.operational.enumerator.events.EnumeratorWasUpdated;
+import com.xgh.model.query.operational.enumerator.EnumeratorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,11 +31,10 @@ public class EnumeratorProjector implements EventHandler {
                 || event instanceof EnumeratorWasUpdated;
     }
 
-    @Override
     public void execute(Event event) {
         Enumerator entity = eventStore.pull(Enumerator.class, ((EntityEvent<?>) event).getEntityId());
 
-        com.xgh.model.query.operational.enumerators.Enumerator projection = new com.xgh.model.query.operational.enumerators.Enumerator(
+        com.xgh.model.query.operational.enumerator.Enumerator projection = new com.xgh.model.query.operational.enumerator.Enumerator(
                 entity.getId().getValue(),
                 entity.getKind().getValue(),
                 entity.getName().getValue(),

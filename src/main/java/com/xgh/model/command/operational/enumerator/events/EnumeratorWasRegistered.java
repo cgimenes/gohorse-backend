@@ -1,9 +1,9 @@
-package com.xgh.model.command.operational.enumerators.events;
+package com.xgh.model.command.operational.enumerator.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.EntityEvent;
-import com.xgh.model.command.operational.enumerators.EnumeratorId;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.valueobjects.Description;
 
 public class EnumeratorWasRegistered extends EntityEvent<EnumeratorId> {

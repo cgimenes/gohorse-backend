@@ -1,4 +1,4 @@
-package com.xgh.model.query.operational.enumerators;
+package com.xgh.model.query.operational.enumerator;
 
 import com.xgh.infra.repository.BasicJpaRepository;
 import java.util.UUID;

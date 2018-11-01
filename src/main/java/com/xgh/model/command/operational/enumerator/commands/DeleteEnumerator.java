@@ -1,7 +1,7 @@
-package com.xgh.model.command.operational.enumerators.commands;
+package com.xgh.model.command.operational.enumerator.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
-import com.xgh.model.command.operational.enumerators.EnumeratorId;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 
 public class DeleteEnumerator implements EntityCommand {
     private final EnumeratorId id;
@@ -10,7 +10,6 @@ public class DeleteEnumerator implements EntityCommand {
         this.id = null;
     }
 
-    @Override
     public EnumeratorId getId() {
         return id;
     }

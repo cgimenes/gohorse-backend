@@ -1,9 +1,9 @@
-package com.xgh.model.command.operational.enumerators;
+package com.xgh.model.command.operational.enumerator;
 
 import com.xgh.infra.controller.BasicCommandController;
-import com.xgh.model.command.operational.enumerators.commands.DeleteEnumerator;
-import com.xgh.model.command.operational.enumerators.commands.RegisterEnumerator;
-import com.xgh.model.command.operational.enumerators.commands.UpdateEnumerator;
+import com.xgh.model.command.operational.enumerator.commands.DeleteEnumerator;
+import com.xgh.model.command.operational.enumerator.commands.RegisterEnumerator;
+import com.xgh.model.command.operational.enumerator.commands.UpdateEnumerator;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

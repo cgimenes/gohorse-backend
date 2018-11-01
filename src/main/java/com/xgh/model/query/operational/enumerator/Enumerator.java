@@ -1,4 +1,4 @@
-package com.xgh.model.query.operational.enumerators;
+package com.xgh.model.query.operational.enumerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;

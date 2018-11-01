@@ -1,8 +1,8 @@
-package com.xgh.model.command.operational.enumerators.events;
+package com.xgh.model.command.operational.enumerator.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.EntityEvent;
-import com.xgh.model.command.operational.enumerators.EnumeratorId;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 
 public class EnumeratorWasDeleted extends EntityEvent<EnumeratorId> {
     protected EnumeratorWasDeleted() {
