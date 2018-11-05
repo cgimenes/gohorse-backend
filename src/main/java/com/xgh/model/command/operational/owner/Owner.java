@@ -7,6 +7,7 @@ import com.xgh.model.command.operational.owner.events.OwnerWasRegistered;
 import com.xgh.model.command.operational.owner.events.OwnerWasUpdated;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
+import com.xgh.model.command.operational.valueobjects.Email;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import java.time.LocalDate;
@@ -17,12 +18,13 @@ public final class Owner extends AggregateRoot<OwnerId> {
     private Document document;
     private LocalDate birthDate;
     private Address address;
+    private Email email;
 
     public Owner() {
         super();
     }
 
-    public void register(OwnerId id, Name name, Phone phone, Document document, LocalDate birthDate, Address address) {
+    public void register(OwnerId id, Name name, Phone phone, Document document, LocalDate birthDate, Address address, Email email) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -47,11 +49,11 @@ public final class Owner extends AggregateRoot<OwnerId> {
             throw new NullMandatoryArgumentException("endereço");
         }
 
-        recordAndApply(new OwnerWasRegistered(id, name, phone, document, birthDate, address, this.nextVersion()));
+        recordAndApply(new OwnerWasRegistered(id, name, phone, document, birthDate, address, email, this.nextVersion()));
     }
 
-    public void update(Name name, Phone phone, Document document, LocalDate birthDate, Address address) {
-        recordAndApply(new OwnerWasUpdated(this.id, name, phone, document, birthDate, address, this.nextVersion()));
+    public void update(Name name, Phone phone, Document document, LocalDate birthDate, Address address, Email email) {
+        recordAndApply(new OwnerWasUpdated(this.id, name, phone, document, birthDate, address, email, this.nextVersion()));
     }
 
     public void delete() {
@@ -65,6 +67,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
+        this.email = event.getEmail();
     }
 
     protected void when(OwnerWasUpdated event) {
@@ -73,6 +76,7 @@ public final class Owner extends AggregateRoot<OwnerId> {
         this.phone = event.getPhone();
         this.birthDate = event.getBirthDate();
         this.address = event.getAddress();
+        this.email = event.getEmail();
     }
 
     protected void when(OwnerWasDeleted event) {
@@ -98,4 +102,9 @@ public final class Owner extends AggregateRoot<OwnerId> {
     public Address getAddress() {
         return this.address;
     }
+    
+    public Email getEmail() {
+		return this.email;
+	}
+
 }

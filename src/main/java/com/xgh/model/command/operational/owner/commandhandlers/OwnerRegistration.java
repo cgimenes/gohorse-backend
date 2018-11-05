@@ -25,7 +25,8 @@ public class OwnerRegistration implements CommandHandler<RegisterOwner> {
                 command.getPhone(),
                 command.getDocument(),
                 command.getBirthDate(),
-                command.getAddress());
+                command.getAddress(),
+        		command.getEmail());
         eventStore.push(owner);
     }
 }

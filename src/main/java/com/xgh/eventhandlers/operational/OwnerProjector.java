@@ -46,7 +46,8 @@ public class OwnerProjector implements EventHandler {
                 entity.getPhone().getValue(),
                 entity.getBirthDate(),
                 addressProjection,
-                entity.isDeleted());
+                entity.isDeleted(),
+                entity.getEmail().toString());
 
         repository.save(projection);
     }

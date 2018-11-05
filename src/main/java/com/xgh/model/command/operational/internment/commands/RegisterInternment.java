@@ -26,19 +26,19 @@ public class RegisterInternment implements EntityCommand {
 
     @Override
     public InternmentId getId() {
-        return id;
+        return this.id;
     }
 
     public BedId getBedId() {
-        return bedId;
+        return this.bedId;
     }
 
     public AnimalId getAnimalId() {
-        return animalId;
+        return this.animalId;
     }
 
     public LocalDateTime getBusyAt() {
-        return busyAt;
+        return this.busyAt;
     }
 
     public LocalDateTime getBusyUntil() {

@@ -8,6 +8,7 @@ import com.xgh.model.command.operational.owner.Owner;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Cpf;
+import com.xgh.model.command.operational.valueobjects.Email;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import com.xgh.model.command.operational.valueobjects.PostalCode;
@@ -45,7 +46,7 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"),
-                LocalDate.of(1001, 01, 01), address);
+                LocalDate.of(1001, 01, 01), address, new Email("requena.re@hotmail.com"));
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
 
@@ -64,14 +65,15 @@ public class OwnerCommandControllerTests {
     @Test
     public void update() {
         Owner owner = new Owner();
+        Email ownerEmail = new Email("requena.re@hotmail.com");
         Address address = new Address(new PostalCode("87024-360", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09090385975"),
-                LocalDate.of(1001, 01, 01), address);
+                LocalDate.of(1001, 01, 01), address, ownerEmail);
         eventStore.push(owner);
 
-        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("00000000191"), LocalDate.of(1002, 02, 02), address);
+        owner.update(new Name("Dono Master"), new Phone("44000000000"), new Cpf("00000000191"), LocalDate.of(1002, 02, 02), address, ownerEmail);
 
         RequestEntity<Owner> request = RequestEntity.put(URI.create("/owners")).body(owner);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -95,7 +97,7 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"), data,
-                address);
+                address, new Email("requena.re@hotmail.com"));
         eventStore.push(owner);
 
         HttpEntity<Owner> requestEntity = new HttpEntity<>(owner);
