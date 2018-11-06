@@ -5,6 +5,7 @@ import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
+import com.xgh.model.command.operational.valueobjects.Email;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import java.time.LocalDate;
@@ -15,17 +16,19 @@ public class OwnerWasUpdated extends EntityEvent<OwnerId> {
     private Document document;
     private LocalDate birthDate;
     private Address address;
+    private Email email;
 
     protected OwnerWasUpdated() {
     }
 
-    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Document document, LocalDate birthDate, Address address, EntityVersion version) {
+    public OwnerWasUpdated(OwnerId id, Name name, Phone phone, Document document, LocalDate birthDate, Address address, Email email, EntityVersion version) {
         super(id, version);
         this.name = name;
         this.phone = phone;
         this.document = document;
         this.birthDate = birthDate;
         this.address = address;
+        this.email = email;
     }
 
     public Name getName() {
@@ -47,4 +50,9 @@ public class OwnerWasUpdated extends EntityEvent<OwnerId> {
     public Address getAddress() {
         return address;
     }
+    
+    public Email getEmail() {
+        return email;
+    }
+
 }

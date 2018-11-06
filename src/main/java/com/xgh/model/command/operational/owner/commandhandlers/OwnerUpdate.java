@@ -24,7 +24,8 @@ public class OwnerUpdate implements CommandHandler<UpdateOwner> {
                 command.getPhone(),
                 command.getDocument(),
                 command.getBirthDate(),
-                command.getAddress());
+                command.getAddress(),
+                command.getEmail());
         eventStore.push(owner);
     }
 }

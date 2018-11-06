@@ -33,11 +33,13 @@ public final class Owner {
 
     @JsonIgnore
     private Boolean deleted = false;
+    
+    private String email;
 
     protected Owner() {
     }
 
-    public Owner(UUID id, String name, String document, String phone, LocalDate birthDate, Address address, Boolean deleted) {
+    public Owner(UUID id, String name, String document, String phone, LocalDate birthDate, Address address, Boolean deleted, String email) {
         this.id = id;
         this.name = name;
         this.document = document;
@@ -45,6 +47,7 @@ public final class Owner {
         this.birthDate = birthDate;
         this.address = address;
         this.deleted = deleted;
+        this.email = email;
     }
 
     public String getName() {
@@ -74,4 +77,9 @@ public final class Owner {
     public Boolean isDeleted() {
         return deleted;
     }
+    
+    public String getEmail() {
+		return this.email;
+	}
+
 }

@@ -28,22 +28,22 @@ public class InternmentWasRegistered extends EntityEvent<InternmentId> {
     }
 
     public BedId getBedId() {
-        return bedId;
+        return this.bedId;
     }
 
     public AnimalId getAnimalId() {
-        return animalId;
+        return this.animalId;
     }
 
     public LocalDateTime getBusyAt() {
-        return busyAt;
+        return this.busyAt;
     }
 
     public LocalDateTime getBusyUntil() {
-        return busyUntil;
+        return this.busyUntil;
     }
 
     public InternmentStatus getStatus() {
-        return status;
+        return this.status;
     }
 }

@@ -22,7 +22,7 @@ public class OwnerSampleData {
 
     public Owner getSample() {
         Address address = addressSampleData.getSample();
-        Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false);
+        Owner owner = new Owner(UUID.randomUUID(), "Dono Master", "09450600929", "44313371337", LocalDate.parse("1911-01-01"), address, false, "requena.re@hotmail.com");
         supplierRepository.save(owner);
         return owner;
     }

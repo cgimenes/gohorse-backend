@@ -4,6 +4,7 @@ import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
+import com.xgh.model.command.operational.valueobjects.Email;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ public final class UpdateOwner implements EntityCommand {
     private final Phone phone;
     private final LocalDate birthDate;
     private final Address address;
+    private final Email email;
 
     protected UpdateOwner() {
         this.id = null;
@@ -23,6 +25,7 @@ public final class UpdateOwner implements EntityCommand {
         this.phone = null;
         this.birthDate = null;
         this.address = null;
+        this.email = null;
     }
 
     @Override
@@ -48,5 +51,9 @@ public final class UpdateOwner implements EntityCommand {
 
     public Address getAddress() {
         return this.address;
+    }
+    
+    public Email getEmail() {
+        return this.email;
     }
 }
