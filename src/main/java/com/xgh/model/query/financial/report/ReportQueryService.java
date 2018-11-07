@@ -15,7 +15,7 @@ public class ReportQueryService {
     private InvoiceRepository repository;
 
     public YearCashFlow buildCashFlow(Year year) {
-        List<Invoice> invoices = repository.findByPaymentYear(year);
+        List<Invoice> invoices = repository.findPaidByPaymentYear(year);
         return new YearCashFlow(year, new BigDecimal(0), invoices);
     }
 }

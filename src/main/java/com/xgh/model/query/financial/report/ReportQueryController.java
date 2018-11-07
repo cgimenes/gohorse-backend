@@ -19,7 +19,7 @@ public class ReportQueryController {
         this.service = service;
     }
 
-    @GetMapping("cashflow/{year}")
+    @GetMapping("/cashflow/{year}")
     public ResponseEntity<YearCashFlow> cashFlow(@PathVariable("year") Year year) {
         YearCashFlow cashFlow = service.buildCashFlow(year);
         return ResponseEntity.ok(cashFlow);

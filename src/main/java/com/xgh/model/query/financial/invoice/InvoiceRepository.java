@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
-    default List<Invoice> findByPaymentYear(Year year) {
+    default List<Invoice> findPaidByPaymentYear(Year year) {
         LocalDateTime startOfYear = LocalDate
                 .now()
                 .withYear(year.getValue())
                 .withDayOfMonth(1).withMonth(1).atStartOfDay();
-        return findByPaymentDateBetween(startOfYear, startOfYear.plusYears(1).minusDays(1));
+        return findByPaymentDateBetweenAndStatus(startOfYear, startOfYear.plusYears(1).minusDays(1), "PAID");
     }
 
-    List<Invoice> findByPaymentDateBetween(LocalDateTime from, LocalDateTime to);
+    List<Invoice> findByPaymentDateBetweenAndStatus(LocalDateTime from, LocalDateTime to, String status);
 }

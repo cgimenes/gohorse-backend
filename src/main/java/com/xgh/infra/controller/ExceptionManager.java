@@ -32,6 +32,7 @@ public class ExceptionManager {
     private static final int TYPE_MISMATCH = 4;
     private static final int ROUTE_NOT_FOUND = 5;
     private static final int INVALID_ARGUMENT = 6;
+    private static final int UNPROCESSABLE_ENTITY = 7;
 
     /*
      * Exception Handlers
@@ -153,4 +154,14 @@ public class ExceptionManager {
 
         return new ErrorResponse(BAD_REQUEST, "Falha ao ler o corpo da mensagem");
     }
+
+    @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
+    @ExceptionHandler({IllegalStateException.class})
+    public @ResponseBody
+    ErrorResponse handleException(IllegalStateException ex) {
+        logger.info(ex);
+
+        return new ErrorResponse(UNPROCESSABLE_ENTITY, "Estado atual da entidade não suporta essa transição");
+    }
+
 }
