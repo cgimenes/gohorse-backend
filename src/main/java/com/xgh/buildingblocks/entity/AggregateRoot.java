@@ -1,6 +1,6 @@
 package com.xgh.buildingblocks.entity;
 
-import com.xgh.buildingblocks.event.Event;
+import com.xgh.buildingblocks.event.EntityEvent;
 import com.xgh.buildingblocks.event.EventStream;
 import com.xgh.exceptions.DeletedEntityException;
 import java.lang.reflect.Method;
@@ -25,7 +25,7 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
      *
      * TODO preecher o version com o nextVersion automagicamente
      */
-    protected void recordAndApply(Event<IdT> event) {
+    protected void recordAndApply(EntityEvent<IdT> event) {
         if (this.isDeleted()) {
             throw new DeletedEntityException();
         }
@@ -44,12 +44,12 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
     /*
      * Aplica o evento, atualizando os metadados e invocando o handler do evento
      */
-    private void apply(Event<IdT> event) {
+    private void apply(EntityEvent<IdT> event) {
         this.updateMetadata(event);
         this.invokeHandlerMethod(event);
     }
 
-    private void updateMetadata(Event<IdT> event) {
+    private void updateMetadata(EntityEvent<IdT> event) {
         this.id = event.getEntityId();
         this.version = event.getEntityVersion();
     }
@@ -57,7 +57,7 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
     /*
      * Encontra e executa o handler do evento
      */
-    private void invokeHandlerMethod(Event<?> event) {
+    private void invokeHandlerMethod(EntityEvent<?> event) {
         Method handlerMethod = getHandlerMethod(event);
         if (handlerMethod != null) {
             handlerMethod.setAccessible(true);
@@ -73,7 +73,7 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
     /*
      * Encontra o handler do evento (método 'when' com o argumento do mesmo tipo do evento)
      */
-    private Method getHandlerMethod(Event<?> event) {
+    private Method getHandlerMethod(EntityEvent<?> event) {
         try {
             return getClass().getDeclaredMethod("when", event.getClass());
         } catch (NoSuchMethodException e) {
@@ -81,7 +81,7 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
         }
     }
 
-    private void record(Event<?> event) {
+    private void record(EntityEvent<?> event) {
         this.uncommittedEvents.add(event);
     }
 
@@ -99,11 +99,11 @@ public abstract class AggregateRoot<IdT extends EntityId> extends DomainEntity<I
         }
 
         while (events.hasNext()) {
-            this.apply((Event<IdT>) events.next());
+            this.apply((EntityEvent<IdT>) events.next());
         }
     }
 
-    public EntityVersion getVersion() {
+    public final EntityVersion getVersion() {
         return version;
     }
 

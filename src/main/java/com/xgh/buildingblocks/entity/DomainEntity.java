@@ -5,7 +5,7 @@ import com.xgh.buildingblocks.JsonSerializable;
 public abstract class DomainEntity<IdT extends EntityId> implements JsonSerializable {
     protected IdT id;
 
-    public IdT getId() {
+    public final IdT getId() {
         return id;
     }
 
@@ -28,7 +28,7 @@ public abstract class DomainEntity<IdT extends EntityId> implements JsonSerializ
         return id.equals(other.getId());
     }
 
-    public String getType() {
+    public final String getType() {
         return this.getClass().getName();
     }
 }

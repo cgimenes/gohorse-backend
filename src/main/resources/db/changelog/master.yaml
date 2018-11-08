@@ -6,6 +6,9 @@ databaseChangeLog:
         name: TYPE_NAME
         value: varchar(100)
     - property:
+        name: TYPE_NOTE
+        value: varchar(500)
+    - property:
         name: TYPE_PHONE
         value: varchar(13)
     - property:
@@ -85,5 +88,19 @@ databaseChangeLog:
     - include:
         file: db/changelog/0016-table-enumerator.yaml
     - include:
+<<<<<<< HEAD
         file: db/changelog/0017-table-animal.yaml
         
+=======
+        file: db/changelog/0017-table-surgery.yaml
+    - include:
+        file: db/changelog/0018-internment-add-column.yaml
+    - include:
+        file: db/changelog/0019-table-account.yaml
+    - include:
+        file: db/changelog/0020-table-invoice.yaml
+    - include:
+        file: db/changelog/0021-table-transaction.yaml
+    - include:
+        file: db/changelog/0022-owner-add-column.yaml
+>>>>>>> master

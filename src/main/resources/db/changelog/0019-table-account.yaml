@@ -1,0 +1,32 @@
+databaseChangeLog:
+    - changeSet:
+        id: 19
+        author: marcelo.gimenes
+        changes:
+            - createTable:
+                tableName: account
+                columns:
+                    - column:
+                        name: id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                            primaryKey: true
+                    - column:
+                        name: owner_id
+                        type: ${TYPE_UUID}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: account_type
+                        type: ${TYPE_NAME}
+                        constraints:
+                            nullable: false
+                    - column:
+                        name: deleted
+                        type: ${TYPE_BOOL}
+                        constraints:
+                          nullable: false
+            - rollback:
+               - dropTable:
+                  tableName: account
