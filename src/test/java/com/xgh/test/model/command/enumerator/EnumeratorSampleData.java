@@ -3,9 +3,8 @@ package com.xgh.test.model.command.enumerator;
 import com.xgh.buildingblocks.EventStore;
 import com.xgh.model.command.operational.enumerator.Enumerator;
 import com.xgh.model.command.operational.enumerator.EnumeratorId;
-import com.xgh.model.command.operational.valueobjects.Description;
 import com.xgh.model.command.operational.valueobjects.Name;
-
+import com.xgh.model.command.operational.valueobjects.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

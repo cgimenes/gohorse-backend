@@ -99,3 +99,6 @@ databaseChangeLog:
         file: db/changelog/0021-table-transaction.yaml
     - include:
         file: db/changelog/0022-owner-add-column.yaml
+    - include:
+        file: db/changelog/0023-table-animal.yaml
+
