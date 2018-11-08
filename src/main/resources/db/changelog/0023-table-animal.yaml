@@ -1,6 +1,6 @@
 databaseChangeLog:
     - changeSet:
-        id: 17
+        id: 23
         author: joao.silva
         changes:
           - dropForeignKeyConstraint:

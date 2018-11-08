@@ -88,10 +88,6 @@ databaseChangeLog:
     - include:
         file: db/changelog/0016-table-enumerator.yaml
     - include:
-<<<<<<< HEAD
-        file: db/changelog/0017-table-animal.yaml
-        
-=======
         file: db/changelog/0017-table-surgery.yaml
     - include:
         file: db/changelog/0018-internment-add-column.yaml
@@ -103,4 +99,6 @@ databaseChangeLog:
         file: db/changelog/0021-table-transaction.yaml
     - include:
         file: db/changelog/0022-owner-add-column.yaml
->>>>>>> master
+    - include:
+        file: db/changelog/0023-table-animal.yaml
+
