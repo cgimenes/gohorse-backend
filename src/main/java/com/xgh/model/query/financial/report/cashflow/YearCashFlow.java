@@ -32,8 +32,8 @@ public class YearCashFlow {
         for (Month monthEnum : Month.values()) {
             String month = monthEnum.toString().toLowerCase();
 
-            Map<String, BigDecimal> incomes = typeTotalBalances.getOrDefault("INCOME", new HashMap<>());
-            Map<String, BigDecimal> expenses = typeTotalBalances.getOrDefault("EXPENSE", new HashMap<>());
+            Map<String, BigDecimal> incomes = typeTotalBalances.getOrDefault("income", new HashMap<>());
+            Map<String, BigDecimal> expenses = typeTotalBalances.getOrDefault("expense", new HashMap<>());
 
             totalPeriodBalances.put(month,
                     incomes.getOrDefault(month, BigDecimal.ZERO).subtract(expenses.getOrDefault(month, BigDecimal.ZERO)));
