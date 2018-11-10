@@ -15,48 +15,50 @@ import java.util.Map;
 // TODO criar uma tabela para representar esse modelo, atualizando o mesmo quando necessário através de um EventHandler
 public class YearCashFlow {
     private final Year year;
-    private final Map<Month, BigDecimal> initialBalances = new HashMap<>();
-    private final Map<String, Map<Month, BigDecimal>> typeTotalBalances;
-    private final Map<Month, BigDecimal> totalPeriodBalances = new HashMap<>();
-    private final Map<Month, BigDecimal> totalBalances = new HashMap<>();
-    private final Map<String, Map<String, Map<Month, BigDecimal>>> summarized;
+    private final Map<String, BigDecimal> initialBalances = new HashMap<>();
+    private final Map<String, Map<String, BigDecimal>> typeTotalBalances;
+    private final Map<String, BigDecimal> totalPeriodBalances = new HashMap<>();
+    private final Map<String, BigDecimal> totalBalances = new HashMap<>();
+    private final Map<String, Map<String, Map<String, BigDecimal>>> summarized;
 
     public YearCashFlow(Year year, BigDecimal previousYearFinalBalance, List<Invoice> invoices) {
         this.year = year;
-        initialBalances.put(Month.JANUARY, previousYearFinalBalance);
+        initialBalances.put(Month.JANUARY.toString().toLowerCase(), previousYearFinalBalance);
 
         summarized = summarize(invoices);
 
         typeTotalBalances = calculateTypeTotalBalances();
 
-        for (Month month : Month.values()) {
-            Map<Month, BigDecimal> incomes = typeTotalBalances.getOrDefault("INCOME", new HashMap<>());
-            Map<Month, BigDecimal> expenses = typeTotalBalances.getOrDefault("EXPENSE", new HashMap<>());
+        for (Month monthEnum : Month.values()) {
+            String month = monthEnum.toString().toLowerCase();
+
+            Map<String, BigDecimal> incomes = typeTotalBalances.getOrDefault("INCOME", new HashMap<>());
+            Map<String, BigDecimal> expenses = typeTotalBalances.getOrDefault("EXPENSE", new HashMap<>());
 
             totalPeriodBalances.put(month,
                     incomes.getOrDefault(month, BigDecimal.ZERO).subtract(expenses.getOrDefault(month, BigDecimal.ZERO)));
 
             totalBalances.put(month, initialBalances.get(month).add(totalPeriodBalances.get(month)));
             // Verifica se o ciclo dos meses não recomeçou, para não atualizar o balanço inicial de janeiro que veio por parâmetro
-            if (month.plus(1) != Month.JANUARY) {
-                initialBalances.put(month.plus(1), totalBalances.get(month));
+            if (monthEnum.plus(1) != Month.JANUARY) {
+                initialBalances.put(monthEnum.plus(1).toString().toLowerCase(), totalBalances.get(month));
             }
         }
     }
 
-    private Map<String, Map<String, Map<Month, BigDecimal>>> summarize(List<Invoice> invoices) {
+    private Map<String, Map<String, Map<String, BigDecimal>>> summarize(List<Invoice> invoices) {
         return invoices
                 .stream()
                 .collect(groupingBy(
-                        Invoice::getType,
+                        (invoice) -> invoice.getType().toLowerCase(),
                         groupingBy(
-                                Invoice::getOperation,
+                                (invoice) -> invoice.getOperation().toLowerCase(),
                                 groupingBy(
-                                        (Invoice invoice) -> invoice.getPaymentDate().getMonth(),
+                                        (Invoice invoice) -> invoice.getPaymentDate().getMonth().toString().toLowerCase(),
                                         reducing(BigDecimal.ZERO, Invoice::getTotalValue, BigDecimal::add)))));
     }
 
-    private Map<String, Map<Month, BigDecimal>> calculateTypeTotalBalances() {
+    private Map<String, Map<String, BigDecimal>> calculateTypeTotalBalances() {
         return summarized.entrySet()
                 .stream()
                 .collect(toMap(
@@ -67,11 +69,11 @@ public class YearCashFlow {
                                         reducing(BigDecimal.ZERO, Map.Entry::getValue, BigDecimal::add)))));
     }
 
-    public Map<Month, BigDecimal> getInitialBalances() {
+    public Map<String, BigDecimal> getInitialBalances() {
         return initialBalances;
     }
 
-    public Map<String, Map<String, Map<Month, BigDecimal>>> getSummarized() {
+    public Map<String, Map<String, Map<String, BigDecimal>>> getSummarized() {
         return summarized;
     }
 
@@ -79,15 +81,15 @@ public class YearCashFlow {
         return year;
     }
 
-    public Map<Month, BigDecimal> getTotalPeriodBalances() {
+    public Map<String, BigDecimal> getTotalPeriodBalances() {
         return totalPeriodBalances;
     }
 
-    public Map<Month, BigDecimal> getTotalBalances() {
+    public Map<String, BigDecimal> getTotalBalances() {
         return totalBalances;
     }
 
-    public Map<String, Map<Month, BigDecimal>> getTypeTotalBalances() {
+    public Map<String, Map<String, BigDecimal>> getTypeTotalBalances() {
         return typeTotalBalances;
     }
 }
