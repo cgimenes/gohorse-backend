@@ -1,21 +1,21 @@
 package com.xgh.test.model.query.operational.specie;
 
-import com.xgh.model.query.operational.specie.Specie;
-import com.xgh.model.query.operational.specie.SpecieRepository;
+import com.xgh.model.query.operational.enumerator.Enumerator;
+import com.xgh.model.query.operational.enumerator.EnumeratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component("QuerySpecieSampleData")
 public class SpecieSampleData {
-    private final SpecieRepository specieRepository;
+	private final EnumeratorRepository specieRepository;
 
     @Autowired
-    protected SpecieSampleData(SpecieRepository specieRepository) {
+    protected SpecieSampleData(EnumeratorRepository specieRepository) {
         this.specieRepository = specieRepository;
     }
 
-    public Specie getSample() {
-        Specie specie = new Specie("Catioro");
+    public Enumerator getSample() {
+        Enumerator specie = new Enumerator();
         specieRepository.save(specie);
         return specie;
     }

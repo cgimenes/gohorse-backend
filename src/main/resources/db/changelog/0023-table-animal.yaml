@@ -1,0 +1,23 @@
+databaseChangeLog:
+    - changeSet:
+        id: 23
+        author: joao.silva
+        changes:
+          - dropForeignKeyConstraint:
+              baseTableName: animal
+              constraintName: fk_animal_breed
+          - addForeignKeyConstraint:
+              baseColumnNames: breed_id
+              baseTableName: animal
+              constraintName: fk_animal_breed
+              referencedColumnNames: id
+              referencedTableName: enumerator
+          - dropForeignKeyConstraint:
+              baseTableName: animal
+              constraintName: fk_animal_specie
+          - addForeignKeyConstraint:
+              baseColumnNames: specie_id
+              baseTableName: animal
+              constraintName: fk_animal_specie
+              referencedColumnNames: id
+              referencedTableName: enumerator                                           
