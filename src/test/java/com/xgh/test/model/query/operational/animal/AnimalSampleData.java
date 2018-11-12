@@ -4,6 +4,7 @@ import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.model.query.operational.animal.AnimalRepository;
 import com.xgh.test.model.query.operational.breed.BreedSampleData;
 import com.xgh.test.model.query.operational.owner.OwnerSampleData;
+import com.xgh.test.model.query.operational.sex.SexSampleData;
 import com.xgh.test.model.query.operational.specie.SpecieSampleData;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -16,13 +17,15 @@ public class AnimalSampleData {
     private final OwnerSampleData ownerSampleData;
     private final BreedSampleData breedSampleData;
     private final SpecieSampleData specieSampleData;
+    private final SexSampleData sexSampleData;
 
     @Autowired
-    protected AnimalSampleData(AnimalRepository repository, OwnerSampleData ownerSampleData, BreedSampleData breedSampleData, SpecieSampleData specieSampleData) {
+    protected AnimalSampleData(AnimalRepository repository, OwnerSampleData ownerSampleData, BreedSampleData breedSampleData, SpecieSampleData specieSampleData, SexSampleData sexSampleData) {
         this.repository = repository;
         this.ownerSampleData = ownerSampleData;
         this.breedSampleData = breedSampleData;
         this.specieSampleData = specieSampleData;
+        this.sexSampleData = sexSampleData;
     }
 
     public Animal getSample() {
@@ -32,7 +35,7 @@ public class AnimalSampleData {
                 ownerSampleData.getSample(),
                 breedSampleData.getSample(),
                 specieSampleData.getSample(),
-                'M',
+                sexSampleData.getSample(),
                 LocalDate.of(2012, 12, 12),
                 false,
                 new Float(100.50),
