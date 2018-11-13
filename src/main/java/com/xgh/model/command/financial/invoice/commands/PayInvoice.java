@@ -10,6 +10,10 @@ public class PayInvoice implements EntityCommand {
         id = null;
     }
 
+    public PayInvoice(InvoiceId id) {
+        this.id = id;
+    }
+
     @Override
     public InvoiceId getId() {
         return id;

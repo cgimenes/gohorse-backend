@@ -19,4 +19,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, UUID> {
     }
 
     List<Invoice> findByPaymentDateBetweenAndStatus(LocalDateTime from, LocalDateTime to, String status);
+
+    List<Invoice> findByOperationId(UUID operationId);
 }
