@@ -1,10 +1,8 @@
 package com.xgh.model.query.operational.animal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.query.operational.breed.Breed;
 import com.xgh.model.query.operational.enumerator.Enumerator;
 import com.xgh.model.query.operational.owner.Owner;
-import com.xgh.model.query.operational.specie.Specie;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
