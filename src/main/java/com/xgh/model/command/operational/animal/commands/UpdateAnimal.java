@@ -13,7 +13,7 @@ public class UpdateAnimal implements EntityCommand {
     private final OwnerId owner;
     private final EnumeratorId breed;
     private final EnumeratorId specie;
-    private final EnumeratorId sex;
+    private final String sex;
     private final LocalDate birthDate;
     private final Float weight;
     private final boolean castrated;
@@ -51,7 +51,7 @@ public class UpdateAnimal implements EntityCommand {
         return specie;
     }
 
-    public EnumeratorId getSex() {
+    public String getSex() {
         return sex;
     }
 

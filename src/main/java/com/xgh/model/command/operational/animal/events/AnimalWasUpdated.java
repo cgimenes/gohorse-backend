@@ -13,7 +13,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
     private OwnerId owner;
     private EnumeratorId breed;
     private EnumeratorId specie;
-    private EnumeratorId sex;
+    private String sex;
     private LocalDate birthDate;
     private Float weight;
     private boolean castrated;
@@ -21,7 +21,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
     protected AnimalWasUpdated() {
     }
 
-    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, EnumeratorId sex, LocalDate birthDate,
+    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate,
                             Float weight, boolean castrated, EntityVersion version) {
         super(id, version);
         this.name = name;
@@ -50,7 +50,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
         return specie;
     }
 
-    public EnumeratorId getSex() {
+    public String getSex() {
         return sex;
     }
 

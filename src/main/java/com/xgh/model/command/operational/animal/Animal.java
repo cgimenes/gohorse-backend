@@ -15,12 +15,12 @@ public final class Animal extends AggregateRoot<AnimalId> {
     private OwnerId owner;
     private EnumeratorId breed;
     private EnumeratorId specie;
-    private EnumeratorId sex;
+    private String sex;
     private LocalDate birthDate;
     private Float weight;
     private Boolean castrated = false;
 
-    public void register(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, EnumeratorId sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void register(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate, Float weight, Boolean castrated) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -94,7 +94,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return specie;
     }
 
-    public EnumeratorId getSex() {
+    public String getSex() {
         return sex;
     }
 
@@ -110,7 +110,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return castrated;
     }
 
-    public void update(Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, EnumeratorId sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void update(Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate, Float weight, Boolean castrated) {
         recordAndApply(new AnimalWasUpdated(this.id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
     }
 
