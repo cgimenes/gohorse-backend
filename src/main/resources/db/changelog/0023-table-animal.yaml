@@ -3,21 +3,6 @@ databaseChangeLog:
         id: 23
         author: joao.silva
         changes:
-          - renameColumn:
-              columnDataType: ${TYPE_SEX}
-              newColumnName: sex_id
-              oldColumnName: sex
-              tableName: animal
-          - modifyDataType:
-              columnName: sex_id
-              newDataType: ${TYPE_UUID}
-              tableName: animal
-          - addForeignKeyConstraint:
-              baseColumnNames: sex_id
-              baseTableName: animal
-              constraintName: fk_animal_sex
-              referencedColumnNames: id
-              referencedTableName: enumerator
           - dropForeignKeyConstraint:
               baseTableName: animal
               constraintName: fk_animal_breed

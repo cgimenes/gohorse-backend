@@ -6,6 +6,7 @@ import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.valueobjects.Sex;
 import com.xgh.test.model.command.operational.owner.OwnerSampleData;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class AnimalSampleData {
                 ownerId,
                 new EnumeratorId(),
                 new EnumeratorId(),
-                new EnumeratorId(),
+                Sex.MALE,
                 LocalDate.parse("2018-10-10"),
                 new Float(10.50),
                 false);
