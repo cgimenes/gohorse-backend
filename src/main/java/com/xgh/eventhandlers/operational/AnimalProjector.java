@@ -62,11 +62,6 @@ public class AnimalProjector implements EventHandler {
         if(!specie.isPresent()) {
         	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
         }
-
-        Optional<Enumerator> sex = sexRepository.findById(entity.getSex().getValue());
-        if(!specie.isPresent()) {
-        	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
-        }
         
         com.xgh.model.query.operational.animal.Animal projection = new com.xgh.model.query.operational.animal.Animal(
                 entity.getId().getValue(),
@@ -74,7 +69,7 @@ public class AnimalProjector implements EventHandler {
                 owner.get(),
                 breed.get(),
                 specie.get(),
-                sex.get(),
+                entity.getSex().toString(),
                 entity.getBirthDate(),
                 entity.isCastrated(),
                 entity.getWeight(),
