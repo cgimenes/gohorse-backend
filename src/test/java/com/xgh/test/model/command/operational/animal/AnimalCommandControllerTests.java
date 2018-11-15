@@ -69,8 +69,8 @@ public class AnimalCommandControllerTests {
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino", entityFromStore.getName().toString());
         assertEquals(owner.getId().getValue(), entityFromStore.getOwner().getValue());
-        //assertEquals("760ddc16-6e8d-4139-a684-da70ce7a657a", entityFromStore.getBreed().toString());
-        //assertEquals("760ddc16-6e8d-4139-a684-da70ce7a657b", entityFromStore.getSpecie().toString());
+        assertEquals(breed.getId(), entityFromStore.getBreed());
+        assertEquals(specie.getId(), entityFromStore.getSpecie());
         assertEquals("MALE", entityFromStore.getSex().toString());
         assertEquals(LocalDate.of(1001, 01, 01), entityFromStore.getBirthDate());
         assertEquals(new Float(35), entityFromStore.getWeight());
@@ -95,8 +95,8 @@ public class AnimalCommandControllerTests {
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino Benner", entityFromStore.getName().toString());
         assertEquals(entity.getOwner(), entityFromStore.getOwner());
-       // assertEquals("Splitz", entityFromStore.getBreed().toString());
-       // assertEquals("Cachorro", entityFromStore.getSpecie().toString());
+        assertEquals(entity.getBreed(), entityFromStore.getBreed());
+        assertEquals(entity.getSpecie(), entityFromStore.getSpecie());
         assertEquals("MALE", entityFromStore.getSex().toString());
         assertEquals(LocalDate.of(1002, 02, 02), entityFromStore.getBirthDate());
         assertEquals(new Float(10), entityFromStore.getWeight());
