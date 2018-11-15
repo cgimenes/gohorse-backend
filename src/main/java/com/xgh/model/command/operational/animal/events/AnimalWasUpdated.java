@@ -6,6 +6,8 @@ import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.valueobjects.Sex;
+
 import java.time.LocalDate;
 
 public class AnimalWasUpdated extends EntityEvent<AnimalId> {
@@ -13,7 +15,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
     private OwnerId owner;
     private EnumeratorId breed;
     private EnumeratorId specie;
-    private String sex;
+    private Sex sex;
     private LocalDate birthDate;
     private Float weight;
     private boolean castrated;
@@ -21,7 +23,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
     protected AnimalWasUpdated() {
     }
 
-    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate,
+    public AnimalWasUpdated(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate,
                             Float weight, boolean castrated, EntityVersion version) {
         super(id, version);
         this.name = name;
@@ -50,7 +52,7 @@ public class AnimalWasUpdated extends EntityEvent<AnimalId> {
         return specie;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 

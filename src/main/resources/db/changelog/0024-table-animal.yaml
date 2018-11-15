@@ -3,14 +3,6 @@ databaseChangeLog:
         id: 24
         author: andre.conceicao
         changes:
-          - dropForeignKeyConstraint:
-             baseTableName: animal
-             constraintName: fk_animal_sex
-          - renameColumn:
-             columnDataType: ${TYPE_UUID}
-             newColumnName: sex
-             oldColumnName: sex_id
-             tableName: animal
           - modifyDataType:
              columnName: sex
              newDataType: ${TYPE_NAME}

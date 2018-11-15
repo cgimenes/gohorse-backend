@@ -8,6 +8,8 @@ import com.xgh.model.command.operational.animal.events.AnimalWasUpdated;
 import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.valueobjects.Sex;
+
 import java.time.LocalDate;
 
 public final class Animal extends AggregateRoot<AnimalId> {
@@ -15,12 +17,12 @@ public final class Animal extends AggregateRoot<AnimalId> {
     private OwnerId owner;
     private EnumeratorId breed;
     private EnumeratorId specie;
-    private String sex;
+    private Sex sex;
     private LocalDate birthDate;
     private Float weight;
     private Boolean castrated = false;
 
-    public void register(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void register(AnimalId id, Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -94,7 +96,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return specie;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
@@ -110,7 +112,7 @@ public final class Animal extends AggregateRoot<AnimalId> {
         return castrated;
     }
 
-    public void update(Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, String sex, LocalDate birthDate, Float weight, Boolean castrated) {
+    public void update(Name name, OwnerId owner, EnumeratorId breed, EnumeratorId specie, Sex sex, LocalDate birthDate, Float weight, Boolean castrated) {
         recordAndApply(new AnimalWasUpdated(this.id, name, owner, breed, specie, sex, birthDate, weight, castrated, this.nextVersion()));
     }
 
