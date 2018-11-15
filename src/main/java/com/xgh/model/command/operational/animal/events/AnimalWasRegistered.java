@@ -7,7 +7,6 @@ import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Sex;
-
 import java.time.LocalDate;
 
 public class AnimalWasRegistered extends EntityEvent<AnimalId> {
