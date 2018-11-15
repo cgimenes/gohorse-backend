@@ -30,7 +30,7 @@ public class AnimalSampleData {
                 ownerId,
                 new EnumeratorId(),
                 new EnumeratorId(),
-                new EnumeratorId(),
+                "MALE",
                 LocalDate.parse("2018-10-10"),
                 new Float(10.50),
                 false);

@@ -48,7 +48,7 @@ public class AnimalCommandControllerTests {
         Owner owner = ownerSampleData.getSample();
 
         entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new EnumeratorId(),
-        		new EnumeratorId(), new EnumeratorId(), LocalDate.of(1001, 01, 01),
+        		new EnumeratorId(), "MALE", LocalDate.of(1001, 01, 01),
                 new Float(35), false);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/animals", entity, Void.class);
@@ -74,7 +74,7 @@ public class AnimalCommandControllerTests {
         Animal entity = animalSampleData.getSample();
 
         entity.update(new Name("Severino Benner"), entity.getOwner(), new EnumeratorId(),
-        		new EnumeratorId(), new EnumeratorId(), LocalDate.of(1002, 02, 02),
+        		new EnumeratorId(), "MALE", LocalDate.of(1002, 02, 02),
                 new Float(10), false);
 
         RequestEntity<Animal> request = RequestEntity.put(URI.create("/animals")).body(entity);
