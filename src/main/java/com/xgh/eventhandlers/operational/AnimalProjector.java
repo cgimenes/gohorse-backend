@@ -22,8 +22,7 @@ import org.springframework.stereotype.Component;
 public class AnimalProjector implements EventHandler {
     private final PostgresEventStore eventStore;
     private final AnimalRepository repository;
-    private final EnumeratorRepository breedRepository;
-    private final EnumeratorRepository specieRepository;
+    private final EnumeratorRepository breedRepository,specieRepository;
     private final OwnerRepository ownerRepository;
 
     @Autowired
@@ -60,14 +59,14 @@ public class AnimalProjector implements EventHandler {
         if(!specie.isPresent()) {
         	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
         }
-
+        
         com.xgh.model.query.operational.animal.Animal projection = new com.xgh.model.query.operational.animal.Animal(
                 entity.getId().getValue(),
                 entity.getName().getValue(),
                 owner.get(),
                 breed.get(),
                 specie.get(),
-                entity.getSex().asCharacter(),
+                entity.getSex().toString(),
                 entity.getBirthDate(),
                 entity.isCastrated(),
                 entity.getWeight(),

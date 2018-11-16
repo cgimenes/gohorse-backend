@@ -1,0 +1,9 @@
+databaseChangeLog:
+    - changeSet:
+        id: 24
+        author: andre.conceicao
+        changes:
+          - modifyDataType:
+             columnName: sex
+             newDataType: ${TYPE_NAME}
+             tableName: animal
