@@ -46,7 +46,7 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"),
-                LocalDate.of(1001, 01, 01), address, new Email("requena.re@hotmail.com"));
+                LocalDate.of(1001, 01, 01), address, new Email("teste@teste.com"));
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/owners", owner, Void.class);
 
@@ -65,7 +65,7 @@ public class OwnerCommandControllerTests {
     @Test
     public void update() {
         Owner owner = new Owner();
-        Email ownerEmail = new Email("requena.re@hotmail.com");
+        Email ownerEmail = new Email("teste@teste.com");
         Address address = new Address(new PostalCode("87024-360", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
@@ -97,7 +97,7 @@ public class OwnerCommandControllerTests {
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"), data,
-                address, new Email("requena.re@hotmail.com"));
+                address, new Email("teste@teste.com"));
         eventStore.push(owner);
 
         HttpEntity<Owner> requestEntity = new HttpEntity<>(owner);
