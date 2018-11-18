@@ -103,3 +103,6 @@ databaseChangeLog:
         file: db/changelog/0023-table-animal.yaml
     - include:
         file: db/changelog/0024-table-animal.yaml
+    - include:
+        file: db/changelog/0025-table-supplier.yaml
+        

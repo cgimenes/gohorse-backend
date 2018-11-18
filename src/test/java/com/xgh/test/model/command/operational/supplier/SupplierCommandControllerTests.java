@@ -4,12 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.xgh.infra.repository.PostgresEventStore;
+import com.xgh.model.command.operational.enumerator.Enumerator;
 import com.xgh.model.command.operational.supplier.Supplier;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import com.xgh.model.command.operational.valueobjects.PostalCode;
+import com.xgh.test.model.command.enumerator.DistributionTypeSampleData;
+
 import java.net.URI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,14 +40,21 @@ public class SupplierCommandControllerTests {
 
     @Autowired
     private PostgresEventStore eventStore;
-
+    
+    @Autowired
+    private DistributionTypeSampleData distTypeSampleData;
+    
+    @Autowired
+    private SupplierSampleData supplierSampleData;
+    
     @Test
     public void registerWithSuccess() {
+    	Enumerator distributionType = distTypeSampleData.getSample();
+    	
         Supplier entity = new Supplier();
-        entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), "00000000191",
+        entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), distributionType.getId(), "00000000191",
                 new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
-                        null),
-                new Name("Ração"));
+                        null));
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/suppliers", entity, Void.class);
 
@@ -54,6 +64,7 @@ public class SupplierCommandControllerTests {
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Nestle", entityFromStore.getName().toString());
         assertEquals("44998015821", entityFromStore.getPhone().toString());
+        assertEquals(distributionType.getId(), entityFromStore.getDistributionType());
         assertEquals("00000000191", entityFromStore.getDocument().toString());
         assertEquals("/suppliers/" + entity.getId(), response.getHeaders().getLocation().getPath());
         assertEquals("1", entityFromStore.getVersion().toString());
@@ -61,15 +72,9 @@ public class SupplierCommandControllerTests {
 
     @Test
     public void updateWithSuccess() {
-        Supplier entity = new Supplier();
-        entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
-                new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
-                        null),
-                new Name("Ração"));
-        eventStore.push(entity);
+        Supplier entity = supplierSampleData.getSample();
 
-        entity.update(entity.getName(), new Phone("44998731154"), entity.getDocument(), entity.getAddress(),
-                entity.getDistributionType());
+        entity.update(entity.getName(), new Phone("44998731154"), entity.getDistributionType(), entity.getDocument(), entity.getAddress());
 
         RequestEntity<Supplier> request = RequestEntity.put(URI.create("/suppliers")).body(entity);
         ResponseEntity<Void> response = restTemplate.exchange(request, Void.class);
@@ -78,19 +83,16 @@ public class SupplierCommandControllerTests {
 
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
         assertTrue(entity.equals(entityFromStore));
-        assertEquals("Nestle", entityFromStore.getName().toString());
+        assertEquals("Mercadão de Maringá", entityFromStore.getName().toString());
         assertEquals("44998731154", entityFromStore.getPhone().toString());
-        assertEquals("00000000191", entityFromStore.getDocument().toString());
-        assertEquals("2", entityFromStore.getVersion().toString());
+        assertEquals(entity.getDistributionType(), entityFromStore.getDistributionType());
+        assertEquals(entity.getDocument().toString(), entityFromStore.getDocument().toString());
+        assertEquals(entity.getVersion().toString(), entityFromStore.getVersion().toString());
     }
 
     @Test
     public void deleteWithSuccess() {
-        Supplier entity = new Supplier();
-        entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
-                new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
-                        null),
-                new Name("Ração"));
+        Supplier entity = supplierSampleData.getSample();
 
         eventStore.push(entity);
 
