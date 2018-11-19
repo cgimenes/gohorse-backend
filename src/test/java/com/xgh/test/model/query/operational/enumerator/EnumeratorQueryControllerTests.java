@@ -1,4 +1,4 @@
-package com.xgh.test.model.query.enumerator;
+package com.xgh.test.model.query.operational.enumerator;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

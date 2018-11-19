@@ -1,4 +1,4 @@
-package com.xgh.test.model.command.enumerator;
+package com.xgh.test.model.command.operational.enumerator;
 
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.operational.enumerator.Enumerator;

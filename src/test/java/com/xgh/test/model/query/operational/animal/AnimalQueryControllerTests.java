@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.test.model.query.Page;
-import com.xgh.test.model.query.enumerator.EnumeratorSampleData;
+import com.xgh.test.model.query.operational.enumerator.EnumeratorSampleData;
 
 import java.io.IOException;
 import java.time.LocalDate;

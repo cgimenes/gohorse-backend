@@ -1,4 +1,4 @@
-package com.xgh.test.model.query.enumerator;
+package com.xgh.test.model.query.operational.enumerator;
 
 import com.xgh.model.query.operational.enumerator.Enumerator;
 import com.xgh.model.query.operational.enumerator.EnumeratorRepository;

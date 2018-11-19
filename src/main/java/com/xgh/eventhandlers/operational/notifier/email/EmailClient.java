@@ -1,5 +1,6 @@
 package com.xgh.eventhandlers.operational.notifier.email;
 
+import com.xgh.infra.JUnitIdentifier;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -60,7 +61,9 @@ public class EmailClient {
             message.setSubject(template.getSubject());
             message.setContent(template.getBody(),"text/html; charset=utf-8");
 
-            Transport.send(message);
+            if (!JUnitIdentifier.isJUnitTest()) {
+                Transport.send(message);
+            }
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

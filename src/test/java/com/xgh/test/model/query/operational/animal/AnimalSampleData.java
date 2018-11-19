@@ -2,7 +2,7 @@ package com.xgh.test.model.query.operational.animal;
 
 import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.model.query.operational.animal.AnimalRepository;
-import com.xgh.test.model.query.enumerator.EnumeratorSampleData;
+import com.xgh.test.model.query.operational.enumerator.EnumeratorSampleData;
 import com.xgh.test.model.query.operational.owner.OwnerSampleData;
 import java.time.LocalDate;
 import java.util.UUID;
