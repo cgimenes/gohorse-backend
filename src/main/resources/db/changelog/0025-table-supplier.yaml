@@ -6,7 +6,7 @@ databaseChangeLog:
             - addColumn:
                 columns:
                 - column:
-                    name: distributiontype_id
+                    name: distribution_type_id
                     type: ${TYPE_UUID}
                     constraints:
                             foreignKeyName: fk_supplier_dist_type

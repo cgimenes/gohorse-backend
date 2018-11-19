@@ -26,7 +26,7 @@ public final class Supplier {
     private String document;
 
     @ManyToOne
-    @JoinColumn(name = "distributiontype_id")
+    @JoinColumn(name = "distribution_type_id")
     private Enumerator distributionType;
     
     @ManyToOne
