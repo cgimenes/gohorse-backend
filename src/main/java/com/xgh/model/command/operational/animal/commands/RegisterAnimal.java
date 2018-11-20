@@ -5,6 +5,7 @@ import com.xgh.model.command.operational.animal.AnimalId;
 import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.valueobjects.Sex;
 import java.time.LocalDate;
 
 public final class RegisterAnimal implements EntityCommand {
@@ -13,7 +14,7 @@ public final class RegisterAnimal implements EntityCommand {
     private final OwnerId owner;
     private final EnumeratorId breed;
     private final EnumeratorId specie;
-    private final EnumeratorId sex;
+    private final Sex sex;
     private final LocalDate birthDate;
     private final Float weight;
     private final boolean castrated;
@@ -51,7 +52,7 @@ public final class RegisterAnimal implements EntityCommand {
         return specie;
     }
 
-    public EnumeratorId getSex() {
+    public Sex getSex() {
         return sex;
     }
 

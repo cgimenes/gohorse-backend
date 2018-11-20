@@ -6,12 +6,15 @@ import static org.junit.Assert.assertTrue;
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.operational.animal.Animal;
 import com.xgh.model.command.operational.animal.AnimalId;
-import com.xgh.model.command.operational.enumerator.EnumeratorId;
+import com.xgh.model.command.operational.enumerator.Enumerator;
 import com.xgh.model.command.operational.owner.Owner;
 import com.xgh.model.command.operational.valueobjects.Name;
+import com.xgh.model.command.operational.valueobjects.Sex;
+import com.xgh.test.model.command.operational.enumerator.EnumeratorSampleData;
 import com.xgh.test.model.command.operational.owner.OwnerSampleData;
 import java.net.URI;
 import java.time.LocalDate;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class AnimalCommandControllerTests {
 
     @Autowired
     private OwnerSampleData ownerSampleData;
+    
+    @Autowired
+    private EnumeratorSampleData enumSampleData;
 
     @Autowired
     private AnimalSampleData animalSampleData;
@@ -46,9 +52,12 @@ public class AnimalCommandControllerTests {
     public void registerWithSuccess() {
         Animal entity = new Animal();
         Owner owner = ownerSampleData.getSample();
+        Enumerator breed = enumSampleData.getSample();
+        Enumerator specie = enumSampleData.getSample();
 
-        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), new EnumeratorId(),
-        		new EnumeratorId(), new EnumeratorId(), LocalDate.of(1001, 01, 01),
+
+        entity.register(new AnimalId(), new Name("Severino"), owner.getId(), breed.getId(),
+        		specie.getId(), Sex.MALE, LocalDate.of(1001, 01, 01),
                 new Float(35), false);
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/animals", entity, Void.class);
@@ -60,9 +69,9 @@ public class AnimalCommandControllerTests {
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino", entityFromStore.getName().toString());
         assertEquals(owner.getId().getValue(), entityFromStore.getOwner().getValue());
-        assertEquals("Xinauzer", entityFromStore.getBreed().toString());
-        assertEquals("Cachorro", entityFromStore.getSpecie().toString());
-        assertEquals("M", entityFromStore.getSex().toString());
+        assertEquals(breed.getId(), entityFromStore.getBreed());
+        assertEquals(specie.getId(), entityFromStore.getSpecie());
+        assertEquals("MALE", entityFromStore.getSex().toString());
         assertEquals(LocalDate.of(1001, 01, 01), entityFromStore.getBirthDate());
         assertEquals(new Float(35), entityFromStore.getWeight());
         assertEquals(false, entityFromStore.isCastrated());
@@ -73,8 +82,8 @@ public class AnimalCommandControllerTests {
     public void updateWithSuccess() {
         Animal entity = animalSampleData.getSample();
 
-        entity.update(new Name("Severino Benner"), entity.getOwner(), new EnumeratorId(),
-        		new EnumeratorId(), new EnumeratorId(), LocalDate.of(1002, 02, 02),
+        entity.update(new Name("Severino Benner"), entity.getOwner(), entity.getBreed(),
+        		entity.getSpecie(), Sex.MALE, LocalDate.of(1002, 02, 02),
                 new Float(10), false);
 
         RequestEntity<Animal> request = RequestEntity.put(URI.create("/animals")).body(entity);
@@ -86,9 +95,9 @@ public class AnimalCommandControllerTests {
         assertTrue(entity.equals(entityFromStore));
         assertEquals("Severino Benner", entityFromStore.getName().toString());
         assertEquals(entity.getOwner(), entityFromStore.getOwner());
-        assertEquals("Splitz", entityFromStore.getBreed().toString());
-        assertEquals("Cachorro", entityFromStore.getSpecie().toString());
-        assertEquals("M", entityFromStore.getSex().toString());
+        assertEquals(entity.getBreed(), entityFromStore.getBreed());
+        assertEquals(entity.getSpecie(), entityFromStore.getSpecie());
+        assertEquals("MALE", entityFromStore.getSex().toString());
         assertEquals(LocalDate.of(1002, 02, 02), entityFromStore.getBirthDate());
         assertEquals(new Float(10), entityFromStore.getWeight());
         assertEquals(false, entityFromStore.isCastrated());

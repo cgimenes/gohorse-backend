@@ -14,21 +14,25 @@ public class Invoice {
     private UUID id;
 
     private LocalDateTime issueDate;
+    private LocalDateTime paymentDate;
     private BigDecimal totalValue;
     private String operation;
     private UUID operationId;
     private String status;
+    private String type;
 
     protected Invoice() {
     }
 
-    public Invoice(UUID id, LocalDateTime issueDate, BigDecimal totalValue, String operation, UUID operationId, String status) {
+    public Invoice(UUID id, LocalDateTime issueDate, LocalDateTime paymentDate, BigDecimal totalValue, String operation, UUID operationId, String status, String type) {
         this.id = id;
         this.issueDate = issueDate;
+        this.paymentDate = paymentDate;
         this.totalValue = totalValue;
         this.operation = operation;
         this.operationId = operationId;
         this.status = status;
+        this.type = type;
     }
 
     public UUID getId() {
@@ -53,6 +57,14 @@ public class Invoice {
 
     public String getStatus() {
         return status;
+    }
+
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public String getType() {
+        return type;
     }
 
 //    public List<Transaction> getTransactions() {

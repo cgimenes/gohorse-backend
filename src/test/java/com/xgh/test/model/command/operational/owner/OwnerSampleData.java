@@ -23,7 +23,7 @@ public class OwnerSampleData {
     public Owner getSample() {
         Owner owner = new Owner();
         owner.register(new OwnerId(), new Name("Zé do ai"), new Phone("44313371337"), new Cpf("09450600929"),
-                LocalDate.of(1001, 01, 01), addressSampleData.getSample(), new Email("requena.re@hotmail.com"));
+                LocalDate.of(1001, 01, 01), addressSampleData.getSample(), new Email("teste@teste.com"));
         eventStore.push(owner);
         return owner;
     }

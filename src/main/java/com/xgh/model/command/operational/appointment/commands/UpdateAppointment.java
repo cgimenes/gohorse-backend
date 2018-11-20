@@ -8,19 +8,11 @@ import com.xgh.model.command.operational.veterinary.VeterinaryId;
 import java.time.LocalDateTime;
 
 public class UpdateAppointment implements EntityCommand {
-    private final AppointmentId id;
-    private final VeterinaryId veterinary;
-    private final LocalDateTime dateTime;
-    private final AppointmentPlace place;
-    private final Address address;
-
-    protected UpdateAppointment() {
-        this.id = new AppointmentId();
-        veterinary = null;
-        dateTime = null;
-        place = null;
-        address = null;
-    }
+    private AppointmentId id;
+    private VeterinaryId veterinary;
+    private LocalDateTime dateTime;
+    private AppointmentPlace place;
+    private Address address;
 
     @Override
     public AppointmentId getId() {

@@ -6,6 +6,7 @@ import com.xgh.model.command.financial.account.Account;
 import com.xgh.model.command.financial.account.AccountId;
 import com.xgh.model.command.financial.invoice.Invoice;
 import com.xgh.model.command.financial.invoice.InvoiceId;
+import com.xgh.model.command.financial.invoice.InvoiceType;
 import com.xgh.model.command.financial.invoice.commands.GenerateInvoices;
 import com.xgh.model.command.financial.valueobjects.Transaction;
 import com.xgh.model.command.operational.animal.Animal;
@@ -71,10 +72,10 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
             transactions.add(new Transaction(payer.getId(), receiver.getId(), splittedValue));
         }
 
-        createInvoice(command, transactions);
+        createInvoice(command, transactions, InvoiceType.INCOME);
     }
 
-    private void createInvoice(GenerateInvoices command, List<Transaction> transactions) {
+    private void createInvoice(GenerateInvoices command, List<Transaction> transactions, InvoiceType invoiceType) {
         Invoice invoice = new Invoice();
         invoice.register(
                 new InvoiceId(),
@@ -82,7 +83,8 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
                 command.getValue(),
                 command.getOperation(),
                 command.getOperationId(),
-                transactions
+                transactions,
+                invoiceType
         );
         eventStore.push(invoice);
     }
@@ -105,6 +107,6 @@ public class InvoicesGeneration implements CommandHandler<GenerateInvoices> {
         Account receiver = getAccountByOwner(appointment.getVeterinary().getValue());
         List<Transaction> transactions = Arrays.asList(new Transaction(payer.getId(), receiver.getId(), command.getValue()));
 
-        createInvoice(command, transactions);
+        createInvoice(command, transactions, InvoiceType.INCOME);
     }
 }

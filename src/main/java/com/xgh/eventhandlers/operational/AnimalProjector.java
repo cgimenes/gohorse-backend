@@ -22,19 +22,16 @@ import org.springframework.stereotype.Component;
 public class AnimalProjector implements EventHandler {
     private final PostgresEventStore eventStore;
     private final AnimalRepository repository;
-    private final EnumeratorRepository breedRepository;
-    private final EnumeratorRepository specieRepository;
-    private final EnumeratorRepository sexRepository;
+    private final EnumeratorRepository breedRepository,specieRepository;
     private final OwnerRepository ownerRepository;
 
     @Autowired
-    public AnimalProjector(PostgresEventStore eventStore, AnimalRepository repository, EnumeratorRepository breedRepository, EnumeratorRepository specieRepository, OwnerRepository ownerRepository, EnumeratorRepository sexRepository) {
+    public AnimalProjector(PostgresEventStore eventStore, AnimalRepository repository, EnumeratorRepository breedRepository, EnumeratorRepository specieRepository, OwnerRepository ownerRepository) {
         this.eventStore = eventStore;
         this.repository = repository;
         this.breedRepository = breedRepository;
         this.specieRepository = specieRepository;
         this.ownerRepository = ownerRepository;
-        this.sexRepository = sexRepository;
     }
 
     @Override
@@ -62,11 +59,6 @@ public class AnimalProjector implements EventHandler {
         if(!specie.isPresent()) {
         	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
         }
-
-        Optional<Enumerator> sex = sexRepository.findById(entity.getSex().getValue());
-        if(!specie.isPresent()) {
-        	throw new ProjectionFailedException(Enumerator.class.getSimpleName());
-        }
         
         com.xgh.model.query.operational.animal.Animal projection = new com.xgh.model.query.operational.animal.Animal(
                 entity.getId().getValue(),
@@ -74,7 +66,7 @@ public class AnimalProjector implements EventHandler {
                 owner.get(),
                 breed.get(),
                 specie.get(),
-                sex.get(),
+                entity.getSex().toString(),
                 entity.getBirthDate(),
                 entity.isCastrated(),
                 entity.getWeight(),

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.test.model.query.Page;
+import com.xgh.test.model.query.operational.enumerator.EnumeratorSampleData;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,6 +36,9 @@ public class AnimalQueryControllerTests {
 
     @Autowired
     private AnimalSampleData animalSampleData;
+    
+    @Autowired
+    private EnumeratorSampleData enumSampleData;
 
     @Test
     public void findById() {
@@ -45,10 +50,10 @@ public class AnimalQueryControllerTests {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(animalId, response.getBody().getId());
         assertEquals("Farelo", response.getBody().getName());
-        assertEquals("Tremedeira", response.getBody().getBreed().getName());
-        assertEquals("Catioro", response.getBody().getSpecie().getName());
         assertEquals("Dono Master", response.getBody().getOwner().getName());
-        assertEquals("M", response.getBody().getSex().toString());
+        assertEquals(enumSampleData.getSample().getName(),response.getBody().getBreed().getName());
+        assertEquals(enumSampleData.getSample().getName(),response.getBody().getSpecie().getName());
+        assertEquals("MALE", response.getBody().getSex().toString());
         assertEquals(LocalDate.of(2012, 12, 12), response.getBody().getBirthDate());
         assertEquals(new Float(100.50), response.getBody().getWeight());
         assertEquals(false, response.getBody().isCastrated());
