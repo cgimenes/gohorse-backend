@@ -1,9 +1,8 @@
 package com.xgh.model.query.operational.animal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xgh.model.query.operational.breed.Breed;
+import com.xgh.model.query.operational.enumerator.Enumerator;
 import com.xgh.model.query.operational.owner.Owner;
-import com.xgh.model.query.operational.specie.Specie;
 import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -27,13 +26,15 @@ public final class Animal {
 
     @ManyToOne
     @JoinColumn(name = "breed_id")
-    private Breed breed;
+    private Enumerator breed;
 
     @ManyToOne
     @JoinColumn(name = "specie_id")
-    private Specie specie;
+    private Enumerator specie;
 
-    private Character sex;
+    @ManyToOne
+    @JoinColumn(name = "sex_id")
+    private Enumerator sex;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
@@ -48,7 +49,7 @@ public final class Animal {
     protected Animal() {
     }
 
-    public Animal(UUID id, String name, Owner owner, Breed breed, Specie specie, Character sex, LocalDate birthDate,
+    public Animal(UUID id, String name, Owner owner, Enumerator breed, Enumerator specie, Enumerator sex, LocalDate birthDate,
                   Boolean castrated, Float weight, Boolean deleted) {
         this.id = id;
         this.name = name;
@@ -74,15 +75,15 @@ public final class Animal {
         return owner;
     }
 
-    public Breed getBreed() {
+    public Enumerator getBreed() {
         return breed;
     }
 
-    public Specie getSpecie() {
+    public Enumerator getSpecie() {
         return specie;
     }
 
-    public Character getSex() {
+    public Enumerator getSex() {
         return sex;
     }
 

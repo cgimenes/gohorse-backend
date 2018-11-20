@@ -2,18 +2,18 @@ package com.xgh.model.command.operational.animal.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.animal.AnimalId;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
-import com.xgh.model.command.operational.valueobjects.Sex;
 import java.time.LocalDate;
 
 public final class RegisterAnimal implements EntityCommand {
     private final AnimalId id;
     private final Name name;
     private final OwnerId owner;
-    private final Name breed;
-    private final Name specie;
-    private final Sex sex;
+    private final EnumeratorId breed;
+    private final EnumeratorId specie;
+    private final EnumeratorId sex;
     private final LocalDate birthDate;
     private final Float weight;
     private final boolean castrated;
@@ -43,15 +43,15 @@ public final class RegisterAnimal implements EntityCommand {
         return owner;
     }
 
-    public Name getBreed() {
+    public EnumeratorId getBreed() {
         return breed;
     }
 
-    public Name getSpecie() {
+    public EnumeratorId getSpecie() {
         return specie;
     }
 
-    public Sex getSex() {
+    public EnumeratorId getSex() {
         return sex;
     }
 
