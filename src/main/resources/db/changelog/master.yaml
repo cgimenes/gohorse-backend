@@ -1,108 +1,971 @@
 databaseChangeLog:
-    - property:
-        name: TYPE_UUID
-        value: uuid
-    - property:
-        name: TYPE_NAME
-        value: varchar(100)
-    - property:
-        name: TYPE_NOTE
-        value: varchar(500)
-    - property:
-        name: TYPE_PHONE
-        value: varchar(13)
-    - property:
-        name: TYPE_CPF
-        value: varchar(11)
-    - property:
-        name: TYPE_CRMV
-        value: varchar(13)
-    - property:
-        name: TYPE_CODE
-        value: varchar(20)
-    - property:
-        name: TYPE_EMAIL
-        value: varchar(100)
-    - property:
-        name: TYPE_INTEGER
-        value: integer
-    - property:
-        name: TYPE_DATETIME
-        value: datetime()
-    - property:
-        name: TYPE_DATE
-        value: date()
-    - property:
-        name: TYPE_JSON
-        value: text
-    - property:
-        name: TYPE_BOOL
-        value: bool
-    - property:
-        name: TYPE_DESCRIPTION
-        value: varchar(100)
-    - property:
-        name: TYPE_POSTALCODE
-        value: varchar(9)
-    - property:
-        name: TYPE_CPF_CNPJ
-        value: varchar(14)
-    - property:
-        name: TYPE_CURRENCY
-        value: decimal(20,2)
-    - property:
-        name: TYPE_FLOAT
-        value: decimal
-    - property:
-        name: TYPE_SEX
-        value: varchar(1)
+- property:
+    name: TYPE_UUID
+    value: uuid
+- property:
+    name: TYPE_NAME
+    value: varchar(100)
+- property:
+    name: TYPE_NOTE
+    value: varchar(500)
+- property:
+    name: TYPE_PHONE
+    value: varchar(13)
+- property:
+    name: TYPE_CPF
+    value: varchar(11)
+- property:
+    name: TYPE_CRMV
+    value: varchar(13)
+- property:
+    name: TYPE_CODE
+    value: varchar(20)
+- property:
+    name: TYPE_EMAIL
+    value: varchar(100)
+- property:
+    name: TYPE_INTEGER
+    value: integer
+- property:
+    name: TYPE_DATETIME
+    value: datetime()
+- property:
+    name: TYPE_DATE
+    value: date()
+- property:
+    name: TYPE_JSON
+    value: text
+- property:
+    name: TYPE_BOOL
+    value: bool
+- property:
+    name: TYPE_DESCRIPTION
+    value: varchar(100)
+- property:
+    name: TYPE_POSTALCODE
+    value: varchar(9)
+- property:
+    name: TYPE_CPF_CNPJ
+    value: varchar(14)
+- property:
+    name: TYPE_CURRENCY
+    value: decimal(20,2)
+- property:
+    name: TYPE_FLOAT
+    value: decimal
+- property:
+    name: TYPE_SEX
+    value: varchar(1)
 
-    - include:
-        file: db/changelog/0001-table-event.yaml
-    - include:
-        file: db/changelog/0002-table-postal_code.yaml
-    - include:
-        file: db/changelog/0003-table-address.yaml
-    - include:
-        file: db/changelog/0004-table-laboratory.yaml
-    - include:
-        file: db/changelog/0005-table-veterinary.yaml
-    - include:
-        file: db/changelog/0006-table-owner.yaml
-    - include:
-        file: db/changelog/0008-table-supplier.yaml
-    - include:
-        file: db/changelog/0009-table-bed.yaml
-    - include:
-        file: db/changelog/0010-table-product.yaml
-    - include:
-        file: db/changelog/0011-table-breed.yaml
-    - include:
-        file: db/changelog/0012-table-specie.yaml
-    - include:
-        file: db/changelog/0013-table-animal.yaml
-    - include:
-        file: db/changelog/0014-table-internment.yaml        
-    - include:
-        file: db/changelog/0015-table-appointment.yaml
-    - include:
-        file: db/changelog/0016-table-enumerator.yaml
-    - include:
-        file: db/changelog/0017-table-surgery.yaml
-    - include:
-        file: db/changelog/0018-internment-add-column.yaml
-    - include:
-        file: db/changelog/0019-table-account.yaml
-    - include:
-        file: db/changelog/0020-table-invoice.yaml
-    - include:
-        file: db/changelog/0021-table-transaction.yaml
-    - include:
-        file: db/changelog/0022-owner-add-column.yaml
-    - include:
-        file: db/changelog/0023-table-animal.yaml
-    - include:
-        file: db/changelog/0024-table-animal.yaml
-    - include:
-        file: db/changelog/0025-table-supplier.yaml
-        
+- changeSet:
+    id: 1
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: event
+        columns:
+        - column:
+            name: entity_id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+        - column:
+            name: entity_version
+            type: ${TYPE_INTEGER}
+            constraints:
+              nullable: false
+        - column:
+            name: entity_type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: event_type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: ocurred_on
+            type: ${TYPE_DATETIME}
+            constraints:
+              nullable: false
+        - column:
+            name: event_data
+            type: ${TYPE_JSON}
+            constraints:
+              nullable: false
+    - addPrimaryKey:
+        columnNames: entity_id, entity_version, entity_type
+        constraintName: pk_event
+        tableName: event
+    - rollback:
+      - dropTable:
+          tableName: event
+
+- changeSet:
+    id: 2
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: postal_code
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_POSTALCODE}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_postalcode
+        - column:
+            name: street_type
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: street_name
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: neighbourhood
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: city
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: state
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: country
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: postal_code
+
+- changeSet:
+    id: 3
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: address
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_address
+        - column:
+            name: postal_code_id
+            type: ${TYPE_POSTALCODE}
+            constraints:
+              nullable: false
+              foreignKeyName: fk_address_postal_code
+              references: postal_code(id)
+        - column:
+            name: number
+            type: ${TYPE_INTEGER}
+            constraints:
+              nullable: false
+        - column:
+            name: complement
+            type: ${TYPE_DESCRIPTION}
+    - rollback:
+      - dropTable:
+          tableName: address
+
+- changeSet:
+    id: 4
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: laboratory
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_laboratory
+        - column:
+            name: company_name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: phone
+            type: ${TYPE_PHONE}
+            constraints:
+              nullable: false
+        - column:
+            name: address_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_laboratory_address
+              references: address(id)
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: laboratory
+
+- changeSet:
+    id: 5
+    author: alexandre.requena
+    changes:
+    - createTable:
+        tableName: veterinary
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_veterinary
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: crmv
+            type: ${TYPE_CRMV}
+            constraints:
+              nullable: false
+        - column:
+            name: phone
+            type: ${TYPE_PHONE}
+            constraints:
+              nullable: false
+        - column:
+            name: email
+            type: ${TYPE_EMAIL}
+            constraints:
+              nullable: false
+        - column:
+            name: birth_date
+            type: ${TYPE_DATE}
+            constraints:
+              nullable: false
+        - column:
+            name: address_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_veterinary_address
+              references: address(id)
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: veterinary
+
+- changeSet:
+    id: 6
+    author: joao.silva
+    changes:
+    - createTable:
+        tableName: owner
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_owner
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: phone
+            type: ${TYPE_PHONE}
+            constraints:
+              nullable: false
+        - column:
+            name: cpf
+            type: ${TYPE_CPF}
+            constraints:
+              nullable: false
+        - column:
+            name: birth_date
+            type: ${TYPE_DATE}
+            constraints:
+              nullable: false
+        - column:
+            name: address_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_owner_address
+              references: address(id)
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: owner
+
+- changeSet:
+    id: 8
+    author: andre.conceicao
+    changes:
+    - createTable:
+        tableName: supplier
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_supplier
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: cpf_cnpj
+            type: ${TYPE_CPF_CNPJ}
+            constraints:
+              nullable: false
+        - column:
+            name: address_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_supplier_address
+              references: address(id)
+              nullable: false
+        - column:
+            name: phone
+            type: ${TYPE_PHONE}
+            constraints:
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: supplier
+
+- changeSet:
+    id: 9
+    author: andre.martins
+    changes:
+    - createTable:
+        tableName: bed
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_bed
+        - column:
+            name: code
+            type: ${TYPE_CODE}
+            constraints:
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+
+    - rollback:
+      - dropTable:
+          tableName: bed
+
+- changeSet:
+    id: 10
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: product
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_product
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: price
+            type: ${TYPE_CURRENCY}
+            constraints:
+              nullable: false
+        - column:
+            name: brand
+            type: ${TYPE_NAME}
+        - column:
+            name: amount
+            type: ${TYPE_FLOAT}
+            constraints:
+              nullable: false
+        - column:
+            name: supplier_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_product_supplier
+              references: supplier(id)
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: product
+
+- changeSet:
+    id: 11
+    author: joao.silva
+    changes:
+    - createTable:
+        tableName: breed
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_breed
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: breed
+
+- changeSet:
+    id: 12
+    author: joao.silva
+    changes:
+    - createTable:
+        tableName: specie
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_specie
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: specie
+
+- changeSet:
+    id: 13
+    author: joao.silva
+    changes:
+    - createTable:
+        tableName: animal
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_animal
+        - column:
+            name: name
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: owner_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_animal_owner
+              references: owner(id)
+              nullable: false
+        - column:
+            name: breed_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_animal_breed
+              references: breed(id)
+              nullable: false
+        - column:
+            name: specie_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_animal_specie
+              references: specie(id)
+              nullable: false
+        - column:
+            name: sex
+            type: ${TYPE_SEX}
+            constraints:
+              nullable: false
+        - column:
+            name: birth_date
+            type: ${TYPE_DATE}
+            constraints:
+              nullable: false
+        - column:
+            name: castrated
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+        - column:
+            name: weight
+            type: ${TYPE_FLOAT}
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: animal
+
+- changeSet:
+    id: 14
+    author: alexandre.requena
+    changes:
+    - createTable:
+        tableName: internment
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_internment
+        - column:
+            name: animal_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_internment_animal
+              references: animal(id)
+              nullable: false
+        - column:
+            name: bed_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_internment_bed
+              references: bed(id)
+              nullable: false
+        - column:
+            name: busy_at
+            type: ${TYPE_DATETIME}
+            constraints:
+              nullable: false
+        - column:
+            name: busy_until
+            type: ${TYPE_DATETIME}
+            constraints:
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: internment
+
+- changeSet:
+    id: 15
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: appointment
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_appointment
+        - column:
+            name: animal_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_appointment_animal
+              references: animal(id)
+              nullable: false
+        - column:
+            name: veterinary_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_appointment_veterinary
+              references: veterinary(id)
+              nullable: false
+        - column:
+            name: date_time
+            type: ${TYPE_DATETIME}
+            constraints:
+              nullable: false
+        - column:
+            name: status
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: place
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: address_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_appointment_address
+              references: address(id)
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: appointment
+
+- changeSet:
+    id: 16
+    author: andre.conceicao
+    changes:
+    - createTable:
+        tableName: enumerator
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_enum
+        - column:
+            name: kind
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: name
+            type: ${TYPE_DESCRIPTION}
+            constraints:
+              nullable: false
+        - column:
+            name: auto_generated
+            type: ${TYPE_BOOL}
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: enumerator
+
+- changeSet:
+    id: 17
+    author: alexandre.requena
+    changes:
+    - createTable:
+        tableName: surgery
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: pk_surgery
+        - column:
+            name: animal_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_surgery_animal
+              references: animal(id)
+              nullable: false
+        - column:
+            name: veterinary_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_surgery_veterinary
+              references: veterinary(id)
+              nullable: false
+        - column:
+            name: appointment_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_surgery_appointment
+              references: appointment(id)
+              nullable: false
+        - column:
+            name: date_time
+            type: ${TYPE_DATETIME}
+            constraints:
+              nullable: false
+        - column:
+            name: status
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: surgery_type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: notes
+            type: ${TYPE_NOTE}
+            constraints:
+              nullable: true
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: surgery
+
+- changeSet:
+    id: 18
+    author: alexandre.requena
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: status
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        tableName: internment
+    - rollback:
+      - dropColumn:
+          tableName: internment
+          columnName: status
+
+- changeSet:
+    id: 19
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: account
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: owner_id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+        - column:
+            name: account_type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: deleted
+            type: ${TYPE_BOOL}
+            constraints:
+              nullable: false
+    - rollback:
+      - dropTable:
+          tableName: account
+
+- changeSet:
+    id: 20
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: invoice
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: issue_date
+            type: ${TYPE_DATETIME}
+        - column:
+            name: total_value
+            type: ${TYPE_CURRENCY}
+        - column:
+            name: operation
+            type: ${TYPE_NAME}
+        - column:
+            name: operation_id
+            type: ${TYPE_UUID}
+        - column:
+            name: status
+            type: ${TYPE_NAME}
+    - rollback:
+      - dropTable:
+          tableName: invoice
+
+- changeSet:
+    id: 21
+    author: marcelo.gimenes
+    changes:
+    - createTable:
+        tableName: transaction
+        columns:
+        - column:
+            name: id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+              primaryKey: true
+        - column:
+            name: origin_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_transaction_account_origin
+              references: account(id)
+              nullable: false
+        - column:
+            name: destination_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_transaction_account_destination
+              references: account(id)
+              nullable: false
+        - column:
+            name: invoice_id
+            type: ${TYPE_UUID}
+            constraints:
+              foreignKeyName: fk_transaction_invoice
+              references: invoice(id)
+              nullable: false
+        - column:
+            name: value
+            type: ${TYPE_CURRENCY}
+    - rollback:
+      - dropTable:
+          tableName: transaction
+
+- changeSet:
+    id: 22
+    author: marcelo.gimenes
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: type
+            type: ${TYPE_NAME}
+            constraints:
+              nullable: false
+        - column:
+            name: payment_date
+            type: ${TYPE_DATETIME}
+        tableName: invoice
+    - rollback:
+      - dropColumn:
+          tableName: invoice
+          columnName: type
+      - dropColumn:
+          tableName: invoice
+          columnName: payment_date
+
+- changeSet:
+    id: 23
+    author: alexandre.requena
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: email
+            type: ${TYPE_EMAIL}
+            constraints:
+              nullable: true
+        schemaName: public
+        tableName: owner
+
+- changeSet:
+    id: 24
+    author: joao.silva
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: animal
+        constraintName: fk_animal_breed
+    - addForeignKeyConstraint:
+        baseColumnNames: breed_id
+        baseTableName: animal
+        constraintName: fk_animal_breed
+        referencedColumnNames: id
+        referencedTableName: enumerator
+    - dropForeignKeyConstraint:
+        baseTableName: animal
+        constraintName: fk_animal_specie
+    - addForeignKeyConstraint:
+        baseColumnNames: specie_id
+        baseTableName: animal
+        constraintName: fk_animal_specie
+        referencedColumnNames: id
+        referencedTableName: enumerator
+
+- changeSet:
+    id: 25
+    author: joao.trentini
+    changes:
+    - addColumn:
+        columns:
+            - column:
+                name: distribution_type_id
+                type: ${TYPE_UUID}
+                constraints:
+                    foreignKeyName: fk_supplier_dist_type
+                    references: enumerator(id)
+                    nullable: false
+            schemaName: public
+            tableName: supplier

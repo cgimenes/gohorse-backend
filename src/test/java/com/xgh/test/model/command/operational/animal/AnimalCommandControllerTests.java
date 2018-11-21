@@ -10,7 +10,7 @@ import com.xgh.model.command.operational.enumerator.Enumerator;
 import com.xgh.model.command.operational.owner.Owner;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Sex;
-import com.xgh.test.model.command.enumerator.EnumeratorSampleData;
+import com.xgh.test.model.command.operational.enumerator.EnumeratorSampleData;
 import com.xgh.test.model.command.operational.owner.OwnerSampleData;
 import java.net.URI;
 import java.time.LocalDate;

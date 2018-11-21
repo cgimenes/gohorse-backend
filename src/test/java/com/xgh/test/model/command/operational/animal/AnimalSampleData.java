@@ -7,7 +7,7 @@ import com.xgh.model.command.operational.enumerator.Enumerator;
 import com.xgh.model.command.operational.owner.OwnerId;
 import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Sex;
-import com.xgh.test.model.command.enumerator.EnumeratorSampleData;
+import com.xgh.test.model.command.operational.enumerator.EnumeratorSampleData;
 import com.xgh.test.model.command.operational.owner.OwnerSampleData;
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
