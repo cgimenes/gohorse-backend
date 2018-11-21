@@ -2,14 +2,14 @@ package com.xgh.model.command.operational.internment.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.EntityEvent;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.internment.InternmentStatus;
 import com.xgh.model.command.operational.animal.AnimalId;
-import com.xgh.model.command.operational.bed.BedId;
 import com.xgh.model.command.operational.internment.InternmentId;
 import java.time.LocalDateTime;
 
 public class InternmentWasRegistered extends EntityEvent<InternmentId> {
-    private BedId bedId;
+    private EnumeratorId bedId;
     private AnimalId animalId;
     private LocalDateTime busyAt;
     private LocalDateTime busyUntil;
@@ -17,7 +17,7 @@ public class InternmentWasRegistered extends EntityEvent<InternmentId> {
 
     protected InternmentWasRegistered() {}
 
-    public InternmentWasRegistered(InternmentId id, BedId bedId, AnimalId animalId, LocalDateTime busyAt,
+    public InternmentWasRegistered(InternmentId id, EnumeratorId bedId, AnimalId animalId, LocalDateTime busyAt,
     		LocalDateTime busyUntil, InternmentStatus status, EntityVersion version) {
         super(id, version);
         this.bedId = bedId;
@@ -27,7 +27,7 @@ public class InternmentWasRegistered extends EntityEvent<InternmentId> {
         this.status = status;
     }
 
-    public BedId getBedId() {
+    public EnumeratorId getBedId() {
         return this.bedId;
     }
 

@@ -2,13 +2,13 @@ package com.xgh.model.command.operational.internment.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
 import com.xgh.model.command.operational.animal.AnimalId;
-import com.xgh.model.command.operational.bed.BedId;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.internment.InternmentId;
 import java.time.LocalDateTime;
 
 public class UpdateInternment implements EntityCommand {
     private final InternmentId id;
-    private final BedId bedId;
+    private final EnumeratorId bedId;
     private final AnimalId animalId;
     private final LocalDateTime busyAt;
     private final LocalDateTime busyUntil;
@@ -26,7 +26,7 @@ public class UpdateInternment implements EntityCommand {
         return id;
     }
 
-    public BedId getBedId() {
+    public EnumeratorId getBedId() {
         return bedId;
     }
 

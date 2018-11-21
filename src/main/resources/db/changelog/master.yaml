@@ -962,3 +962,17 @@ databaseChangeLog:
         columnName: sex
         newDataType: ${TYPE_NAME}
         tableName: animal
+
+- changeSet:
+    id: 26
+    author: andre.conceicao
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: internment
+        constraintName: fk_internment_bed
+    - addForeignKeyConstraint:
+        baseColumnNames: bed_id
+        baseTableName: internment
+        constraintName: fk_internment_bed
+        referencedColumnNames: id
+        referencedTableName: enumerator

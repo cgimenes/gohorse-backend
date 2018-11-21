@@ -4,9 +4,9 @@ import com.xgh.buildingblocks.EventStore;
 import com.xgh.buildingblocks.command.CommandHandler;
 import com.xgh.exceptions.EntityNotFoundException;
 import com.xgh.model.command.operational.animal.Animal;
-import com.xgh.model.command.operational.bed.Bed;
 import com.xgh.model.command.operational.internment.Internment;
 import com.xgh.model.command.operational.internment.commands.RegisterInternment;
+import com.xgh.model.query.operational.enumerator.Enumerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +22,6 @@ public class InternmentRegistration implements CommandHandler<RegisterInternment
 
     @Override
     public void execute(RegisterInternment command) {
-        if (!eventStore.entityExists(Bed.class, command.getBedId())) {
-            throw new EntityNotFoundException(Bed.class.getSimpleName(), command.getBedId().getValue());
-        }
 
         if (!eventStore.entityExists(Animal.class, command.getAnimalId())) {
             throw new EntityNotFoundException(Animal.class.getSimpleName(), command.getAnimalId().getValue());
