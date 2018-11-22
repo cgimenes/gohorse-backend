@@ -1,11 +1,17 @@
 package com.xgh.model.query.financial.invoice;
 
+import com.xgh.ApplicationContextProvider;
+import com.xgh.model.query.operational.appointment.AppointmentRepository;
+import com.xgh.model.query.operational.internment.InternmentRepository;
+import com.xgh.model.query.operational.surgery.SurgeryRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.data.repository.CrudRepository;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Entity
 @Table(name = "invoice")
@@ -47,12 +53,30 @@ public class Invoice {
         return totalValue;
     }
 
-    public String getOperation() {
+    public String getOperationName() {
         return operation;
     }
 
     public UUID getOperationId() {
         return operationId;
+    }
+
+    public Object getOperation() {
+        Class<? extends CrudRepository> repository;
+        switch (operation) {
+            case "SURGERY":
+                repository = SurgeryRepository.class;
+                break;
+            case "INTERNMENT":
+                repository = InternmentRepository.class;
+                break;
+            case "APPOINTMENT":
+                repository = AppointmentRepository.class;
+                break;
+            default:
+                throw new NotImplementedException();
+        }
+        return ApplicationContextProvider.getApplicationContext().getBean(repository).findById(operationId);
     }
 
     public String getStatus() {
@@ -66,8 +90,4 @@ public class Invoice {
     public String getType() {
         return type;
     }
-
-//    public List<Transaction> getTransactions() {
-//        return transactions;
-//    }
 }

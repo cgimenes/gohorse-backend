@@ -52,7 +52,7 @@ public class YearCashFlow {
                 .collect(groupingBy(
                         (invoice) -> invoice.getType().toLowerCase(),
                         groupingBy(
-                                (invoice) -> invoice.getOperation().toLowerCase(),
+                                (invoice) -> invoice.getOperationName().toLowerCase(),
                                 groupingBy(
                                         (Invoice invoice) -> invoice.getPaymentDate().getMonth().toString().toLowerCase(),
                                         reducing(BigDecimal.ZERO, Invoice::getTotalValue, BigDecimal::add)))));

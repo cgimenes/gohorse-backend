@@ -11,9 +11,11 @@ import com.xgh.model.command.financial.invoice.commands.GenerateInvoices;
 import com.xgh.model.command.financial.invoice.commands.PayInvoice;
 import com.xgh.model.command.financial.valueobjects.Operation;
 import com.xgh.model.command.operational.appointment.Appointment;
+import com.xgh.model.command.operational.appointment.commands.FinishAppointment;
 import com.xgh.model.query.financial.invoice.Invoice;
 import com.xgh.model.query.financial.invoice.InvoiceRepository;
 import com.xgh.test.model.command.operational.appointment.AppointmentSampleData;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;
@@ -44,16 +46,16 @@ public class InvoiceCommandControllerTests {
     @Test
     public void register() {
         Appointment entity = appointmentSampleData.getSample();
-        GenerateInvoices command = new GenerateInvoices(entity.getId(), Operation.APPOINTMENT, entity.getPrice());
+        FinishAppointment command = new FinishAppointment(entity.getId(), new BigDecimal(20.50));
 
         CommandBus.dispatch(command);
 
-        List<Invoice> invoices = invoiceRepository.findByOperationId(command.getOperationId().getValue());
+        List<Invoice> invoices = invoiceRepository.findByOperationId(command.getId().getValue());
 
         assertEquals(1, invoices.size());
-        assertEquals(Operation.APPOINTMENT.toString(), invoices.get(0).getOperation());
-        assertEquals(command.getOperationId().getValue(), invoices.get(0).getOperationId());
-        assertEquals(command.getValue(), invoices.get(0).getTotalValue());
+        assertEquals(Operation.APPOINTMENT.toString(), invoices.get(0).getOperationName());
+        assertEquals(command.getId().getValue(), invoices.get(0).getOperationId());
+        assertEquals(command.getPrice().setScale(2), invoices.get(0).getTotalValue());
         assertEquals(InvoiceType.INCOME.toString(), invoices.get(0).getType());
         assertNull(invoices.get(0).getPaymentDate());
         assertEquals(LocalDateTime.now().toLocalDate(), invoices.get(0).getIssueDate().toLocalDate());
