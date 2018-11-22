@@ -32,4 +32,6 @@ public interface AppointmentRepository extends BasicJpaRepository<Appointment, U
     List<Appointment> findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(LocalDateTime from, LocalDateTime to);
 
     boolean existsByDateTime(LocalDateTime dateTime);
+
+    boolean existsByDeletedFalseAndIdNotAndDateTime(UUID id, LocalDateTime dateTime);
 }

@@ -22,7 +22,7 @@ public class AppointmentUpdate implements CommandHandler<UpdateAppointment> {
 
     @Override
     public void execute(UpdateAppointment command) {
-        if (repository.existsByDateTime(command.getDateTime())) {
+        if (repository.existsByDeletedFalseAndIdNotAndDateTime(command.getId().getValue(), command.getDateTime())) {
             throw new EntityFieldConflictedException(Appointment.class, "dateTime");
         }
 
