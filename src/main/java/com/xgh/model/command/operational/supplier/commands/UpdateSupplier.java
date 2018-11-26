@@ -1,7 +1,6 @@
 package com.xgh.model.command.operational.supplier.commands;
 
 import com.xgh.buildingblocks.command.EntityCommand;
-import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Document;
@@ -14,7 +13,7 @@ public final class UpdateSupplier implements EntityCommand {
     private final Document document;
     private final Phone phone;
     private final Address address;
-    private final EnumeratorId distributionType;
+    private final Name distributionType;
 
     protected UpdateSupplier() {
         this.id = null;
@@ -42,7 +41,7 @@ public final class UpdateSupplier implements EntityCommand {
         return this.phone;
     }
 
-    public EnumeratorId getDistributionType() {
+    public Name getDistributionType() {
         return this.distributionType;
     }
 

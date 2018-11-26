@@ -4,11 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xgh.model.query.operational.enumerator.Enumerator;
 import com.xgh.model.query.operational.supplier.Supplier;
 import com.xgh.model.query.operational.supplier.SupplierRepository;
 import com.xgh.test.model.query.Page;
-import com.xgh.test.model.query.enumerator.DistributionTypeSampleData;
 import com.xgh.test.model.query.operational.address.AddressSampleData;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,9 +40,6 @@ public class SupplierQueryControllerTests {
 
     @Autowired
     private SupplierRepository repository;
-    
-    @Autowired
-    private DistributionTypeSampleData distTypeSampleData;
 
     @Before
     public void before() {
@@ -90,9 +85,8 @@ public class SupplierQueryControllerTests {
     }
 
     private UUID createSampleEntity() {
-    	Enumerator distributionType = distTypeSampleData.getSample();
         com.xgh.model.query.operational.address.Address address = addressSampleData.getSample();
-        Supplier supplier = new Supplier(UUID.randomUUID(), "Nestle", "44998015821", distributionType,
+        Supplier supplier = new Supplier(UUID.randomUUID(), "Nestle", "44998015821",
                 "00000000191", address, false);
         repository.save(supplier);
         return supplier.getId();
