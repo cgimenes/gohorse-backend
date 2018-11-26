@@ -2,6 +2,8 @@ package com.xgh.model.query.operational.supplier;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.operational.address.Address;
+import com.xgh.model.query.operational.enumerator.Enumerator;
+
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +26,10 @@ public final class Supplier {
     private String document;
 
     @ManyToOne
+    @JoinColumn(name = "distribution_type_id")
+    private Enumerator distributionType;
+    
+    @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
 
@@ -33,11 +39,12 @@ public final class Supplier {
     protected Supplier() {
     }
 
-    public Supplier(UUID id, String name, String phone, String document, Address address, Boolean deleted) {
+    public Supplier(UUID id, String name, String phone, Enumerator distributionType, String document, Address address, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.document = document;
         this.phone = phone;
+        this.distributionType = distributionType;
         this.address = address;
         this.deleted = deleted;
     }
@@ -53,7 +60,11 @@ public final class Supplier {
     public String getPhone() {
         return phone;
     }
-
+    
+    public Enumerator getDistributionType() {
+    	return distributionType;
+    }
+    
     public String getDocument() {
         return document;
     }
