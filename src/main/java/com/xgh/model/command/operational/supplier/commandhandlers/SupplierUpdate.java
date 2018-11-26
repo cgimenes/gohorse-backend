@@ -22,9 +22,9 @@ public class SupplierUpdate implements CommandHandler<UpdateSupplier> {
         supplier.update(
                 command.getName(),
                 command.getPhone(),
+                command.getDistributionType(),
                 command.getDocument().getValue(),
-                command.getAddress(),
-                command.getDistributionType());
+                command.getAddress());
         repository.push(supplier);
     }
 }
