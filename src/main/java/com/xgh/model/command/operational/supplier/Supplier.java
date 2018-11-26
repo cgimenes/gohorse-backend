@@ -2,7 +2,6 @@ package com.xgh.model.command.operational.supplier;
 
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.NullMandatoryArgumentException;
-import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.supplier.events.SupplierWasDeleted;
 import com.xgh.model.command.operational.supplier.events.SupplierWasRegistered;
 import com.xgh.model.command.operational.supplier.events.SupplierWasUpdated;
@@ -15,9 +14,10 @@ public class Supplier extends AggregateRoot<SupplierId> {
     private Phone phone;
     private String document;
     private Address address;
-    private EnumeratorId distributionType;
+    private Name distributionType;
 
-    public void register(SupplierId id, Name name, Phone phone, EnumeratorId distributionType, String document, Address address) {
+    public void register(SupplierId id, Name name, Phone phone, String document, Address address,
+                         Name distributionType) {
         if (id == null) {
             throw new NullMandatoryArgumentException("ID");
         }
@@ -43,12 +43,12 @@ public class Supplier extends AggregateRoot<SupplierId> {
         }
 
         recordAndApply(
-                new SupplierWasRegistered(id, name, phone, distributionType, document, address, this.nextVersion()));
+                new SupplierWasRegistered(id, name, phone, document, address, distributionType, this.nextVersion()));
     }
 
-    public void update(Name name, Phone phone, EnumeratorId distributionType, String document, Address address) {
+    public void update(Name name, Phone phone, String document, Address address, Name distributionType) {
         recordAndApply(
-                new SupplierWasUpdated(this.id, name, phone, distributionType, document, address, this.nextVersion()));
+                new SupplierWasUpdated(this.id, name, phone, document, address, distributionType, this.nextVersion()));
     }
 
     public void delete() {
@@ -88,7 +88,7 @@ public class Supplier extends AggregateRoot<SupplierId> {
         return this.phone;
     }
 
-    public EnumeratorId getDistributionType() {
+    public Name getDistributionType() {
         return this.distributionType;
     }
 

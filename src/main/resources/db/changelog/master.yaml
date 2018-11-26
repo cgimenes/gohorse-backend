@@ -956,16 +956,9 @@ databaseChangeLog:
 
 - changeSet:
     id: 25
-    author: joao.trentini
+    author: andre.conceicao
     changes:
-    - addColumn:
-        columns:
-            - column:
-                name: distribution_type_id
-                type: ${TYPE_UUID}
-                constraints:
-                    foreignKeyName: fk_supplier_dist_type
-                    references: enumerator(id)
-                    nullable: false
-            schemaName: public
-            tableName: supplier
+    - modifyDataType:
+        columnName: sex
+        newDataType: ${TYPE_NAME}
+        tableName: animal

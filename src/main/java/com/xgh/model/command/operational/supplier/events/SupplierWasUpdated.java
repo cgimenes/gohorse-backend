@@ -2,7 +2,6 @@ package com.xgh.model.command.operational.supplier.events;
 
 import com.xgh.buildingblocks.entity.EntityVersion;
 import com.xgh.buildingblocks.event.EntityEvent;
-import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.supplier.SupplierId;
 import com.xgh.model.command.operational.valueobjects.Address;
 import com.xgh.model.command.operational.valueobjects.Name;
@@ -13,7 +12,7 @@ public class SupplierWasUpdated extends EntityEvent<SupplierId> {
     private Phone phone;
     private String document;
     private Address address;
-    private EnumeratorId distributionType;
+    private Name distributionType;
 
     protected SupplierWasUpdated() {
     }
@@ -22,9 +21,9 @@ public class SupplierWasUpdated extends EntityEvent<SupplierId> {
             SupplierId id,
             Name name,
             Phone phone,
-            EnumeratorId distributionType,
             String document,
             Address address,
+            Name distributionType,
             EntityVersion version
     ) {
         super(id, version);
@@ -47,7 +46,7 @@ public class SupplierWasUpdated extends EntityEvent<SupplierId> {
         return document;
     }
 
-    public EnumeratorId getDistributionType() {
+    public Name getDistributionType() {
         return distributionType;
     }
 
