@@ -3,6 +3,7 @@ package com.xgh.model.query.operational.enumerator;
 import com.xgh.infra.controller.BasicQueryController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,9 +28,9 @@ public class EnumeratorQueryController extends BasicQueryController<Enumerator, 
     }
     
     @GetMapping("/find")
-    public ResponseEntity<Page<Enumerator>> findByType(@RequestParam(name = "type") String type,
+    public ResponseEntity<List<Enumerator>> findByType(@RequestParam(name = "type") String type,
                                                   @RequestParam(name = "page", defaultValue = "0") int pageNumber) {
-        Page<Enumerator> page = this.service.findByTypeContainingIgnoreCase(pageNumber, type);
+        List<Enumerator> page = this.service.findByDeletedFalseAndKindContainingIgnoreCase(pageNumber, type);
         return ResponseEntity.ok().body(page);
     }
 }

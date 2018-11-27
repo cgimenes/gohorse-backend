@@ -3,16 +3,16 @@ package com.xgh.model.command.operational.internment;
 import com.xgh.buildingblocks.entity.AggregateRoot;
 import com.xgh.exceptions.InvalidArgumentException;
 import com.xgh.exceptions.NullMandatoryArgumentException;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.internment.events.InternmentWasFinished;
 import com.xgh.model.command.operational.animal.AnimalId;
-import com.xgh.model.command.operational.bed.BedId;
 import com.xgh.model.command.operational.internment.events.InternmentWasDeleted;
 import com.xgh.model.command.operational.internment.events.InternmentWasRegistered;
 import com.xgh.model.command.operational.internment.events.InternmentWasUpdated;
 import java.time.LocalDateTime;
 
 public class Internment extends AggregateRoot<InternmentId> {
-    private BedId bedId;
+    private EnumeratorId bedId;
     private AnimalId animalId;
     private LocalDateTime busyAt;
     private LocalDateTime busyUntil;
@@ -22,7 +22,7 @@ public class Internment extends AggregateRoot<InternmentId> {
         super();
     }
 
-    public void register(InternmentId id, BedId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
+    public void register(InternmentId id, EnumeratorId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
         if (id == null) {
             throw new NullMandatoryArgumentException("id");
         }
@@ -46,7 +46,7 @@ public class Internment extends AggregateRoot<InternmentId> {
         recordAndApply(new InternmentWasRegistered(id, bedId, animalId, busyAt, busyUntil, InternmentStatus.ACTIVE, this.nextVersion()));
     }
 
-    public void update(BedId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
+    public void update(EnumeratorId bedId, AnimalId animalId, LocalDateTime busyAt, LocalDateTime busyUntil) {
         recordAndApply(new InternmentWasUpdated(this.id, bedId, animalId, busyAt, busyUntil, this.nextVersion()));
     }
 
@@ -81,7 +81,7 @@ public class Internment extends AggregateRoot<InternmentId> {
         this.markDeleted();
     }
 
-    public BedId getBedId() {
+    public EnumeratorId getBedId() {
         return bedId;
     }
 

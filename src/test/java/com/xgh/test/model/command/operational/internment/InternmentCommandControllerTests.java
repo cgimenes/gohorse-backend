@@ -5,11 +5,11 @@ import static org.junit.Assert.assertTrue;
 
 import com.xgh.infra.repository.PostgresEventStore;
 import com.xgh.model.command.operational.animal.AnimalId;
-import com.xgh.model.command.operational.bed.BedId;
+import com.xgh.model.command.operational.enumerator.EnumeratorId;
 import com.xgh.model.command.operational.internment.Internment;
 import com.xgh.model.command.operational.internment.InternmentId;
 import com.xgh.test.model.command.operational.animal.AnimalSampleData;
-import com.xgh.test.model.command.operational.bed.BedSampleData;
+import com.xgh.test.model.command.operational.enumerator.BedSampleData;
 import java.net.URI;
 import java.time.LocalDateTime;
 import org.junit.Test;
@@ -45,11 +45,10 @@ public class InternmentCommandControllerTests {
 
     @Test
     public void registerWithSuccess() {
-        BedId bedId = bedSampleData.getSample().getId();
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();
-        entity.register(new InternmentId(), bedId, animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
+        entity.register(new InternmentId(), bedSampleData.getSample().getId(), animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
 
         ResponseEntity<Void> response = restTemplate.postForEntity(URI.create("/internments"), entity, Void.class);
 
@@ -67,14 +66,13 @@ public class InternmentCommandControllerTests {
 
     @Test
     public void updateWithSuccess() {
-        BedId bedId = bedSampleData.getSample().getId();
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();
-        entity.register(new InternmentId(), bedId, animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
+        entity.register(new InternmentId(), bedSampleData.getSample().getId(), animalId, LocalDateTime.of(2018, 10, 10, 10, 10, 10), LocalDateTime.of(2018, 10, 10, 12, 10, 10));
         eventStore.push(entity);
 
-        BedId newBedId = bedSampleData.getSample().getId();
+        EnumeratorId newBedId = bedSampleData.getSample().getId();
         entity.update(newBedId, entity.getAnimalId(), entity.getBusyAt(), LocalDateTime.of(2018, 10, 12, 10, 10, 10));
 
         RequestEntity<Internment> request = RequestEntity.put(URI.create("/internments")).body(entity);
@@ -92,7 +90,7 @@ public class InternmentCommandControllerTests {
 
     @Test
     public void deleteWithSuccess() {
-        BedId bedId = bedSampleData.getSample().getId();
+        EnumeratorId bedId = bedSampleData.getSample().getId();
         AnimalId animalId = animalSampleData.getSample().getId();
 
         Internment entity = new Internment();

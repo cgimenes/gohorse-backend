@@ -6,12 +6,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xgh.model.command.operational.internment.InternmentStatus;
 import com.xgh.model.query.operational.animal.Animal;
-import com.xgh.model.query.operational.bed.Bed;
+import com.xgh.model.query.operational.enumerator.Enumerator;
 import com.xgh.model.query.operational.internment.Internment;
 import com.xgh.model.query.operational.internment.InternmentRepository;
 import com.xgh.test.model.query.Page;
 import com.xgh.test.model.query.operational.animal.AnimalSampleData;
-import com.xgh.test.model.query.operational.bed.BedSampleData;
+import com.xgh.test.model.query.operational.enumerator.BedSampleData;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class InternmentQueryControllerTests {
     }
 
     private UUID createSampleEntity() {
-        Bed bed = bedSampleData.getSample();
+        Enumerator bed = bedSampleData.getSample();
         Animal animal = animalSampleData.getSample();
 
         Internment internment = new Internment(UUID.randomUUID(),

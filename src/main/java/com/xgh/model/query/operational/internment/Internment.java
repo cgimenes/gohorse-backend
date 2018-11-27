@@ -2,7 +2,8 @@ package com.xgh.model.query.operational.internment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.operational.animal.Animal;
-import com.xgh.model.query.operational.bed.Bed;
+import com.xgh.model.query.operational.enumerator.Enumerator;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ public class Internment {
 
     @ManyToOne
     @JoinColumn(name = "bed_id")
-    private Bed bed;
+    private Enumerator bed;
 
     @ManyToOne
     @JoinColumn(name = "animal_id")
@@ -40,7 +41,7 @@ public class Internment {
     protected Internment() {
     }
 
-    public Internment(UUID id, Bed bed, Animal animal, LocalDateTime busyAt, LocalDateTime busyUntil, String status, Boolean deleted) {
+    public Internment(UUID id, Enumerator bed, Animal animal, LocalDateTime busyAt, LocalDateTime busyUntil, String status, Boolean deleted) {
         this.id = id;
         this.bed = bed;
         this.animal = animal;
@@ -54,7 +55,7 @@ public class Internment {
         return this.id;
     }
 
-    public Bed getBed() {
+    public Enumerator getBed() {
         return this.bed;
     }
 
