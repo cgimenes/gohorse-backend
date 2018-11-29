@@ -10,7 +10,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.xgh.eventhandlers.operational.notifier.email.templates.EmailTemplate;
@@ -36,12 +35,13 @@ public class EmailClient {
 		this.password = password;
 	}
 
-	@Async
 	public void sendEmail(String to, EmailTemplate template) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.host", smtpServer);
         props.put("mail.smtp.port", smtpServerPort);
+        props.put("mail.smtp.timeout", 5000);
+        props.put("mail.smtp.connectiontimeout", 5000);
         props.put("mail.smtp.socketFactory.port", smtpServerPort);
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 

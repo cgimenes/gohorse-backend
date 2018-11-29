@@ -976,6 +976,7 @@ databaseChangeLog:
         constraintName: fk_internment_bed
         referencedColumnNames: id
         referencedTableName: enumerator
+
 - changeSet:
     id: 27
     author: andre.conceicao
@@ -994,3 +995,14 @@ databaseChangeLog:
         constraintName: fk_supplier_distribution_type
         referencedColumnNames: id
         referencedTableName: enumerator
+
+- changeSet:
+    id: 28
+    author: marcelo.gimenes
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: price
+            type: ${TYPE_CURRENCY}
+        tableName: appointment

@@ -35,6 +35,7 @@ public class AppointmentSampleData {
                 "FIRST",
                 "OTHER",
                 addressSampleData.getSample(),
+                null,
                 false);
         repository.save(entity);
         return entity;

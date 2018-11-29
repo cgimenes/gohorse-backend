@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xgh.model.query.operational.address.Address;
 import com.xgh.model.query.operational.animal.Animal;
 import com.xgh.model.query.operational.veterinary.Veterinary;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -40,13 +41,15 @@ public final class Appointment {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    private BigDecimal price;
+
     @JsonIgnore
     private Boolean deleted = false;
 
     protected Appointment() {
     }
 
-    public Appointment(UUID id, Animal animal, Veterinary veterinary, LocalDateTime dateTime, String status, String appointmentType, String place, Address address, Boolean deleted) {
+    public Appointment(UUID id, Animal animal, Veterinary veterinary, LocalDateTime dateTime, String status, String appointmentType, String place, Address address, BigDecimal price, Boolean deleted) {
         super();
         this.id = id;
         this.animal = animal;
@@ -56,6 +59,7 @@ public final class Appointment {
         this.appointmentType = appointmentType;
         this.place = place;
         this.address = address;
+        this.price = price;
         this.deleted = deleted;
     }
 
@@ -93,5 +97,9 @@ public final class Appointment {
 
     public Boolean getDeleted() {
         return deleted;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 }

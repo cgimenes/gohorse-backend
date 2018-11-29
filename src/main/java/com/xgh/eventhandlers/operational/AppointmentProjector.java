@@ -77,6 +77,7 @@ public class AppointmentProjector implements EventHandler {
                 entity.getAppointmentType().toString(),
                 entity.getPlace().toString(),
                 addressProjection,
+                entity.getPrice(),
                 entity.isDeleted());
 
         repository.save(projection);
