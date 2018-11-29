@@ -24,7 +24,7 @@ public interface AppointmentRepository extends BasicJpaRepository<Appointment, U
 
     default List<Appointment> findDatesWithAppointmentBetweenTwelveMonths() {
         LocalDateTime today = LocalDate.now().atStartOfDay();
-        return findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(today.minusMonths(11).withDayOfMonth(1), today.plusMonths(1).minusDays(1));
+        return findByDeletedFalseAndDateTimeBetweenOrderByDateTimeAsc(today.minusMonths(11).withDayOfMonth(1), today.plusMonths(1).withDayOfMonth(1).minusDays(1));
     }
 
     Page<Appointment> findByStatus(Pageable pageable, String status);

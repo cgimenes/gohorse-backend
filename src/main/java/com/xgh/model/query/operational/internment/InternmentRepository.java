@@ -13,7 +13,7 @@ public interface InternmentRepository extends BasicJpaRepository<Internment, UUI
 
     default List<Internment> findDatesWithAppointmentBetweenTwelveMonths() {
         LocalDateTime today = LocalDate.now().atStartOfDay();
-        return findByDeletedFalseAndBusyAtBetweenOrderByBusyAtAsc(today.minusMonths(11).withDayOfMonth(1), today.plusMonths(1).minusDays(1));
+        return findByDeletedFalseAndBusyAtBetweenOrderByBusyAtAsc(today.minusMonths(11).withDayOfMonth(1), today.plusMonths(1).withDayOfMonth(1).minusDays(1));
     }
 
     List<Internment> findByDeletedFalseAndBusyAtBetweenOrderByBusyAtAsc(LocalDateTime from, LocalDateTime to);
