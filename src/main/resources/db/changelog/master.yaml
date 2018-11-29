@@ -976,3 +976,21 @@ databaseChangeLog:
         constraintName: fk_internment_bed
         referencedColumnNames: id
         referencedTableName: enumerator
+- changeSet:
+    id: 27
+    author: andre.conceicao
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: distribution_type_id
+            type: ${TYPE_UUID}
+            constraints:
+              nullable: false
+        tableName: supplier
+    - addForeignKeyConstraint:
+        baseColumnNames: distribution_type_id
+        baseTableName: supplier
+        constraintName: fk_supplier_distribution_type
+        referencedColumnNames: id
+        referencedTableName: enumerator

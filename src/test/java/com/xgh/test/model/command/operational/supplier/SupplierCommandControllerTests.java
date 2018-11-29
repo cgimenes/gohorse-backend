@@ -11,6 +11,9 @@ import com.xgh.model.command.operational.valueobjects.Name;
 import com.xgh.model.command.operational.valueobjects.Phone;
 import com.xgh.model.command.operational.valueobjects.PostalCode;
 import java.net.URI;
+
+import com.xgh.model.command.operational.enumerator.Enumerator;
+import com.xgh.test.model.command.operational.enumerator.EnumeratorSampleData;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +41,17 @@ public class SupplierCommandControllerTests {
     @Autowired
     private PostgresEventStore eventStore;
 
+    @Autowired
+    private EnumeratorSampleData enumSampleData;
+
     @Test
     public void registerWithSuccess() {
         Supplier entity = new Supplier();
+        Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), "00000000191",
                 new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
-                new Name("Ração"));
+                distType.getId());
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/suppliers", entity, Void.class);
 
@@ -62,10 +69,11 @@ public class SupplierCommandControllerTests {
     @Test
     public void updateWithSuccess() {
         Supplier entity = new Supplier();
+        Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
                 new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
-                new Name("Ração"));
+                distType.getId());
         eventStore.push(entity);
 
         entity.update(entity.getName(), new Phone("44998731154"), entity.getDocument(), entity.getAddress(),
@@ -87,10 +95,11 @@ public class SupplierCommandControllerTests {
     @Test
     public void deleteWithSuccess() {
         Supplier entity = new Supplier();
+        Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
                 new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
-                new Name("Ração"));
+                distType.getId());
 
         eventStore.push(entity);
 

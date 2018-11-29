@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import com.xgh.test.model.query.operational.enumerator.EnumeratorSampleData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +42,9 @@ public class SupplierQueryControllerTests {
 
     @Autowired
     private SupplierRepository repository;
+
+    @Autowired
+    private EnumeratorSampleData enumSampleData;
 
     @Before
     public void before() {
@@ -87,7 +92,7 @@ public class SupplierQueryControllerTests {
     private UUID createSampleEntity() {
         com.xgh.model.query.operational.address.Address address = addressSampleData.getSample();
         Supplier supplier = new Supplier(UUID.randomUUID(), "Nestle", "44998015821",
-                "00000000191", address, false);
+                "00000000191", address, enumSampleData.getSample(), false);
         repository.save(supplier);
         return supplier.getId();
     }
