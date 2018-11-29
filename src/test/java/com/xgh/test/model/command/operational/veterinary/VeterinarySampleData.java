@@ -22,7 +22,7 @@ public class VeterinarySampleData {
         Veterinary veterinary = new Veterinary();
         veterinary.register(new VeterinaryId(),
                 new Name("Ricardo Requena"),
-                new Address(new PostalCode("87043-050", "Rua", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
+                new Address(new PostalCode("87043-050", "Rio Andaraí", "Oásis", "Maringá", "PR", "Brasil"), 374,
                         null),
                 new Phone("44998015821"), new Crmv("9375"), new Email("espacoanimal.vet@hotmail.com"),
                 LocalDate.of(1986, 10, 03));

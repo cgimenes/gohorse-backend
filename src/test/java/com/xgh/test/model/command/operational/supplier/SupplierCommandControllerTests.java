@@ -49,7 +49,7 @@ public class SupplierCommandControllerTests {
         Supplier entity = new Supplier();
         Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015821"), "00000000191",
-                new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
+                new Address(new PostalCode("87005-140", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
                 distType.getId());
 
@@ -71,7 +71,7 @@ public class SupplierCommandControllerTests {
         Supplier entity = new Supplier();
         Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
-                new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
+                new Address(new PostalCode("87005-140", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
                 distType.getId());
         eventStore.push(entity);
@@ -97,7 +97,7 @@ public class SupplierCommandControllerTests {
         Supplier entity = new Supplier();
         Enumerator distType = enumSampleData.getSample();
         entity.register(new SupplierId(), new Name("Nestle"), new Phone("44998015822"), "00000000191",
-                new Address(new PostalCode("87005-140", "Rua", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
+                new Address(new PostalCode("87005-140", "Ruazera", "Barro", "Maringá", "PR", "Brasil"), 117,
                         null),
                 distType.getId());
 

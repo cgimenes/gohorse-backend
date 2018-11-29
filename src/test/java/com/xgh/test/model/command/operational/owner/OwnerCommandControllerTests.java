@@ -42,7 +42,7 @@ public class OwnerCommandControllerTests {
     @Test
     public void register() {
         Owner owner = new Owner();
-        Address address = new Address(new PostalCode("87024-360", "Rua", "Garimpo", "Jardim Diamante", "Maringá", "PR", "Brasil"),
+        Address address = new Address(new PostalCode("87024-360", "Garimpo", "Jardim Diamante", "Maringá", "PR", "Brasil"),
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"),
@@ -66,7 +66,7 @@ public class OwnerCommandControllerTests {
     public void update() {
         Owner owner = new Owner();
         Email ownerEmail = new Email("teste@teste.com");
-        Address address = new Address(new PostalCode("87024-360", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
+        Address address = new Address(new PostalCode("87024-360", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("09090385975"),
@@ -93,7 +93,7 @@ public class OwnerCommandControllerTests {
     public void deleteWithSuccess() {
         Owner owner = new Owner();
         LocalDate data = LocalDate.of(1802, 02, 02);
-        Address address = new Address(new PostalCode("11111-222", "Rua", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
+        Address address = new Address(new PostalCode("11111-222", "Das gaivotas", "Jardim dos Passaros", "Maringá", "PR", "Brasil"),
                 389, null);
 
         owner.register(new OwnerId(), new Name("Dono Master"), new Phone("44313371337"), new Cpf("00000000191"), data,

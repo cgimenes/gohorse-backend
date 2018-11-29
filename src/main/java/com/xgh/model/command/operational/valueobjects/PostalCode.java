@@ -5,7 +5,6 @@ import com.xgh.exceptions.NullMandatoryArgumentException;
 
 public class PostalCode implements ValueObject {
     private String code;
-    private String streetType;
     private String streetName;
     private String neighbourhood;
     private String city;
@@ -15,14 +14,10 @@ public class PostalCode implements ValueObject {
     protected PostalCode() {
     }
 
-    public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
+    public PostalCode(String code, String streetName, String neighbourhood, String city,
                       String state, String country) {
         if (code == null) {
             throw new NullMandatoryArgumentException("código");
-        }
-
-        if (streetType == null) {
-            throw new NullMandatoryArgumentException("tipo da rua");
         }
 
         if (streetName == null) {
@@ -49,13 +44,7 @@ public class PostalCode implements ValueObject {
             throw new IllegalArgumentException("O código do CEP deve estar no formato 99999-999");
         }
 
-        // TODO converter para enum
-        if (!streetType.equals("Avenida") && !streetType.equals("Rua")) {
-            throw new IllegalArgumentException("O tipo da rua deve ser: 'Rua' ou 'Avenida'");
-        }
-
         this.code = code;
-        this.streetType = streetType;
         this.streetName = streetName;
         this.neighbourhood = neighbourhood;
         this.city = city;
@@ -65,10 +54,6 @@ public class PostalCode implements ValueObject {
 
     public String getCode() {
         return code;
-    }
-
-    public String getStreetType() {
-        return streetType;
     }
 
     public String getStreetName() {

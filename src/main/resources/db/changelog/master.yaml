@@ -928,8 +928,11 @@ databaseChangeLog:
             type: ${TYPE_EMAIL}
             constraints:
               nullable: true
-        schemaName: public
         tableName: owner
+    - rollback:
+      - dropColumn:
+          tableName: owner
+          columnName: email
 
 - changeSet:
     id: 24
@@ -1006,3 +1009,15 @@ databaseChangeLog:
             name: price
             type: ${TYPE_CURRENCY}
         tableName: appointment
+    - rollback:
+      - dropColumn:
+          tableName: appointment
+          columnName: price
+
+- changeSet:
+    id: 29
+    author: marcelo.gimenes
+    changes:
+    - dropColumn:
+        tableName: postal_code
+        columnName: street_type

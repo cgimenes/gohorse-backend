@@ -12,9 +12,6 @@ public class PostalCode {
     @Column(name = "id")
     private String code;
 
-    @Column(name = "street_type")
-    private String streetType;
-
     @Column(name = "street_name")
     private String streetName;
 
@@ -29,10 +26,9 @@ public class PostalCode {
     protected PostalCode() {
     }
 
-    public PostalCode(String code, String streetType, String streetName, String neighbourhood, String city,
+    public PostalCode(String code, String streetName, String neighbourhood, String city,
                       String state, String country) {
         this.code = code;
-        this.streetType = streetType;
         this.streetName = streetName;
         this.neighbourhood = neighbourhood;
         this.city = city;
@@ -42,10 +38,6 @@ public class PostalCode {
 
     public String getCode() {
         return code;
-    }
-
-    public String getStreetType() {
-        return streetType;
     }
 
     public String getStreetName() {

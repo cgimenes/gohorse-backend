@@ -13,7 +13,6 @@ public class AddressSampleData {
     public PostalCode getSamplePostalCode() {
         return new PostalCode(
                 "87005-140",
-                "Rua",
                 "Rua Tabaete",
                 "Jardim Tabaetê",
                 "Maringá",

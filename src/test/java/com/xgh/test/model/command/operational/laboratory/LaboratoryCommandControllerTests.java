@@ -44,7 +44,7 @@ public class LaboratoryCommandControllerTests {
     public void registerWithSuccess() {
         Laboratory entity = new Laboratory();
         entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("44313371337"), new Address(
-                new PostalCode("87020-025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+                new PostalCode("87020-025", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
                 null));
 
         ResponseEntity<Void> response = restTemplate.postForEntity("/laboratories", entity, Void.class);
@@ -63,12 +63,12 @@ public class LaboratoryCommandControllerTests {
     public void updateWithSuccess() {
         Laboratory entity = new Laboratory();
         entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("44313371337"), new Address(
-                new PostalCode("87020-025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+                new PostalCode("87020-025", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
                 null));
         eventStore.push(entity);
 
         entity.update(new Name("Laboratório dos Noob"), new Phone("44000000000"), new Address(
-                new PostalCode("87020-025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+                new PostalCode("87020-025", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
                 null));
 
         RequestEntity<Laboratory> request = RequestEntity.put(URI.create("/laboratories")).body(entity);
@@ -87,7 +87,7 @@ public class LaboratoryCommandControllerTests {
     public void deleteWithSuccess() {
         Laboratory entity = new Laboratory();
         entity.register(new LaboratoryId(), new Name("Laboratório dos Hackers"), new Phone("44313371337"), new Address(
-                new PostalCode("87020-025", "Avenida", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
+                new PostalCode("87020-025", "Avenida Tiradentes", "Centro", "Maringá", "PR", "Brasil"), 587,
                 null));
         eventStore.push(entity);
 

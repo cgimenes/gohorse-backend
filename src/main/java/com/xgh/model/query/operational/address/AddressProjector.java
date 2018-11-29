@@ -34,7 +34,6 @@ public class AddressProjector {
     private PostalCode projectPostalCode(com.xgh.model.command.operational.valueobjects.PostalCode postalcode) {
         PostalCode postalcodeProjection = new PostalCode(
                 postalcode.getCode(),
-                postalcode.getStreetType(),
                 postalcode.getStreetName(),
                 postalcode.getNeighbourhood(),
                 postalcode.getCity(),

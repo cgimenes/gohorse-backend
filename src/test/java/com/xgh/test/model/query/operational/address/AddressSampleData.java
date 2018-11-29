@@ -15,7 +15,7 @@ public class AddressSampleData {
     private AddressRepository addressRepository;
 
     public Address getSample() {
-        PostalCode postalCode = new PostalCode("87040-000", "Avenida", "Do Toninho", "Bairro Pacífico", "Londrina", "Paraná", "Brasil");
+        PostalCode postalCode = new PostalCode("87040-000", "Do Toninho", "Bairro Pacífico", "Londrina", "Paraná", "Brasil");
         postalCodeRepository.save(postalCode);
         Address address = new Address(postalCode, 123, null);
         addressRepository.save(address);
